@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">MediCare</title>
+
+    <!-- Bootstrap CSS - WebJar Local -->
+    <link rel="stylesheet"
+          th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+
+    <!-- Font Awesome - WebJar Local -->
+    <link rel="stylesheet"
+          th:href="@{/webjars/font-awesome/css/all.min.css}">
+
+    <!-- Custom CSS -->
+    <link th:href="@{/appointmentschedule/css/style.css?v=3}"
+          rel="stylesheet">
+</head>
+<!-- NAVBAR FRAGMENT -->
+<nav th:fragment="navbar"
+     class="navbar navbar-expand-lg navbar-dark fixed-top"
+     style="background: linear-gradient(135deg,#1e3c72,#2a5298);
+            box-shadow:0 4px 20px rgba(0,0,0,0.15);">
+    <div class="container-fluid px-4">
+
+        <!-- Brand -->
+        <a class="navbar-brand d-flex align-items-center"
+           href="/appointmentschedule/appointments/dashboard">
+            <span class="me-2" style="font-size:1.8rem;">🏥</span>
+            <span>
+                <strong>MediCare</strong>
+                <small class="d-block"
+                       style="font-size:0.6rem;opacity:0.8;">
+                    Appointment System
+                </small>
+            </span>
+        </a>
+
+        <!-- Toggle -->
+        <button class="navbar-toggler border-0"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Links -->
+        <div class="collapse navbar-collapse" id="navContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="/appointmentschedule/appointments/dashboard">
+                        <i class="fas fa-chart-line me-1"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="/appointmentschedule/appointments">
+                        <i class="fas fa-calendar-check me-1"></i>
+                        Appointments
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="/appointmentschedule/appointments/book">
+                        <i class="fas fa-plus-circle me-1"></i>
+                        Book New
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="/appointmentschedule/schedules">
+                        <i class="fas fa-clock me-1"></i>
+                        Schedules
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- SCRIPTS FRAGMENT -->
+<div th:fragment="scripts">
+    <!-- Bootstrap JS - WebJar Local -->
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}">
+    </script>
+    <!-- Custom JS -->
+    <script th:src="@{/appointmentschedule/js/app.js?v=3}">
+    </script>
+</div>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{appointmentschedule/fragments/header
+                   :: head('Booking Confirmed - MediCare')}">
+</head>
+
+<body class="bg-light" style="padding-top:80px;">
+
+<nav th:replace="~{appointmentschedule/fragments/header
+                  :: navbar}">
+</nav>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm text-center
+                        animate__animated animate__zoomIn">
+                <div class="card-body p-5">
+
+                    <!-- Success Icon -->
+                    <div class="mb-4 success-checkmark">
+                        <i class="fas fa-check-circle
+                                  fa-5x text-success"></i>
+                    </div>
+
+                    <h2 class="fw-bold text-success mb-2">
+                        Booking Confirmed!
+                    </h2>
+                    <p class="text-muted mb-4">
+                        Your appointment has been
+                        successfully scheduled
+                    </p>
+
+                    <!-- Appointment Info Card -->
+                    <div class="bg-light rounded-4 p-4
+                                text-start mb-4">
+                        <div class="row g-3">
+
+                            <!-- Ref + Token -->
+                            <div class="col-7">
+                                <label class="small text-muted">
+                                    Reference No.
+                                </label>
+                                <p class="fw-bold text-primary
+                                          fs-5 mb-0"
+                                   th:text="${appointment.appointmentRef}">
+                                </p>
+                            </div>
+                            <div class="col-5 text-end"
+                                 th:if="${appointment.tokenNumber
+                                          != null}">
+                                <label class="small text-muted">
+                                    Token
+                                </label>
+                                <p class="fw-bold text-primary
+                                          fs-3 mb-0"
+                                   th:text="'#'
+                                    + ${appointment.tokenNumber}">
+                                </p>
+                            </div>
+
+                            <div class="col-12"><hr></div>
+
+                            <!-- Patient -->
+                            <div class="col-md-6">
+                                <label class="small text-muted">
+                                    Patient
+                                </label>
+                                <p class="fw-semibold mb-0"
+                                   th:text="${appointment.patientName}">
+                                </p>
+                            </div>
+
+                            <!-- Doctor -->
+                            <div class="col-md-6">
+                                <label class="small text-muted">
+                                    Doctor
+                                </label>
+                                <p class="fw-semibold mb-0"
+                                   th:text="${appointment.doctorName}">
+                                </p>
+                            </div>
+
+                            <!-- Date -->
+                            <div class="col-md-6">
+                                <label class="small text-muted">
+                                    Date
+                                </label>
+                                <p class="fw-semibold mb-0">
+                                    <i class="fas fa-calendar
+                                              text-primary me-1"></i>
+                                    <span th:text="${appointment.getFormattedDate()}">
+                                    </span>
+                                </p>
+                            </div>
+
+                            <!-- Time -->
+                            <div class="col-md-6">
+                                <label class="small text-muted">
+                                    Time
+                                </label>
+                                <p class="fw-semibold mb-0">
+                                    <i class="fas fa-clock
+                                              text-primary me-1"></i>
+                                    <span th:text="${appointment.getFormattedTime()}">
+                                    </span>
+                                </p>
+                            </div>
+
+                            <!-- Specialization -->
+                            <div class="col-12"
+                                 th:if="${appointment.specialization}">
+                                <label class="small text-muted">
+                                    Specialization
+                                </label>
+                                <p class="mb-0">
+                                    <span class="badge bg-info"
+                                          th:text="${appointment.specialization}">
+                                    </span>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Note -->
+                    <div class="alert alert-info text-start mb-4">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Please arrive
+                        <strong>15 minutes early</strong>
+                        with your reference number.
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="d-grid gap-2">
+                        <a th:href="@{'/appointmentschedule/appointments/view/'
+                                    + ${appointment.id}}"
+                           class="btn btn-primary btn-lg">
+                            <i class="fas fa-eye me-2"></i>
+                            View Full Details
+                        </a>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <a href="/appointmentschedule/appointments/book"
+                                   class="btn btn-outline-primary
+                                          w-100">
+                                    <i class="fas fa-plus-circle me-1">
+                                    </i>
+                                    Book Another
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <a href="/appointmentschedule/appointments/dashboard"
+                                   class="btn btn-outline-secondary
+                                          w-100">
+                                    <i class="fas fa-home me-1"></i>
+                                    Dashboard
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{appointmentschedule/fragments/footer
+                    :: footer}">
+</footer>
+
+<div th:replace="~{appointmentschedule/fragments/header
+                  :: scripts}">
+</div>
+
+</body>
+</html>

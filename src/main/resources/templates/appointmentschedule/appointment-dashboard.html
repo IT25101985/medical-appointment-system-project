@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+
+<head th:replace="~{appointmentschedule/fragments/header
+                   :: head('Dashboard - MediCare')}">
+</head>
+
+<body class="bg-light" style="padding-top:80px;">
+
+<nav th:replace="~{appointmentschedule/fragments/header
+                  :: navbar}">
+</nav>
+
+<div class="container-fluid px-4 py-4">
+
+    <!-- Page Header -->
+    <div class="d-flex justify-content-between
+                align-items-center mb-4
+                animate__animated animate__fadeInDown">
+        <div>
+            <h2 class="fw-bold text-dark mb-1">
+                <i class="fas fa-chart-line
+                          text-primary me-2"></i>
+                Dashboard
+            </h2>
+            <p class="text-muted mb-0">
+                Appointment Overview
+            </p>
+        </div>
+        <a href="/appointmentschedule/appointments/book"
+           class="btn btn-primary btn-lg shadow-sm">
+            <i class="fas fa-plus-circle me-2"></i>
+            Book Appointment
+        </a>
+    </div>
+
+    <!-- Alerts -->
+    <div th:if="${successMessage}"
+         class="alert alert-success alert-dismissible
+                fade show" role="alert">
+        <span th:text="${successMessage}"></span>
+        <button type="button" class="btn-close"
+                data-bs-dismiss="alert"></button>
+    </div>
+    <div th:if="${errorMessage}"
+         class="alert alert-danger alert-dismissible
+                fade show" role="alert">
+        <span th:text="${errorMessage}"></span>
+        <button type="button" class="btn-close"
+                data-bs-dismiss="alert"></button>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="row g-4 mb-4">
+
+        <!-- Total -->
+        <div class="col-xl-2 col-md-4 col-sm-6">
+            <div class="card border-0 shadow-sm h-100 stat-card">
+                <div class="card-body text-center p-4">
+                    <div class="stat-icon bg-primary
+                               bg-opacity-10 text-primary
+                               mx-auto mb-3">
+                        <i class="fas fa-calendar-check fa-2x"></i>
+                    </div>
+                    <h3 class="fw-bold mb-1"
+                        th:text="${stats['totalAppointments']}">
+                        0
+                    </h3>
+                    <p class="text-muted small mb-0">Total</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Today -->
+        <div class="col-xl-2 col-md-4 col-sm-6">
+            <div class="card border-0 shadow-sm h-100 stat-card">
+                <div class="card-body text-center p-4">
+                    <div class="stat-icon bg-info
+                               bg-opacity-10 text-info
+                               mx-auto mb-3">
+                        <i class="fas fa-calendar-day fa-2x"></i>
+                    </div>
+                    <h3 class="fw-bold mb-1"
+                        th:text="${stats['todayAppointments']}">
+                        0
+                    </h3>
+                    <p class="text-muted small mb-0">Today</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pending -->
+        <div class="col-xl-2 col-md-4 col-sm-6">
+            <div class="card border-0 shadow-sm h-100 stat-card">
+                <div class="card-body text-center p-4">
+                    <div class="stat-icon bg-warning
+                               bg-opacity-10 text-warning
+                               mx-auto mb-3">
+                        <i class="fas fa-hourglass-half fa-2x"></i>
+                    </div>
+                    <h3 class="fw-bold mb-1"
+                        th:text="${stats['pendingCount']}">
+                        0
+                    </h3>
+                    <p class="text-muted small mb-0">Pending</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Confirmed -->
+        <div class="col-xl-2 col-md-4 col-sm-6">
+            <div class="card border-0 shadow-sm h-100 stat-card">
+                <div class="card-body text-center p-4">
+                    <div class="stat-icon bg-success
+                               bg-opacity-10 text-success
+                               mx-auto mb-3">
+                        <i class="fas fa-check-circle fa-2x"></i>
+                    </div>
+                    <h3 class="fw-bold mb-1"
+                        th:text="${stats['confirmedCount']}">
+                        0
+                    </h3>
+                    <p class="text-muted small mb-0">Confirmed</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Completed -->
+        <div class="col-xl-2 col-md-4 col-sm-6">
+            <div class="card border-0 shadow-sm h-100 stat-card">
+                <div class="card-body text-center p-4">
+                    <div class="stat-icon bg-secondary
+                               bg-opacity-10 text-secondary
+                               mx-auto mb-3">
+                        <i class="fas fa-clipboard-check fa-2x"></i>
+                    </div>
+                    <h3 class="fw-bold mb-1"
+                        th:text="${stats['completedCount']}">
+                        0
+                    </h3>
+                    <p class="text-muted small mb-0">Completed</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cancelled -->
+        <div class="col-xl-2 col-md-4 col-sm-6">
+            <div class="card border-0 shadow-sm h-100 stat-card">
+                <div class="card-body text-center p-4">
+                    <div class="stat-icon bg-danger
+                               bg-opacity-10 text-danger
+                               mx-auto mb-3">
+                        <i class="fas fa-times-circle fa-2x"></i>
+                    </div>
+                    <h3 class="fw-bold mb-1"
+                        th:text="${stats['cancelledCount']}">
+                        0
+                    </h3>
+                    <p class="text-muted small mb-0">Cancelled</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Row -->
+    <div class="row g-4">
+
+        <!-- Today's Table -->
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-0 py-3">
+                    <div class="d-flex justify-content-between
+                                align-items-center">
+                        <h5 class="mb-0 fw-bold">
+                            <i class="fas fa-calendar-day
+                                      text-info me-2"></i>
+                            Today's Appointments
+                        </h5>
+                        <a href="/appointmentschedule/appointments"
+                           class="btn btn-sm btn-outline-primary">
+                            View All
+                            <i class="fas fa-arrow-right ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover
+                                      align-middle mb-0">
+                            <thead class="table-light">
+                            <tr>
+                                <th>Token</th>
+                                <th>Patient</th>
+                                <th>Doctor</th>
+                                <th>Time</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="apt
+                                     : ${todayAppointments}">
+                                <td>
+                                        <span class="badge
+                                               bg-primary
+                                               rounded-pill"
+                                              th:text="'#'
+                                               + ${apt.tokenNumber}">
+                                            #1
+                                        </span>
+                                </td>
+                                <td>
+                                    <div class="fw-semibold"
+                                         th:text="${apt.patientName}">
+                                    </div>
+                                    <small class="text-muted"
+                                           th:text="${apt.patientPhone}">
+                                    </small>
+                                </td>
+                                <td>
+                                    <div th:text="${apt.doctorName}">
+                                    </div>
+                                    <small class="text-muted"
+                                           th:text="${apt.specialization}">
+                                    </small>
+                                </td>
+                                <td th:text="${apt.getFormattedTime()}">
+                                </td>
+                                <td>
+                                        <span class="badge rounded-pill"
+                                              th:classappend="'bg-'
+                                               + ${apt.getStatusBadgeClass()}"
+                                              th:text="${apt.status}">
+                                        </span>
+                                </td>
+                                <td>
+                                    <a th:href="@{'/appointmentschedule/appointments/view/'
+                                                    + ${apt.id}}"
+                                       class="btn btn-sm
+                                                  btn-outline-primary">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr th:if="${#lists.isEmpty(
+                                            todayAppointments)}">
+                                <td colspan="6"
+                                    class="text-center py-5
+                                               text-muted">
+                                    <i class="fas fa-calendar-times
+                                                  fa-3x mb-3 d-block
+                                                  opacity-25"></i>
+                                    No appointments today
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pending + Quick Actions -->
+        <div class="col-lg-4">
+
+            <!-- Pending -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-white border-0 py-3">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="fas fa-hourglass-half
+                                  text-warning me-2"></i>
+                        Pending Approval
+                    </h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="list-group list-group-flush">
+                        <div th:each="apt
+                             : ${pendingAppointments}"
+                             class="list-group-item
+                                    list-group-item-action
+                                    px-4 py-3">
+                            <div class="d-flex
+                                        justify-content-between
+                                        align-items-start">
+                                <div>
+                                    <h6 class="mb-1 fw-semibold"
+                                        th:text="${apt.patientName}">
+                                    </h6>
+                                    <p class="mb-1 small text-muted">
+                                        <i class="fas fa-user-md me-1">
+                                        </i>
+                                        <span th:text="${apt.doctorName}">
+                                        </span>
+                                    </p>
+                                    <p class="mb-0 small text-muted">
+                                        <i class="fas fa-calendar me-1">
+                                        </i>
+                                        <span th:text="${apt.getFormattedDate()}">
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="btn-group btn-group-sm">
+                                    <a th:href="@{'/appointmentschedule/appointments/status/'
+                                                + ${apt.id}
+                                                + '/CONFIRMED'}"
+                                       class="btn btn-outline-success"
+                                       title="Confirm">
+                                        <i class="fas fa-check"></i>
+                                    </a>
+                                    <!--/*@thymesVar id="id" type=""*/-->
+                                    <a th:href="@{'/appointmentschedule/appointments/cancel/'
+                                                + ${apt.id}}"
+                                       class="btn btn-outline-danger"
+                                       title="Cancel"
+                                       onclick="return confirm(
+                                           'Cancel this appointment?')">
+                                        <i class="fas fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div th:if="${#lists.isEmpty(
+                                     pendingAppointments)}"
+                             class="text-center py-4 text-muted">
+                            <i class="fas fa-check-double
+                                      fa-2x mb-2 d-block
+                                      opacity-25"></i>
+                            No pending appointments
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-0 py-3">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="fas fa-bolt
+                                  text-primary me-2"></i>
+                        Quick Actions
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <a href="/appointmentschedule/appointments/book"
+                           class="btn btn-primary">
+                            <i class="fas fa-plus-circle me-2"></i>
+                            New Appointment
+                        </a>
+                        <a href="/appointmentschedule/schedules/new"
+                           class="btn btn-outline-primary">
+                            <i class="fas fa-calendar-plus me-2"></i>
+                            Create Schedule
+                        </a>
+                        <a href="/appointmentschedule/schedules"
+                           class="btn btn-outline-secondary">
+                            <i class="fas fa-clock me-2"></i>
+                            Manage Schedules
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{appointmentschedule/fragments/footer
+                    :: footer}">
+</footer>
+
+<div th:replace="~{appointmentschedule/fragments/header
+                  :: scripts}">
+</div>
+
+</body>
+</html>

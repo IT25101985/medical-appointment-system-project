@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{appointmentschedule/fragments/header
+                   :: head('Schedule Detail - MediCare')}">
+</head>
+
+<body class="bg-light" style="padding-top:80px;">
+
+<nav th:replace="~{appointmentschedule/fragments/header
+                  :: navbar}">
+</nav>
+
+<div class="container py-4">
+
+    <a href="/appointmentschedule/schedules"
+       class="btn btn-outline-primary mb-4">
+        <i class="fas fa-arrow-left me-2"></i>
+        Back to Schedules
+    </a>
+
+    <div class="row g-4">
+
+        <!-- LEFT: Details -->
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-header bg-white border-0 py-4">
+                    <div class="d-flex justify-content-between
+                                align-items-center">
+                        <h4 class="fw-bold mb-0">
+                            <i class="fas fa-calendar-alt
+                                      text-primary me-2"></i>
+                            Schedule Details
+                        </h4>
+                        <span class="badge rounded-pill fs-6 px-3 py-2"
+                              th:classappend="${schedule.status.name()
+                                              == 'AVAILABLE'}
+                                              ? 'bg-success'
+                                              : (${schedule.status.name()
+                                                 == 'FULL'}
+                                                 ? 'bg-danger'
+                                                 : 'bg-secondary')"
+                              th:text="${schedule.status}">
+                        </span>
+                    </div>
+                </div>
+
+                <div class="card-body p-4">
+
+                    <!-- Doctor Info -->
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <label class="detail-label">Doctor</label>
+                            <p class="fw-bold fs-5 mb-0"
+                               th:text="${schedule.doctorName}">
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="detail-label">
+                                Specialization
+                            </label>
+                            <p class="mb-0">
+                                <span class="badge bg-info fs-6"
+                                      th:text="${schedule.specialization
+                                                ?: 'General'}">
+                                </span>
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="detail-label">Date</label>
+                            <p class="fw-semibold mb-0">
+                                <i class="fas fa-calendar
+                                          text-primary me-1"></i>
+                                <span th:text="${schedule.getFormattedDate()}">
+                                </span>
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="detail-label">Time</label>
+                            <p class="fw-semibold mb-0">
+                                <i class="fas fa-clock
+                                          text-primary me-1"></i>
+                                <span th:text="${schedule.getFormattedTimeRange()}">
+                                </span>
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="detail-label">Location</label>
+                            <p class="fw-semibold mb-0">
+                                <i class="fas fa-map-marker-alt
+                                          text-danger me-1"></i>
+                                <span th:text="${schedule.location
+                                                ?: 'Not specified'}">
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <!-- Slot Stats -->
+                    <div class="row text-center my-4">
+                        <div class="col-4">
+                            <h3 class="fw-bold text-primary"
+                                th:text="${schedule.maxSlots}">
+                                10
+                            </h3>
+                            <small class="text-muted">
+                                Total Slots
+                            </small>
+                        </div>
+                        <div class="col-4">
+                            <h3 class="fw-bold text-warning"
+                                th:text="${schedule.bookedSlots}">
+                                3
+                            </h3>
+                            <small class="text-muted">Booked</small>
+                        </div>
+                        <div class="col-4">
+                            <h3 class="fw-bold text-success"
+                                th:text="${schedule.getAvailableSlots()}">
+                                7
+                            </h3>
+                            <small class="text-muted">
+                                Available
+                            </small>
+                        </div>
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div class="progress mb-4"
+                         style="height:15px;">
+                        <div class="progress-bar bg-primary"
+                             role="progressbar"
+                             th:style="'width:'
+                              + ${schedule.maxSlots > 0
+                                 ? (schedule.bookedSlots * 100
+                                    / schedule.maxSlots)
+                                 : 0}
+                              + '%'">
+                        </div>
+                    </div>
+
+                    <!-- Notes -->
+                    <div th:if="${schedule.notes}">
+                        <hr>
+                        <label class="detail-label">Notes</label>
+                        <p class="bg-light p-3 rounded mb-0"
+                           th:text="${schedule.notes}">
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT: Actions -->
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-0 py-3">
+                    <h6 class="mb-0 fw-bold">
+                        <i class="fas fa-cog me-2"></i>Actions
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+
+                        <!-- Book -->
+                        <a th:if="${schedule.hasAvailableSlots()}"
+                           th:href="@{'/appointmentschedule/appointments/book?scheduleId='
+                                    + ${schedule.id}}"
+                           class="btn btn-primary">
+                            <i class="fas fa-calendar-plus me-2"></i>
+                            Book Appointment
+                        </a>
+
+                        <!-- Full Badge -->
+                        <div th:if="${!schedule.hasAvailableSlots()
+                                     and schedule.status.name()
+                                     != 'CANCELLED'}"
+                             class="alert alert-danger text-center
+                                    mb-0 py-2">
+                            <i class="fas fa-times-circle me-1"></i>
+                            Schedule is Full
+                        </div>
+
+                        <!-- Edit -->
+                        <a th:href="@{'/appointmentschedule/schedules/edit/'
+                                    + ${schedule.id}}"
+                           class="btn btn-outline-primary">
+                            <i class="fas fa-edit me-2"></i>
+                            Edit Schedule
+                        </a>
+
+                        <!-- Cancel -->
+                        <a th:if="${schedule.status.name()
+                                   != 'CANCELLED'}"
+                           th:href="@{'/appointmentschedule/schedules/status/'
+                                    + ${schedule.id}
+                                    + '/CANCELLED'}"
+                           class="btn btn-outline-warning"
+                           onclick="return confirm(
+                               'Cancel this schedule?')">
+                            <i class="fas fa-ban me-2"></i>
+                            Cancel Schedule
+                        </a>
+
+                        <!-- Reactivate -->
+                        <a th:if="${schedule.status.name()
+                                   == 'CANCELLED'}"
+                           th:href="@{'/appointmentschedule/schedules/status/'
+                                    + ${schedule.id}
+                                    + '/AVAILABLE'}"
+                           class="btn btn-outline-success">
+                            <i class="fas fa-redo me-2"></i>
+                            Reactivate
+                        </a>
+
+                        <!-- Delete -->
+                        <a th:href="@{'/appointmentschedule/schedules/delete/'
+                                    + ${schedule.id}}"
+                           class="btn btn-outline-danger"
+                           onclick="return confirm(
+                               'Delete permanently?')">
+                            <i class="fas fa-trash me-2"></i>
+                            Delete Schedule
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Schedule ID Info -->
+            <div class="card border-0 shadow-sm mt-4">
+                <div class="card-body">
+                    <div class="row g-2 text-center">
+                        <div class="col-6">
+                            <small class="text-muted d-block">
+                                Schedule ID
+                            </small>
+                            <span class="fw-bold"
+                                  th:text="${schedule.id}">
+                            </span>
+                        </div>
+                        <div class="col-6">
+                            <small class="text-muted d-block">
+                                Doctor ID
+                            </small>
+                            <span class="fw-bold"
+                                  th:text="${schedule.doctorId}">
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{appointmentschedule/fragments/footer
+                    :: footer}">
+</footer>
+
+<div th:replace="~{appointmentschedule/fragments/header
+                  :: scripts}">
+</div>
+
+</body>
+</html>

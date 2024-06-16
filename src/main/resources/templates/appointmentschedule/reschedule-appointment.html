@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{appointmentschedule/fragments/header
+                   :: head('Reschedule - MediCare')}">
+</head>
+
+<body class="bg-light" style="padding-top:80px;">
+
+<nav th:replace="~{appointmentschedule/fragments/header
+                  :: navbar}">
+</nav>
+
+<div class="container py-4">
+
+    <a href="/appointmentschedule/appointments"
+       class="btn btn-outline-primary mb-4">
+        <i class="fas fa-arrow-left me-2"></i>
+        Back
+    </a>
+
+    <div class="row g-4">
+
+        <!-- LEFT: Reschedule Form -->
+        <div class="col-lg-7">
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-header
+                            bg-warning bg-opacity-10
+                            border-0 py-4">
+                    <h4 class="fw-bold mb-1">
+                        <i class="fas fa-calendar-alt
+                                  text-warning me-2"></i>
+                        Reschedule Appointment
+                    </h4>
+                    <span class="text-muted"
+                          th:text="'Ref: '
+                           + ${appointment.appointmentRef}">
+                    </span>
+                </div>
+
+                <div class="card-body p-4">
+
+                    <!-- Current Info -->
+                    <div class="alert alert-info mb-4">
+                        <h6 class="fw-bold mb-2">
+                            <i class="fas fa-info-circle me-2"></i>
+                            Current Appointment
+                        </h6>
+                        <div class="row g-2">
+                            <div class="col-md-4">
+                                <small class="text-muted">
+                                    Patient
+                                </small>
+                                <p class="fw-semibold mb-0"
+                                   th:text="${appointment.patientName}">
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <small class="text-muted">
+                                    Doctor
+                                </small>
+                                <p class="fw-semibold mb-0"
+                                   th:text="${appointment.doctorName}">
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <small class="text-muted">
+                                    Current Date
+                                </small>
+                                <p class="fw-semibold mb-0"
+                                   th:text="${appointment.getFormattedDate()}">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reschedule Form -->
+                    <form th:action="@{'/appointmentschedule/appointments/reschedule/'
+                                     + ${appointment.id}}"
+                          method="post">
+
+                        <h6 class="fw-bold mb-3">
+                            <i class="fas fa-calendar-plus
+                                      text-primary me-2"></i>
+                            Select New Date & Time
+                        </h6>
+
+                        <div class="row g-3 mb-4">
+
+                            <!-- New Date -->
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">
+                                    New Date *
+                                </label>
+                                <input type="date"
+                                       name="newDate"
+                                       class="form-control
+                                              form-control-lg"
+                                       th:min="${#temporals.format(
+                                                #temporals.createNow(),
+                                                'yyyy-MM-dd')}"
+                                       required>
+                            </div>
+
+                            <!-- New Time -->
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">
+                                    New Time *
+                                </label>
+                                <input type="time"
+                                       name="newTime"
+                                       class="form-control
+                                              form-control-lg"
+                                       required>
+                            </div>
+
+                            <!-- New Schedule -->
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">
+                                    New Schedule (Optional)
+                                </label>
+                                <select name="newScheduleId"
+                                        class="form-select
+                                               form-select-lg">
+                                    <option value="">
+                                        -- Select a schedule --
+                                    </option>
+                                    <option th:each="sch
+                                             : ${availableSchedules}"
+                                            th:value="${sch.id}"
+                                            th:text="${sch.doctorName
+                                                     + ' | '
+                                                     + sch.getFormattedDate()
+                                                     + ' | '
+                                                     + sch.getFormattedTimeRange()
+                                                     + ' ('
+                                                     + sch.getAvailableSlots()
+                                                     + ' slots)'}">
+                                    </option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="d-flex gap-3">
+                            <button type="submit"
+                                    class="btn btn-warning
+                                           btn-lg flex-grow-1">
+                                <i class="fas fa-calendar-check me-2">
+                                </i>
+                                Confirm Reschedule
+                            </button>
+                            <a th:href="@{'/appointmentschedule/appointments/view/'
+                                        + ${appointment.id}}"
+                               class="btn btn-outline-secondary btn-lg">
+                                Cancel
+                            </a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT: Available Schedules -->
+        <div class="col-lg-5">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-primary
+                            text-white py-3">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="fas fa-calendar-alt me-2"></i>
+                        Available Schedules
+                    </h5>
+                </div>
+                <div class="card-body p-0"
+                     style="max-height:500px;overflow-y:auto;">
+                    <div class="list-group list-group-flush">
+
+                        <div th:each="sch : ${availableSchedules}"
+                             class="list-group-item p-3">
+                            <div class="d-flex
+                                        justify-content-between">
+                                <div>
+                                    <h6 class="mb-1 fw-semibold"
+                                        th:text="${sch.doctorName}">
+                                    </h6>
+                                    <p class="mb-1 small">
+                                        <span class="badge bg-info"
+                                              th:text="${sch.specialization}">
+                                        </span>
+                                    </p>
+                                    <small class="text-muted">
+                                        <i class="fas fa-calendar me-1">
+                                        </i>
+                                        <span th:text="${sch.getFormattedDate()}">
+                                        </span>
+                                        |
+                                        <i class="fas fa-clock ms-1 me-1">
+                                        </i>
+                                        <span th:text="${sch.getFormattedTimeRange()}">
+                                        </span>
+                                    </small>
+                                    <br>
+                                    <small class="text-muted">
+                                        <i class="fas fa-map-marker-alt me-1">
+                                        </i>
+                                        <span th:text="${sch.location
+                                                         ?: 'Location TBD'}">
+                                        </span>
+                                    </small>
+                                </div>
+                                <div class="text-end
+                                            align-self-center">
+                                    <span class="badge bg-success"
+                                          th:text="${sch.getAvailableSlots()}
+                                                   + ' slots'">
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div th:if="${#lists.isEmpty(
+                                     availableSchedules)}"
+                             class="text-center py-5 text-muted">
+                            <i class="fas fa-calendar-times
+                                      fa-3x mb-3 d-block
+                                      opacity-25"></i>
+                            No available schedules
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<footer th:replace="~{appointmentschedule/fragments/footer
+                    :: footer}">
+</footer>
+
+<div th:replace="~{appointmentschedule/fragments/header
+                  :: scripts}">
+</div>
+
+</body>
+</html>

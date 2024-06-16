@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{appointmentschedule/fragments/header
+                   :: head('Schedules - MediCare')}">
+</head>
+
+<body class="bg-light" style="padding-top:80px;">
+
+<nav th:replace="~{appointmentschedule/fragments/header
+                  :: navbar}">
+</nav>
+
+<div class="container-fluid px-4 py-4">
+
+    <!-- Header -->
+    <div class="d-flex justify-content-between
+                align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold text-dark mb-1">
+                <i class="fas fa-clock
+                          text-primary me-2"></i>
+                Schedule Management
+            </h2>
+            <p class="text-muted mb-0"
+               th:if="${filterInfo}"
+               th:text="'Filtered: ' + ${filterInfo}">
+            </p>
+        </div>
+        <a href="/appointmentschedule/schedules/new"
+           class="btn btn-primary shadow-sm">
+            <i class="fas fa-plus-circle me-2"></i>
+            Create Schedule
+        </a>
+    </div>
+
+    <!-- Alerts -->
+    <div th:if="${successMessage}"
+         class="alert alert-success
+                alert-dismissible fade show"
+         role="alert">
+        <span th:text="${successMessage}"></span>
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="alert">
+        </button>
+    </div>
+
+    <div th:if="${errorMessage}"
+         class="alert alert-danger
+                alert-dismissible fade show"
+         role="alert">
+        <span th:text="${errorMessage}"></span>
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="alert">
+        </button>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body py-3">
+            <form method="get"
+                  action="/appointmentschedule/schedules"
+                  class="row g-3 align-items-end">
+
+                <!-- Doctor Name -->
+                <div class="col-md-4">
+                    <label class="form-label small fw-semibold">
+                        Search Doctor
+                    </label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-white">
+                            <i class="fas fa-search"></i>
+                        </span>
+                        <input type="text"
+                               name="search"
+                               class="form-control"
+                               placeholder="Search by doctor name..."
+                               th:value="${searchKeyword}">
+                    </div>
+                </div>
+
+                <!-- Date -->
+                <div class="col-md-3">
+                    <label class="form-label small fw-semibold">
+                        Filter by Date
+                    </label>
+                    <input type="date"
+                           name="date"
+                           class="form-control">
+                </div>
+
+                <!-- Doctor ID -->
+                <div class="col-md-3">
+                    <label class="form-label small fw-semibold">
+                        Doctor ID
+                    </label>
+                    <input type="number"
+                           name="doctorId"
+                           class="form-control"
+                           placeholder="Doctor ID">
+                </div>
+
+                <!-- Buttons -->
+                <div class="col-md-2">
+                    <div class="d-flex gap-2">
+                        <button type="submit"
+                                class="btn btn-primary flex-grow-1">
+                            <i class="fas fa-search me-1"></i>
+                            Search
+                        </button>
+                        <a href="/appointmentschedule/schedules"
+                           class="btn btn-outline-secondary">
+                            <i class="fas fa-redo"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- Schedules Grid -->
+    <div class="row g-4">
+
+        <div th:each="sch : ${schedules}"
+             class="col-xl-4 col-lg-6">
+            <div class="card border-0 shadow-sm h-100
+                        schedule-card-hover">
+
+                <!-- Card Header -->
+                <div class="card-header border-0 py-3"
+                     th:classappend="${sch.status.name()
+                                      == 'AVAILABLE'}
+                                      ? 'bg-success bg-opacity-10'
+                                      : (${sch.status.name()
+                                         == 'FULL'}
+                                         ? 'bg-danger bg-opacity-10'
+                                         : 'bg-secondary bg-opacity-10')">
+                    <div class="d-flex justify-content-between
+                                align-items-center">
+                        <h6 class="mb-0 fw-bold"
+                            th:text="${sch.doctorName}">
+                        </h6>
+                        <span class="badge rounded-pill"
+                              th:classappend="${sch.status.name()
+                                              == 'AVAILABLE'}
+                                              ? 'bg-success'
+                                              : (${sch.status.name()
+                                                 == 'FULL'}
+                                                 ? 'bg-danger'
+                                                 : 'bg-secondary')"
+                              th:text="${sch.status}">
+                        </span>
+                    </div>
+                </div>
+
+                <div class="card-body">
+
+                    <!-- Specialization -->
+                    <div class="mb-3">
+                        <span class="badge bg-info bg-opacity-75"
+                              th:text="${sch.specialization
+                                        ?: 'General'}">
+                        </span>
+                    </div>
+
+                    <!-- Details Grid -->
+                    <div class="row g-2 mb-3">
+                        <div class="col-6">
+                            <small class="text-muted d-block">
+                                <i class="fas fa-calendar me-1"></i>
+                                Date
+                            </small>
+                            <span class="fw-semibold"
+                                  th:text="${sch.getFormattedDate()}">
+                            </span>
+                        </div>
+                        <div class="col-6">
+                            <small class="text-muted d-block">
+                                <i class="fas fa-clock me-1"></i>
+                                Time
+                            </small>
+                            <span class="fw-semibold"
+                                  th:text="${sch.getFormattedTimeRange()}">
+                            </span>
+                        </div>
+                        <div class="col-6">
+                            <small class="text-muted d-block">
+                                <i class="fas fa-map-marker-alt me-1">
+                                </i>
+                                Location
+                            </small>
+                            <span class="fw-semibold"
+                                  th:text="${sch.location ?: 'N/A'}">
+                            </span>
+                        </div>
+                        <div class="col-6">
+                            <small class="text-muted d-block">
+                                <i class="fas fa-users me-1"></i>
+                                Slots
+                            </small>
+                            <span class="fw-semibold">
+                                <span th:text="${sch.bookedSlots}">0</span>
+                                /
+                                <span th:text="${sch.maxSlots}">10</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div class="mb-2">
+                        <div class="d-flex justify-content-between
+                                    small mb-1">
+                            <span class="text-muted">
+                                Booking Progress
+                            </span>
+                            <span class="fw-semibold"
+                                  th:text="${sch.getAvailableSlots()}
+                                           + ' available'">
+                            </span>
+                        </div>
+                        <div class="progress" style="height:8px;">
+                            <div class="progress-bar"
+                                 th:classappend="${sch.getAvailableSlots()
+                                                  == 0}
+                                                  ? 'bg-danger'
+                                                  : (${sch.getAvailableSlots()
+                                                     <= 3}
+                                                     ? 'bg-warning'
+                                                     : 'bg-success')"
+                                 role="progressbar"
+                                 th:style="'width:'
+                                  + ${sch.maxSlots > 0
+                                     ? (sch.bookedSlots * 100
+                                        / sch.maxSlots)
+                                     : 0}
+                                  + '%'">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Card Footer -->
+                <div class="card-footer bg-white border-0 py-3">
+                    <div class="d-flex gap-2">
+
+                        <!-- Book -->
+                        <a th:if="${sch.hasAvailableSlots()}"
+                           th:href="@{'/appointmentschedule/appointments/book?scheduleId='
+                                    + ${sch.id}}"
+                           class="btn btn-primary btn-sm flex-grow-1">
+                            <i class="fas fa-calendar-plus me-1"></i>
+                            Book
+                        </a>
+
+                        <!-- View -->
+                        <a th:href="@{'/appointmentschedule/schedules/view/'
+                                    + ${sch.id}}"
+                           class="btn btn-outline-info btn-sm"
+                           title="View">
+                            <i class="fas fa-eye"></i>
+                        </a>
+
+                        <!-- Edit -->
+                        <a th:href="@{'/appointmentschedule/schedules/edit/'
+                                    + ${sch.id}}"
+                           class="btn btn-outline-primary btn-sm"
+                           title="Edit">
+                            <i class="fas fa-edit"></i>
+                        </a>
+
+                        <!-- Delete -->
+                        <a th:href="@{'/appointmentschedule/schedules/delete/'
+                                    + ${sch.id}}"
+                           class="btn btn-outline-danger btn-sm"
+                           title="Delete"
+                           onclick="return confirm(
+                               'Delete this schedule?')">
+                            <i class="fas fa-trash"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Empty State -->
+        <div th:if="${#lists.isEmpty(schedules)}"
+             class="col-12">
+            <div class="text-center py-5">
+                <i class="fas fa-calendar-times
+                          fa-4x text-muted mb-3
+                          d-block opacity-25"></i>
+                <h4 class="text-muted">No schedules found</h4>
+                <p class="text-muted">
+                    Create a new schedule to get started
+                </p>
+                <a href="/appointmentschedule/schedules/new"
+                   class="btn btn-primary">
+                    <i class="fas fa-plus-circle me-2"></i>
+                    Create Schedule
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<footer th:replace="~{appointmentschedule/fragments/footer
+                    :: footer}">
+</footer>
+
+<div th:replace="~{appointmentschedule/fragments/header
+                  :: scripts}">
+</div>
+
+</body>
+</html>

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{appointmentschedule/fragments/header
+                   :: head('Book Appointment - MediCare')}">
+</head>
+
+<body class="bg-light" style="padding-top:80px;">
+
+<nav th:replace="~{appointmentschedule/fragments/header
+                  :: navbar}">
+</nav>
+
+<div class="container py-4">
+
+    <!-- Page Header -->
+    <div class="text-center mb-4
+                animate__animated animate__fadeInDown">
+        <h2 class="fw-bold text-dark">
+            <i class="fas fa-calendar-plus
+                      text-primary me-2"></i>
+            Book an Appointment
+        </h2>
+        <p class="text-muted">
+            Fill in the details below to schedule your visit
+        </p>
+    </div>
+
+    <!-- Alerts -->
+    <div th:if="${successMessage}"
+         class="alert alert-success
+                alert-dismissible fade show"
+         role="alert">
+        <i class="fas fa-check-circle me-2"></i>
+        <span th:text="${successMessage}"></span>
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="alert">
+        </button>
+    </div>
+
+    <div th:if="${errorMessage}"
+         class="alert alert-danger
+                alert-dismissible fade show"
+         role="alert">
+        <i class="fas fa-exclamation-circle me-2"></i>
+        <span th:text="${errorMessage}"></span>
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="alert">
+        </button>
+    </div>
+
+    <div class="row g-4">
+
+        <!-- LEFT: Booking Form -->
+        <div class="col-lg-8
+                    animate__animated animate__fadeInLeft">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4 p-lg-5">
+
+                    <form th:action="@{/appointmentschedule/appointments/book}"
+                          th:object="${appointment}"
+                          method="post">
+
+                        <!-- Schedule ID hidden -->
+                        <input type="hidden"
+                               name="scheduleId"
+                               th:value="${selectedSchedule != null
+                                          ? selectedSchedule.id
+                                          : ''}">
+
+                        <!-- ====== STEP 1: Patient Info ====== -->
+                        <div class="mb-4">
+                            <h5 class="fw-bold text-primary mb-3">
+                                <span class="step-number">1</span>
+                                Patient Information
+                            </h5>
+                            <hr class="mt-0">
+                        </div>
+
+                        <div class="row g-3 mb-4">
+
+                            <!-- Patient ID -->
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">
+                                    <i class="fas fa-id-card
+                                              me-1 text-muted"></i>
+                                    Patient ID *
+                                </label>
+                                <input type="number"
+                                       class="form-control form-control-lg"
+                                       th:field="*{patientId}"
+                                       th:classappend="${#fields.hasErrors('patientId')}
+                                                       ? 'is-invalid' : ''"
+                                       placeholder="Enter Patient ID"
+                                       required>
+                                <div class="invalid-feedback"
+                                     th:if="${#fields.hasErrors('patientId')}"
+                                     th:errors="*{patientId}">
+                                </div>
+                            </div>
+
+                            <!-- Full Name -->
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">
+                                    <i class="fas fa-user
+                                              me-1 text-muted"></i>
+                                    Full Name *
+                                </label>
+                                <input type="text"
+                                       class="form-control form-control-lg"
+                                       th:field="*{patientName}"
+                                       th:classappend="${#fields.hasErrors('patientName')}
+                                                       ? 'is-invalid' : ''"
+                                       placeholder="Enter full name"
+                                       required>
+                                <div class="invalid-feedback"
+                                     th:if="${#fields.hasErrors('patientName')}"
+                                     th:errors="*{patientName}">
+                                </div>
+                            </div>
+
+                            <!-- Phone -->
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">
+                                    <i class="fas fa-phone
+                                              me-1 text-muted"></i>
+                                    Phone Number *
+                                </label>
+                                <input type="tel"
+                                       class="form-control form-control-lg"
+                                       th:field="*{patientPhone}"
+                                       th:classappend="${#fields.hasErrors('patientPhone')}
+                                                       ? 'is-invalid' : ''"
+                                       placeholder="+94 7X XXX XXXX"
+                                       required>
+                                <div class="invalid-feedback"
+                                     th:if="${#fields.hasErrors('patientPhone')}"
+                                     th:errors="*{patientPhone}">
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">
+                                    <i class="fas fa-envelope
+                                              me-1 text-muted"></i>
+                                    Email
+                                </label>
+                                <input type="email"
+                                       class="form-control form-control-lg"
+                                       th:field="*{patientEmail}"
+                                       th:classappend="${#fields.hasErrors('patientEmail')}
+                                                       ? 'is-invalid' : ''"
+                                       placeholder="patient@email.com">
+                                <div class="invalid-feedback"
+                                     th:if="${#fields.hasErrors('patientEmail')}"
+                                     th:errors="*{patientEmail}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ====== STEP 2: Doctor Info ====== -->
+                        <div class="mb-4">
+                            <h5 class="fw-bold text-primary mb-3">
+                                <span class="step-number">2</span>
+                                Doctor Information
+                            </h5>
+                            <hr class="mt-0">
+                        </div>
+
+                        <div class="row g-3 mb-4">
+
+                            <!-- Doctor ID -->
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">
+                                    <i class="fas fa-user-md
+                                              me-1 text-muted"></i>
+                                    Doctor ID *
+                                </label>
+                                <input type="number"
+                                       class="form-control form-control-lg"
+                                       th:field="*{doctorId}"
+                                       placeholder="Doctor ID"
+                                       required>
+                            </div>
+
+                            <!-- Doctor Name -->
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">
+                                    Doctor Name *
+                                </label>
+                                <input type="text"
+                                       class="form-control form-control-lg"
+                                       th:field="*{doctorName}"
+                                       placeholder="Dr. Name"
+                                       required>
+                            </div>
+
+                            <!-- Specialization -->
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">
+                                    Specialization
+                                </label>
+                                <input type="text"
+                                       class="form-control form-control-lg"
+                                       th:field="*{specialization}"
+                                       placeholder="e.g., Cardiology">
+                            </div>
+                        </div>
+
+                        <!-- ====== STEP 3: Appointment ====== -->
+                        <div class="mb-4">
+                            <h5 class="fw-bold text-primary mb-3">
+                                <span class="step-number">3</span>
+                                Appointment Details
+                            </h5>
+                            <hr class="mt-0">
+                        </div>
+
+                        <div class="row g-3 mb-4">
+
+                            <!-- Date -->
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">
+                                    <i class="fas fa-calendar
+                                              me-1 text-muted"></i>
+                                    Date *
+                                </label>
+                                <input type="date"
+                                       class="form-control form-control-lg"
+                                       th:field="*{appointmentDate}"
+                                       th:classappend="${#fields.hasErrors('appointmentDate')}
+                                                       ? 'is-invalid' : ''"
+                                       th:min="${#temporals.format(
+                                                #temporals.createNow(),
+                                                'yyyy-MM-dd')}"
+                                       required>
+                                <div class="invalid-feedback"
+                                     th:if="${#fields.hasErrors('appointmentDate')}"
+                                     th:errors="*{appointmentDate}">
+                                </div>
+                            </div>
+
+                            <!-- Time -->
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">
+                                    <i class="fas fa-clock
+                                              me-1 text-muted"></i>
+                                    Time *
+                                </label>
+                                <input type="time"
+                                       class="form-control form-control-lg"
+                                       th:field="*{appointmentTime}"
+                                       required>
+                            </div>
+
+                            <!-- Type -->
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">
+                                    <i class="fas fa-video
+                                              me-1 text-muted"></i>
+                                    Type
+                                </label>
+                                <select class="form-select form-select-lg"
+                                        th:field="*{appointmentType}">
+                                    <option th:each="type
+                                             : ${appointmentTypes}"
+                                            th:value="${type}"
+                                            th:text="${type}">
+                                    </option>
+                                </select>
+                            </div>
+
+                            <!-- Reason -->
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">
+                                    <i class="fas fa-comment-medical
+                                              me-1 text-muted"></i>
+                                    Reason for Visit
+                                </label>
+                                <textarea class="form-control"
+                                          th:field="*{reason}"
+                                          rows="3"
+                                          placeholder="Briefly describe your symptoms...">
+                                </textarea>
+                            </div>
+
+                            <!-- Notes -->
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">
+                                    <i class="fas fa-sticky-note
+                                              me-1 text-muted"></i>
+                                    Additional Notes
+                                </label>
+                                <textarea class="form-control"
+                                          th:field="*{notes}"
+                                          rows="2"
+                                          placeholder="Any other info...">
+                                </textarea>
+                            </div>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="d-flex gap-3 pt-3">
+                            <button type="submit"
+                                    class="btn btn-primary
+                                           btn-lg flex-grow-1">
+                                <i class="fas fa-check-circle me-2"></i>
+                                Confirm Booking
+                            </button>
+                            <a href="/appointmentschedule/appointments/dashboard"
+                               class="btn btn-outline-secondary btn-lg">
+                                <i class="fas fa-times me-2"></i>
+                                Cancel
+                            </a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT: Available Schedules Sidebar -->
+        <div class="col-lg-4
+                    animate__animated animate__fadeInRight">
+            <div class="card border-0 shadow-sm sticky-top"
+                 style="top:100px;">
+                <div class="card-header bg-primary
+                            text-white py-3">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="fas fa-calendar-alt me-2"></i>
+                        Available Schedules
+                    </h5>
+                </div>
+                <div class="card-body p-0"
+                     style="max-height:600px;
+                            overflow-y:auto;">
+                    <div class="list-group list-group-flush">
+
+                        <a th:each="sch : ${availableSchedules}"
+                           th:href="@{'/appointmentschedule/appointments/book?scheduleId='
+                                    + ${sch.id}}"
+                           class="list-group-item
+                                  list-group-item-action
+                                  p-3 schedule-card"
+                           th:classappend="${selectedSchedule != null
+                                           and selectedSchedule.id
+                                           == sch.id}
+                                           ? 'active' : ''">
+
+                            <div class="d-flex
+                                        justify-content-between
+                                        align-items-start">
+                                <div>
+                                    <h6 class="mb-1 fw-semibold"
+                                        th:text="${sch.doctorName}">
+                                    </h6>
+                                    <p class="mb-1 small">
+                                        <span class="badge bg-info
+                                                     bg-opacity-75"
+                                              th:text="${sch.specialization}">
+                                        </span>
+                                    </p>
+                                    <p class="mb-0 small">
+                                        <i class="fas fa-calendar me-1"></i>
+                                        <span th:text="${sch.getFormattedDate()}">
+                                        </span>
+                                    </p>
+                                    <p class="mb-0 small">
+                                        <i class="fas fa-clock me-1"></i>
+                                        <span th:text="${sch.getFormattedTimeRange()}">
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-success
+                                                 rounded-pill"
+                                          th:text="${sch.getAvailableSlots()}
+                                                   + ' slots'">
+                                    </span>
+                                    <br>
+                                    <small class="text-muted"
+                                           th:text="${sch.location}">
+                                    </small>
+                                </div>
+                            </div>
+                        </a>
+
+                        <div th:if="${#lists.isEmpty(
+                                     availableSchedules)}"
+                             class="text-center py-5 text-muted">
+                            <i class="fas fa-calendar-times
+                                      fa-3x mb-3 d-block
+                                      opacity-25"></i>
+                            <p>No available schedules</p>
+                            <a href="/appointmentschedule/schedules/new"
+                               class="btn btn-sm
+                                      btn-outline-primary">
+                                Create Schedule
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<footer th:replace="~{appointmentschedule/fragments/footer
+                    :: footer}">
+</footer>
+
+<div th:replace="~{appointmentschedule/fragments/header
+                  :: scripts}">
+</div>
+
+</body>
+</html>

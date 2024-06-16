@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{appointmentschedule/fragments/header
+                   :: head('Schedule Form - MediCare')}">
+</head>
+
+<body class="bg-light" style="padding-top:80px;">
+
+<nav th:replace="~{appointmentschedule/fragments/header
+                  :: navbar}">
+</nav>
+
+<div class="container py-4">
+
+  <a href="/appointmentschedule/schedules"
+     class="btn btn-outline-primary mb-4">
+    <i class="fas fa-arrow-left me-2"></i>
+    Back to Schedules
+  </a>
+
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card border-0 shadow-sm">
+
+        <div class="card-header bg-white border-0 py-4">
+          <h4 class="fw-bold mb-0">
+            <i class="fas fa-calendar-plus
+                                  text-primary me-2"></i>
+            <span th:text="${isEdit}
+                                       ? 'Edit Schedule'
+                                       : 'Create New Schedule'">
+                        </span>
+          </h4>
+        </div>
+
+        <div class="card-body p-4 p-lg-5">
+          <form th:action="@{/appointmentschedule/schedules/save}"
+                th:object="${schedule}"
+                method="post">
+
+            <!-- Hidden fields -->
+            <input type="hidden" th:field="*{id}">
+            <input type="hidden" th:field="*{bookedSlots}">
+            <input type="hidden" th:field="*{status}">
+
+            <!-- Doctor Info -->
+            <h6 class="fw-bold text-primary mb-3">
+              <i class="fas fa-user-md me-2"></i>
+              Doctor Information
+            </h6>
+
+            <div class="row g-3 mb-4">
+
+              <!-- Doctor ID -->
+              <div class="col-md-4">
+                <label class="form-label fw-semibold">
+                  Doctor ID *
+                </label>
+                <input type="number"
+                       class="form-control
+                                              form-control-lg"
+                       th:field="*{doctorId}"
+                       th:classappend="${#fields.hasErrors('doctorId')}
+                                                       ? 'is-invalid' : ''"
+                       placeholder="Doctor ID"
+                       required>
+                <div class="invalid-feedback"
+                     th:if="${#fields.hasErrors('doctorId')}"
+                     th:errors="*{doctorId}">
+                </div>
+              </div>
+
+              <!-- Doctor Name -->
+              <div class="col-md-4">
+                <label class="form-label fw-semibold">
+                  Doctor Name *
+                </label>
+                <input type="text"
+                       class="form-control
+                                              form-control-lg"
+                       th:field="*{doctorName}"
+                       th:classappend="${#fields.hasErrors('doctorName')}
+                                                       ? 'is-invalid' : ''"
+                       placeholder="Dr. Name"
+                       required>
+                <div class="invalid-feedback"
+                     th:if="${#fields.hasErrors('doctorName')}"
+                     th:errors="*{doctorName}">
+                </div>
+              </div>
+
+              <!-- Specialization -->
+              <div class="col-md-4">
+                <label class="form-label fw-semibold">
+                  Specialization
+                </label>
+                <select class="form-select
+                                               form-select-lg"
+                        th:field="*{specialization}">
+                  <option value="">
+                    Select Specialization
+                  </option>
+                  <option value="Cardiology">
+                    Cardiology
+                  </option>
+                  <option value="Dermatology">
+                    Dermatology
+                  </option>
+                  <option value="Neurology">
+                    Neurology
+                  </option>
+                  <option value="Orthopedics">
+                    Orthopedics
+                  </option>
+                  <option value="Pediatrics">
+                    Pediatrics
+                  </option>
+                  <option value="Psychiatry">
+                    Psychiatry
+                  </option>
+                  <option value="General Medicine">
+                    General Medicine
+                  </option>
+                  <option value="Gynecology">
+                    Gynecology
+                  </option>
+                  <option value="ENT">ENT</option>
+                  <option value="Ophthalmology">
+                    Ophthalmology
+                  </option>
+                </select>
+              </div>
+
+            </div>
+
+            <!-- Schedule Details -->
+            <h6 class="fw-bold text-primary mb-3">
+              <i class="fas fa-calendar me-2"></i>
+              Schedule Details
+            </h6>
+
+            <div class="row g-3 mb-4">
+
+              <!-- Date -->
+              <div class="col-md-4">
+                <label class="form-label fw-semibold">
+                  Date *
+                </label>
+                <input type="date"
+                       class="form-control
+                                              form-control-lg"
+                       th:field="*{scheduleDate}"
+                       th:classappend="${#fields.hasErrors('scheduleDate')}
+                                                       ? 'is-invalid' : ''"
+                       th:min="${#temporals.format(
+                                                #temporals.createNow(),
+                                                'yyyy-MM-dd')}"
+                       required>
+                <div class="invalid-feedback"
+                     th:if="${#fields.hasErrors('scheduleDate')}"
+                     th:errors="*{scheduleDate}">
+                </div>
+              </div>
+
+              <!-- Start Time -->
+              <div class="col-md-4">
+                <label class="form-label fw-semibold">
+                  Start Time *
+                </label>
+                <input type="time"
+                       class="form-control
+                                              form-control-lg"
+                       th:field="*{startTime}"
+                       th:classappend="${#fields.hasErrors('startTime')}
+                                                       ? 'is-invalid' : ''"
+                       required>
+                <div class="invalid-feedback"
+                     th:if="${#fields.hasErrors('startTime')}"
+                     th:errors="*{startTime}">
+                </div>
+              </div>
+
+              <!-- End Time -->
+              <div class="col-md-4">
+                <label class="form-label fw-semibold">
+                  End Time *
+                </label>
+                <input type="time"
+                       class="form-control
+                                              form-control-lg"
+                       th:field="*{endTime}"
+                       th:classappend="${#fields.hasErrors('endTime')}
+                                                       ? 'is-invalid' : ''"
+                       required>
+                <div class="invalid-feedback"
+                     th:if="${#fields.hasErrors('endTime')}"
+                     th:errors="*{endTime}">
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Capacity & Location -->
+            <h6 class="fw-bold text-primary mb-3">
+              <i class="fas fa-cog me-2"></i>
+              Capacity & Location
+            </h6>
+
+            <div class="row g-3 mb-4">
+
+              <!-- Max Slots -->
+              <div class="col-md-4">
+                <label class="form-label fw-semibold">
+                  Max Slots *
+                </label>
+                <input type="number"
+                       class="form-control
+                                              form-control-lg"
+                       th:field="*{maxSlots}"
+                       th:classappend="${#fields.hasErrors('maxSlots')}
+                                                       ? 'is-invalid' : ''"
+                       min="1"
+                       max="50"
+                       placeholder="e.g. 15"
+                       required>
+                <div class="invalid-feedback"
+                     th:if="${#fields.hasErrors('maxSlots')}"
+                     th:errors="*{maxSlots}">
+                </div>
+              </div>
+
+              <!-- Location -->
+              <div class="col-md-8">
+                <label class="form-label fw-semibold">
+                  Location
+                </label>
+                <input type="text"
+                       class="form-control
+                                              form-control-lg"
+                       th:field="*{location}"
+                       placeholder="e.g. Room 201, Building A">
+              </div>
+
+              <!-- Notes -->
+              <div class="col-12">
+                <label class="form-label fw-semibold">
+                  Notes
+                </label>
+                <textarea class="form-control"
+                          th:field="*{notes}"
+                          rows="3"
+                          placeholder="Additional notes...">
+                                </textarea>
+              </div>
+
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex gap-3 pt-3">
+              <button type="submit"
+                      class="btn btn-primary
+                                           btn-lg flex-grow-1">
+                <i class="fas fa-save me-2"></i>
+                <span th:text="${isEdit}
+                                               ? 'Update Schedule'
+                                               : 'Create Schedule'">
+                                </span>
+              </button>
+              <a href="/appointmentschedule/schedules"
+                 class="btn btn-outline-secondary btn-lg">
+                <i class="fas fa-times me-2"></i>
+                Cancel
+              </a>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer th:replace="~{appointmentschedule/fragments/footer
+                    :: footer}">
+</footer>
+
+<div th:replace="~{appointmentschedule/fragments/header
+                  :: scripts}">
+</div>
+
+</body>
+</html>

@@ -5,7 +5,6 @@ import jakarta.validation.constraints.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-// ✅ Both @Entity and @Table are required
 @Entity
 @Table(name = "appointments")
 public class Appointment {
@@ -15,137 +14,143 @@ public class Appointment {
     private Long id;
 
     @NotBlank(message = "Patient name is required")
-    @Size(min = 2, max = 100,
-            message = "Name must be 2-100 characters")
-    @Column(name = "patient_name", nullable = false)
+    @Size(min = 2, max = 100, message = "Name must be 2-100 characters")
+    @Column(nullable = false)
     private String patientName;
 
-    @NotBlank(message = "Doctor name is required")
-    @Column(name = "doctor_name", nullable = false)
-    private String doctorName;
-
-    @NotNull(message = "Date is required")
-    @Column(name = "appointment_date", nullable = false)
-    private LocalDate appointmentDate;
-
-    @NotNull(message = "Time is required")
-    @Column(name = "appointment_time", nullable = false)
-    private LocalTime appointmentTime;
-
-    @NotBlank(message = "Specialization is required")
-    @Column(name = "specialization")
-    private String specialization;
-
-    @Column(name = "status")
-    private String status;
-
-    @Column(name = "notes", columnDefinition = "TEXT")
-    private String notes;
-
-    @Email(message = "Enter valid email")
-    @Column(name = "patient_email")
+    @NotBlank(message = "Patient email is required")
+    @Email(message = "Please enter a valid email")
+    @Column(nullable = false)
     private String patientEmail;
 
+    @NotBlank(message = "Phone number is required")
     @Pattern(regexp = "^[0-9]{10}$",
             message = "Phone must be 10 digits")
-    @Column(name = "patient_phone")
+    @Column(nullable = false)
     private String patientPhone;
 
-    // ✅ OOP: Default Constructor
-    public Appointment() {
-        this.status = "BOOKED";
-    }
+    @NotBlank(message = "Doctor name is required")
+    @Column(nullable = false)
+    private String doctorName;
 
-    // ✅ OOP: Parameterized Constructor
-    public Appointment(String patientName, String doctorName,
+    @NotBlank(message = "Specialization is required")
+    @Column(nullable = false)
+    private String specialization;
+
+    @NotNull(message = "Appointment date is required")
+    @Column(nullable = false)
+    private LocalDate appointmentDate;
+
+    @NotNull(message = "Appointment time is required")
+    @Column(nullable = false)
+    private LocalTime appointmentTime;
+
+    @NotBlank(message = "Reason is required")
+    @Size(min = 5, max = 500,
+            message = "Reason must be 5-500 characters")
+    @Column(nullable = false)
+    private String reason;
+
+    @Column(nullable = false)
+    private String status = "PENDING";
+
+    @Column(nullable = false)
+    private String appointmentType = "IN_PERSON";
+
+    @Column(length = 1000)
+    private String notes;
+
+    // ===== CONSTRUCTORS =====
+    public Appointment() {}
+
+    public Appointment(String patientName, String patientEmail,
+                       String patientPhone, String doctorName,
+                       String specialization,
                        LocalDate appointmentDate,
-                       LocalTime appointmentTime,
-                       String specialization) {
-        this.patientName     = patientName;
-        this.doctorName      = doctorName;
+                       LocalTime appointmentTime, String reason) {
+        this.patientName = patientName;
+        this.patientEmail = patientEmail;
+        this.patientPhone = patientPhone;
+        this.doctorName = doctorName;
+        this.specialization = specialization;
         this.appointmentDate = appointmentDate;
         this.appointmentTime = appointmentTime;
-        this.specialization  = specialization;
-        this.status          = "BOOKED";
+        this.reason = reason;
+        this.status = "PENDING";
+        this.appointmentType = "IN_PERSON";
     }
 
-    // ✅ OOP: ABSTRACTION
-    public boolean isUpcoming() {
-        return appointmentDate != null &&
-                appointmentDate.isAfter(LocalDate.now());
-    }
-
-    public boolean isCancellable() {
-        return "BOOKED".equals(status) ||
-                "RESCHEDULED".equals(status);
-    }
-
-    public String getStatusBadgeColor() {
-        if (status == null) return "secondary";
-        switch (status) {
-            case "BOOKED":      return "primary";
-            case "COMPLETED":   return "success";
-            case "CANCELLED":   return "danger";
-            case "RESCHEDULED": return "warning";
-            default:            return "secondary";
-        }
-    }
-
-    // ✅ OOP: POLYMORPHISM
-    @Override
-    public String toString() {
-        return "Appointment{" +
-                "id="             + id              +
-                ", patient='"     + patientName     + '\'' +
-                ", doctor='"      + doctorName      + '\'' +
-                ", date="         + appointmentDate +
-                ", time="         + appointmentTime +
-                ", status='"      + status          + '\'' +
-                '}';
-    }
-
-    // ✅ OOP: ENCAPSULATION - Getters & Setters
+    // ===== GETTERS AND SETTERS =====
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
     public String getPatientName() { return patientName; }
-    public void setPatientName(String n) { this.patientName = n; }
-
-    public String getDoctorName() { return doctorName; }
-    public void setDoctorName(String n) { this.doctorName = n; }
-
-    public LocalDate getAppointmentDate() {
-        return appointmentDate;
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
     }
-    public void setAppointmentDate(LocalDate d) {
-        this.appointmentDate = d;
-    }
-
-    public LocalTime getAppointmentTime() {
-        return appointmentTime;
-    }
-    public void setAppointmentTime(LocalTime t) {
-        this.appointmentTime = t;
-    }
-
-    public String getSpecialization() { return specialization; }
-    public void setSpecialization(String s) {
-        this.specialization = s;
-    }
-
-    public String getStatus() { return status; }
-    public void setStatus(String s) { this.status = s; }
-
-    public String getNotes() { return notes; }
-    public void setNotes(String n) { this.notes = n; }
 
     public String getPatientEmail() { return patientEmail; }
-    public void setPatientEmail(String e) {
-        this.patientEmail = e;
+    public void setPatientEmail(String patientEmail) {
+        this.patientEmail = patientEmail;
     }
 
     public String getPatientPhone() { return patientPhone; }
-    public void setPatientPhone(String p) {
-        this.patientPhone = p;
+    public void setPatientPhone(String patientPhone) {
+        this.patientPhone = patientPhone;
+    }
+
+    public String getDoctorName() { return doctorName; }
+    public void setDoctorName(String doctorName) {
+        this.doctorName = doctorName;
+    }
+
+    public String getSpecialization() { return specialization; }
+    public void setSpecialization(String specialization) {
+        this.specialization = specialization;
+    }
+
+    public LocalDate getAppointmentDate() { return appointmentDate; }
+    public void setAppointmentDate(LocalDate appointmentDate) {
+        this.appointmentDate = appointmentDate;
+    }
+
+    public LocalTime getAppointmentTime() { return appointmentTime; }
+    public void setAppointmentTime(LocalTime appointmentTime) {
+        this.appointmentTime = appointmentTime;
+    }
+
+    public String getReason() { return reason; }
+    public void setReason(String reason) { this.reason = reason; }
+
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
+
+    public String getAppointmentType() { return appointmentType; }
+    public void setAppointmentType(String appointmentType) {
+        this.appointmentType = appointmentType;
+    }
+
+    public String getNotes() { return notes; }
+    public void setNotes(String notes) { this.notes = notes; }
+
+    // ===== BUSINESS LOGIC =====
+    public boolean isCancellable() {
+        return "PENDING".equals(this.status)
+                || "CONFIRMED".equals(this.status);
+    }
+
+    public boolean isUpcoming() {
+        return this.appointmentDate != null
+                && this.appointmentDate.isAfter(LocalDate.now())
+                && !"CANCELLED".equals(this.status);
+    }
+
+    @Override
+    public String toString() {
+        return id + "," + patientName + "," + patientEmail + ","
+                + patientPhone + "," + doctorName + ","
+                + specialization + "," + appointmentDate + ","
+                + appointmentTime + "," + reason + ","
+                + status + "," + appointmentType;
     }
 }

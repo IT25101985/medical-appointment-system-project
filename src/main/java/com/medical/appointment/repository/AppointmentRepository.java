@@ -2,57 +2,55 @@ package com.medical.appointment.repository;
 
 import com.medical.appointment.entity.Appointment;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
 
-// ✅ @Repository annotation is important
 @Repository
 public interface AppointmentRepository
         extends JpaRepository<Appointment, Long> {
 
-    // Find by patient name - case insensitive
-    List<Appointment> findByPatientNameContainingIgnoreCase(
-            String patientName);
-
-    // Find by doctor
-    List<Appointment> findByDoctorName(String doctorName);
-
-    // Find by status
     List<Appointment> findByStatus(String status);
 
-    // Find by date
-    List<Appointment> findByAppointmentDate(LocalDate date);
+    List<Appointment> findByPatientEmail(String email);
 
-    // Find upcoming - sorted by date
-    List<Appointment>
-    findByAppointmentDateGreaterThanEqualOrderByAppointmentDateAsc(
-            LocalDate date);
+    List<Appointment> findByDoctorName(String doctorName);
 
-    // Find by specialization
     List<Appointment> findBySpecialization(String specialization);
 
-    // Count by status
-    @Query("SELECT COUNT(a) FROM Appointment a " +
-            "WHERE a.status = :status")
-    long countByStatus(@Param("status") String status);
+    List<Appointment> findByAppointmentDate(LocalDate date);
 
-    // Find today's appointments
-    @Query("SELECT a FROM Appointment a " +
-            "WHERE a.appointmentDate = :today " +
-            "ORDER BY a.appointmentTime ASC")
-    List<Appointment> findTodaysAppointments(
-            @Param("today") LocalDate today);
+    List<Appointment> findByDoctorNameAndAppointmentDate(
+            String doctorName, LocalDate date);
 
-    // Search by name or email
-    @Query("SELECT a FROM Appointment a WHERE " +
-            "LOWER(a.patientName) LIKE " +
-            "LOWER(CONCAT('%', :keyword, '%')) " +
-            "OR LOWER(a.patientEmail) LIKE " +
-            "LOWER(CONCAT('%', :keyword, '%'))")
-    List<Appointment> searchByKeyword(
-            @Param("keyword") String keyword);
+    List<Appointment> findByAppointmentDateAfterOrderByAppointmentDateAsc(
+            LocalDate date);
+
+    @Query("SELECT COUNT(a) FROM Appointment a WHERE a.status = ?1")
+    long countByStatus(String status);
+
+    // ===== Direct UPDATE queries =====
+    @Modifying
+    @Transactional
+    @Query("UPDATE Appointment a SET a.status = :status WHERE a.id = :id")
+    int updateStatusById(
+            @Param("id") Long id,
+            @Param("status") String status);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE Appointment a SET " +
+            "a.appointmentDate = :date, " +
+            "a.appointmentTime = :time, " +
+            "a.status = 'CONFIRMED' " +
+            "WHERE a.id = :id")
+    int updateDateTimeById(
+            @Param("id") Long id,
+            @Param("date") LocalDate date,
+            @Param("time") java.time.LocalTime time);
 }

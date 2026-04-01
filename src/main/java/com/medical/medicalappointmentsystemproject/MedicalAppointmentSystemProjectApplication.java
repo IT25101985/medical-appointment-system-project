@@ -14,12 +14,13 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EntityScan(
         basePackages = {
                 "com.medical.appointment.entity",
-                "com.medical.medicalappointmentsystemproject.patient.model"
+                "com.medical.medicalappointmentsystemproject"
         }
 )
 @EnableJpaRepositories(
         basePackages = {
-                "com.medical.appointment.repository"
+                "com.medical.appointment.repository",
+                "com.medical.medicalappointmentsystemproject"
         }
 )
 public class MedicalAppointmentSystemProjectApplication {
@@ -27,8 +28,8 @@ public class MedicalAppointmentSystemProjectApplication {
     public static void main(String[] args) {
         SpringApplication.run(
                 MedicalAppointmentSystemProjectApplication.class,
-                args
-        );
+                args);
+
         System.out.println("\n");
         System.out.println("=========================================");
         System.out.println("   Medical Appointment System Started!   ");

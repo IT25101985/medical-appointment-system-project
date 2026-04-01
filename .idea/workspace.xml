@@ -8,14 +8,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/appointments/appointments-list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/appointments/book-appointment.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/appointments/dashboard.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/appointments/my-appointments.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/appointments/reschedule.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/appointments/schedules.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/appointments/view-appointment.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_07-05-2026_13_14_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_07-05-2026_13_14__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_07-05-2026_13_15_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_07-05-2026_13_15__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/appointment/controller/AppointmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/appointment/controller/AppointmentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/appointment/entity/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/appointment/entity/Appointment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/appointment/entity/Schedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/appointment/entity/Schedule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/appointment/repository/AppointmentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/appointment/repository/AppointmentRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/appointment/repository/ScheduleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/appointment/repository/ScheduleRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/appointment/service/AppointmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/appointment/service/AppointmentService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/medicalappointmentsystemproject/MedicalAppointmentSystemProjectApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/medicalappointmentsystemproject/MedicalAppointmentSystemProjectApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/medicalappointmentsystemproject/patient/model/Patient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/appointments.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/appointments.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/appointment.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/appointment.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/appointment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/appointment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/appointments.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/book-appointment.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/reschedule.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/schedule.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,8 +47,8 @@
       <list>
         <option value="CSS File" />
         <option value="JavaScript File" />
-        <option value="HTML File" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -84,8 +104,10 @@
     "RunOnceActivity.git.unshallow": "true",
     "Spring Boot.MedicalAppointmentApplication.executor": "Run",
     "Spring Boot.MedicalAppointmentSystemProjectApplication.executor": "Run",
-    "git-widget-placeholder": "Appointment-&&-Schedule-Pathirana-D.P.D.P",
+    "git-widget-placeholder": "Appointment-&&-Schedule",
+    "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/MalithPC/OneDrive/Documents/it23835382/medical-appointment-system-project",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
@@ -96,6 +118,11 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\dell\Documents\New folder (2)\medical-appointment-system-project\src\main\resources\templates\appointments" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <module name="medical-appointment-system-project" />
@@ -110,7 +137,7 @@
     </configuration>
     <configuration name="MedicalAppointmentSystemProjectApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
-      <module name="Medical-Appointment-System-Project" />
+      <module name="medical-appointment-system" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.medical.medicalappointmentsystemproject.MedicalAppointmentSystemProjectApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -120,8 +147,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.23774.435" />
-        <option value="bundled-js-predefined-d6986cc7102b-f27c65a3e318-JavaScript-IU-251.23774.435" />
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.33514.17" />
       </set>
     </attachedChunks>
   </component>

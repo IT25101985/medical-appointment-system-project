@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
-import java.util.Arrays;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,228 +24,548 @@ public class AppointmentController {
     @Autowired
     private AppointmentService appointmentService;
 
-    private static final List<String> DOCTORS = Arrays.asList(
-            "Dr. Silva", "Dr. Perera", "Dr. Fernando",
-            "Dr. Gunawardena", "Dr. Rajapaksa", "Dr. Wickrama"
-    );
-
-    private static final List<String> SPECIALIZATIONS = Arrays.asList(
-            "Cardiology", "Neurology", "Orthopedics",
-            "Pediatrics", "General Medicine", "Dentistry"
-    );
-
-    // ==================== DASHBOARD ====================
-
+    // =========================================
+    // ===== DASHBOARD =====
+    // =========================================
     @GetMapping
     public String dashboard(Model model) {
-        model.addAttribute("appointments",
-                appointmentService.getUpcomingAppointments());
-        model.addAttribute("todaysAppointments",
-                appointmentService.getTodaysAppointments());
-        model.addAttribute("totalBooked",
-                appointmentService.countBooked());
-        model.addAttribute("totalCompleted",
-                appointmentService.countCompleted());
-        model.addAttribute("totalCancelled",
-                appointmentService.countCancelled());
-        model.addAttribute("totalRescheduled",
-                appointmentService.countRescheduled());
-        model.addAttribute("todayCount",
-                appointmentService.countTodaysAppointments());
-        return "appointments";
+        try {
+            long total = appointmentService
+                    .getAllAppointments().size();
+            long pending = appointmentService
+                    .countByStatus("PENDING");
+            long confirmed = appointmentService
+                    .countByStatus("CONFIRMED");
+            long cancelled = appointmentService
+                    .countByStatus("CANCELLED");
+            List<Appointment> upcoming = appointmentService
+                    .getUpcomingAppointments();
+
+            model.addAttribute("totalAppointments", total);
+            model.addAttribute("pendingCount", pending);
+            model.addAttribute("confirmedCount", confirmed);
+            model.addAttribute("cancelledCount", cancelled);
+            model.addAttribute("upcomingAppointments", upcoming);
+
+            System.out.println("Dashboard loaded - Total: " + total);
+
+        } catch (Exception e) {
+            System.err.println("Dashboard error: " + e.getMessage());
+            model.addAttribute("totalAppointments", 0);
+            model.addAttribute("pendingCount", 0);
+            model.addAttribute("confirmedCount", 0);
+            model.addAttribute("cancelledCount", 0);
+            model.addAttribute("upcomingAppointments",
+                    new ArrayList<>());
+        }
+        return "appointments/dashboard";
     }
 
-    // ==================== CREATE ====================
-
+    // =========================================
+    // ===== CREATE: Show Booking Form =====
+    // =========================================
     @GetMapping("/book")
     public String showBookingForm(Model model) {
         model.addAttribute("appointment", new Appointment());
-        model.addAttribute("doctors", DOCTORS);
-        model.addAttribute("specializations", SPECIALIZATIONS);
-        model.addAttribute("schedules",
-                appointmentService.getAvailableSchedules());
-        return "book-appointment";
+        try {
+            model.addAttribute("availableSchedules",
+                    appointmentService.getAvailableSchedules());
+        } catch (Exception e) {
+            model.addAttribute("availableSchedules",
+                    new ArrayList<>());
+        }
+        return "appointments/book-appointment";
     }
 
+    // =========================================
+    // ===== CREATE: Process Booking =====
+    // =========================================
     @PostMapping("/book")
     public String bookAppointment(
             @Valid @ModelAttribute("appointment")
             Appointment appointment,
             BindingResult result,
             Model model,
-            RedirectAttributes ra) {
+            RedirectAttributes redirectAttributes) {
+
+        System.out.println("=== BOOK APPOINTMENT ===");
+        System.out.println("Patient: "
+                + appointment.getPatientName());
+        System.out.println("Doctor: "
+                + appointment.getDoctorName());
+        System.out.println("Date: "
+                + appointment.getAppointmentDate());
 
         if (result.hasErrors()) {
-            model.addAttribute("doctors", DOCTORS);
-            model.addAttribute("specializations", SPECIALIZATIONS);
-            model.addAttribute("schedules",
-                    appointmentService.getAvailableSchedules());
-            return "book-appointment";
+            System.out.println("Validation errors: "
+                    + result.getErrorCount());
+            try {
+                model.addAttribute("availableSchedules",
+                        appointmentService.getAvailableSchedules());
+            } catch (Exception e) {
+                model.addAttribute("availableSchedules",
+                        new ArrayList<>());
+            }
+            return "appointments/book-appointment";
         }
 
-        appointmentService.bookAppointment(appointment);
-        ra.addFlashAttribute("successMessage",
-                "✅ Appointment booked successfully!");
-        return "redirect:/appointments";
+        try {
+            Appointment saved = appointmentService
+                    .bookAppointment(appointment);
+            System.out.println("Booked OK: ID=" + saved.getId());
+            redirectAttributes.addFlashAttribute(
+                    "successMessage",
+                    "✅ Appointment booked! ID: #" + saved.getId());
+            return "redirect:/appointments/all";
+
+        } catch (Exception e) {
+            System.err.println("Book error: " + e.getMessage());
+            model.addAttribute("errorMessage",
+                    "❌ Booking failed: " + e.getMessage());
+            try {
+                model.addAttribute("availableSchedules",
+                        appointmentService.getAvailableSchedules());
+            } catch (Exception ex) {
+                model.addAttribute("availableSchedules",
+                        new ArrayList<>());
+            }
+            return "appointments/book-appointment";
+        }
     }
 
-    // ==================== READ ====================
-
+    // =========================================
+    // ===== READ: All Appointments =====
+    // =========================================
     @GetMapping("/all")
-    public String viewAll(
-            Model model,
+    public String viewAllAppointments(
             @RequestParam(required = false) String status,
-            @RequestParam(required = false) String search) {
+            @RequestParam(required = false) String doctor,
+            Model model) {
 
-        List<Appointment> list;
+        System.out.println("=== VIEW ALL ===");
+        System.out.println("Status filter: " + status);
 
-        if (search != null && !search.trim().isEmpty()) {
-            list = appointmentService.searchAppointments(search);
-        } else if (status != null && !status.isEmpty()) {
-            list = appointmentService.getByStatus(status);
-        } else {
-            list = appointmentService.getAllAppointments();
+        List<Appointment> appointments = new ArrayList<>();
+
+        try {
+            if (status != null && !status.trim().isEmpty()) {
+                appointments = appointmentService
+                        .getAppointmentsByStatus(status.trim());
+            } else if (doctor != null && !doctor.trim().isEmpty()) {
+                appointments = appointmentService
+                        .getDoctorAppointments(doctor.trim());
+            } else {
+                appointments = appointmentService
+                        .getAllAppointments();
+            }
+            System.out.println("Found: " + appointments.size()
+                    + " appointments");
+
+        } catch (Exception e) {
+            System.err.println("ViewAll error: " + e.getMessage());
+            appointments = new ArrayList<>();
         }
 
-        model.addAttribute("appointments", list);
-        model.addAttribute("search", search);
+        model.addAttribute("appointments", appointments);
         model.addAttribute("selectedStatus", status);
-        model.addAttribute("totalBooked",
-                appointmentService.countBooked());
-        model.addAttribute("totalCompleted",
-                appointmentService.countCompleted());
-        model.addAttribute("totalCancelled",
-                appointmentService.countCancelled());
-        return "appointments";
+        return "appointments/appointments-list";
     }
 
-    @GetMapping("/{id}")
-    public String viewOne(@PathVariable Long id, Model model) {
-        Optional<Appointment> apt =
-                appointmentService.getAppointmentById(id);
-        if (apt.isPresent()) {
-            model.addAttribute("appointment", apt.get());
-            return "appointment-detail";
+    // =========================================
+    // ===== READ: My Appointments =====
+    // =========================================
+    @GetMapping("/my-appointments")
+    public String myAppointments(
+            @RequestParam(required = false) String email,
+            Model model) {
+
+        if (email != null && !email.trim().isEmpty()) {
+            try {
+                List<Appointment> list = appointmentService
+                        .getPatientAppointments(email.trim());
+                model.addAttribute("appointments", list);
+                System.out.println("Found " + list.size()
+                        + " for: " + email);
+            } catch (Exception e) {
+                System.err.println("MyApt error: " + e.getMessage());
+                model.addAttribute("appointments", new ArrayList<>());
+            }
+            model.addAttribute("searchEmail", email);
         }
-        return "redirect:/appointments";
+        return "appointments/my-appointments";
     }
 
-    // ==================== UPDATE ====================
+    // =========================================
+    // ===== READ: View Single =====
+    // =========================================
+    @GetMapping("/view/{id}")
+    public String viewAppointment(
+            @PathVariable Long id, Model model) {
 
+        System.out.println("=== VIEW ID: " + id + " ===");
+
+        try {
+            Optional<Appointment> appointment =
+                    appointmentService.getAppointmentById(id);
+
+            if (appointment.isPresent()) {
+                model.addAttribute("appointment",
+                        appointment.get());
+                return "appointments/view-appointment";
+            }
+
+            System.out.println("Not found: " + id);
+
+        } catch (Exception e) {
+            System.err.println("View error: " + e.getMessage());
+        }
+
+        return "redirect:/appointments/all";
+    }
+
+    // =========================================
+    // ===== UPDATE: Show Reschedule Form =====
+    // =========================================
     @GetMapping("/reschedule/{id}")
     public String showRescheduleForm(
             @PathVariable Long id, Model model) {
-        Optional<Appointment> apt =
-                appointmentService.getAppointmentById(id);
-        if (apt.isPresent()) {
-            model.addAttribute("appointment", apt.get());
-            return "reschedule";
+
+        System.out.println("=== SHOW RESCHEDULE: " + id + " ===");
+
+        try {
+            Optional<Appointment> appointment =
+                    appointmentService.getAppointmentById(id);
+
+            if (appointment.isPresent()) {
+                model.addAttribute("appointment",
+                        appointment.get());
+                return "appointments/reschedule";
+            }
+
+        } catch (Exception e) {
+            System.err.println("ShowReschedule error: "
+                    + e.getMessage());
         }
-        return "redirect:/appointments";
+
+        return "redirect:/appointments/all";
     }
 
+    // =========================================
+    // ===== UPDATE: Process Reschedule =====
+    // =========================================
     @PostMapping("/reschedule/{id}")
-    public String reschedule(
+    public String rescheduleAppointment(
             @PathVariable Long id,
-            @RequestParam String newDate,
-            @RequestParam String newTime,
-            RedirectAttributes ra) {
+            @RequestParam(name = "newDate", required = false)
+            String newDate,
+            @RequestParam(name = "newTime", required = false)
+            String newTime,
+            RedirectAttributes redirectAttributes) {
 
-        Appointment updated = appointmentService
-                .rescheduleAppointment(id, LocalDate.parse(newDate),
-                        newTime);
-        if (updated != null) {
-            ra.addFlashAttribute("successMessage",
-                    "✅ Rescheduled to " + newDate + " at " + newTime);
-        } else {
-            ra.addFlashAttribute("errorMessage",
-                    "❌ Appointment not found!");
+        System.out.println("=== RESCHEDULE POST ===");
+        System.out.println("ID       : " + id);
+        System.out.println("New Date : " + newDate);
+        System.out.println("New Time : " + newTime);
+
+        try {
+            // ===== VALIDATE DATE =====
+            if (newDate == null || newDate.trim().isEmpty()) {
+                redirectAttributes.addFlashAttribute(
+                        "errorMessage",
+                        "❌ Please select a new date!");
+                return "redirect:/appointments/reschedule/" + id;
+            }
+
+            // ===== VALIDATE TIME =====
+            if (newTime == null || newTime.trim().isEmpty()) {
+                redirectAttributes.addFlashAttribute(
+                        "errorMessage",
+                        "❌ Please select a new time!");
+                return "redirect:/appointments/reschedule/" + id;
+            }
+
+            // ===== PARSE =====
+            LocalDate parsedDate;
+            LocalTime parsedTime;
+
+            try {
+                parsedDate = LocalDate.parse(newDate.trim());
+            } catch (Exception pe) {
+                redirectAttributes.addFlashAttribute(
+                        "errorMessage",
+                        "❌ Invalid date format: " + newDate);
+                return "redirect:/appointments/reschedule/" + id;
+            }
+
+            try {
+                parsedTime = LocalTime.parse(newTime.trim());
+            } catch (Exception pe) {
+                redirectAttributes.addFlashAttribute(
+                        "errorMessage",
+                        "❌ Invalid time format: " + newTime);
+                return "redirect:/appointments/reschedule/" + id;
+            }
+
+            // ===== FUTURE DATE CHECK =====
+            if (parsedDate.isBefore(LocalDate.now())) {
+                redirectAttributes.addFlashAttribute(
+                        "errorMessage",
+                        "❌ Please select a future date!");
+                return "redirect:/appointments/reschedule/" + id;
+            }
+
+            // ===== DO RESCHEDULE =====
+            appointmentService.rescheduleAppointment(
+                    id, parsedDate, parsedTime);
+
+            System.out.println("Reschedule SUCCESS: " + id);
+            redirectAttributes.addFlashAttribute(
+                    "successMessage",
+                    "✅ Appointment #" + id
+                            + " rescheduled to "
+                            + parsedDate + " at " + parsedTime);
+
+        } catch (Exception e) {
+            System.err.println("Reschedule ERROR: "
+                    + e.getMessage());
+            e.printStackTrace();
+            redirectAttributes.addFlashAttribute(
+                    "errorMessage",
+                    "❌ Reschedule failed: " + e.getMessage());
         }
-        return "redirect:/appointments";
+
+        return "redirect:/appointments/all";
     }
 
-    @PostMapping("/status/{id}")
-    public String updateStatus(
-            @PathVariable Long id,
-            @RequestParam String status,
-            RedirectAttributes ra) {
-
-        appointmentService.updateStatus(id, status);
-        ra.addFlashAttribute("successMessage",
-                "✅ Status updated to: " + status);
-        return "redirect:/appointments";
-    }
-
-    // ==================== DELETE ====================
-
+    // =========================================
+    // ===== DELETE: Cancel Appointment =====
+    // =========================================
     @PostMapping("/cancel/{id}")
-    public String cancel(@PathVariable Long id,
-                         RedirectAttributes ra) {
-        if (appointmentService.cancelAppointment(id)) {
-            ra.addFlashAttribute("successMessage",
-                    "✅ Appointment cancelled!");
-        } else {
-            ra.addFlashAttribute("errorMessage",
-                    "❌ Not found!");
+    public String cancelAppointment(
+            @PathVariable Long id,
+            RedirectAttributes redirectAttributes) {
+
+        System.out.println("=== CANCEL POST: " + id + " ===");
+
+        try {
+            // ===== CHECK EXISTS =====
+            Optional<Appointment> opt =
+                    appointmentService.getAppointmentById(id);
+
+            if (!opt.isPresent()) {
+                System.out.println("Not found: " + id);
+                redirectAttributes.addFlashAttribute(
+                        "errorMessage",
+                        "❌ Appointment #" + id + " not found!");
+                return "redirect:/appointments/all";
+            }
+
+            Appointment apt = opt.get();
+            System.out.println("Current Status: "
+                    + apt.getStatus());
+
+            // ===== ALREADY CANCELLED =====
+            if ("CANCELLED".equals(apt.getStatus())) {
+                redirectAttributes.addFlashAttribute(
+                        "errorMessage",
+                        "⚠️ Already cancelled!");
+                return "redirect:/appointments/all";
+            }
+
+            // ===== DO CANCEL =====
+            appointmentService.cancelAppointment(id);
+
+            System.out.println("Cancel SUCCESS: " + id);
+            redirectAttributes.addFlashAttribute(
+                    "successMessage",
+                    "✅ Appointment #" + id
+                            + " cancelled successfully!");
+
+        } catch (Exception e) {
+            System.err.println("Cancel ERROR: " + e.getMessage());
+            e.printStackTrace();
+            redirectAttributes.addFlashAttribute(
+                    "errorMessage",
+                    "❌ Cancel failed: " + e.getMessage());
         }
-        return "redirect:/appointments";
+
+        return "redirect:/appointments/all";
     }
 
+    // =========================================
+    // ===== DELETE: Permanent Delete =====
+    // =========================================
     @PostMapping("/delete/{id}")
-    public String delete(@PathVariable Long id,
-                         RedirectAttributes ra) {
-        appointmentService.deleteAppointment(id);
-        ra.addFlashAttribute("successMessage",
-                "🗑️ Deleted successfully!");
-        return "redirect:/appointments";
-    }
+    public String deleteAppointment(
+            @PathVariable Long id,
+            RedirectAttributes redirectAttributes) {
 
-    // ==================== SCHEDULE ====================
+        System.out.println("=== DELETE POST: " + id + " ===");
 
-    @GetMapping("/schedule")
-    public String schedule(Model model) {
-        model.addAttribute("schedules",
-                appointmentService.getAllSchedules());
-        model.addAttribute("schedule", new Schedule());
-        model.addAttribute("doctors", DOCTORS);
-        model.addAttribute("specializations", SPECIALIZATIONS);
-        return "schedule";
-    }
+        try {
+            // ===== CHECK EXISTS =====
+            if (!appointmentService.getAppointmentById(id)
+                    .isPresent()) {
+                redirectAttributes.addFlashAttribute(
+                        "errorMessage",
+                        "❌ Appointment #" + id + " not found!");
+                return "redirect:/appointments/all";
+            }
 
-    @PostMapping("/schedule/add")
-    public String addSchedule(
-            @Valid @ModelAttribute("schedule") Schedule schedule,
-            BindingResult result,
-            Model model,
-            RedirectAttributes ra) {
+            // ===== DO DELETE =====
+            appointmentService.deleteAppointment(id);
 
-        if (result.hasErrors()) {
-            model.addAttribute("schedules",
-                    appointmentService.getAllSchedules());
-            model.addAttribute("doctors", DOCTORS);
-            model.addAttribute("specializations", SPECIALIZATIONS);
-            return "schedule";
+            System.out.println("Delete SUCCESS: " + id);
+            redirectAttributes.addFlashAttribute(
+                    "successMessage",
+                    "✅ Appointment #" + id
+                            + " deleted permanently.");
+
+        } catch (Exception e) {
+            System.err.println("Delete ERROR: " + e.getMessage());
+            e.printStackTrace();
+            redirectAttributes.addFlashAttribute(
+                    "errorMessage",
+                    "❌ Delete failed: " + e.getMessage());
         }
 
-        appointmentService.createSchedule(schedule);
-        ra.addFlashAttribute("successMessage",
-                "✅ Schedule added!");
-        return "redirect:/appointments/schedule";
+        return "redirect:/appointments/all";
     }
 
-    @PostMapping("/schedule/delete/{id}")
+    // =========================================
+    // ===== SCHEDULE: View All =====
+    // =========================================
+    @GetMapping("/schedules")
+    public String viewSchedules(Model model) {
+        System.out.println("=== VIEW SCHEDULES ===");
+        try {
+            List<Schedule> schedules = appointmentService
+                    .getAllSchedules();
+            model.addAttribute("schedules", schedules);
+            System.out.println("Schedules: " + schedules.size());
+        } catch (Exception e) {
+            System.err.println("Schedules error: " + e.getMessage());
+            model.addAttribute("schedules", new ArrayList<>());
+        }
+        model.addAttribute("newSchedule", new Schedule());
+        return "appointments/schedules";
+    }
+
+    // =========================================
+    // ===== SCHEDULE: Add New =====
+    // =========================================
+    @PostMapping("/schedules/add")
+    public String addSchedule(
+            @ModelAttribute("newSchedule") Schedule schedule,
+            RedirectAttributes redirectAttributes) {
+
+        System.out.println("=== ADD SCHEDULE ===");
+        System.out.println("Doctor: " + schedule.getDoctorName());
+        System.out.println("Day: " + schedule.getDayOfWeek());
+
+        try {
+            // ===== SET DEFAULTS =====
+            if (schedule.getAvailableDate() == null) {
+                schedule.setAvailableDate(LocalDate.now());
+            }
+            schedule.setAvailable(true);
+
+            // ===== VALIDATE =====
+            if (schedule.getDoctorName() == null
+                    || schedule.getDoctorName().trim().isEmpty()) {
+                redirectAttributes.addFlashAttribute(
+                        "errorMessage",
+                        "❌ Doctor name is required!");
+                return "redirect:/appointments/schedules";
+            }
+
+            if (schedule.getStartTime() == null
+                    || schedule.getEndTime() == null) {
+                redirectAttributes.addFlashAttribute(
+                        "errorMessage",
+                        "❌ Start and end time are required!");
+                return "redirect:/appointments/schedules";
+            }
+
+            // ===== SAVE =====
+            Schedule saved = appointmentService
+                    .addSchedule(schedule);
+            System.out.println("Schedule saved: ID="
+                    + saved.getId());
+            redirectAttributes.addFlashAttribute(
+                    "successMessage",
+                    "✅ Schedule added for Dr. "
+                            + schedule.getDoctorName());
+
+        } catch (Exception e) {
+            System.err.println("AddSchedule error: "
+                    + e.getMessage());
+            e.printStackTrace();
+            redirectAttributes.addFlashAttribute(
+                    "errorMessage",
+                    "❌ Add failed: " + e.getMessage());
+        }
+
+        return "redirect:/appointments/schedules";
+    }
+
+    // =========================================
+    // ===== SCHEDULE: Delete =====
+    // =========================================
+    @PostMapping("/schedules/delete/{id}")
     public String deleteSchedule(
-            @PathVariable Long id, RedirectAttributes ra) {
-        appointmentService.deleteSchedule(id);
-        ra.addFlashAttribute("successMessage",
-                "🗑️ Schedule deleted!");
-        return "redirect:/appointments/schedule";
+            @PathVariable Long id,
+            RedirectAttributes redirectAttributes) {
+
+        System.out.println("=== DELETE SCHEDULE: " + id + " ===");
+
+        try {
+            appointmentService.deleteSchedule(id);
+            System.out.println("Schedule deleted: " + id);
+            redirectAttributes.addFlashAttribute(
+                    "successMessage",
+                    "✅ Schedule removed successfully.");
+        } catch (Exception e) {
+            System.err.println("DeleteSchedule error: "
+                    + e.getMessage());
+            redirectAttributes.addFlashAttribute(
+                    "errorMessage",
+                    "❌ Delete failed: " + e.getMessage());
+        }
+
+        return "redirect:/appointments/schedules";
     }
 
-    @GetMapping("/file-log")
-    public String fileLog(Model model) {
-        model.addAttribute("fileContent",
-                appointmentService.readAppointmentsFromFile());
-        return "file-log";
+    // =========================================
+    // ===== SCHEDULE: Update Status =====
+    // =========================================
+    @PostMapping("/schedules/toggle/{id}")
+    public String toggleSchedule(
+            @PathVariable Long id,
+            RedirectAttributes redirectAttributes) {
+
+        System.out.println("=== TOGGLE SCHEDULE: " + id + " ===");
+
+        try {
+            List<Schedule> all = appointmentService.getAllSchedules();
+            Schedule target = all.stream()
+                    .filter(s -> s.getId().equals(id))
+                    .findFirst()
+                    .orElseThrow(() -> new RuntimeException(
+                            "Schedule not found: " + id));
+
+            target.setAvailable(!target.isAvailable());
+            appointmentService.updateSchedule(id, target);
+
+            redirectAttributes.addFlashAttribute(
+                    "successMessage",
+                    "✅ Schedule status updated!");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute(
+                    "errorMessage",
+                    "❌ Toggle failed: " + e.getMessage());
+        }
+
+        return "redirect:/appointments/schedules";
     }
 }

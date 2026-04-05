@@ -23,7 +23,6 @@ public class AppointmentController {
     @Autowired
     private AppointmentService appointmentService;
 
-    // Constant lists
     private static final List<String> DOCTORS = Arrays.asList(
             "Dr. Silva", "Dr. Perera", "Dr. Fernando",
             "Dr. Gunawardena", "Dr. Rajapaksa", "Dr. Wickrama"
@@ -73,7 +72,7 @@ public class AppointmentController {
             Appointment appointment,
             BindingResult result,
             Model model,
-            RedirectAttributes redirectAttributes) {
+            RedirectAttributes ra) {
 
         if (result.hasErrors()) {
             model.addAttribute("doctors", DOCTORS);
@@ -84,7 +83,7 @@ public class AppointmentController {
         }
 
         appointmentService.bookAppointment(appointment);
-        redirectAttributes.addFlashAttribute("successMessage",
+        ra.addFlashAttribute("successMessage",
                 "✅ Appointment booked successfully!");
         return "redirect:/appointments";
     }
@@ -97,17 +96,17 @@ public class AppointmentController {
             @RequestParam(required = false) String status,
             @RequestParam(required = false) String search) {
 
-        List<Appointment> appointments;
+        List<Appointment> list;
 
         if (search != null && !search.trim().isEmpty()) {
-            appointments = appointmentService.searchAppointments(search);
+            list = appointmentService.searchAppointments(search);
         } else if (status != null && !status.isEmpty()) {
-            appointments = appointmentService.getByStatus(status);
+            list = appointmentService.getByStatus(status);
         } else {
-            appointments = appointmentService.getAllAppointments();
+            list = appointmentService.getAllAppointments();
         }
 
-        model.addAttribute("appointments", appointments);
+        model.addAttribute("appointments", list);
         model.addAttribute("search", search);
         model.addAttribute("selectedStatus", status);
         model.addAttribute("totalBooked",
@@ -120,13 +119,11 @@ public class AppointmentController {
     }
 
     @GetMapping("/{id}")
-    public String viewAppointment(
-            @PathVariable Long id, Model model) {
-        Optional<Appointment> appointment =
+    public String viewOne(@PathVariable Long id, Model model) {
+        Optional<Appointment> apt =
                 appointmentService.getAppointmentById(id);
-
-        if (appointment.isPresent()) {
-            model.addAttribute("appointment", appointment.get());
+        if (apt.isPresent()) {
+            model.addAttribute("appointment", apt.get());
             return "appointment-detail";
         }
         return "redirect:/appointments";
@@ -137,11 +134,10 @@ public class AppointmentController {
     @GetMapping("/reschedule/{id}")
     public String showRescheduleForm(
             @PathVariable Long id, Model model) {
-        Optional<Appointment> appointment =
+        Optional<Appointment> apt =
                 appointmentService.getAppointmentById(id);
-
-        if (appointment.isPresent()) {
-            model.addAttribute("appointment", appointment.get());
+        if (apt.isPresent()) {
+            model.addAttribute("appointment", apt.get());
             return "reschedule";
         }
         return "redirect:/appointments";
@@ -152,18 +148,16 @@ public class AppointmentController {
             @PathVariable Long id,
             @RequestParam String newDate,
             @RequestParam String newTime,
-            RedirectAttributes redirectAttributes) {
+            RedirectAttributes ra) {
 
-        LocalDate date = LocalDate.parse(newDate);
-        Appointment updated = appointmentService.rescheduleAppointment(
-                id, date, newTime);
-
+        Appointment updated = appointmentService
+                .rescheduleAppointment(id, LocalDate.parse(newDate),
+                        newTime);
         if (updated != null) {
-            redirectAttributes.addFlashAttribute("successMessage",
-                    "✅ Appointment rescheduled to " + newDate +
-                            " at " + newTime);
+            ra.addFlashAttribute("successMessage",
+                    "✅ Rescheduled to " + newDate + " at " + newTime);
         } else {
-            redirectAttributes.addFlashAttribute("errorMessage",
+            ra.addFlashAttribute("errorMessage",
                     "❌ Appointment not found!");
         }
         return "redirect:/appointments";
@@ -173,10 +167,10 @@ public class AppointmentController {
     public String updateStatus(
             @PathVariable Long id,
             @RequestParam String status,
-            RedirectAttributes redirectAttributes) {
+            RedirectAttributes ra) {
 
         appointmentService.updateStatus(id, status);
-        redirectAttributes.addFlashAttribute("successMessage",
+        ra.addFlashAttribute("successMessage",
                 "✅ Status updated to: " + status);
         return "redirect:/appointments";
     }
@@ -184,42 +178,37 @@ public class AppointmentController {
     // ==================== DELETE ====================
 
     @PostMapping("/cancel/{id}")
-    public String cancelAppointment(
-            @PathVariable Long id,
-            RedirectAttributes redirectAttributes) {
-
-        boolean result = appointmentService.cancelAppointment(id);
-        if (result) {
-            redirectAttributes.addFlashAttribute("successMessage",
-                    "✅ Appointment cancelled successfully!");
+    public String cancel(@PathVariable Long id,
+                         RedirectAttributes ra) {
+        if (appointmentService.cancelAppointment(id)) {
+            ra.addFlashAttribute("successMessage",
+                    "✅ Appointment cancelled!");
         } else {
-            redirectAttributes.addFlashAttribute("errorMessage",
-                    "❌ Appointment not found!");
+            ra.addFlashAttribute("errorMessage",
+                    "❌ Not found!");
         }
         return "redirect:/appointments";
     }
 
     @PostMapping("/delete/{id}")
-    public String deleteAppointment(
-            @PathVariable Long id,
-            RedirectAttributes redirectAttributes) {
-
+    public String delete(@PathVariable Long id,
+                         RedirectAttributes ra) {
         appointmentService.deleteAppointment(id);
-        redirectAttributes.addFlashAttribute("successMessage",
-                "🗑️ Appointment deleted permanently!");
+        ra.addFlashAttribute("successMessage",
+                "🗑️ Deleted successfully!");
         return "redirect:/appointments";
     }
 
     // ==================== SCHEDULE ====================
 
     @GetMapping("/schedule")
-    public String viewSchedule(Model model) {
+    public String schedule(Model model) {
         model.addAttribute("schedules",
                 appointmentService.getAllSchedules());
         model.addAttribute("schedule", new Schedule());
         model.addAttribute("doctors", DOCTORS);
         model.addAttribute("specializations", SPECIALIZATIONS);
-        return "reschedule";
+        return "schedule";
     }
 
     @PostMapping("/schedule/add")
@@ -227,36 +216,33 @@ public class AppointmentController {
             @Valid @ModelAttribute("schedule") Schedule schedule,
             BindingResult result,
             Model model,
-            RedirectAttributes redirectAttributes) {
+            RedirectAttributes ra) {
 
         if (result.hasErrors()) {
             model.addAttribute("schedules",
                     appointmentService.getAllSchedules());
             model.addAttribute("doctors", DOCTORS);
             model.addAttribute("specializations", SPECIALIZATIONS);
-            return "reschedule";
+            return "schedule";
         }
 
         appointmentService.createSchedule(schedule);
-        redirectAttributes.addFlashAttribute("successMessage",
-                "✅ Schedule added successfully!");
+        ra.addFlashAttribute("successMessage",
+                "✅ Schedule added!");
         return "redirect:/appointments/schedule";
     }
 
     @PostMapping("/schedule/delete/{id}")
     public String deleteSchedule(
-            @PathVariable Long id,
-            RedirectAttributes redirectAttributes) {
-
+            @PathVariable Long id, RedirectAttributes ra) {
         appointmentService.deleteSchedule(id);
-        redirectAttributes.addFlashAttribute("successMessage",
+        ra.addFlashAttribute("successMessage",
                 "🗑️ Schedule deleted!");
         return "redirect:/appointments/schedule";
     }
 
-    // File content view
     @GetMapping("/file-log")
-    public String viewFileLog(Model model) {
+    public String fileLog(Model model) {
         model.addAttribute("fileContent",
                 appointmentService.readAppointmentsFromFile());
         return "file-log";

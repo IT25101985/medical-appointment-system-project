@@ -9,7 +9,6 @@ import java.time.LocalTime;
 @Table(name = "appointments")
 public class Appointment {
 
-    // ✅ OOP ENCAPSULATION - all private fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,11 +16,11 @@ public class Appointment {
     @NotBlank(message = "Patient name is required")
     @Size(min = 2, max = 100,
             message = "Name must be between 2 and 100 characters")
-    @Column(name = "patient_name", nullable = false, length = 100)
+    @Column(name = "patient_name", nullable = false)
     private String patientName;
 
     @NotBlank(message = "Doctor name is required")
-    @Column(name = "doctor_name", nullable = false, length = 100)
+    @Column(name = "doctor_name", nullable = false)
     private String doctorName;
 
     @NotNull(message = "Appointment date is required")
@@ -33,22 +32,22 @@ public class Appointment {
     private LocalTime appointmentTime;
 
     @NotBlank(message = "Specialization is required")
-    @Column(name = "specialization", length = 100)
+    @Column(name = "specialization")
     private String specialization;
 
-    @Column(name = "status", length = 30)
+    @Column(name = "status")
     private String status;
 
     @Column(name = "notes", columnDefinition = "TEXT")
     private String notes;
 
-    @Email(message = "Please enter a valid email address")
-    @Column(name = "patient_email", length = 150)
+    @Email(message = "Please enter a valid email")
+    @Column(name = "patient_email")
     private String patientEmail;
 
     @Pattern(regexp = "^[0-9]{10}$",
-            message = "Phone must be exactly 10 digits")
-    @Column(name = "patient_phone", length = 15)
+            message = "Phone must be 10 digits")
+    @Column(name = "patient_phone")
     private String patientPhone;
 
     // ✅ OOP: Default Constructor
@@ -61,50 +60,50 @@ public class Appointment {
                        LocalDate appointmentDate,
                        LocalTime appointmentTime,
                        String specialization) {
-        this.patientName    = patientName;
-        this.doctorName     = doctorName;
+        this.patientName     = patientName;
+        this.doctorName      = doctorName;
         this.appointmentDate = appointmentDate;
         this.appointmentTime = appointmentTime;
         this.specialization  = specialization;
         this.status          = "BOOKED";
     }
 
-    // ✅ OOP: ABSTRACTION - Business Logic
+    // ✅ OOP: ABSTRACTION - Business Methods
     public boolean isUpcoming() {
-        return this.appointmentDate != null &&
-                this.appointmentDate.isAfter(LocalDate.now());
+        return appointmentDate != null &&
+                appointmentDate.isAfter(LocalDate.now());
     }
 
     public boolean isCancellable() {
-        return "BOOKED".equals(this.status) ||
-                "RESCHEDULED".equals(this.status);
+        return "BOOKED".equals(status) ||
+                "RESCHEDULED".equals(status);
     }
 
     public String getStatusBadgeColor() {
-        return switch (this.status) {
-            case "BOOKED"       -> "primary";
-            case "COMPLETED"    -> "success";
-            case "CANCELLED"    -> "danger";
-            case "RESCHEDULED"  -> "warning";
-            default             -> "secondary";
-        };
+        if (status == null) return "secondary";
+        switch (status) {
+            case "BOOKED":      return "primary";
+            case "COMPLETED":   return "success";
+            case "CANCELLED":   return "danger";
+            case "RESCHEDULED": return "warning";
+            default:            return "secondary";
+        }
     }
 
-    // ✅ OOP: POLYMORPHISM - Override toString
+    // ✅ OOP: POLYMORPHISM - toString
     @Override
     public String toString() {
         return "Appointment{" +
-                "id="               + id              +
-                ", patientName='"   + patientName     + '\'' +
-                ", doctorName='"    + doctorName      + '\'' +
-                ", date="           + appointmentDate +
-                ", time="           + appointmentTime +
-                ", specialization='"+ specialization  + '\'' +
-                ", status='"        + status          + '\'' +
+                "id="                + id              +
+                ", patientName='"    + patientName     + '\'' +
+                ", doctorName='"     + doctorName      + '\'' +
+                ", appointmentDate=" + appointmentDate +
+                ", appointmentTime=" + appointmentTime +
+                ", status='"         + status          + '\'' +
                 '}';
     }
 
-    // ✅ OOP: ENCAPSULATION - Getters and Setters
+    // ✅ OOP: ENCAPSULATION - Getters & Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

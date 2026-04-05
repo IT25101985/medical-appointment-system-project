@@ -14,7 +14,7 @@ public class Schedule {
     private Long id;
 
     @NotBlank(message = "Doctor name is required")
-    @Column(name = "doctor_name", nullable = false, length = 100)
+    @Column(name = "doctor_name", nullable = false)
     private String doctorName;
 
     @NotNull(message = "Available date is required")
@@ -39,11 +39,25 @@ public class Schedule {
     @Column(name = "is_available")
     private boolean isAvailable;
 
-    @Column(name = "specialization", length = 100)
+    @Column(name = "specialization")
     private String specialization;
 
-    // ✅ OOP: Constructor
+    // ✅ OOP: Default Constructor
     public Schedule() {
+        this.isAvailable     = true;
+        this.currentPatients = 0;
+    }
+
+    // ✅ OOP: Parameterized Constructor
+    public Schedule(String doctorName, LocalDate availableDate,
+                    LocalTime startTime, LocalTime endTime,
+                    int maxPatients, String specialization) {
+        this.doctorName      = doctorName;
+        this.availableDate   = availableDate;
+        this.startTime       = startTime;
+        this.endTime         = endTime;
+        this.maxPatients     = maxPatients;
+        this.specialization  = specialization;
         this.isAvailable     = true;
         this.currentPatients = 0;
     }
@@ -78,20 +92,20 @@ public class Schedule {
         }
     }
 
-    // ✅ OOP: POLYMORPHISM
+    // ✅ OOP: POLYMORPHISM - toString
     @Override
     public String toString() {
         return "Schedule{" +
-                "id="             + id            +
-                ", doctorName='"  + doctorName    + '\'' +
-                ", date="         + availableDate +
+                "id="             + id              +
+                ", doctorName='"  + doctorName      + '\'' +
+                ", date="         + availableDate   +
                 ", slots="        + currentPatients +
-                "/"               + maxPatients   +
-                ", available="    + isAvailable   +
+                "/"               + maxPatients     +
+                ", available="    + isAvailable     +
                 '}';
     }
 
-    // Getters and Setters
+    // ✅ OOP: ENCAPSULATION - Getters & Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

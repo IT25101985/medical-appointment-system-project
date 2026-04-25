@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
+<<<<<<< Updated upstream
     <annotationProcessing>
       <profile name="Annotation profile for Medical-Appointment-System-Project" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -17,5 +18,10 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Medical-Appointment-System-Project" options="-parameters" />
     </option>
+=======
+    <bytecodeTargetLevel>
+      <module name="Medical-Appointment-System-Project" target="17" />
+    </bytecodeTargetLevel>
+>>>>>>> Stashed changes
   </component>
 </project>

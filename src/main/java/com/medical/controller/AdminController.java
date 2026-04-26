@@ -1,9 +1,9 @@
 package com.medical.controller;
 
-//import com.medical.entity.Doctor;
+import com.medical.entity.Doctor;
 import com.medical.entity.User;
-//import com.medical.service.AppointmentService;
-//import com.medical.service.DoctorService;
+import com.medical.service.AppointmentService;
+import com.medical.service.DoctorService;
 import com.medical.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-//import com.medical.entity.Appointment;
+import com.medical.entity.Appointment;
 import java.util.Optional;
 
 @Controller
@@ -29,8 +29,8 @@ public class AdminController {
     @Autowired
     private UserService userService;
     
-    @Autowired
-    private com.medical.service.NotificationService notificationService;
+//    @Autowired
+//    private com.medical.service.NotificationService notificationService;
 
     @GetMapping("/dashboard")
     public String dashboard() {
@@ -116,17 +116,17 @@ public class AdminController {
             foundAppointment.setStatus("CANCELLED");
             appointmentService.saveAppointment(foundAppointment);
             
-            // 2. Send cancellation email
-            try {
-                notificationService.sendCancellationEmail(
-                    foundAppointment.getContactEmail(), 
-                    foundAppointment.getPatient().getFullName(), 
-                    foundAppointment.getAppointmentDate().toString()
-                );
-            } catch (Exception e) {
-                // Ignore failure so the system doesn't crash if the email server is offline
-                System.out.println("Email ignored");
-            }
+//            // 2. Send cancellation email
+//            try {
+////                notificationService.sendCancellationEmail(
+//                    foundAppointment.getContactEmail(),
+//                    foundAppointment.getPatient().getFullName(),
+//                    foundAppointment.getAppointmentDate().toString()
+//                );
+//            } catch (Exception e) {
+//                // Ignore failure so the system doesn't crash if the email server is offline
+//                System.out.println("Email ignored");
+//            }
         }
         return "redirect:/admin/appointments";
     }

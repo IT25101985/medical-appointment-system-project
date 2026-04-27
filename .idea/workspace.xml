@@ -14,8 +14,6 @@
       <change afterPath="$PROJECT_DIR$/../../Medical-Appointment-System-Project/src/main/java/com/medical/medicalappointmentsystemproject/MedicalAppointmentSystemProjectApplication.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../Medical-Appointment-System-Project/src/main/resources/application.properties" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../Medical-Appointment-System-Project/src/test/java/com/medical/medicalappointmentsystemproject/MedicalAppointmentSystemProjectApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

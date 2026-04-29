@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module external.linked.project.id="$MODULE_DIR$/pom.xml" external.system.module.type="SINGLE_MODULE" external.system.module.version="223-2" org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
+<<<<<<< Updated upstream
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_17">
+=======
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_5">
+>>>>>>> Stashed changes
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
+<<<<<<< Updated upstream
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
+=======
+      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+>>>>>>> Stashed changes
       <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/annotations" isTestSource="false" generated="true" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+<<<<<<< Updated upstream
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-data-jpa:3.1.2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-aop:3.1.2" level="project" />
     <orderEntry type="library" name="Maven: org.aspectj:aspectjweaver:1.9.19" level="project" />
@@ -128,6 +137,9 @@
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.15.2" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.woodstox:stax2-api:4.2.1" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.woodstox:woodstox-core:6.5.1" level="project" />
+=======
+    <orderEntry type="library" name="Maven: com.twilio.sdk:twilio:9.14.0" level="project" />
+>>>>>>> Stashed changes
     <orderEntry type="library" name="Maven: com.itextpdf:itextpdf:5.5.13.3" level="project" />
   </component>
 </module>

@@ -3,6 +3,7 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
+
   <component name="ChangeListManager">
     <list default="true" id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/../../Medical-Appointment-System-Project/.gitattributes" afterDir="false" />
@@ -20,6 +21,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
@@ -29,31 +31,50 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
+
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
     &quot;state&quot;: &quot;OPEN&quot;,
     &quot;assignee&quot;: &quot;IT25101985&quot;
   }
 }</component>
+
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/IT25101985/medical-appointment-system-project.git&quot;,
     &quot;accountId&quot;: &quot;8294d8c8-39de-452e-8d5f-52b253f9a0b4&quot;
   }
 }</component>
+
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 0
+  &quot;associatedIndex&quot;: 1
 }</component>
-  <component name="ProjectId" id="3CtbjZoYF3vqRbh2nx0NXlrYSHu" />
+
+  <component name="ProjectId" id="3CtcWSQluYdZKCIjn4DLvErY2Ww" />
+
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;git-widget-placeholder&quot;: &quot;Admin-&amp;&amp;-Authentication&quot;
+
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.MedicalAppointmentApplication.executor": "Run",
+    "git-widget-placeholder": "dev",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/medical-appointment-system-project/git hub/medical-appointment-system-project/pom.xml"
   }
-}</component>
+}]]></component>
+
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -61,13 +82,14 @@
       </set>
     </attachedChunks>
   </component>
+
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="" />
-      <created>1777090910200</created>
+      <created>0</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1777090910200</updated>
+      <updated>0</updated>
     </task>
     <servers />
   </component>

@@ -1,6 +1,5 @@
 package com.medical.config;
 
-import com.medical.entity.User;
 import com.medical.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,8 +11,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import java.util.Optional;
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -21,12 +18,15 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable())
+                .csrf(csrf -> csrf.disable()) // Disable CSRF for easier development
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/register", "/login", "/css/**", "/js/**").permitAll()
+                        // 1. Pages everyone can see
+                        .requestMatchers("/", "/login", "/register", "/css/**", "/js/**").permitAll()
+                        // 2. Role-based access control
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/doctor/**").hasRole("DOCTOR")
                         .requestMatchers("/patient/**").hasRole("PATIENT")
+                        // 3. All other pages require login
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
@@ -34,10 +34,6 @@ public class SecurityConfig {
                         .defaultSuccessUrl("/dashboard")
                         .permitAll()
                 )
-                .rememberMe(remember -> remember
-                        .key("superSecretKey")
-                        .alwaysRemember(true)
-                        .tokenValiditySeconds(86400 * 30)) // 30 days
                 .logout(logout -> logout
                         .logoutSuccessUrl("/login?logout")
                         .permitAll()
@@ -48,27 +44,19 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
+        // Use BCrypt to securely hash passwords in the database
         return new BCryptPasswordEncoder();
     }
 
     @Bean
     public UserDetailsService userDetailsService(UserRepository userRepository) {
-        return username -> {
-            Optional<User> userOptional = userRepository.findByUsername(username);
-            if (userOptional.isPresent()) {
-                User user = userOptional.get();
-                String role = user.getRole();
-                if (role == null || role.trim().isEmpty()) {
-                    role = "ROLE_PATIENT"; // Default safety role
-                }
-
-                return org.springframework.security.core.userdetails.User
+        // Logic to find user in MySQL during login
+        return username -> userRepository.findByUsername(username)
+                .map(user -> org.springframework.security.core.userdetails.User
                         .withUsername(user.getUsername())
                         .password(user.getPassword())
-                        .roles(role.replace("ROLE_", ""))
-                        .build();
-            }
-            throw new UsernameNotFoundException("User not found");
-        };
+                        .roles(user.getRole().replace("ROLE_", ""))
+                        .build())
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 }

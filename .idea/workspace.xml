@@ -64,6 +64,11 @@
       </set>
     </attachedChunks>
   </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "git-widget-placeholder": "Engagement"
+  }
+}]]></component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="" />

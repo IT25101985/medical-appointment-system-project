@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
@@ -15,7 +16,10 @@
       <change afterPath="$PROJECT_DIR$/../../Medical-Appointment-System-Project/src/main/java/com/medical/medicalappointmentsystemproject/MedicalAppointmentSystemProjectApplication.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../Medical-Appointment-System-Project/src/main/resources/application.properties" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../Medical-Appointment-System-Project/src/test/java/com/medical/medicalappointmentsystemproject/MedicalAppointmentSystemProjectApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
+
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,6 +32,7 @@
         <entry key="$PROJECT_DIR$" value="dev" />
       </map>
     </option>
+
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
@@ -70,7 +75,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Spring Boot.MedicalAppointmentApplication.executor": "Run",
-    "git-widget-placeholder": "dev",
+    "git-widget-placeholder": "Patient-&&-Booking",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/medical-appointment-system-project/git hub/medical-appointment-system-project/pom.xml"
   }
@@ -92,6 +97,8 @@
       <option name="presentableId" value="Default" />
       <updated>1777967443385</updated>
     </task>
+
     <servers />
   </component>
+
 </project>

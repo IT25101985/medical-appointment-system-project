@@ -2,6 +2,7 @@ package com.medical.controller;
 
 import com.medical.entity.User;
 import com.medical.entity.Appointment; // Ensure this import exists
+import com.medical.service.AppointmentService;
 import com.medical.service.DoctorService;
 import com.medical.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

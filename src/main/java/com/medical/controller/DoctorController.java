@@ -1,5 +1,6 @@
 package com.medical.controller;
 
+import com.medical.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,8 +49,8 @@ public class DoctorController {
             String username = principal.getName();
             // Filter appointments for the currently logged in doctor
             java.util.List<com.medical.entity.Appointment> doctorAppointments = appointmentService.getAllAppointments().stream()
-                .filter(a -> a.getDoctor() != null && a.getDoctor().getUser() != null && username.equals(a.getDoctor().getUser().getUsername()))
-                .collect(java.util.stream.Collectors.toList());
+                    .filter(a -> a.getDoctor() != null && a.getDoctor().getUser() != null && username.equals(a.getDoctor().getUser().getUsername()))
+                    .collect(java.util.stream.Collectors.toList());
             model.addAttribute("appointments", doctorAppointments);
         } else {
             model.addAttribute("appointments", new java.util.ArrayList<>());

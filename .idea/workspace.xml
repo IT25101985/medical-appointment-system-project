@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+
+  <component name="ChangeListManager">
+    <list default="true" id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Admin-&amp;-Authentication" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;IT25101985&quot;
+  }
+}</component>
+
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/IT25101985/medical-appointment-system-project.git&quot;,
+    &quot;accountId&quot;: &quot;8294d8c8-39de-452e-8d5f-52b253f9a0b4&quot;
+  }
+}</component>
+
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+
+  <component name="ProjectId" id="3D1BzHNXuz5VUD4BwLiPV27GjXK" />
+
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.MedicalAppointmentApplication.executor": "Run"
+  }
+}]]></component>
+
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="medical-appointment-system-project" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="medical-appointment-system-project" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+  </component>
+
+  <component name="SpellCheckerSettings"
+             RuntimeDictionaries="0"
+             Folders="0"
+             CustomDictionaries="0"
+             DefaultDictionary="application-level"
+             UseSingleDictionary="true"
+             transferred="true" />
+
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="" />
+      <created>1777440058478</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1777440058478</updated>
+    </task>
+
+    <servers />
+  </component>
+
+</project>

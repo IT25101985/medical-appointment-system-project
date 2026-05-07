@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
@@ -18,6 +19,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
+
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,6 +32,7 @@
         <entry key="$PROJECT_DIR$" value="dev" />
       </map>
     </option>
+
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
@@ -47,10 +50,7 @@
     &quot;accountId&quot;: &quot;8294d8c8-39de-452e-8d5f-52b253f9a0b4&quot;
   }
 }</component>
-<<<<<<< HEAD
-=======
 
->>>>>>> f18a1c66cfe4f6355d6fc88d58a69a3829697146
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -58,13 +58,10 @@
       </MavenGeneralSettings>
     </option>
   </component>
-<<<<<<< HEAD
-=======
 
->>>>>>> f18a1c66cfe4f6355d6fc88d58a69a3829697146
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 1
-}</component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 1
+}]]></component>
 
   <component name="ProjectId" id="3CtcWSQluYdZKCIjn4DLvErY2Ww" />
 
@@ -72,25 +69,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-<<<<<<< HEAD
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "git-widget-placeholder": "Patient-&&-Booking"
-  }
-}]]></component>
-=======
 
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Spring Boot.MedicalAppointmentApplication.executor": "Run",
-    "git-widget-placeholder": "dev",
+    "git-widget-placeholder": "Patient-&&-Booking",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/medical-appointment-system-project/git hub/medical-appointment-system-project/pom.xml"
   }
 }]]></component>
 
->>>>>>> f18a1c66cfe4f6355d6fc88d58a69a3829697146
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -102,11 +92,13 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="" />
-      <created>0</created>
+      <created>1777967443385</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>0</updated>
+      <updated>1777967443385</updated>
     </task>
+
     <servers />
   </component>
+
 </project>

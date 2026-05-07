@@ -1,8 +1,6 @@
 package com.medical.controller;
 
-import com.medical.entity.Appointment;
 import com.medical.entity.User;
-import com.medical.service.AppointmentService;
 import com.medical.service.DoctorService;
 import com.medical.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +19,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.io.ByteArrayInputStream;
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Controller

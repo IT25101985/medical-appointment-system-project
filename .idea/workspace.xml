@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
+
   <component name="ChangeListManager">
     <list default="true" id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -10,6 +12,19 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
@@ -19,18 +34,25 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;IT25101985&quot;
+
+  <component name="GitHubPullRequestSearchHistory">
+  {
+    "lastFilter": {
+      "state": "OPEN",
+      "assignee": "IT25101985"
+    }
   }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/IT25101985/medical-appointment-system-project.git&quot;,
-    &quot;accountId&quot;: &quot;8294d8c8-39de-452e-8d5f-52b253f9a0b4&quot;
+  </component>
+
+  <component name="GithubPullRequestsUISettings">
+  {
+    "selectedUrlAndAccountId": {
+      "url": "https://github.com/IT25101985/medical-appointment-system-project.git",
+      "accountId": "8294d8c8-39de-452e-8d5f-52b253f9a0b4"
+    }
   }
-}</component>
+  </component>
+
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -38,68 +60,53 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 1
-}</component>
+
+  <component name="ProjectColorInfo">
+    {
+      "associatedIndex": 1
+    }
+  </component>
+
   <component name="ProjectId" id="3CtcWSQluYdZKCIjn4DLvErY2Ww" />
+
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-<<<<<<< Updated upstream
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Spring Boot.MedicalAppointmentApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/medical-appointment-system-project/git hub/medical-appointment-system-project/pom.xml&quot;
+
+  <component name="PropertiesComponent">
+  {
+    "keyToString": {
+      "ModuleVcsDetector.initialDetectionPerformed": "true",
+      "RunOnceActivity.ShowReadmeOnStart": "true",
+      "RunOnceActivity.git.unshallow": "true",
+      "Spring Boot.MedicalAppointmentApplication.executor": "Run",
+      "git-widget-placeholder": "dev",
+      "kotlin-language-version-configured": "true",
+      "last_opened_file_path": "D:/medical-appointment-system-project/git hub/medical-appointment-system-project/pom.xml"
+    }
   }
-}</component>
-  <component name="RunManager">
-    <configuration name="MedicalAppointmentApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.medical.MedicalAppointmentApplication" />
-      <module name="medical-appointment-system" />
-=======
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "Spring Boot.MedicalAppointmentApplication.executor": "Run",
-    "git-widget-placeholder": "Admin-&&-Authentication",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/medical-appointment-system-project/git hub/medical-appointment-system-project/pom.xml"
-  }
-}]]></component>
-  <component name="RunManager">
-    <configuration name="MedicalAppointmentApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UnknownPolicyInFreeMode" />
-      <module name="medical-appointment-system" />
+  </component>
+
+  <component name="ProjectRootManager" version="2" project-jdk-name="24" project-jdk-type="JavaSDK" />
+
+  <component name="RunManager" selected="Spring Boot.MedicalAppointmentApplication">
+    <configuration name="MedicalAppointmentApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true">
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.medical.MedicalAppointmentApplication" />
->>>>>>> Stashed changes
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.medical.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
+      <module name="medical-appointment-system" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+
     <recent_temporary>
       <list>
-<<<<<<< Updated upstream
+        <item itemvalue="Spring Boot.MedicalAppointmentApplication" />
         <item itemvalue="Application.MedicalAppointmentApplication" />
-=======
-        <item itemvalue="Spring Boot.MedicalAppointmentApplication" />
-        <item itemvalue="Spring Boot.MedicalAppointmentApplication" />
->>>>>>> Stashed changes
       </list>
     </recent_temporary>
   </component>
+
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -107,14 +114,25 @@
       </set>
     </attachedChunks>
   </component>
+
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="" />
-      <created>1777967443385</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
+      <created>1777440058478</created>
       <updated>1777967443385</updated>
     </task>
     <servers />
   </component>
+
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/medical/entity/Appointment.java</url>
+          <line>7</line>
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+
 </project>

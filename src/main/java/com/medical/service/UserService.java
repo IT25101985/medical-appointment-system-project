@@ -1,5 +1,6 @@
 package com.medical.service;
 
+import com.medical.entity.User;
 import com.medical.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

@@ -6,7 +6,7 @@ import jakarta.persistence.Entity;
 @Entity
 @DiscriminatorValue("PATIENT")
 public class Patient extends User {
-
+    
     private String bloodGroup;
 
     public Patient() {

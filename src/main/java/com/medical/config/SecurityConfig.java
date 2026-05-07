@@ -1,5 +1,6 @@
 package com.medical.config;
 
+import com.medical.entity.User;
 import com.medical.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

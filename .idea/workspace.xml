@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
 
   <component name="ChangeListManager">
-    <list default="true" id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="" />
+    <list default="true"
+          id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1"
+          name="Changes"
+          comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,18 +27,18 @@
   </component>
 
   <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
+    &quot;lastFilter&quot;: {
     &quot;state&quot;: &quot;OPEN&quot;,
     &quot;assignee&quot;: &quot;IT25101985&quot;
-  }
-}</component>
+    }
+    }</component>
 
   <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/IT25101985/medical-appointment-system-project.git&quot;,
     &quot;accountId&quot;: &quot;8294d8c8-39de-452e-8d5f-52b253f9a0b4&quot;
-  }
-}</component>
+    }
+    }</component>
 
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -45,8 +49,8 @@
   </component>
 
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 1
-}</component>
+    &quot;associatedIndex&quot;: 1
+    }</component>
 
   <component name="ProjectId" id="3CtcWSQluYdZKCIjn4DLvErY2Ww" />
 
@@ -56,16 +60,16 @@
   </component>
 
   <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "Spring Boot.MedicalAppointmentApplication.executor": "Run",
-    "git-widget-placeholder": "Doctor-Management",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/hirun/Desktop/oop projrect/medical-appointment-system-project"
-  }
-}]]></component>
+    "keyToString": {
+      "ModuleVcsDetector.initialDetectionPerformed": "true",
+      "RunOnceActivity.ShowReadmeOnStart": "true",
+      "RunOnceActivity.git.unshallow": "true",
+      "Spring Boot.MedicalAppointmentApplication.executor": "Run",
+      "git-widget-placeholder": "Doctor-Management",
+      "kotlin-language-version-configured": "true",
+      "last_opened_file_path": "C:/Users/hirun/Desktop/oop projrect/medical-appointment-system-project"
+    }
+  }]]></component>
 
   <component name="SharedIndexes">
     <attachedChunks>
@@ -77,7 +81,9 @@
 
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="" />
+      <changelist id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1"
+                  name="Changes"
+                  comment="" />
       <created>1777967443385</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -85,4 +91,5 @@
     </task>
     <servers />
   </component>
+
 </project>

@@ -1,11 +1,12 @@
 package com.medical.config;
 
-import com.medical.entity.User;
 import com.medical.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 @Component
 public class DataInitializer implements CommandLineRunner {
@@ -18,23 +19,27 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        // Check if admin user already exists
+        Optional<User> adminOpt = userRepository.findByUsername("admin");
 
-        // 1. Simply check if "admin" exists
-        if (userRepository.findByUsername("admin").isEmpty()) {
-
-            // 2. Create the Admin user
+        if (adminOpt.isEmpty()) {
             User admin = new User();
             admin.setUsername("admin");
-            admin.setPassword(passwordEncoder.encode("admin123")); // Securely hashed
+            admin.setPassword(passwordEncoder.encode("admin123")); // Default password
             admin.setFullName("System Administrator");
             admin.setRole("ROLE_ADMIN");
 
-            // 3. Save to database
             userRepository.save(admin);
-
-            System.out.println(">>> Default Admin created: admin / admin123");
+            System.out.println("Default Admin user created! Username: 'admin', Password: 'admin123'");
         } else {
-            System.out.println(">>> Admin already exists. No action needed.");
+            // Check if existing admin has a plain text password mistakenly inserted
+            User admin = adminOpt.get();
+            if (!admin.getPassword().startsWith("$2a$")) {
+                admin.setPassword(passwordEncoder.encode("admin123"));
+                admin.setRole("ROLE_ADMIN");
+                userRepository.save(admin);
+                System.out.println("Admin user password was plain text. Successfully re-hashed!");
+            }
         }
     }
 }

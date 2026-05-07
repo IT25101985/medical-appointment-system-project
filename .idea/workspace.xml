@@ -24,10 +24,11 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Admin-&amp;-Authentication" />
+        <entry key="$PROJECT_DIR$" value="dev" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
 
   <component name="GitHubPullRequestSearchHistory">{
@@ -57,33 +58,71 @@
     </option>
   </component>
 
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+
   <component name="ProjectId" id="3D1BzHNXuz5VUD4BwLiPV27GjXK" />
 
   <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
 
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.MedicalAppointmentApplication.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Spring Boot.MedicalAppointmentApplication.executor": "Run"
+    "Spring Boot.MedicalAppointmentApplication.executor": "Run",
+    "git-widget-placeholder": "dev",
+    "kotlin-language-version-configured": "true"
   }
 }]]></component>
 
-  <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="medical-appointment-system-project" />
+  <component name="RunManager" selected="Spring Boot.MedicalAppointmentApplication">
+    <configuration name="MedicalAppointmentApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.medical.MedicalAppointmentApplication" />
+      <module name="medical-appointment-system" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
 
+    <configuration name="MedicalAppointmentApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UnknownPolicyInFreeMode" />
+      <module name="medical-appointment-system" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.medical.MedicalAppointmentApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="medical-appointment-system" />
+    </configuration>
+
     <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="medical-appointment-system-project" />
+      <module name="medical-appointment-system" />
       <option name="filePath" />
       <method v="2" />
     </configuration>
+
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.MedicalAppointmentApplication" />
+        <item itemvalue="Spring Boot.MedicalAppointmentApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.31033.145" />
+      </set>
+    </attachedChunks>
   </component>
 
   <component name="SpellCheckerSettings"
@@ -100,9 +139,8 @@
       <created>1777440058478</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1777440058478</updated>
+      <updated>1777967443385</updated>
     </task>
-
     <servers />
   </component>
 

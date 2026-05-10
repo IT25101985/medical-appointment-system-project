@@ -78,6 +78,11 @@
     &quot;last_opened_file_path&quot;: &quot;D:/medical-appointment-system-project/git hub/medical-appointment-system-project/pom.xml&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.medical" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="MedicalAppointmentApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true">
       <module name="medical-appointment-system" />

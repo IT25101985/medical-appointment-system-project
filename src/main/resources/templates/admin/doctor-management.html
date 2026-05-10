@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doctor Directory | Admin Portal</title>
+    <title>HealthCarePlus - Staff Management</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -73,7 +73,7 @@
         <div class="bg-emerald-600 p-2 rounded-lg text-white">
             <i class="fa-solid fa-user-md text-xl"></i>
         </div>
-        <h1 class="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">Staff Management</h1>
+        <h1 class="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">HealthCare<span class="text-emerald-600">Plus</span> Staff</h1>
     </div>
 
     <div class="flex items-center gap-2 md:gap-4">
@@ -84,6 +84,12 @@
 
         <a href="/admin/dashboard" class="hidden sm:flex items-center gap-2 text-sm font-semibold text-slate-600 dark:text-slate-400 hover:text-emerald-500 transition">
             <i class="fa-solid fa-arrow-left"></i> Dashboard
+        </a>
+        <a href="/admin/invoices" class="hidden lg:flex items-center gap-2 text-sm font-semibold text-slate-600 dark:text-slate-400 hover:text-emerald-500 transition">
+            <i class="fa-solid fa-file-invoice-dollar"></i> Invoices
+        </a>
+        <a href="/admin/reviews" class="hidden lg:flex items-center gap-2 text-sm font-semibold text-slate-600 dark:text-slate-400 hover:text-emerald-500 transition">
+            <i class="fa-solid fa-star"></i> Reviews
         </a>
         <a href="/" class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-emerald-500 hover:text-white transition">
             <i class="fa-solid fa-house"></i>
@@ -135,6 +141,19 @@
                     </select>
                 </div>
 
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="space-y-1">
+                        <label class="text-xs font-bold text-slate-400 uppercase ml-1">Experience</label>
+                        <input type="text" name="experience" placeholder="e.g. 5 Years"
+                               class="w-full px-4 py-3.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-2xl outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500" />
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-xs font-bold text-slate-400 uppercase ml-1">Clinic Hours</label>
+                        <input type="text" name="clinicHours" placeholder="10 AM - 4 PM"
+                               class="w-full px-4 py-3.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-2xl outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500" />
+                    </div>
+                </div>
+
                 <div class="space-y-1">
                     <label class="text-xs font-bold text-slate-400 uppercase ml-1">Profile Photo</label>
                     <input type="file" id="imageInput" accept="image/*" class="w-full p-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 text-slate-500 rounded-2xl text-sm" />
@@ -155,9 +174,20 @@
                 Active Directory
                 <span class="ml-2 px-2.5 py-1 bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 text-xs rounded-lg" th:text="${#lists.size(doctors)}">0</span>
             </h2>
-            <div class="relative w-full md:w-64">
-                <input type="text" id="doctorSearch" placeholder="Search staff..." class="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl text-sm outline-none focus:ring-2 focus:ring-emerald-500/20" />
-                <i class="fa-solid fa-search absolute left-4 top-3.5 text-slate-400 text-sm"></i>
+            <div class="flex gap-3 w-full md:w-auto">
+                <select id="specialtyFilter" class="px-4 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl text-sm outline-none focus:ring-2 focus:ring-emerald-500/20 appearance-none cursor-pointer">
+                    <option value="">All Specialties</option>
+                    <option value="General Medicine">General Medicine</option>
+                    <option value="Cardiology">Cardiology</option>
+                    <option value="Pediatrics">Pediatrics</option>
+                    <option value="Neurology">Neurology</option>
+                    <option value="Orthopedics">Orthopedics</option>
+                    <option value="Psychiatry">Psychiatry</option>
+                </select>
+                <div class="relative w-full md:w-64">
+                    <input type="text" id="doctorSearch" placeholder="Search staff..." class="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl text-sm outline-none focus:ring-2 focus:ring-emerald-500/20" />
+                    <i class="fa-solid fa-search absolute left-4 top-3.5 text-slate-400 text-sm"></i>
+                </div>
             </div>
         </div>
 
@@ -180,9 +210,13 @@
                               th:text="${doc.specialization}">Specialization</span>
 
                         <div class="space-y-2">
+                            <div class="flex items-center gap-2 text-xs font-bold text-slate-700 dark:text-slate-300">
+                                <i class="fa-solid fa-user-tag w-4 text-emerald-500"></i>
+                                Username: <span th:text="${doc.user != null ? doc.user.username : 'N/A'}" class="text-emerald-600 dark:text-emerald-400">username</span>
+                            </div>
                             <div class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
-                                <i class="fa-solid fa-envelope w-4"></i>
-                                <span th:text="${doc.user != null ? doc.user.username : 'N/A'}">email@hosp.com</span>
+                                <i class="fa-solid fa-clock w-4"></i>
+                                <span th:text="${doc.clinicHours != null ? doc.clinicHours : 'N/A'}">10 AM - 4 PM</span>
                             </div>
                         </div>
                     </div>
@@ -199,11 +233,31 @@
                                 th:data-email="${doc.user != null ? doc.user.username : 'N/A'}"
                                 th:data-phone="${doc.user != null and doc.user.phoneNo != null ? doc.user.phoneNo : 'N/A'}"
                                 th:data-id="${doc.id}"
+                                th:data-exp="${doc.experience != null ? doc.experience : 'N/A'}"
+                                th:data-clinic="${doc.clinicHours != null ? doc.clinicHours : 'N/A'}"
+                                th:data-img="${doc.user != null and doc.user.profileImage != null ? doc.user.profileImage : 'https://cdn-icons-png.flaticon.com/512/3774/3774299.png'}"
+                                onclick="openEditModal(this)"
+                                class="px-3 py-2 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-600 hover:text-white text-blue-600 dark:text-blue-400 text-xs font-bold rounded-xl transition-all cursor-pointer">
+                            <i class="fa-solid fa-pen"></i> Edit
+                        </button>
+                        <button type="button"
+                                th:data-name="${doc.name}"
+                                th:data-spec="${doc.specialization}"
+                                th:data-email="${doc.user != null ? doc.user.username : 'N/A'}"
+                                th:data-phone="${doc.user != null and doc.user.phoneNo != null ? doc.user.phoneNo : 'N/A'}"
+                                th:data-id="${doc.id}"
+                                th:data-exp="${doc.experience != null ? doc.experience : 'N/A'}"
+                                th:data-clinic="${doc.clinicHours != null ? doc.clinicHours : 'N/A'}"
                                 th:data-img="${doc.user != null and doc.user.profileImage != null ? doc.user.profileImage : 'https://cdn-icons-png.flaticon.com/512/3774/3774299.png'}"
                                 onclick="showDetails(this)"
-                                class="px-4 py-2 bg-slate-50 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-slate-600 dark:text-slate-300 text-xs font-bold rounded-xl transition-all cursor-pointer">
+                                class="px-3 py-2 bg-slate-50 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white text-slate-600 dark:text-slate-300 text-xs font-bold rounded-xl transition-all cursor-pointer">
                             Details
                         </button>
+                        <form th:action="@{/admin/doctors/{id}/reset-password(id=${doc.id})}" method="post" onsubmit="return confirm('Reset password to 123?');" class="m-0">
+                            <button type="submit" title="Reset Password to 123" class="px-3 py-2 bg-yellow-50 dark:bg-yellow-900/20 hover:bg-yellow-600 hover:text-white text-yellow-600 dark:text-yellow-400 text-xs font-bold rounded-xl transition-all cursor-pointer">
+                                <i class="fa-solid fa-key"></i> Reset Pwd
+                            </button>
+                        </form>
                         <form th:action="@{/admin/doctors/{id}/delete(id=${doc.id})}" method="post" onsubmit="return confirm('Delete this record?');" class="m-0">
                             <button type="submit" class="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl cursor-pointer">
                                 <i class="fa-solid fa-trash-can"></i>
@@ -241,8 +295,56 @@
                     <p class="text-[10px] font-bold text-slate-400 uppercase mb-1">Contact No</p>
                     <p id="modalPhone" class="text-sm text-slate-700 dark:text-slate-200 font-medium"></p>
                 </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl">
+                        <p class="text-[10px] font-bold text-slate-400 uppercase mb-1">Experience</p>
+                        <p id="modalExp" class="text-sm text-slate-700 dark:text-slate-200 font-medium"></p>
+                    </div>
+                    <div class="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl">
+                        <p class="text-[10px] font-bold text-slate-400 uppercase mb-1">Clinic Hours</p>
+                        <p id="modalClinic" class="text-sm text-slate-700 dark:text-slate-200 font-medium"></p>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
+</div>
+
+<!-- Edit Doctor Modal -->
+<div id="editModal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl w-full max-w-md overflow-hidden transform scale-95 transition-transform duration-300 border border-transparent dark:border-slate-800" id="editModalContent">
+        <div class="p-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
+            <h3 class="font-bold text-slate-900 dark:text-white">Update Personnel Profile</h3>
+            <button onclick="closeEditModal()" class="text-slate-400 hover:text-red-500 cursor-pointer p-2"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <form id="editForm" method="post" class="p-6 space-y-4">
+            <div class="space-y-1">
+                <label class="text-xs font-bold text-slate-400 uppercase ml-1">Specialization</label>
+                <select name="specialization" id="editSpec" required class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl outline-none focus:ring-2 focus:ring-blue-500/20">
+                    <option value="General Medicine">General Medicine</option>
+                    <option value="Cardiology">Cardiology</option>
+                    <option value="Pediatrics">Pediatrics</option>
+                    <option value="Neurology">Neurology</option>
+                    <option value="Orthopedics">Orthopedics</option>
+                    <option value="Psychiatry">Psychiatry</option>
+                </select>
+            </div>
+            <div class="space-y-1">
+                <label class="text-xs font-bold text-slate-400 uppercase ml-1">Experience</label>
+                <input type="text" name="experience" id="editExp" class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl outline-none focus:ring-2 focus:ring-blue-500/20" />
+            </div>
+            <div class="space-y-1">
+                <label class="text-xs font-bold text-slate-400 uppercase ml-1">Clinic Hours</label>
+                <input type="text" name="clinicHours" id="editClinic" class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl outline-none focus:ring-2 focus:ring-blue-500/20" />
+            </div>
+            <div class="space-y-1">
+                <label class="text-xs font-bold text-slate-400 uppercase ml-1">Contact No</label>
+                <input type="text" name="phoneNo" id="editPhone" class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl outline-none focus:ring-2 focus:ring-blue-500/20" />
+            </div>
+            <button type="submit" class="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl shadow-lg shadow-blue-200 dark:shadow-none transition transform active:scale-95 cursor-pointer">
+                Save Changes
+            </button>
+        </form>
     </div>
 </div>
 
@@ -272,10 +374,30 @@
         document.getElementById('modalSpec').innerText = btn.getAttribute('data-spec');
         document.getElementById('modalEmail').innerText = btn.getAttribute('data-email');
         document.getElementById('modalPhone').innerText = btn.getAttribute('data-phone');
+        document.getElementById('modalExp').innerText = btn.getAttribute('data-exp');
+        document.getElementById('modalClinic').innerText = btn.getAttribute('data-clinic');
         document.getElementById('modalImg').src = btn.getAttribute('data-img');
 
         const modal = document.getElementById('detailsModal');
         const content = document.getElementById('modalContent');
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            modal.classList.remove('opacity-0');
+            content.classList.remove('scale-95');
+        }, 10);
+    }
+
+    function openEditModal(btn) {
+        document.getElementById('editSpec').value = btn.getAttribute('data-spec') !== 'N/A' ? btn.getAttribute('data-spec') : 'General Medicine';
+        document.getElementById('editExp').value = btn.getAttribute('data-exp') !== 'N/A' ? btn.getAttribute('data-exp') : '';
+        document.getElementById('editClinic').value = btn.getAttribute('data-clinic') !== 'N/A' ? btn.getAttribute('data-clinic') : '';
+        document.getElementById('editPhone').value = btn.getAttribute('data-phone') !== 'N/A' ? btn.getAttribute('data-phone') : '';
+        
+        let id = btn.getAttribute('data-id');
+        document.getElementById('editForm').action = '/admin/doctors/' + id + '/update';
+
+        const modal = document.getElementById('editModal');
+        const content = document.getElementById('editModalContent');
         modal.classList.remove('hidden');
         setTimeout(() => {
             modal.classList.remove('opacity-0');
@@ -291,18 +413,36 @@
         setTimeout(() => { modal.classList.add('hidden'); }, 300);
     }
 
-    // --- Search & Image Base64 Logic ---
+    function closeEditModal() {
+        const modal = document.getElementById('editModal');
+        const content = document.getElementById('editModalContent');
+        modal.classList.add('opacity-0');
+        content.classList.add('scale-95');
+        setTimeout(() => { modal.classList.add('hidden'); }, 300);
+    }
+
+    // --- Search, Filter & Image Base64 Logic ---
     document.addEventListener('DOMContentLoaded', () => {
         const searchInput = document.getElementById('doctorSearch');
-        if(searchInput) {
-            searchInput.addEventListener('input', (e) => {
-                let term = e.target.value.toLowerCase();
-                document.querySelectorAll('.doctor-card').forEach(card => {
-                    let text = card.innerText.toLowerCase();
-                    card.style.display = text.includes(term) ? 'block' : 'none';
-                });
+        const filterSelect = document.getElementById('specialtyFilter');
+
+        function filterDoctors() {
+            let term = searchInput ? searchInput.value.toLowerCase() : '';
+            let specialty = filterSelect ? filterSelect.value : '';
+
+            document.querySelectorAll('.doctor-card').forEach(card => {
+                let text = card.innerText.toLowerCase();
+                let cardSpec = card.querySelector('span.uppercase').innerText;
+                
+                let matchesSearch = text.includes(term);
+                let matchesSpecialty = specialty === '' || cardSpec === specialty;
+                
+                card.style.display = (matchesSearch && matchesSpecialty) ? 'block' : 'none';
             });
         }
+
+        if(searchInput) searchInput.addEventListener('input', filterDoctors);
+        if(filterSelect) filterSelect.addEventListener('change', filterDoctors);
 
         const imageInput = document.getElementById('imageInput');
         if(imageInput) {

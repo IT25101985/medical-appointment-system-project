@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Portal | Healthcare</title>
+    <title>HealthCarePlus - Admin Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -83,8 +83,8 @@
 <main class="glass-card animate__animated animate__zoomIn max-w-4xl w-full rounded-3xl overflow-hidden">
     <header class="bg-emerald-600/40 p-10 text-white flex justify-between items-center border-b border-white/10">
         <div>
-            <h1 class="text-4xl font-bold tracking-tight">Admin Dashboard</h1>
-            <p class="text-indigo-100 text-sm mt-1">Hospital Management System | Secure Node</p>
+            <h1 class="text-4xl font-bold tracking-tight">HealthCare<span style="color: #10b981;">Plus</span></h1>
+            <p class="text-indigo-100 text-sm mt-1">Admin Dashboard | Secure Personnel Node</p>
         </div>
         <form th:action="@{/logout}" method="post">
             <button type="submit" class="bg-red-500/80 hover:bg-red-600 px-5 py-2.5 rounded-xl text-sm font-bold transition-all flex items-center gap-2 shadow-lg">
@@ -123,11 +123,24 @@
                     </div>
                 </a>
             </li>
+            <li class="animate__animated animate__fadeInUp animate__delay-1s">
+                <a href="/admin/users" class="nav-link block p-8 rounded-2xl group">
+                    <div class="flex items-center space-x-5">
+                        <div class="p-4 bg-blue-500/20 rounded-2xl group-hover:bg-slate-900 border border-slate-800 text-white group-hover:text-blue-600 transition-all text-2xl text-blue-200">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <div>
+                            <span class="block text-xl font-bold text-white mb-1">Manage Users</span>
+                            <span class="text-sm text-gray-300 group-hover:text-blue-100">Patients, Doctors, and Admins</span>
+                        </div>
+                    </div>
+                </a>
+            </li>
         </ul>
     </nav>
 
     <footer class="bg-black/20 p-6 text-center text-xs font-medium text-white/60 tracking-widest uppercase">
-        &copy; 2026 Healthcare Systems | Authorized Personnel Only
+        &copy; 2026 HealthCarePlus | Authorized Personnel Only
     </footer>
 </main>
 

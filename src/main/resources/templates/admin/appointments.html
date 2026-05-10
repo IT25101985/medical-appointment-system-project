@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Appointment Management | MedAdmin</title>
+    <title>HealthCarePlus - Appointment Management</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            --primary: #4f46e5;
-            --primary-light: #eef2ff;
+            --primary: #2563eb;
+            --primary-light: #eff6ff;
             --success: #10b981;
             --danger: #ef4444;
             --bg-body: #f8fafc;
@@ -192,14 +192,16 @@
 
 <header>
     <div class="logo">
-        <i class="fa-solid fa-square-h"></i>
-        <span>MedAdmin <span style="font-weight: 300;">Clinic</span></span>
+        <i class="fa-solid fa-hospital"></i>
+        <span>HealthCare<span style="color: #10b981;">Plus</span></span>
     </div>
     <div style="display: flex; gap: 12px; align-items: center;">
         <button class="btn theme-toggle" id="theme-btn">
             <i class="fa-solid fa-moon"></i>
         </button>
         <a href="/admin/dashboard" class="btn"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+        <a href="/admin/invoices" class="btn"><i class="fa-solid fa-file-invoice-dollar"></i> Invoices</a>
+        <a href="/admin/reviews" class="btn"><i class="fa-solid fa-star"></i> Reviews</a>
     </div>
 </header>
 

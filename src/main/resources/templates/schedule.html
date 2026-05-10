@@ -2,458 +2,235 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doctor Schedules | MediCare</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>Schedules | MediCare</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
     <style>
-        * { margin:0; padding:0; box-sizing:border-box; }
+        :root {
+            --primary:#003366;--accent:#0077CC;
+            --gold:#FFB800;--bg:#F4F6F9;--white:#FFF;
+            --border:#E2E8F0;--text:#1A1A2E;--muted:#94A3B8;
+            --success:#10B981;--danger:#EF4444;
+        }
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{font-family:'Inter',sans-serif;background:var(--bg);padding:30px;}
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: #f0f4f8;
-            padding: 30px;
+        .page-top {
+            background:linear-gradient(
+                135deg,var(--primary),var(--accent));
+            border-radius:16px;padding:28px 30px;color:white;
+            margin-bottom:25px;display:flex;
+            justify-content:space-between;align-items:center;
+        }
+        .page-top h1{font-size:1.4rem;font-weight:800;}
+        .page-top p{font-size:0.85rem;opacity:0.8;}
+
+        .btn{
+            padding:10px 20px;border-radius:8px;border:none;
+            font-family:'Inter',sans-serif;font-size:0.85rem;
+            font-weight:600;cursor:pointer;transition:all 0.3s;
+            display:inline-flex;align-items:center;gap:7px;
+            text-decoration:none;
+        }
+        .btn-white{background:white;color:var(--primary);}
+        .btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,0.15);}
+        .btn-danger{background:#FEE2E2;color:var(--danger);border:1px solid #FECACA;}
+        .btn-danger:hover{background:var(--danger);color:white;}
+        .btn-sm{padding:6px 12px;font-size:0.78rem;}
+
+        .alert{
+            padding:14px 18px;border-radius:10px;margin-bottom:18px;
+            display:flex;align-items:center;gap:10px;font-size:0.88rem;
+            border-left:4px solid var(--success);
+            background:#D1FAE5;color:#065F46;
         }
 
-        .page-header {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 15px;
-            padding: 30px;
-            color: white;
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .grid{display:grid;grid-template-columns:1fr 2fr;gap:22px;}
+
+        .form-card{
+            background:white;border-radius:16px;padding:22px;
+            box-shadow:0 2px 10px rgba(0,0,0,0.06);
+            border:1px solid var(--border);height:fit-content;
         }
-
-        .page-header h1 { font-size: 1.5rem; font-weight: 700; }
-        .page-header p { opacity: 0.9; font-size: 0.9rem; }
-
-        .btn {
-            padding: 10px 20px;
-            border-radius: 10px;
-            border: none;
-            cursor: pointer;
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
+        .form-card h2{
+            font-size:1rem;font-weight:700;margin-bottom:18px;
+            padding-bottom:10px;border-bottom:2px solid var(--bg);
+            color:var(--text);
         }
-
-        .btn-white {
-            background: white;
-            color: #667eea;
+        .form-group{margin-bottom:14px;}
+        .form-label{
+            font-size:0.8rem;font-weight:600;color:#4A5568;
+            margin-bottom:5px;display:block;
         }
-
-        .btn-white:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        .form-control{
+            width:100%;padding:9px 12px;border:2px solid var(--border);
+            border-radius:8px;font-family:'Inter',sans-serif;
+            font-size:0.85rem;outline:none;transition:border 0.3s;
         }
-
-        .btn-danger {
-            background: #fff5f5;
-            color: #e53e3e;
-            border: 1px solid #fed7d7;
+        .form-control:focus{border-color:var(--accent);}
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+        .btn-submit{
+            width:100%;padding:11px;
+            background:linear-gradient(135deg,var(--primary),var(--accent));
+            color:white;border:none;border-radius:8px;
+            font-family:'Inter',sans-serif;font-size:0.9rem;
+            font-weight:600;cursor:pointer;transition:all 0.3s;
         }
+        .btn-submit:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,51,102,0.3);}
 
-        .btn-danger:hover {
-            background: #e53e3e;
-            color: white;
+        .schedules-section{
+            background:white;border-radius:16px;
+            box-shadow:0 2px 10px rgba(0,0,0,0.06);
+            border:1px solid var(--border);overflow:hidden;
         }
-
-        .btn-sm { padding: 6px 12px; font-size: 0.8rem; }
-
-        .alert {
-            padding: 15px 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .section-head{
+            padding:18px 22px;border-bottom:1px solid var(--border);
+            display:flex;justify-content:space-between;align-items:center;
         }
+        .section-head h2{font-size:1rem;font-weight:700;}
 
-        .alert-success {
-            background: #f0fff4;
-            border: 1px solid #9ae6b4;
-            color: #276749;
+        .schedule-grid{
+            display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+            gap:14px;padding:18px;
         }
-
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 25px;
+        .schedule-card{
+            border:2px solid var(--border);border-radius:12px;
+            padding:16px;transition:all 0.3s;
         }
-
-        /* Add Schedule Form */
-        .form-card {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            height: fit-content;
+        .schedule-card:hover{
+            border-color:var(--accent);transform:translateY(-3px);
+            box-shadow:0 6px 18px rgba(0,119,204,0.1);
         }
+        .schedule-card.available{border-left:4px solid var(--success);}
+        .schedule-card.full{border-left:4px solid var(--danger);}
 
-        .form-card h2 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: #2d3748;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #e2e8f0;
-        }
+        .sch-doctor{font-weight:700;font-size:0.95rem;color:var(--text);margin-bottom:3px;}
+        .sch-spec{font-size:0.78rem;color:var(--accent);font-weight:500;margin-bottom:10px;}
+        .sch-detail{font-size:0.82rem;color:var(--muted);margin-bottom:4px;display:flex;align-items:center;gap:6px;}
 
-        .form-group { margin-bottom: 15px; }
+        .progress-wrap{background:var(--border);border-radius:10px;height:5px;margin:10px 0;overflow:hidden;}
+        .progress-bar{height:100%;border-radius:10px;background:var(--success);transition:width 0.5s;}
+        .progress-bar.high{background:var(--danger);}
+        .progress-bar.mid{background:var(--gold);}
 
-        .form-label {
-            font-size: 0.82rem;
-            font-weight: 600;
-            color: #4a5568;
-            margin-bottom: 6px;
-            display: block;
-        }
+        .slot-info{display:flex;justify-content:space-between;font-size:0.78rem;color:var(--muted);}
+        .card-foot{display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding-top:10px;border-top:1px solid var(--bg);}
+        .avail-badge{padding:3px 10px;border-radius:20px;font-size:0.72rem;font-weight:600;display:inline-flex;align-items:center;gap:4px;}
+        .avail-badge.yes{background:#D1FAE5;color:#065F46;}
+        .avail-badge.no{background:#FEE2E2;color:#991B1B;}
 
-        .form-control {
-            width: 100%;
-            padding: 10px 14px;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.88rem;
-            outline: none;
-            transition: border-color 0.3s ease;
-        }
+        .empty-box{text-align:center;padding:50px;color:var(--muted);}
+        .empty-box .icon{font-size:3rem;margin-bottom:10px;}
 
-        .form-control:focus { border-color: #667eea; }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .btn-submit {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 5px;
-        }
-
-        .btn-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(102,126,234,0.4);
-        }
-
-        /* Schedule Cards */
-        .schedules-section {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            overflow: hidden;
-        }
-
-        .section-header {
-            padding: 20px 25px;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .section-header h2 {
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-
-        .schedule-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 15px;
-            padding: 20px;
-        }
-
-        .schedule-card {
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 18px;
-            transition: all 0.3s ease;
-            animation: fadeIn 0.4s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity:0; transform:translateY(10px); }
-            to   { opacity:1; transform:translateY(0); }
-        }
-
-        .schedule-card:hover {
-            border-color: #667eea;
-            box-shadow: 0 5px 15px rgba(102,126,234,0.1);
-            transform: translateY(-3px);
-        }
-
-        .schedule-card.available { border-left: 4px solid #48bb78; }
-        .schedule-card.full      { border-left: 4px solid #e53e3e; }
-
-        .schedule-doctor {
-            font-weight: 700;
-            font-size: 1rem;
-            color: #2d3748;
-            margin-bottom: 5px;
-        }
-
-        .schedule-spec {
-            font-size: 0.8rem;
-            color: #667eea;
-            font-weight: 500;
-            margin-bottom: 12px;
-        }
-
-        .schedule-details {
-            font-size: 0.85rem;
-            color: #718096;
-            margin-bottom: 10px;
-        }
-
-        .schedule-details .detail-row {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 5px;
-        }
-
-        .progress-bar-wrapper {
-            background: #e2e8f0;
-            border-radius: 10px;
-            height: 6px;
-            margin: 10px 0;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            border-radius: 10px;
-            background: linear-gradient(135deg, #48bb78, #38a169);
-            transition: width 0.5s ease;
-        }
-
-        .progress-fill.high { background: #e53e3e; }
-        .progress-fill.medium { background: #d69e2e; }
-
-        .slot-info {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.8rem;
-            color: #718096;
-        }
-
-        .available-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .available-badge.yes {
-            background: #f0fff4;
-            color: #276749;
-        }
-
-        .available-badge.no {
-            background: #fff5f5;
-            color: #c53030;
-        }
-
-        .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid #e2e8f0;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .grid { grid-template-columns: 1fr; }
-            body { padding: 15px; }
+        @media(max-width:768px){
+            .grid{grid-template-columns:1fr;}
+            body{padding:15px;}
         }
     </style>
 </head>
 <body>
-
-<!-- Page Header -->
-<div class="page-header">
+<div class="page-top">
     <div>
         <h1>🗓️ Doctor Schedules</h1>
-        <p>Manage doctor availability and time slots</p>
+        <p>Manage availability and time slots</p>
     </div>
     <a th:href="@{/appointments}" class="btn btn-white">
         <i class="fas fa-arrow-left"></i> Back
     </a>
 </div>
 
-<!-- Alert -->
-<div th:if="${successMessage}" class="alert alert-success">
+<div th:if="${successMessage}" class="alert">
     <i class="fas fa-check-circle"></i>
     <span th:text="${successMessage}"></span>
 </div>
 
 <div class="grid">
-
-    <!-- Add Schedule Form -->
     <div class="form-card">
-        <h2>➕ Add New Schedule</h2>
-
+        <h2>➕ Add Schedule</h2>
         <form th:action="@{/appointments/schedule/add}"
-              th:object="${schedule}"
-              method="post">
-
+              th:object="${schedule}" method="post">
             <div class="form-group">
-                <label class="form-label">Doctor Name</label>
-                <select th:field="*{doctorName}"
-                        class="form-control">
-                    <option value="">-- Select Doctor --</option>
-                    <option th:each="doc : ${doctors}"
-                            th:value="${doc}"
-                            th:text="${doc}"></option>
+                <label class="form-label">Doctor</label>
+                <select th:field="*{doctorName}" class="form-control">
+                    <option value="">-- Select --</option>
+                    <option th:each="d : ${doctors}" th:value="${d}" th:text="${d}"></option>
                 </select>
             </div>
-
             <div class="form-group">
                 <label class="form-label">Specialization</label>
-                <select th:field="*{specialization}"
-                        class="form-control">
+                <select th:field="*{specialization}" class="form-control">
                     <option value="">-- Select --</option>
-                    <option th:each="spec : ${specializations}"
-                            th:value="${spec}"
-                            th:text="${spec}"></option>
+                    <option th:each="s : ${specializations}" th:value="${s}" th:text="${s}"></option>
                 </select>
             </div>
-
             <div class="form-group">
-                <label class="form-label">Available Date</label>
-                <input type="date"
-                       th:field="*{availableDate}"
-                       class="form-control">
+                <label class="form-label">Date</label>
+                <input type="date" th:field="*{availableDate}" class="form-control">
             </div>
-
             <div class="form-row">
                 <div class="form-group">
-                    <label class="form-label">Start Time</label>
-                    <input type="time"
-                           th:field="*{startTime}"
-                           class="form-control">
+                    <label class="form-label">Start</label>
+                    <input type="time" th:field="*{startTime}" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label class="form-label">End Time</label>
-                    <input type="time"
-                           th:field="*{endTime}"
-                           class="form-control">
+                    <label class="form-label">End</label>
+                    <input type="time" th:field="*{endTime}" class="form-control">
                 </div>
             </div>
-
             <div class="form-group">
                 <label class="form-label">Max Patients</label>
-                <input type="number"
-                       th:field="*{maxPatients}"
-                       class="form-control"
-                       min="1"
-                       max="50"
-                       value="10">
+                <input type="number" th:field="*{maxPatients}" class="form-control" min="1" value="10">
             </div>
-
             <button type="submit" class="btn-submit">
                 <i class="fas fa-plus"></i> Add Schedule
             </button>
         </form>
     </div>
 
-    <!-- Schedules List -->
     <div class="schedules-section">
-        <div class="section-header">
-            <h2>📋 All Schedules
-                (<span th:text="${schedules.size()}"></span>)
-            </h2>
+        <div class="section-head">
+            <h2>📋 All Schedules (<span th:text="${schedules.size()}"></span>)</h2>
         </div>
 
-        <div th:if="${schedules.empty}"
-             style="text-align:center;padding:50px;color:#718096;">
-            <div style="font-size:3rem;margin-bottom:10px;">
-                📭
-            </div>
-            <p>No schedules added yet</p>
+        <div th:if="${schedules.empty}" class="empty-box">
+            <div class="icon">📭</div>
+            <p>No schedules yet</p>
         </div>
 
-        <div class="schedule-grid"
-             th:if="${!schedules.empty}">
-
-            <div th:each="sch : ${schedules}"
-                 th:class="${sch.available} ?
-                         'schedule-card available' :
-                         'schedule-card full'">
-
-                <div class="schedule-doctor"
-                     th:text="${sch.doctorName}"></div>
-                <div class="schedule-spec"
-                     th:text="${sch.specialization}"></div>
-
-                <div class="schedule-details">
-                    <div class="detail-row">
-                        <i class="fas fa-calendar"></i>
-                        <span th:text="${sch.availableDate}"></span>
-                    </div>
-                    <div class="detail-row">
-                        <i class="fas fa-clock"></i>
-                        <span th:text="${sch.startTime +
-                                ' - ' + sch.endTime}"></span>
+        <div class="schedule-grid" th:if="${!schedules.empty}">
+            <div th:each="s : ${schedules}"
+                 th:class="${s.available} ? 'schedule-card available' : 'schedule-card full'">
+                <div class="sch-doctor" th:text="${s.doctorName}"></div>
+                <div class="sch-spec" th:text="${s.specialization}"></div>
+                <div class="sch-detail">
+                    <i class="fas fa-calendar"></i>
+                    <span th:text="${s.availableDate}"></span>
+                </div>
+                <div class="sch-detail">
+                    <i class="fas fa-clock"></i>
+                    <span th:text="${s.startTime + ' - ' + s.endTime}"></span>
+                </div>
+                <div class="progress-wrap">
+                    <div class="progress-bar"
+                         th:style="'width:' + ${s.occupancyPercentage} + '%'"
+                         th:classappend="${s.occupancyPercentage > 80 ? 'high' : (s.occupancyPercentage > 50 ? 'mid' : '')}">
                     </div>
                 </div>
-
-                <!-- Progress Bar -->
-                <div class="progress-bar-wrapper">
-                    <div class="progress-fill"
-                         th:style="'width:' +
-                                 ${sch.occupancyPercentage} + '%'">
-                    </div>
-                </div>
-
                 <div class="slot-info">
-                        <span th:text="${sch.currentPatients +
-                            ' / ' + sch.maxPatients +
-                            ' patients'}"></span>
-                    <span th:text="${sch.remainingSlots +
-                            ' slots left'}"></span>
+                    <span th:text="${s.currentPatients + '/' + s.maxPatients}"></span>
+                    <span th:text="${s.remainingSlots + ' left'}"></span>
                 </div>
-
-                <div class="card-footer">
-                        <span th:class="${sch.available} ?
-                            'available-badge yes' :
-                            'available-badge no'">
-                            <i th:class="${sch.available} ?
-                                'fas fa-check-circle' :
-                                'fas fa-times-circle'"></i>
-                            <span th:text="${sch.available} ?
-                                'Available' : 'Full'"></span>
-                        </span>
-
-                    <form th:action="@{/appointments/schedule/delete/
-                                        {id}(id=${sch.id})}"
-                          method="post"
-                          onsubmit="return confirm(
-                                  'Delete this schedule?')">
-                        <button type="submit"
-                                class="btn btn-danger btn-sm">
+                <div class="card-foot">
+                    <span th:class="${s.available} ? 'avail-badge yes' : 'avail-badge no'"
+                          th:text="${s.available} ? '✅ Available' : '❌ Full'">
+                    </span>
+                    <form th:action="@{/appointments/schedule/delete/{id}(id=${s.id})}"
+                          method="post" onsubmit="return confirm('Delete?')">
+                        <button type="submit" class="btn btn-danger btn-sm">
                             <i class="fas fa-trash"></i>
                         </button>
                     </form>
@@ -462,6 +239,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>

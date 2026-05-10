@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>File Log | MediCare</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+          rel="stylesheet">
+    <style>
+        :root {
+            --primary:#003366;--accent:#0077CC;
+            --gold:#FFB800;--bg:#F4F6F9;--white:#FFF;
+            --dark:#1A1A2E;--border:#E2E8F0;
+        }
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{font-family:'Inter',sans-serif;background:var(--bg);padding:30px;}
+
+        .page-top {
+            background:linear-gradient(135deg,var(--dark),#16213E);
+            border-radius:16px;padding:28px 30px;color:white;
+            margin-bottom:25px;display:flex;
+            justify-content:space-between;align-items:center;
+        }
+        .page-top h1{font-size:1.4rem;font-weight:800;}
+        .page-top p{font-size:0.85rem;opacity:0.7;}
+
+        .btn-back{
+            padding:10px 20px;border-radius:8px;border:none;
+            background:var(--gold);color:var(--primary);
+            font-family:'Inter',sans-serif;font-weight:600;
+            font-size:0.85rem;cursor:pointer;transition:all 0.3s;
+            text-decoration:none;display:inline-flex;
+            align-items:center;gap:7px;
+        }
+        .btn-back:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(255,184,0,0.3);}
+
+        .log-card{
+            background:var(--dark);border-radius:16px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.2);overflow:hidden;
+        }
+        .log-header{
+            padding:16px 22px;border-bottom:1px solid rgba(255,255,255,0.08);
+            display:flex;justify-content:space-between;align-items:center;
+        }
+        .log-header h2{color:white;font-size:0.95rem;font-weight:600;display:flex;align-items:center;gap:8px;}
+        .log-dots{display:flex;gap:6px;}
+        .log-dots span{width:12px;height:12px;border-radius:50%;}
+        .dot-red{background:#EF4444;}
+        .dot-yellow{background:#F59E0B;}
+        .dot-green{background:#10B981;}
+
+        .log-body{
+            padding:22px;max-height:500px;overflow-y:auto;
+        }
+        .log-body pre{
+            font-family:'JetBrains Mono',monospace;
+            font-size:0.82rem;color:#A5F3FC;
+            line-height:1.8;white-space:pre-wrap;
+            word-break:break-all;
+        }
+
+        .info-box{
+            background:white;border-radius:16px;padding:22px;
+            margin-top:22px;border:1px solid var(--border);
+        }
+        .info-box h3{font-size:0.95rem;font-weight:700;margin-bottom:10px;color:var(--dark);}
+        .info-box p{font-size:0.85rem;color:#64748B;line-height:1.6;}
+
+        @media(max-width:600px){body{padding:15px;}}
+    </style>
+</head>
+<body>
+<div class="page-top">
+    <div>
+        <h1>📄 File Logs</h1>
+        <p>View appointment records stored in text files</p>
+    </div>
+    <a th:href="@{/appointments}" class="btn-back">
+        <i class="fas fa-arrow-left"></i> Back
+    </a>
+</div>
+
+<div class="log-card">
+    <div class="log-header">
+        <h2><i class="fas fa-terminal"></i> appointments.txt</h2>
+        <div class="log-dots">
+            <span class="dot-red"></span>
+            <span class="dot-yellow"></span>
+            <span class="dot-green"></span>
+        </div>
+    </div>
+    <div class="log-body">
+        <pre th:text="${fileContent}">No data yet...</pre>
+    </div>
+</div>
+
+<div class="info-box">
+    <h3>📝 About File Handling</h3>
+    <p>
+        This system uses <strong>BufferedWriter</strong> and
+        <strong>BufferedReader</strong> for file operations.
+        Every time an appointment is booked, rescheduled,
+        or cancelled, the action is logged to
+        <code>appointments.txt</code> and
+        <code>appointment_log.txt</code>.
+        This demonstrates <strong>File Handling</strong>
+        implementation using Java I/O.
+    </p>
+</div>
+</body>
+</html>

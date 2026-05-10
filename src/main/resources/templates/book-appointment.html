@@ -2,144 +2,221 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
     <title>Book Appointment | MediCare</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --primary: #003366;
+            --accent: #0077CC;
+            --gold: #FFB800;
+            --dark: #1A1A2E;
+            --bg: #F4F6F9;
+            --white: #FFFFFF;
+            --border: #E2E8F0;
+            --text: #1A1A2E;
+            --text-muted: #94A3B8;
+            --success: #10B981;
+            --danger: #EF4444;
         }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 30px 15px;
         }
 
-        .container {
+        .booking-container {
             width: 100%;
-            max-width: 800px;
-            animation: slideUp 0.6s ease-out;
+            max-width: 720px;
+            animation: slideUp 0.6s ease;
         }
 
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(25px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
-        .card {
-            background: white;
+        /* ===== CARD ===== */
+        .booking-card {
+            background: var(--white);
             border-radius: 20px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
             overflow: hidden;
         }
 
+        /* ===== HEADER ===== */
         .card-header {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            padding: 40px;
+            background: linear-gradient(
+                135deg, var(--primary) 0%,
+                #0056A0 50%, var(--accent) 100%
+            );
+            padding: 40px 35px 50px;
             text-align: center;
-            color: white;
+            color: var(--white);
             position: relative;
+        }
+
+        .card-header::after {
+            content: '';
+            position: absolute;
+            bottom: -15px; left: 0; right: 0;
+            height: 30px;
+            background: var(--white);
+            border-radius: 50% 50% 0 0;
         }
 
         .card-header::before {
             content: '';
             position: absolute;
-            bottom: -20px;
-            left: 0;
-            right: 0;
-            height: 40px;
-            background: white;
-            border-radius: 50% 50% 0 0;
+            top: -30%; right: -5%;
+            width: 200px; height: 200px;
+            background: rgba(255,184,0,0.08);
+            border-radius: 50%;
         }
 
-        .card-header .icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
+        .header-icon {
+            width: 70px; height: 70px;
+            background: rgba(255,184,0,0.15);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 15px;
             animation: pulse 2s infinite;
+            border: 2px solid rgba(255,184,0,0.25);
         }
 
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            50%       { transform: scale(1.05); }
         }
 
         .card-header h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 5px;
+            font-size: 1.6rem;
+            font-weight: 800;
         }
 
         .card-header p {
-            font-size: 0.9rem;
-            opacity: 0.9;
+            font-size: 0.88rem;
+            opacity: 0.8;
+            margin-top: 5px;
         }
 
-        .card-body {
-            padding: 50px 40px 40px;
-        }
-
-        .progress-bar {
+        /* ===== PROGRESS STEPS ===== */
+        .progress-steps {
             display: flex;
-            justify-content: space-between;
-            margin-bottom: 40px;
+            justify-content: center;
+            gap: 0;
+            margin: 30px 35px 0;
             position: relative;
         }
 
-        .progress-bar::before {
+        .progress-steps::before {
             content: '';
             position: absolute;
-            top: 20px;
-            left: 10%;
-            right: 10%;
+            top: 18px;
+            left: 15%; right: 15%;
             height: 2px;
-            background: #e2e8f0;
+            background: var(--border);
         }
 
-        .progress-step {
+        .step {
             display: flex;
             flex-direction: column;
             align-items: center;
+            flex: 1;
             z-index: 1;
         }
 
-        .step-circle {
-            width: 40px;
-            height: 40px;
+        .step-dot {
+            width: 36px; height: 36px;
             border-radius: 50%;
-            background: #e2e8f0;
+            background: var(--border);
+            color: var(--text-muted);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 600;
-            font-size: 0.9rem;
+            font-weight: 700;
+            font-size: 0.85rem;
             margin-bottom: 8px;
             transition: all 0.3s ease;
         }
 
-        .step-circle.active {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+        .step.active .step-dot {
+            background: linear-gradient(
+                135deg, var(--primary), var(--accent)
+            );
             color: white;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 4px 12px rgba(0,51,102,0.3);
+        }
+
+        .step.done .step-dot {
+            background: var(--success);
+            color: white;
         }
 
         .step-label {
-            font-size: 0.75rem;
-            color: #718096;
-            font-weight: 500;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--text-muted);
         }
 
+        .step.active .step-label {
+            color: var(--primary);
+        }
+
+        /* ===== FORM BODY ===== */
+        .card-body {
+            padding: 20px 35px 35px;
+        }
+
+        /* Alerts */
+        .alert {
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-bottom: 18px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        .alert-success {
+            background: #D1FAE5;
+            color: #065F46;
+            border-left: 4px solid var(--success);
+        }
+
+        .alert-danger {
+            background: #FEE2E2;
+            color: #991B1B;
+            border-left: 4px solid var(--danger);
+        }
+
+        /* Form Grid */
         .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            gap: 18px;
         }
 
         .form-group {
@@ -152,296 +229,173 @@
         }
 
         .form-label {
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             font-weight: 600;
-            color: #4a5568;
-            margin-bottom: 8px;
+            color: #4A5568;
+            margin-bottom: 6px;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
         }
 
         .form-label .required {
-            color: #e53e3e;
+            color: var(--danger);
+            font-size: 0.7rem;
         }
 
         .form-control {
-            padding: 12px 16px;
-            border: 2px solid #e2e8f0;
+            padding: 11px 14px;
+            border: 2px solid var(--border);
             border-radius: 10px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.9rem;
-            color: #2d3748;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.88rem;
+            color: var(--text);
             transition: all 0.3s ease;
             outline: none;
-            background: #f8fafc;
+            background: #F8FAFC;
         }
 
         .form-control:focus {
-            border-color: #667eea;
+            border-color: var(--accent);
             background: white;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-            transform: translateY(-1px);
+            box-shadow: 0 0 0 3px rgba(0,119,204,0.1);
         }
 
         .form-control.error {
-            border-color: #e53e3e;
-            box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1);
+            border-color: var(--danger);
+            box-shadow: 0 0 0 3px rgba(239,68,68,0.1);
         }
 
-        .error-message {
-            font-size: 0.75rem;
-            color: #e53e3e;
-            margin-top: 5px;
+        .form-control.valid {
+            border-color: var(--success);
+        }
+
+        .error-text {
+            font-size: 0.73rem;
+            color: var(--danger);
+            margin-top: 4px;
             display: flex;
             align-items: center;
             gap: 4px;
-            animation: fadeIn 0.3s ease;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-5px); }
-            to { opacity: 1; transform: translateY(0); }
+        textarea.form-control {
+            resize: vertical;
+            min-height: 80px;
         }
 
-        .input-wrapper {
-            position: relative;
-        }
-
-        .input-wrapper .input-icon {
-            position: absolute;
-            left: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #a0aec0;
-            font-size: 0.9rem;
-            transition: color 0.3s ease;
-        }
-
-        .input-wrapper .form-control {
-            padding-left: 40px;
-        }
-
-        .input-wrapper .form-control:focus + .input-icon,
-        .input-wrapper:has(.form-control:focus) .input-icon {
-            color: #667eea;
-        }
-
-        .submit-btn {
+        /* Submit Button */
+        .btn-submit {
             width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 14px;
+            background: linear-gradient(
+                135deg, var(--primary), var(--accent)
+            );
             color: white;
             border: none;
-            border-radius: 10px;
-            font-family: 'Poppins', sans-serif;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-top: 20px;
+            margin-top: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             position: relative;
             overflow: hidden;
         }
 
-        .submit-btn::before {
+        .btn-submit::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
             background: linear-gradient(
-                    90deg, transparent,
-                    rgba(255,255,255,0.2), transparent
+                90deg, transparent,
+                rgba(255,255,255,0.2), transparent
             );
             transition: left 0.5s ease;
         }
 
-        .submit-btn:hover::before {
-            left: 100%;
+        .btn-submit:hover::after { left: 100%; }
+
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,51,102,0.35);
         }
 
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
-        }
-
-        .submit-btn:active {
-            transform: translateY(0);
-        }
-
-        .alert {
-            padding: 15px 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            animation: slideIn 0.4s ease;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        .alert-success {
-            background: #f0fff4;
-            border: 1px solid #9ae6b4;
-            color: #276749;
-        }
-
-        .alert-danger {
-            background: #fff5f5;
-            border: 1px solid #feb2b2;
-            color: #9b2c2c;
-        }
+        .btn-submit:active { transform: translateY(-1px); }
 
         .back-link {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 18px;
         }
 
         .back-link a {
-            color: #667eea;
+            color: var(--accent);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-weight: 500;
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            transition: gap 0.3s ease;
+            transition: gap 0.3s;
         }
 
-        .back-link a:hover {
-            gap: 10px;
-        }
+        .back-link a:hover { gap: 10px; }
 
         /* Responsive */
         @media (max-width: 600px) {
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .card-body {
-                padding: 40px 20px 30px;
-            }
-
-            .card-header {
-                padding: 30px 20px;
-            }
-        }
-
-        /* Loading Animation */
-        .loading {
-            display: none;
-            width: 20px;
-            height: 20px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-top-color: white;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin-left: 10px;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .submit-btn.submitting .loading {
-            display: inline-block;
-        }
-
-        .submit-btn.submitting .btn-text {
-            opacity: 0.7;
-        }
-
-        /* Time Slots */
-        .time-slots {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-            margin-top: 10px;
-        }
-
-        .time-slot {
-            padding: 8px;
-            text-align: center;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: #4a5568;
-            transition: all 0.2s ease;
-        }
-
-        .time-slot:hover {
-            border-color: #667eea;
-            color: #667eea;
-            background: rgba(102, 126, 234, 0.05);
-        }
-
-        .time-slot.selected {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-color: transparent;
-            color: white;
-        }
-
-        .time-slot.unavailable {
-            background: #f7fafc;
-            color: #a0aec0;
-            cursor: not-allowed;
-            text-decoration: line-through;
+            .form-grid { grid-template-columns: 1fr; }
+            .card-body { padding: 15px 20px 25px; }
+            .card-header { padding: 30px 20px 40px; }
+            .card-header h1 { font-size: 1.3rem; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="card">
+<div class="booking-container">
+    <div class="booking-card">
+
         <!-- Header -->
         <div class="card-header">
-            <div class="icon">📅</div>
+            <div class="header-icon">📅</div>
             <h1>Book Appointment</h1>
-            <p>Schedule your visit with our expert doctors</p>
+            <p>Schedule a visit with our expert doctors</p>
+        </div>
+
+        <!-- Progress Steps -->
+        <div class="progress-steps">
+            <div class="step done">
+                <div class="step-dot">✓</div>
+                <span class="step-label">Patient</span>
+            </div>
+            <div class="step active">
+                <div class="step-dot">2</div>
+                <span class="step-label">Doctor</span>
+            </div>
+            <div class="step active">
+                <div class="step-dot">3</div>
+                <span class="step-label">Schedule</span>
+            </div>
+            <div class="step">
+                <div class="step-dot">4</div>
+                <span class="step-label">Confirm</span>
+            </div>
         </div>
 
         <!-- Body -->
         <div class="card-body">
 
-            <!-- Success/Error Messages -->
+            <!-- Alerts -->
             <div th:if="${successMessage}"
                  class="alert alert-success">
                 <i class="fas fa-check-circle"></i>
                 <span th:text="${successMessage}"></span>
-            </div>
-
-            <div th:if="${errorMessage}"
-                 class="alert alert-danger">
-                <i class="fas fa-exclamation-circle"></i>
-                <span th:text="${errorMessage}"></span>
-            </div>
-
-            <!-- Progress Steps -->
-            <div class="progress-bar">
-                <div class="progress-step">
-                    <div class="step-circle active">1</div>
-                    <span class="step-label">Patient Info</span>
-                </div>
-                <div class="progress-step">
-                    <div class="step-circle active">2</div>
-                    <span class="step-label">Doctor</span>
-                </div>
-                <div class="progress-step">
-                    <div class="step-circle active">3</div>
-                    <span class="step-label">Schedule</span>
-                </div>
-                <div class="progress-step">
-                    <div class="step-circle">✓</div>
-                    <span class="step-label">Confirm</span>
-                </div>
             </div>
 
             <!-- Form -->
@@ -457,184 +411,210 @@
                     <div class="form-group">
                         <label class="form-label">
                             <i class="fas fa-user"></i>
-                            Patient Name <span class="required">*</span>
+                            Patient Name
+                            <span class="required">*</span>
                         </label>
-                        <div class="input-wrapper">
-                            <input type="text"
-                                   th:field="*{patientName}"
-                                   th:class="${#fields.hasErrors('patientName')}
-                                       ? 'form-control error' : 'form-control'"
-                                   placeholder="Enter full name"
-                                   id="patientName">
-                        </div>
-                        <div class="error-message"
-                             th:if="${#fields.hasErrors('patientName')}">
-                            <i class="fas fa-exclamation-circle"></i>
-                            <span th:errors="*{patientName}"></span>
-                        </div>
+                        <input type="text"
+                               th:field="*{patientName}"
+                               th:class="${#fields.hasErrors(
+                                   'patientName')} ?
+                                   'form-control error' :
+                                   'form-control'"
+                               placeholder="Full name"
+                               id="patientName">
+                        <span class="error-text"
+                              th:if="${#fields.hasErrors(
+                                  'patientName')}">
+                            <i class="fas fa-exclamation-circle">
+                            </i>
+                            <span th:errors="*{patientName}">
+                            </span>
+                        </span>
                     </div>
 
-                    <!-- Patient Email -->
+                    <!-- Email -->
                     <div class="form-group">
                         <label class="form-label">
                             <i class="fas fa-envelope"></i>
-                            Email Address <span class="required">*</span>
+                            Email
+                            <span class="required">*</span>
                         </label>
-                        <div class="input-wrapper">
-                            <input type="email"
-                                   th:field="*{patientEmail}"
-                                   th:class="${#fields.hasErrors('patientEmail')}
-                                       ? 'form-control error' : 'form-control'"
-                                   placeholder="your@email.com"
-                                   id="patientEmail">
-                        </div>
-                        <div class="error-message"
-                             th:if="${#fields.hasErrors('patientEmail')}">
-                            <i class="fas fa-exclamation-circle"></i>
-                            <span th:errors="*{patientEmail}"></span>
-                        </div>
+                        <input type="email"
+                               th:field="*{patientEmail}"
+                               th:class="${#fields.hasErrors(
+                                   'patientEmail')} ?
+                                   'form-control error' :
+                                   'form-control'"
+                               placeholder="email@example.com"
+                               id="patientEmail">
+                        <span class="error-text"
+                              th:if="${#fields.hasErrors(
+                                  'patientEmail')}">
+                            <i class="fas fa-exclamation-circle">
+                            </i>
+                            <span th:errors="*{patientEmail}">
+                            </span>
+                        </span>
                     </div>
 
                     <!-- Phone -->
                     <div class="form-group">
                         <label class="form-label">
                             <i class="fas fa-phone"></i>
-                            Phone Number <span class="required">*</span>
+                            Phone
+                            <span class="required">*</span>
                         </label>
-                        <div class="input-wrapper">
-                            <input type="tel"
-                                   th:field="*{patientPhone}"
-                                   th:class="${#fields.hasErrors('patientPhone')}
-                                       ? 'form-control error' : 'form-control'"
-                                   placeholder="0771234567"
-                                   id="patientPhone"
-                                   maxlength="10">
-                        </div>
-                        <div class="error-message"
-                             th:if="${#fields.hasErrors('patientPhone')}">
-                            <i class="fas fa-exclamation-circle"></i>
-                            <span th:errors="*{patientPhone}"></span>
-                        </div>
+                        <input type="tel"
+                               th:field="*{patientPhone}"
+                               th:class="${#fields.hasErrors(
+                                   'patientPhone')} ?
+                                   'form-control error' :
+                                   'form-control'"
+                               placeholder="0771234567"
+                               maxlength="10"
+                               id="patientPhone">
+                        <span class="error-text"
+                              th:if="${#fields.hasErrors(
+                                  'patientPhone')}">
+                            <i class="fas fa-exclamation-circle">
+                            </i>
+                            <span th:errors="*{patientPhone}">
+                            </span>
+                        </span>
                     </div>
 
                     <!-- Specialization -->
                     <div class="form-group">
                         <label class="form-label">
                             <i class="fas fa-stethoscope"></i>
-                            Specialization <span class="required">*</span>
+                            Specialization
+                            <span class="required">*</span>
                         </label>
                         <select th:field="*{specialization}"
-                                th:class="${#fields.hasErrors('specialization')}
-                                    ? 'form-control error' : 'form-control'"
-                                id="specialization"
-                                onchange="filterDoctors()">
-                            <option value="">-- Select Specialization --</option>
-                            <option th:each="spec : ${specializations}"
-                                    th:value="${spec}"
-                                    th:text="${spec}"></option>
+                                th:class="${#fields.hasErrors(
+                                    'specialization')} ?
+                                    'form-control error' :
+                                    'form-control'"
+                                id="specialization">
+                            <option value="">-- Select --</option>
+                            <option th:each="s : ${specializations}"
+                                    th:value="${s}"
+                                    th:text="${s}"></option>
                         </select>
-                        <div class="error-message"
-                             th:if="${#fields.hasErrors('specialization')}">
-                            <i class="fas fa-exclamation-circle"></i>
-                            <span th:errors="*{specialization}"></span>
-                        </div>
+                        <span class="error-text"
+                              th:if="${#fields.hasErrors(
+                                  'specialization')}">
+                            <i class="fas fa-exclamation-circle">
+                            </i>
+                            <span th:errors="*{specialization}">
+                            </span>
+                        </span>
                     </div>
 
                     <!-- Doctor -->
                     <div class="form-group">
                         <label class="form-label">
                             <i class="fas fa-user-md"></i>
-                            Select Doctor <span class="required">*</span>
+                            Doctor
+                            <span class="required">*</span>
                         </label>
                         <select th:field="*{doctorName}"
-                                th:class="${#fields.hasErrors('doctorName')}
-                                    ? 'form-control error' : 'form-control'"
-                                id="doctorSelect">
-                            <option value="">-- Select Doctor --</option>
-                            <option th:each="doc : ${doctors}"
-                                    th:value="${doc}"
-                                    th:text="${doc}"></option>
+                                th:class="${#fields.hasErrors(
+                                    'doctorName')} ?
+                                    'form-control error' :
+                                    'form-control'"
+                                id="doctorName">
+                            <option value="">-- Select --</option>
+                            <option th:each="d : ${doctors}"
+                                    th:value="${d}"
+                                    th:text="${d}"></option>
                         </select>
-                        <div class="error-message"
-                             th:if="${#fields.hasErrors('doctorName')}">
-                            <i class="fas fa-exclamation-circle"></i>
-                            <span th:errors="*{doctorName}"></span>
-                        </div>
+                        <span class="error-text"
+                              th:if="${#fields.hasErrors(
+                                  'doctorName')}">
+                            <i class="fas fa-exclamation-circle">
+                            </i>
+                            <span th:errors="*{doctorName}">
+                            </span>
+                        </span>
                     </div>
 
-                    <!-- Appointment Date -->
+                    <!-- Date -->
                     <div class="form-group">
                         <label class="form-label">
                             <i class="fas fa-calendar-alt"></i>
-                            Appointment Date <span class="required">*</span>
+                            Date
+                            <span class="required">*</span>
                         </label>
                         <input type="date"
                                th:field="*{appointmentDate}"
-                               th:class="${#fields.hasErrors('appointmentDate')}
-                                   ? 'form-control error' : 'form-control'"
-                               id="appointmentDate"
-                               th:min="${#temporals.format(
-                                   #temporals.createNow(), 'yyyy-MM-dd'
-                               )}"
-                               onchange="loadTimeSlots()">
-                        <div class="error-message"
-                             th:if="${#fields.hasErrors('appointmentDate')}">
-                            <i class="fas fa-exclamation-circle"></i>
-                            <span th:errors="*{appointmentDate}"></span>
-                        </div>
+                               th:class="${#fields.hasErrors(
+                                   'appointmentDate')} ?
+                                   'form-control error' :
+                                   'form-control'"
+                               id="appointmentDate">
+                        <span class="error-text"
+                              th:if="${#fields.hasErrors(
+                                  'appointmentDate')}">
+                            <i class="fas fa-exclamation-circle">
+                            </i>
+                            <span th:errors="*{appointmentDate}">
+                            </span>
+                        </span>
                     </div>
 
-                    <!-- Appointment Time -->
+                    <!-- Time -->
                     <div class="form-group">
                         <label class="form-label">
                             <i class="fas fa-clock"></i>
-                            Appointment Time <span class="required">*</span>
+                            Time
+                            <span class="required">*</span>
                         </label>
                         <input type="time"
                                th:field="*{appointmentTime}"
-                               th:class="${#fields.hasErrors('appointmentTime')}
-                                   ? 'form-control error' : 'form-control'"
-                               id="appointmentTime"
-                               min="08:00"
-                               max="17:00">
-                        <div class="error-message"
-                             th:if="${#fields.hasErrors('appointmentTime')}">
-                            <i class="fas fa-exclamation-circle"></i>
-                            <span th:errors="*{appointmentTime}"></span>
-                        </div>
+                               th:class="${#fields.hasErrors(
+                                   'appointmentTime')} ?
+                                   'form-control error' :
+                                   'form-control'"
+                               min="08:00" max="17:00"
+                               id="appointmentTime">
+                        <span class="error-text"
+                              th:if="${#fields.hasErrors(
+                                  'appointmentTime')}">
+                            <i class="fas fa-exclamation-circle">
+                            </i>
+                            <span th:errors="*{appointmentTime}">
+                            </span>
+                        </span>
                     </div>
 
                     <!-- Notes -->
                     <div class="form-group full-width">
                         <label class="form-label">
                             <i class="fas fa-notes-medical"></i>
-                            Additional Notes (Optional)
+                            Notes (Optional)
                         </label>
                         <textarea th:field="*{notes}"
                                   class="form-control"
                                   rows="3"
-                                  placeholder="Describe your symptoms or any special requests..."
+                                  placeholder="Describe symptoms..."
                                   id="notes"></textarea>
                     </div>
 
                 </div>
 
-                <!-- Submit Button -->
-                <button type="submit" class="submit-btn" id="submitBtn">
-                    <span class="btn-text">
-                        <i class="fas fa-calendar-check"></i>
-                        Confirm Appointment
-                    </span>
-                    <span class="loading"></span>
+                <!-- Submit -->
+                <button type="submit" class="btn-submit">
+                    <i class="fas fa-calendar-check"></i>
+                    Confirm Appointment
                 </button>
 
             </form>
 
-            <!-- Back Link -->
             <div class="back-link">
                 <a th:href="@{/appointments}">
                     <i class="fas fa-arrow-left"></i>
-                    Back to Appointments
+                    Back to Dashboard
                 </a>
             </div>
 
@@ -643,112 +623,32 @@
 </div>
 
 <script>
-    // ✅ Client-side validation
-    document.getElementById('bookingForm')
-        .addEventListener('submit', function(e) {
-            let isValid = true;
-            const fields = [
-                'patientName', 'patientEmail',
-                'patientPhone', 'appointmentDate', 'appointmentTime'
-            ];
+    // Set min date to today
+    const dateInput = document.getElementById('appointmentDate');
+    if (dateInput) {
+        dateInput.min = new Date().toISOString().split('T')[0];
+    }
 
-            fields.forEach(fieldId => {
-                const field = document.getElementById(fieldId);
-                if (field && !field.value.trim()) {
-                    field.classList.add('error');
-                    isValid = false;
-                } else if (field) {
-                    field.classList.remove('error');
-                }
-            });
-
-            // Email validation
-            const email = document.getElementById('patientEmail');
-            if (email && email.value &&
-                !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
-                email.classList.add('error');
-                isValid = false;
-            }
-
-            // Phone validation (10 digits)
-            const phone = document.getElementById('patientPhone');
-            if (phone && phone.value &&
-                !/^[0-9]{10}$/.test(phone.value)) {
-                phone.classList.add('error');
-                isValid = false;
-            }
-
-            // Date validation (not in past)
-            const dateField = document.getElementById('appointmentDate');
-            if (dateField && dateField.value) {
-                const selectedDate = new Date(dateField.value);
-                const today = new Date();
-                today.setHours(0,0,0,0);
-                if (selectedDate < today) {
-                    dateField.classList.add('error');
-                    isValid = false;
-                }
-            }
-
-            if (!isValid) {
-                e.preventDefault();
-                // Scroll to first error
-                document.querySelector('.error')?.scrollIntoView({
-                    behavior: 'smooth', block: 'center'
-                });
-            } else {
-                // Show loading
-                const btn = document.getElementById('submitBtn');
-                btn.classList.add('submitting');
-                btn.disabled = true;
-            }
+    // Phone - digits only
+    document.getElementById('patientPhone')
+        ?.addEventListener('keypress', function(e) {
+            if (!/[0-9]/.test(e.key)) e.preventDefault();
         });
 
-    // Real-time validation feedback
-    document.querySelectorAll('.form-control').forEach(input => {
-        input.addEventListener('blur', function() {
+    // Real-time validation
+    document.querySelectorAll('.form-control').forEach(el => {
+        el.addEventListener('blur', function() {
             if (this.value.trim()) {
                 this.classList.remove('error');
-                this.style.borderColor = '#48bb78';
-            } else if (this.required || this.closest('.form-group')
-                .querySelector('.required')) {
-                this.classList.add('error');
+                this.classList.add('valid');
             }
         });
-
-        input.addEventListener('input', function() {
+        el.addEventListener('input', function() {
             if (this.value.trim()) {
                 this.classList.remove('error');
             }
         });
     });
-
-    // Set minimum date to today
-    const dateInput = document.getElementById('appointmentDate');
-    if (dateInput) {
-        const today = new Date().toISOString().split('T')[0];
-        dateInput.min = today;
-    }
-
-    // Phone number - only allow digits
-    const phoneInput = document.getElementById('patientPhone');
-    if (phoneInput) {
-        phoneInput.addEventListener('keypress', function(e) {
-            if (!/[0-9]/.test(e.key)) {
-                e.preventDefault();
-            }
-        });
-    }
-
-    function filterDoctors() {
-        // Can be enhanced with AJAX to fetch doctors by specialization
-        console.log('Filtering doctors...');
-    }
-
-    function loadTimeSlots() {
-        // Can be enhanced to show available time slots for selected date
-        console.log('Loading time slots...');
-    }
 </script>
 
 </body>

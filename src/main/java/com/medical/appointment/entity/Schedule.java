@@ -5,6 +5,7 @@ import jakarta.validation.constraints.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+// ✅ Both annotations required
 @Entity
 @Table(name = "schedules")
 public class Schedule {
@@ -17,7 +18,7 @@ public class Schedule {
     @Column(name = "doctor_name", nullable = false)
     private String doctorName;
 
-    @NotNull(message = "Available date is required")
+    @NotNull(message = "Date is required")
     @Column(name = "available_date", nullable = false)
     private LocalDate availableDate;
 
@@ -29,13 +30,16 @@ public class Schedule {
     @Column(name = "end_time")
     private LocalTime endTime;
 
-    @Min(value = 1, message = "Max patients must be at least 1")
+    @Min(value = 1, message = "Min 1 patient")
     @Column(name = "max_patients")
     private int maxPatients;
 
     @Column(name = "current_patients")
     private int currentPatients;
 
+    // ✅ IMPORTANT: field name is "isAvailable"
+    // Getter must be "isAvailable()" - Spring uses this for
+    // findByIsAvailableTrue() query method
     @Column(name = "is_available")
     private boolean isAvailable;
 
@@ -92,16 +96,16 @@ public class Schedule {
         }
     }
 
-    // ✅ OOP: POLYMORPHISM - toString
+    // ✅ OOP: POLYMORPHISM
     @Override
     public String toString() {
         return "Schedule{" +
-                "id="             + id              +
-                ", doctorName='"  + doctorName      + '\'' +
-                ", date="         + availableDate   +
-                ", slots="        + currentPatients +
-                "/"               + maxPatients     +
-                ", available="    + isAvailable     +
+                "id="           + id              +
+                ", doctor='"    + doctorName      + '\'' +
+                ", date="       + availableDate   +
+                ", slots="      + currentPatients +
+                "/"             + maxPatients     +
+                ", available="  + isAvailable     +
                 '}';
     }
 
@@ -110,42 +114,33 @@ public class Schedule {
     public void setId(Long id) { this.id = id; }
 
     public String getDoctorName() { return doctorName; }
-    public void setDoctorName(String doctorName) {
-        this.doctorName = doctorName;
-    }
+    public void setDoctorName(String n) { this.doctorName = n; }
 
     public LocalDate getAvailableDate() { return availableDate; }
-    public void setAvailableDate(LocalDate availableDate) {
-        this.availableDate = availableDate;
+    public void setAvailableDate(LocalDate d) {
+        this.availableDate = d;
     }
 
     public LocalTime getStartTime() { return startTime; }
-    public void setStartTime(LocalTime startTime) {
-        this.startTime = startTime;
-    }
+    public void setStartTime(LocalTime t) { this.startTime = t; }
 
     public LocalTime getEndTime() { return endTime; }
-    public void setEndTime(LocalTime endTime) {
-        this.endTime = endTime;
-    }
+    public void setEndTime(LocalTime t) { this.endTime = t; }
 
     public int getMaxPatients() { return maxPatients; }
-    public void setMaxPatients(int maxPatients) {
-        this.maxPatients = maxPatients;
-    }
+    public void setMaxPatients(int n) { this.maxPatients = n; }
 
     public int getCurrentPatients() { return currentPatients; }
-    public void setCurrentPatients(int currentPatients) {
-        this.currentPatients = currentPatients;
+    public void setCurrentPatients(int n) {
+        this.currentPatients = n;
     }
 
+    // ✅ IMPORTANT: boolean getter is "isAvailable" not "getIsAvailable"
     public boolean isAvailable() { return isAvailable; }
-    public void setAvailable(boolean available) {
-        isAvailable = available;
-    }
+    public void setAvailable(boolean a) { this.isAvailable = a; }
 
     public String getSpecialization() { return specialization; }
-    public void setSpecialization(String specialization) {
-        this.specialization = specialization;
+    public void setSpecialization(String s) {
+        this.specialization = s;
     }
 }

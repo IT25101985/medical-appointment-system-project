@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.List;
 
+// ✅ @Repository annotation is important
 @Repository
 public interface ScheduleRepository
         extends JpaRepository<Schedule, Long> {
@@ -17,6 +18,9 @@ public interface ScheduleRepository
 
     List<Schedule> findByAvailableDate(LocalDate date);
 
+    // ✅ IMPORTANT: method name must match field name exactly
+    // Field in Schedule.java is "isAvailable"
+    // So method is findByIsAvailableTrue()
     List<Schedule> findByIsAvailableTrue();
 
     List<Schedule> findBySpecialization(String specialization);

@@ -1,0 +1,143 @@
+Index: src/main/java/com/medical/entity/User.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.medical.entity;\r\n\r\nimport jakarta.persistence.*;\r\n\r\n@Entity\r\n@Table(name = \"users\")\r\n@Inheritance(strategy = InheritanceType.SINGLE_TABLE)\r\n@DiscriminatorColumn(name = \"user_type\")\r\npublic class User {\r\n    @Id\r\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\r\n    private Long id;\r\n    \r\n    private String username;\r\n    private String password;\r\n    private String fullName;\r\n    private String role; // ROLE_ADMIN, ROLE_DOCTOR, ROLE_PATIENT\r\n    private String email;\r\n    private String phoneNo;\r\n    private String address;\r\n    @Column(columnDefinition = \"LONGTEXT\")\r\n    private String profileImage;\r\n\r\n    // Default constructor\r\n    public User() {}\r\n\r\n    // Simple constructor\r\n    public User(String username, String password, String fullName) {\r\n        this.username = username;\r\n        this.password = password;\r\n        this.fullName = fullName;\r\n    }\r\n\r\n    // Getters and Setters (Encapsulation)\r\n    public Long getId() { return id; }\r\n    public void setId(Long id) { this.id = id; }\r\n    \r\n    public String getUsername() { return username; }\r\n    public void setUsername(String username) { this.username = username; }\r\n    \r\n    public String getPassword() { return password; }\r\n    public void setPassword(String password) { this.password = password; }\r\n    \r\n    public String getFullName() { return fullName; }\r\n    public void setFullName(String fullName) { this.fullName = fullName; }\r\n    \r\n    public String getRole() { return role; }\r\n    public void setRole(String role) { this.role = role; }\r\n\r\n    public String getEmail() { return email; }\r\n    public void setEmail(String email) { this.email = email; }\r\n\r\n    public String getPhoneNo() { return phoneNo; }\r\n    public void setPhoneNo(String phoneNo) { this.phoneNo = phoneNo; }\r\n\r\n    public String getAddress() { return address; }\r\n    public void setAddress(String address) { this.address = address; }\r\n\r\n    public String getProfileImage() { return profileImage; }\r\n    public void setProfileImage(String profileImage) { this.profileImage = profileImage; }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/medical/entity/User.java b/src/main/java/com/medical/entity/User.java
+--- a/src/main/java/com/medical/entity/User.java	(revision c07a5c6ec8a8d12d993a5bcd01a2de5bc40d3f80)
++++ b/src/main/java/com/medical/entity/User.java	(date 1778139837436)
+@@ -10,7 +10,7 @@
+     @Id
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
+     private Long id;
+-    
++
+     private String username;
+     private String password;
+     private String fullName;
+@@ -34,16 +34,16 @@
+     // Getters and Setters (Encapsulation)
+     public Long getId() { return id; }
+     public void setId(Long id) { this.id = id; }
+-    
++
+     public String getUsername() { return username; }
+     public void setUsername(String username) { this.username = username; }
+-    
++
+     public String getPassword() { return password; }
+     public void setPassword(String password) { this.password = password; }
+-    
++
+     public String getFullName() { return fullName; }
+     public void setFullName(String fullName) { this.fullName = fullName; }
+-    
++
+     public String getRole() { return role; }
+     public void setRole(String role) { this.role = role; }
+ 
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"a8ef14fd-5384-498a-8c34-ffbf826f6aa1\" name=\"Changes\" comment=\"\">\r\n      <change afterPath=\"$PROJECT_DIR$/../../Medical-Appointment-System-Project/.gitattributes\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/../../Medical-Appointment-System-Project/.gitignore\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/../../Medical-Appointment-System-Project/.mvn/wrapper/maven-wrapper.properties\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/../../Medical-Appointment-System-Project/mvnw\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/../../Medical-Appointment-System-Project/mvnw.cmd\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/../../Medical-Appointment-System-Project/pom.xml\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/../../Medical-Appointment-System-Project/src/main/java/com/medical/medicalappointmentsystemproject/MedicalAppointmentSystemProjectApplication.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/../../Medical-Appointment-System-Project/src/main/resources/application.properties\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/../../Medical-Appointment-System-Project/src/test/java/com/medical/medicalappointmentsystemproject/MedicalAppointmentSystemProjectApplicationTests.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"dev\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n    <option name=\"ROOT_SYNC\" value=\"DONT_SYNC\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;IT25101985&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/IT25101985/medical-appointment-system-project.git&quot;,\r\n    &quot;accountId&quot;: &quot;8294d8c8-39de-452e-8d5f-52b253f9a0b4&quot;\r\n  }\r\n}</component>\r\n  <component name=\"MavenImportPreferences\">\r\n    <option name=\"generalSettings\">\r\n      <MavenGeneralSettings>\r\n        <option name=\"mavenHomeTypeForPersistence\" value=\"WRAPPER\" />\r\n      </MavenGeneralSettings>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 1\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"3CtcWSQluYdZKCIjn4DLvErY2Ww\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"ModuleVcsDetector.initialDetectionPerformed\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"Spring Boot.MedicalAppointmentApplication.executor\": \"Run\",\r\n    \"git-widget-placeholder\": \"dev\",\r\n    \"kotlin-language-version-configured\": \"true\",\r\n    \"last_opened_file_path\": \"D:/medical-appointment-system-project/git hub/medical-appointment-system-project/pom.xml\"\r\n  }\r\n}]]></component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.31033.145\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"a8ef14fd-5384-498a-8c34-ffbf826f6aa1\" name=\"Changes\" comment=\"\" />\r\n      <created>1777967443385</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1777967443385</updated>\r\n    </task>\r\n    <servers />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision c07a5c6ec8a8d12d993a5bcd01a2de5bc40d3f80)
++++ b/.idea/workspace.xml	(date 1778139716589)
+@@ -5,15 +5,7 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="">
+-      <change afterPath="$PROJECT_DIR$/../../Medical-Appointment-System-Project/.gitattributes" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../../Medical-Appointment-System-Project/.gitignore" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../../Medical-Appointment-System-Project/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../../Medical-Appointment-System-Project/mvnw" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../../Medical-Appointment-System-Project/mvnw.cmd" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../../Medical-Appointment-System-Project/pom.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../../Medical-Appointment-System-Project/src/main/java/com/medical/medicalappointmentsystemproject/MedicalAppointmentSystemProjectApplication.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../../Medical-Appointment-System-Project/src/main/resources/application.properties" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../../Medical-Appointment-System-Project/src/test/java/com/medical/medicalappointmentsystemproject/MedicalAppointmentSystemProjectApplicationTests.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/medicalappointmentsystemproject/MedicalAppointmentSystemProjectApplication.java" beforeDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -23,7 +15,7 @@
+   <component name="Git.Settings">
+     <option name="RECENT_BRANCH_BY_REPOSITORY">
+       <map>
+-        <entry key="$PROJECT_DIR$" value="dev" />
++        <entry key="$PROJECT_DIR$" value="Doctor-Management" />
+       </map>
+     </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+@@ -56,16 +48,37 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "ModuleVcsDetector.initialDetectionPerformed": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "Spring Boot.MedicalAppointmentApplication.executor": "Run",
+-    "git-widget-placeholder": "dev",
+-    "kotlin-language-version-configured": "true",
+-    "last_opened_file_path": "D:/medical-appointment-system-project/git hub/medical-appointment-system-project/pom.xml"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;Spring Boot.MedicalAppointmentApplication.executor&quot;: &quot;Run&quot;,
++    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
++    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
++    &quot;last_opened_file_path&quot;: &quot;D:/medical-appointment-system-project/git hub/medical-appointment-system-project/pom.xml&quot;
+   }
+-}]]></component>
++}</component>
++  <component name="RunManager">
++    <configuration name="MedicalAppointmentApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
++      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UnknownPolicyInFreeMode" />
++      <module name="medical-appointment-system" />
++      <option name="SPRING_BOOT_MAIN_CLASS" value="com.medical.MedicalAppointmentApplication" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="com.medical.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <recent_temporary>
++      <list>
++        <item itemvalue="Spring Boot.MedicalAppointmentApplication" />
++      </list>
++    </recent_temporary>
++  </component>
+   <component name="SharedIndexes">
+     <attachedChunks>
+       <set>
+Index: src/main/java/com/medical/medicalappointmentsystemproject/MedicalAppointmentSystemProjectApplication.java
+===================================================================
+diff --git a/src/main/java/com/medical/medicalappointmentsystemproject/MedicalAppointmentSystemProjectApplication.java b/src/main/java/com/medical/medicalappointmentsystemproject/MedicalAppointmentSystemProjectApplication.java
+deleted file mode 100644
+--- a/src/main/java/com/medical/medicalappointmentsystemproject/MedicalAppointmentSystemProjectApplication.java	(revision c07a5c6ec8a8d12d993a5bcd01a2de5bc40d3f80)
++++ /dev/null	(revision c07a5c6ec8a8d12d993a5bcd01a2de5bc40d3f80)
+@@ -1,13 +0,0 @@
+-package com.medical.medicalappointmentsystemproject;
+-
+-import org.springframework.boot.SpringApplication;
+-import org.springframework.boot.autoconfigure.SpringBootApplication;
+-
+-@SpringBootApplication
+-public class MedicalAppointmentSystemProjectApplication {
+-
+-    public static void main(String[] args) {
+-        SpringApplication.run(MedicalAppointmentSystemProjectApplication.class, args);
+-    }
+-
+-}

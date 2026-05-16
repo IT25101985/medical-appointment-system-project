@@ -30,43 +30,46 @@ public class DoctorRestController {
     @GetMapping("/api/doctors/{id}/slots")
     public List<String> getAvailableSlots(@PathVariable Long id, @RequestParam String date) {
         LocalDate localDate = LocalDate.parse(date);
+
         Optional<Doctor> doctorOpt = doctorService.getDoctorById(id);
-        
+
         List<String> availableSlots = new ArrayList<>();
+
         if (!doctorOpt.isPresent()) {
             return availableSlots;
         }
-        
+
         Doctor doctor = doctorOpt.get();
-        
+
         LocalDateTime startOfDay = localDate.atStartOfDay();
         LocalDateTime endOfDay = localDate.atTime(LocalTime.MAX);
-        
-        List<Appointment> existingAppointments = appointmentRepository.findByDoctorAndAppointmentDateBetween(doctor, startOfDay, endOfDay);
-        
+
+        List<Appointment> existingAppointments =
+                appointmentRepository.findByDoctorAndAppointmentDateBetween(
+                        doctor, startOfDay, endOfDay);
+
         // Generate slots from 09:00 to 17:00, every 1 hour
         for (int hour = 9; hour < 17; hour++) {
             LocalDateTime slotTime = localDate.atTime(hour, 0);
-            
-            // Check if this specific time is already booked by another patient
+
             boolean isBooked = false;
+
             for (Appointment app : existingAppointments) {
-                // If the times match AND the appointment is NOT cancelled
                 if (app.getAppointmentDate().equals(slotTime)) {
-                    if (!app.getStatus().equals("CANCELLED")) {
+                    if (!"CANCELLED".equals(app.getStatus())) {
                         isBooked = true;
-                        break; // Stop checking further appointments
+                        break;
                     }
                 }
             }
-            
+
             if (!isBooked) {
-                // Add to our available list. 
-                // We format it standardly: yyyy-MM-dd'T'HH:mm
-                availableSlots.add(slotTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm")));
+                availableSlots.add(
+                        slotTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"))
+                );
             }
         }
-        
+
         return availableSlots;
     }
 }

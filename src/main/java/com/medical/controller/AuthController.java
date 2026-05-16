@@ -1,6 +1,5 @@
 package com.medical.controller;
 
-import com.medical.entity.User;
 import com.medical.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,14 +34,18 @@ public class AuthController {
 
     @GetMapping("/register")
     public String registerForm(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new Patient());
         return "register";
     }
 
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute("user") User user) {
-        user.setRole("ROLE_PATIENT"); // Default role
+    public String registerUser(@ModelAttribute("user") Patient user) {
+        // Log to console for debugging
+        System.out.println("Registering user: " + user.getUsername());
+        
+        user.setRole("ROLE_PATIENT"); // Default role for portal registration
         userService.saveUser(user);
+        
         return "redirect:/login?registered";
     }
     

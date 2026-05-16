@@ -3,20 +3,34 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
+
   <component name="ChangeListManager">
-    <list default="true" id="2605545f-0ebe-40d7-a92e-1abe1be52f92" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/entity/MedicalRecord.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/service/PDFGenerator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/service/PdfService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/Patient/history.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/doctor/records.html" beforeDir="false" />
+    <list default="true" id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/medical/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/controller/DoctorRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/controller/DoctorRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/controller/PatientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/controller/PatientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/repository/PatientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/repository/PatientRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/service/AppointmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/service/AppointmentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/service/DoctorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/service/DoctorService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/service/PatientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/service/PatientService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/service/UserService.java" afterDir="false" />
     </list>
+
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
@@ -25,18 +39,25 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
     &quot;state&quot;: &quot;OPEN&quot;,
     &quot;assignee&quot;: &quot;IT25101985&quot;
   }
 }</component>
+
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/IT25101985/medical-appointment-system-project.git&quot;,
     &quot;accountId&quot;: &quot;8294d8c8-39de-452e-8d5f-52b253f9a0b4&quot;
   }
 }</component>
+
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -44,46 +65,54 @@
       </MavenGeneralSettings>
     </option>
   </component>
+
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 6
-}</component>
-  <component name="ProjectId" id="3CU1rGhLh6X08QI7rwC7lS2uPxp" />
+      &quot;associatedIndex&quot;: 1
+    }</component>
+
+  <component name="ProjectId" id="3CtcWSQluYdZKCIjn4DLvErY2Ww" />
+
+  <component name="ProjectRootManager" version="2" project-jdk-name="24" project-jdk-type="JavaSDK" />
+
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "Spring Boot.MedicalAppointmentApplication.executor": "Run",
-    "git-widget-placeholder": "dev",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/final oop/pom.xml",
-    "project.structure.last.edited": "SDKs",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settings.ide.settings.notifications"
+
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Spring Boot.MedicalAppointmentApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Admin-&amp;&amp;-Authentication&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/medical-appointment-system-project/git hub/medical-appointment-system-project/pom.xml&quot;
   }
-}]]></component>
+}</component>
+
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.medical" />
+    </key>
+  </component>
+
   <component name="RunManager">
-    <configuration name="MedicalAppointmentApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UnknownPolicyInFreeMode" />
+    <configuration name="MedicalAppointmentApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true">
       <module name="medical-appointment-system" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.medical.MedicalAppointmentApplication" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.medical.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.MedicalAppointmentApplication" />
+      </list>
+    </recent_temporary>
   </component>
+
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -91,13 +120,14 @@
       </set>
     </attachedChunks>
   </component>
+
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="2605545f-0ebe-40d7-a92e-1abe1be52f92" name="Changes" comment="" />
-      <created>1776425531820</created>
+      <changelist id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="" />
+      <created>1777440058478</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1776425531820</updated>
+      <updated>1777967443385</updated>
     </task>
     <servers />
   </component>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" class="transition-colors duration-300">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthCarePlus - User Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: 'class', }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-size: 24px 24px; }
+        body { background-color: #f8fafc; background-image: radial-gradient(#cbd5e1 0.5px, transparent 0.5px); }
+        .dark body { background-color: #020617; background-image: radial-gradient(#1e293b 0.5px, transparent 0.5px); }
+        .glass-panel { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.5); }
+        .dark .glass-panel { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.05); }
+        * { transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease; }
+    </style>
+</head>
+<body class="p-4 md:p-8 min-h-screen">
+
+<nav class="max-w-7xl mx-auto flex justify-between items-center mb-10 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
+    <div class="flex items-center gap-3">
+        <div class="bg-blue-600 p-2 rounded-lg text-white">
+            <i class="fa-solid fa-users text-xl"></i>
+        </div>
+        <h1 class="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">HealthCare<span class="text-blue-600">Plus</span> Users</h1>
+    </div>
+    <div class="flex items-center gap-2 md:gap-4">
+        <a href="/admin/dashboard" class="flex items-center gap-2 text-sm font-semibold text-slate-600 dark:text-slate-400 hover:text-blue-500 transition">
+            <i class="fa-solid fa-arrow-left"></i> Dashboard
+        </a>
+    </div>
+</nav>
+
+<main class="max-w-7xl mx-auto">
+    <div class="glass-panel rounded-3xl shadow-xl overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-slate-100/50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 text-xs uppercase tracking-wider">
+                        <th class="p-4 font-semibold">ID</th>
+                        <th class="p-4 font-semibold">Name</th>
+                        <th class="p-4 font-semibold">Username</th>
+                        <th class="p-4 font-semibold">Role</th>
+                        <th class="p-4 font-semibold">Phone No</th>
+                        <th class="p-4 font-semibold text-right">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+                    <tr th:each="user : ${users}" class="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition">
+                        <td class="p-4 text-sm text-slate-500 dark:text-slate-400 font-mono">#<span th:text="${user.id}"></span></td>
+                        <td class="p-4 text-sm font-bold text-slate-900 dark:text-white" th:text="${user.fullName}">Name</td>
+                        <td class="p-4 text-sm text-slate-600 dark:text-slate-300" th:text="${user.username}">user</td>
+                        <td class="p-4">
+                            <span th:text="${user.role}" 
+                                  th:classappend="${user.role == 'ROLE_ADMIN' ? 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400' : (user.role == 'ROLE_DOCTOR' ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400' : 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400')}"
+                                  class="px-2.5 py-1 rounded-md text-[11px] font-bold uppercase tracking-wide">
+                            </span>
+                        </td>
+                        <td class="p-4 text-sm text-slate-600 dark:text-slate-300" th:text="${user.phoneNo != null ? user.phoneNo : 'N/A'}">Phone</td>
+                        <td class="p-4 text-right">
+                            <form th:action="@{/admin/users/{id}/delete(id=${user.id})}" method="post" onsubmit="return confirm('Are you sure you want to ban/delete this user? All their records will be deleted.');" class="inline">
+                                <button type="submit" class="px-3 py-1.5 bg-red-50 hover:bg-red-500 hover:text-white text-red-600 dark:bg-red-900/20 dark:text-red-400 dark:hover:bg-red-500 dark:hover:text-white rounded-lg text-xs font-bold transition-colors cursor-pointer">
+                                    <i class="fa-solid fa-ban mr-1"></i> Ban / Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(users)}">
+                        <td colspan="6" class="p-8 text-center text-slate-500">No users found.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+</body>
+</html>

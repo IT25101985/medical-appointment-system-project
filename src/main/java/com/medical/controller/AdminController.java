@@ -1,9 +1,6 @@
 package com.medical.controller;
 
-import com.medical.entity.Doctor;
 import com.medical.entity.User;
-import com.medical.service.AppointmentService;
-import com.medical.service.DoctorService;
 import com.medical.service.UserService;
 import com.medical.service.MedicalRecordService;
 import com.medical.service.FeedbackService;
@@ -16,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
-import com.medical.entity.Appointment;
+
 import java.util.Optional;
 import java.util.List;
 

@@ -63,6 +63,9 @@ public class AdminController {
     
     @Autowired
     private com.medical.service.NotificationService notificationService;
+<<<<<<< HEAD
+>>>>>>> e0342e957d9753de43f103b06bc45f0bea3545cf
+=======
 >>>>>>> e0342e957d9753de43f103b06bc45f0bea3545cf
 
     @GetMapping("/dashboard")
@@ -280,6 +283,9 @@ public class AdminController {
                     foundAppointment.getContactEmail(), 
                     foundAppointment.getPatient().getFullName(), 
                     foundAppointment.getAppointmentDate().toString()
+<<<<<<< HEAD
+>>>>>>> e0342e957d9753de43f103b06bc45f0bea3545cf
+=======
 >>>>>>> e0342e957d9753de43f103b06bc45f0bea3545cf
                 );
             } catch (Exception e) {

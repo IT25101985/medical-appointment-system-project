@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment | MediCare+</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link th:href="@{/css/appointment.css}" rel="stylesheet">
+</head>
+
+<body class="bg-animated">
+
+<!-- Particles -->
+<div class="particles-container" id="particlesContainer"></div>
+
+<!-- Glow Orbs -->
+<div class="glow-orb glow-orb-blue"></div>
+<div class="glow-orb glow-orb-purple"></div>
+<div class="glow-orb glow-orb-gold"></div>
+
+<!-- Loading -->
+<div class="loading-screen" id="loadingScreen">
+    <div class="loader-ring"></div>
+    <div class="loader-text" id="loaderText">Booking your appointment...</div>
+</div>
+
+<!-- Navbar -->
+<div class="container-fluid px-4 pt-4">
+    <nav class="navbar-glass d-flex justify-content-between align-items-center mb-4">
+        <a href="/" class="navbar-brand-custom">
+            <div class="brand-logo"><i class="fas fa-heartbeat"></i></div>
+            Medi<span class="brand-accent">Care+</span>
+        </a>
+        <div class="nav-pills-custom">
+            <a href="/appointments" class="nav-pill">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+            </a>
+            <a href="/appointments/book" class="nav-pill active-pill">
+                <i class="fas fa-calendar-plus"></i> Book
+            </a>
+            <a href="/appointments/all" class="nav-pill">
+                <i class="fas fa-list"></i> All
+            </a>
+            <a href="/appointments/schedules" class="nav-pill">
+                <i class="fas fa-clock"></i> Schedules
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Card -->
+    <div class="card-glass mx-auto mb-5" style="max-width: 950px;">
+
+        <!-- Header -->
+        <div class="card-header-grad">
+            <div class="header-icon-circle">
+                <i class="fas fa-calendar-plus"></i>
+            </div>
+            <h2>Book an Appointment</h2>
+            <p>Schedule your visit with our expert medical professionals</p>
+        </div>
+
+        <!-- Steps Bar -->
+        <div class="steps-bar">
+            <div class="step-node step-active" id="stepNode1">
+                <div class="step-circle">1</div>
+                <div class="step-label">Patient</div>
+            </div>
+            <div class="step-line" id="stepLine1"><div class="fill"></div></div>
+            <div class="step-node" id="stepNode2">
+                <div class="step-circle">2</div>
+                <div class="step-label">Doctor</div>
+            </div>
+            <div class="step-line" id="stepLine2"><div class="fill"></div></div>
+            <div class="step-node" id="stepNode3">
+                <div class="step-circle">3</div>
+                <div class="step-label">Schedule</div>
+            </div>
+            <div class="step-line" id="stepLine3"><div class="fill"></div></div>
+            <div class="step-node" id="stepNode4">
+                <div class="step-circle">4</div>
+                <div class="step-label">Confirm</div>
+            </div>
+        </div>
+
+        <!-- Form -->
+        <div class="form-body">
+
+            <!-- Alerts -->
+            <div th:if="${successMessage}" class="alert-custom alert-ok">
+                <i class="fas fa-check-circle fa-lg"></i>
+                <span th:text="${successMessage}"></span>
+            </div>
+            <div th:if="${errorMessage}" class="alert-custom alert-err">
+                <i class="fas fa-exclamation-circle fa-lg"></i>
+                <span th:text="${errorMessage}"></span>
+            </div>
+
+            <form th:action="@{/appointments/book}"
+                  th:object="${appointment}"
+                  method="post"
+                  id="bookingForm"
+                  novalidate>
+
+                <!-- ===== STEP 1: PATIENT INFO ===== -->
+                <div id="step1" class="form-step">
+
+                    <div class="sec-title">
+                        <div class="sec-icon"><i class="fas fa-user"></i></div>
+                        <h5>Patient Information</h5>
+                    </div>
+
+                    <div class="row g-3">
+
+                        <!-- Name -->
+                        <div class="col-md-6">
+                            <div class="field-group">
+                                <label class="field-label">
+                                    <i class="fas fa-user"></i>
+                                    Full Name <span class="req">*</span>
+                                </label>
+                                <div class="input-field-wrap">
+                                    <div class="input-prefix">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <input type="text"
+                                           th:field="*{patientName}"
+                                           class="field-input"
+                                           th:classappend="${#fields.hasErrors('patientName')} ? 'input-err'"
+                                           id="patientName"
+                                           placeholder="Enter your full name">
+                                </div>
+                                <div class="err-msg" th:if="${#fields.hasErrors('patientName')}">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <span th:errors="*{patientName}"></span>
+                                </div>
+                                <div class="hint-text">
+                                    <i class="fas fa-info-circle"></i> Minimum 2 characters
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="col-md-6">
+                            <div class="field-group">
+                                <label class="field-label">
+                                    <i class="fas fa-envelope"></i>
+                                    Email Address <span class="req">*</span>
+                                </label>
+                                <div class="input-field-wrap">
+                                    <div class="input-prefix">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <input type="email"
+                                           th:field="*{patientEmail}"
+                                           class="field-input"
+                                           th:classappend="${#fields.hasErrors('patientEmail')} ? 'input-err'"
+                                           id="patientEmail"
+                                           placeholder="your@email.com">
+                                </div>
+                                <div class="err-msg" th:if="${#fields.hasErrors('patientEmail')}">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <span th:errors="*{patientEmail}"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Phone -->
+                        <div class="col-md-6">
+                            <div class="field-group">
+                                <label class="field-label">
+                                    <i class="fas fa-phone"></i>
+                                    Phone Number <span class="req">*</span>
+                                </label>
+                                <div class="input-field-wrap">
+                                    <div class="input-prefix">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <input type="tel"
+                                           th:field="*{patientPhone}"
+                                           class="field-input"
+                                           th:classappend="${#fields.hasErrors('patientPhone')} ? 'input-err'"
+                                           id="patientPhone"
+                                           placeholder="0771234567"
+                                           maxlength="10">
+                                </div>
+                                <div class="err-msg" th:if="${#fields.hasErrors('patientPhone')}">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <span th:errors="*{patientPhone}"></span>
+                                </div>
+                                <div class="hint-text">
+                                    <i class="fas fa-info-circle"></i> 10 digits only
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Type Hidden -->
+                        <div class="col-md-6">
+                            <div class="field-group">
+                                <label class="field-label">
+                                    <i class="fas fa-laptop-medical"></i>
+                                    Appointment Type
+                                </label>
+                                <select th:field="*{appointmentType}"
+                                        class="field-select"
+                                        id="appointmentType">
+                                    <option value="IN_PERSON">🏥 In-Person Visit</option>
+                                    <option value="ONLINE">💻 Online Consultation</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Type Cards -->
+                    <div class="type-card-grid mt-2">
+                        <div class="type-card type-selected"
+                             onclick="pickType('IN_PERSON', this)">
+                            <input type="radio" name="typeRadio"
+                                   value="IN_PERSON" checked>
+                            <div class="type-check">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <span class="type-emoji">🏥</span>
+                            <div class="type-name">In-Person Visit</div>
+                            <div class="type-desc">Visit the clinic directly</div>
+                        </div>
+                        <div class="type-card"
+                             onclick="pickType('ONLINE', this)">
+                            <input type="radio" name="typeRadio" value="ONLINE">
+                            <div class="type-check">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <span class="type-emoji">💻</span>
+                            <div class="type-name">Online Consultation</div>
+                            <div class="type-desc">Video call from home</div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end mt-4">
+                        <button type="button"
+                                class="btn-primary-grad"
+                                onclick="goNext(1)">
+                            Next: Select Doctor
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ===== STEP 2: DOCTOR ===== -->
+                <div id="step2" class="form-step" style="display:none;">
+
+                    <div class="sec-title">
+                        <div class="sec-icon"><i class="fas fa-user-md"></i></div>
+                        <h5>Select Doctor & Specialization</h5>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="field-group">
+                                <label class="field-label">
+                                    <i class="fas fa-stethoscope"></i>
+                                    Specialization <span class="req">*</span>
+                                </label>
+                                <select th:field="*{specialization}"
+                                        class="field-select"
+                                        id="specSelect"
+                                        onchange="loadDoctors()">
+                                    <option value="">-- Select --</option>
+                                    <option value="General Medicine">General Medicine</option>
+                                    <option value="Cardiology">Cardiology</option>
+                                    <option value="Dermatology">Dermatology</option>
+                                    <option value="Pediatrics">Pediatrics</option>
+                                    <option value="Orthopedics">Orthopedics</option>
+                                    <option value="Neurology">Neurology</option>
+                                    <option value="Gynecology">Gynecology</option>
+                                    <option value="Ophthalmology">Ophthalmology</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="field-group">
+                                <label class="field-label">
+                                    <i class="fas fa-user-md"></i>
+                                    Doctor <span class="req">*</span>
+                                </label>
+                                <select th:field="*{doctorName}"
+                                        class="field-select"
+                                        id="docSelect">
+                                    <option value="">-- Select Doctor --</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-4">
+                        <button type="button" class="btn-ghost" onclick="goBack(2)">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                        <button type="button"
+                                class="btn-primary-grad"
+                                onclick="goNext(2)">
+                            Next: Date & Time
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ===== STEP 3: DATE & TIME ===== -->
+                <div id="step3" class="form-step" style="display:none;">
+
+                    <div class="sec-title">
+                        <div class="sec-icon"><i class="fas fa-calendar-alt"></i></div>
+                        <h5>Select Date & Time</h5>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="field-group">
+                                <label class="field-label">
+                                    <i class="fas fa-calendar"></i>
+                                    Appointment Date <span class="req">*</span>
+                                </label>
+                                <div class="input-field-wrap">
+                                    <div class="input-prefix">
+                                        <i class="fas fa-calendar"></i>
+                                    </div>
+                                    <input type="date"
+                                           th:field="*{appointmentDate}"
+                                           class="field-input"
+                                           id="dateInput">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="field-group">
+                                <label class="field-label">
+                                    <i class="fas fa-clock"></i>
+                                    Appointment Time <span class="req">*</span>
+                                </label>
+                                <div class="input-field-wrap">
+                                    <div class="input-prefix">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <input type="time"
+                                           th:field="*{appointmentTime}"
+                                           class="field-input"
+                                           id="timeInput">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Time Slots -->
+                    <div class="field-group mt-3">
+                        <label class="field-label">
+                            <i class="fas fa-th"></i>
+                            Quick Select Time Slot
+                        </label>
+                        <div class="slots-grid">
+                            <div class="time-slot-btn" onclick="pickSlot('08:00',this)">
+                                <span>08:00 AM</span>
+                            </div>
+                            <div class="time-slot-btn" onclick="pickSlot('08:30',this)">
+                                <span>08:30 AM</span>
+                            </div>
+                            <div class="time-slot-btn" onclick="pickSlot('09:00',this)">
+                                <span>09:00 AM</span>
+                            </div>
+                            <div class="time-slot-btn" onclick="pickSlot('09:30',this)">
+                                <span>09:30 AM</span>
+                            </div>
+                            <div class="time-slot-btn" onclick="pickSlot('10:00',this)">
+                                <span>10:00 AM</span>
+                            </div>
+                            <div class="time-slot-btn" onclick="pickSlot('10:30',this)">
+                                <span>10:30 AM</span>
+                            </div>
+                            <div class="time-slot-btn" onclick="pickSlot('11:00',this)">
+                                <span>11:00 AM</span>
+                            </div>
+                            <div class="time-slot-btn" onclick="pickSlot('11:30',this)">
+                                <span>11:30 AM</span>
+                            </div>
+                            <div class="time-slot-btn slot-booked">
+                                <span>12:00 PM</span>
+                            </div>
+                            <div class="time-slot-btn slot-booked">
+                                <span>12:30 PM</span>
+                            </div>
+                            <div class="time-slot-btn" onclick="pickSlot('13:00',this)">
+                                <span>01:00 PM</span>
+                            </div>
+                            <div class="time-slot-btn" onclick="pickSlot('13:30',this)">
+                                <span>01:30 PM</span>
+                            </div>
+                            <div class="time-slot-btn" onclick="pickSlot('14:00',this)">
+                                <span>02:00 PM</span>
+                            </div>
+                            <div class="time-slot-btn" onclick="pickSlot('14:30',this)">
+                                <span>02:30 PM</span>
+                            </div>
+                            <div class="time-slot-btn" onclick="pickSlot('15:00',this)">
+                                <span>03:00 PM</span>
+                            </div>
+                            <div class="time-slot-btn" onclick="pickSlot('15:30',this)">
+                                <span>03:30 PM</span>
+                            </div>
+                        </div>
+                        <div class="slots-legend">
+                            <div class="legend-item">
+                                <div class="legend-dot dot-available"></div>
+                                Available
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-dot dot-selected"></div>
+                                Selected
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-dot dot-booked"></div>
+                                Booked
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reason -->
+                    <div class="field-group mt-3">
+                        <label class="field-label">
+                            <i class="fas fa-comment-medical"></i>
+                            Reason for Visit <span class="req">*</span>
+                        </label>
+                        <textarea th:field="*{reason}"
+                                  class="field-textarea"
+                                  th:classappend="${#fields.hasErrors('reason')} ? 'input-err'"
+                                  id="reasonBox"
+                                  placeholder="Describe your symptoms or reason..."
+                                  rows="3"
+                                  oninput="countChars(this, 500)"></textarea>
+                        <div class="char-count" id="charCounter">0/500</div>
+                        <div class="err-msg" th:if="${#fields.hasErrors('reason')}">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <span th:errors="*{reason}"></span>
+                        </div>
+                    </div>
+
+                    <!-- Notes -->
+                    <div class="field-group mt-2">
+                        <label class="field-label">
+                            <i class="fas fa-sticky-note"></i>
+                            Additional Notes
+                            <span style="color:#aaa; font-weight:400;">(Optional)</span>
+                        </label>
+                        <textarea th:field="*{notes}"
+                                  class="field-textarea"
+                                  placeholder="Any extra info for the doctor..."
+                                  rows="2"></textarea>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-4">
+                        <button type="button" class="btn-ghost" onclick="goBack(3)">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                        <button type="button"
+                                class="btn-primary-grad"
+                                onclick="goNext(3)">
+                            Review Booking
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ===== STEP 4: CONFIRM ===== -->
+                <div id="step4" class="form-step" style="display:none;">
+
+                    <div class="sec-title">
+                        <div class="sec-icon">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+                        <h5>Review & Confirm</h5>
+                    </div>
+
+                    <div class="summary-glass">
+                        <h6>
+                            <i class="fas fa-calendar-check me-2"></i>
+                            Appointment Summary
+                        </h6>
+                        <div class="summary-line">
+                                <span class="s-lbl">
+                                    <i class="fas fa-user me-2"></i>Patient
+                                </span>
+                            <span class="s-val" id="sName">—</span>
+                        </div>
+                        <div class="summary-line">
+                                <span class="s-lbl">
+                                    <i class="fas fa-envelope me-2"></i>Email
+                                </span>
+                            <span class="s-val" id="sEmail">—</span>
+                        </div>
+                        <div class="summary-line">
+                                <span class="s-lbl">
+                                    <i class="fas fa-phone me-2"></i>Phone
+                                </span>
+                            <span class="s-val" id="sPhone">—</span>
+                        </div>
+                        <div class="summary-line">
+                                <span class="s-lbl">
+                                    <i class="fas fa-user-md me-2"></i>Doctor
+                                </span>
+                            <span class="s-val" id="sDoctor">—</span>
+                        </div>
+                        <div class="summary-line">
+                                <span class="s-lbl">
+                                    <i class="fas fa-stethoscope me-2"></i>Specialization
+                                </span>
+                            <span class="s-val" id="sSpec">—</span>
+                        </div>
+                        <div class="summary-line">
+                                <span class="s-lbl">
+                                    <i class="fas fa-calendar me-2"></i>Date
+                                </span>
+                            <span class="s-val" id="sDate">—</span>
+                        </div>
+                        <div class="summary-line">
+                                <span class="s-lbl">
+                                    <i class="fas fa-clock me-2"></i>Time
+                                </span>
+                            <span class="s-val" id="sTime">—</span>
+                        </div>
+                        <div class="summary-line">
+                                <span class="s-lbl">
+                                    <i class="fas fa-laptop-medical me-2"></i>Type
+                                </span>
+                            <span class="s-val" id="sType">—</span>
+                        </div>
+                        <div class="summary-line">
+                                <span class="s-lbl">
+                                    <i class="fas fa-info-circle me-2"></i>Status
+                                </span>
+                            <span class="s-val">
+                                    <span class="badge-pending">⏳ PENDING</span>
+                                </span>
+                        </div>
+                    </div>
+
+                    <div class="terms-box">
+                        <input type="checkbox" id="termsCheck">
+                        <label for="termsCheck">
+                            I agree to the
+                            <a href="#">Terms & Conditions</a>
+                            and confirm all information is accurate.
+                        </label>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-4">
+                        <button type="button" class="btn-ghost" onclick="goBack(4)">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                        <button type="submit" class="btn-success-grad">
+                            <i class="fas fa-calendar-check"></i>
+                            Confirm Booking
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/js/appointment.js}"></script>
+<script>
+    function goNext(s) { StepWizard.next(); }
+    function goBack(s) { StepWizard.prev(); }
+    function pickType(t, el) { TypeSelector.select(t, el); }
+    function pickSlot(t, el) { SlotPicker.select(t, el); }
+    function loadDoctors() { DoctorFilter.load(); }
+    function countChars(el, max) {
+        CharCounter.update(el, max, 'charCounter');
+    }
+</script>
+</body>
+</html>

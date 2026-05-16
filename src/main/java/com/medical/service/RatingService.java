@@ -1,6 +1,5 @@
 package com.medical.service;
 
-import com.medical.entity.Feedback;
 import org.springframework.stereotype.Service;
 
 @Service

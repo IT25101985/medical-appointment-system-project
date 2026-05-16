@@ -1,6 +1,5 @@
 package com.medical.service;
 
-import com.medical.repository.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

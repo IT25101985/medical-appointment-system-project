@@ -23,11 +23,11 @@ public class AppointmentService {
     public List<Appointment> getAppointmentsForDoctor(Doctor doctor) {
         return appointmentRepository.findByDoctor(doctor);
     }
-
+    
     public List<Appointment> getAllAppointments() {
         return appointmentRepository.findAll();
     }
-
+    
     public void deleteAppointment(Appointment appointment) {
         appointmentRepository.delete(appointment);
     }

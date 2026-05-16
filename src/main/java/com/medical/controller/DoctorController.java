@@ -1,5 +1,6 @@
 package com.medical.controller;
 
+import com.medical.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

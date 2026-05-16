@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinical Queue | My Appointments</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            background: #020617;
+            background-image:
+                radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.15) 0, transparent 40%),
+                radial-gradient(at 100% 0%, rgba(30, 58, 138, 0.2) 0, transparent 40%);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #f8fafc;
+        }
+        .premium-blur {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(14px) saturate(160%);
+            border: 1px solid rgba(30, 41, 59, 1);
+        }
+        .current-session {
+            border-left: 4px solid #10b981;
+            background: linear-gradient(to right, rgba(16, 185, 129, 0.1), transparent);
+        }
+        .action-btn {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        }
+        /* Modern Home Button */
+        .modern-home-btn {
+            position: fixed; top: 20px; right: 20px;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white; padding: 10px 24px; border-radius: 30px;
+            text-decoration: none; font-weight: 600; z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease; display: flex; align-items: center; gap: 8px;
+        }
+        .modern-home-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); color: white; }
+    </style>
+</head>
+<body class="p-4 md:p-10">
+<a href="/" class="modern-home-btn"><i class="fa-solid fa-house-chimney-medical"></i> Home</a>
+
+<div class="max-w-6xl mx-auto">
+
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-6 animate__animated animate__fadeInDown">
+        <div>
+            <div class="flex items-center gap-3 mb-2">
+                <a href="/doctor/dashboard" class="w-10 h-10 flex items-center justify-center rounded-xl bg-slate-900 border border-slate-800 text-white border border-slate-700 text-slate-300 hover:text-emerald-500 hover:border-blue-200 transition-all">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </a>
+                <h1 class="text-3xl font-extrabold tracking-tight text-white">Appointment Queue</h1>
+            </div>
+            <p class="text-slate-300 ml-12">Tracking <span class="font-bold text-emerald-500" th:text="${#lists.size(appointments)}">8</span> patients for today, April 18, 2026.</p>
+        </div>
+
+        <div class="flex gap-4 ml-12 md:ml-0">
+            <div class="bg-slate-900 border border-slate-800 text-white px-5 py-3 rounded-2xl border border-slate-100 shadow-sm">
+                <p class="text-[10px] font-bold text-slate-400 uppercase">Pending</p>
+                <p class="text-xl font-bold text-orange-500">03</p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 text-white px-5 py-3 rounded-2xl border border-slate-100 shadow-sm text-right">
+                <p class="text-[10px] font-bold text-slate-400 uppercase">Completed</p>
+                <p class="text-xl font-bold text-emerald-500">05</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex flex-wrap items-center justify-between gap-4 mb-6 animate__animated animate__fadeIn">
+        <div class="relative w-full md:w-96">
+            <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+            <input type="text" placeholder="Search patient by name or ID..."
+                   class="w-full pl-12 pr-4 py-3 rounded-2xl border border-slate-700 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all shadow-sm">
+        </div>
+        <div class="flex gap-2">
+            <button class="px-4 py-2 bg-slate-900 border border-slate-800 text-white border border-slate-700 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-800">Today</button>
+            <button class="px-4 py-2 bg-slate-900 border border-slate-800 text-white border border-slate-700 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-800"><i class="fa-solid fa-filter mr-2"></i>Filter</button>
+        </div>
+    </div>
+
+    <div class="premium-blur rounded-[2.5rem] overflow-hidden shadow-xl animate__animated animate__fadeInUp">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-separate border-spacing-0">
+                <thead>
+                <tr class="bg-slate-800/50">
+                    <th class="px-8 py-5 text-[11px] font-bold text-slate-400 uppercase tracking-widest">Time & Patient</th>
+                    <th class="px-8 py-5 text-[11px] font-bold text-slate-400 uppercase tracking-widest">Type / Purpose</th>
+                    <th class="px-8 py-5 text-[11px] font-bold text-slate-400 uppercase tracking-widest">Status</th>
+                    <th class="px-8 py-5 text-[11px] font-bold text-slate-400 uppercase tracking-widest text-right">Clinical Actions</th>
+                </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+
+                <tr class="current-session group transition-all">
+                    <td class="px-8 py-6">
+                        <div class="flex items-center gap-4">
+                            <div class="text-center min-w-[60px]">
+                                <p class="text-sm font-bold text-emerald-500">10:30</p>
+                                <p class="text-[10px] text-slate-400 font-bold uppercase">AM</p>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="h-11 w-11 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold shadow-lg shadow-blue-200">
+                                    JD
+                                </div>
+                                <div>
+                                    <p class="font-bold text-white">John Doe (Demo)</p>
+                                    <p class="text-xs text-slate-400">ID: #PT-8829</p>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-8 py-6">
+                        <div class="flex flex-col">
+                            <span class="text-sm font-semibold text-slate-700">General Checkup</span>
+                            <span class="text-xs text-slate-400">Follow-up for Hypertension</span>
+                        </div>
+                    </td>
+                    <td class="px-8 py-6">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 text-[10px] font-extrabold bg-blue-50 text-emerald-500 rounded-full uppercase border border-blue-100">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse"></span>
+                                In Queue
+                            </span>
+                    </td>
+                    <td class="px-8 py-6 text-right">
+                        <div class="flex justify-end gap-2">
+                            <a href="/doctor/consultations" class="action-btn px-4 py-2 bg-emerald-600 text-white text-xs font-bold rounded-xl hover:bg-blue-700 decoration-none inline-flex items-center">
+                                Start Session
+                            </a>
+                            <a href="/doctor/records" class="action-btn p-2 bg-slate-100 text-slate-300 rounded-xl hover:bg-slate-200 decoration-none inline-flex items-center">
+                                <i class="fa-solid fa-ellipsis-vertical px-1"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr th:each="app : ${appointments}" class="hover:bg-slate-800/50 transition-all">
+                    <td class="px-8 py-6">
+                        <div class="flex items-center gap-4">
+                            <div class="text-center min-w-[60px]">
+                                <p class="text-sm font-bold text-slate-300" th:text="${app.appointmentDate != null ? #temporals.format(app.appointmentDate, 'hh:mm a') : 'TBD'}">11:15 AM</p>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="h-11 w-11 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-300 font-bold">
+                                    SA
+                                </div>
+                                <div>
+                                    <p class="font-bold text-slate-700" th:text="${app.patient != null ? app.patient.fullName : 'Guest Patient'}">Sarah Adams</p>
+                                    <p class="text-xs text-slate-400" th:text="'ID: #PT-' + ${app.patient != null ? app.patient.id : '0000'}">ID: #PT-9012</p>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-8 py-6">
+                        <span class="text-sm font-medium text-slate-600">Consultation</span>
+                    </td>
+                    <td class="px-8 py-6">
+                        <span class="px-3 py-1 text-[10px] font-extrabold bg-slate-100 text-slate-300 rounded-full uppercase">Scheduled</span>
+                    </td>
+                    <td class="px-8 py-6 text-right">
+                        <a href="/doctor/records" class="text-slate-400 hover:text-emerald-500 text-xs font-bold transition-colors inline-block decoration-none">
+                            View Records <i class="fa-solid fa-arrow-right-long ml-1"></i>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div th:if="${#lists.isEmpty(appointments)}" class="p-24 text-center">
+                <div class="w-20 h-20 bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fa-solid fa-calendar-xmark text-2xl text-slate-300"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white">No appointments yet</h3>
+                <p class="text-slate-400 text-sm">Your schedule for today is currently empty.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-8 flex justify-center items-center gap-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+        <i class="fa-solid fa-shield-halved"></i> HIPAA Compliant & Secure Session
+    </div>
+</div>
+
+</body>
+</html>

@@ -13,7 +13,7 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
-
+    
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -21,11 +21,11 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
-
+    
     public Optional<User> findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
-
+    
     public User updateUserProfile(User currentUser, User updatedInfo) {
         currentUser.setFullName(updatedInfo.getFullName());
         currentUser.setAddress(updatedInfo.getAddress());
@@ -33,7 +33,7 @@ public class UserService {
         currentUser.setProfileImage(updatedInfo.getProfileImage());
         return userRepository.save(currentUser);
     }
-
+    
     public void deleteUser(User user) {
         userRepository.delete(user);
     }

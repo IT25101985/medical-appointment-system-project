@@ -6,20 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <processorPath>
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
-        </processorPath>
-        <module name="Medical-Appointment-System-Project" />
         <module name="medical-appointment-system" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="Medical-Appointment-System-Project" target="17" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="Medical-Appointment-System-Project" options="-parameters" />
       <module name="medical-appointment-system" options="-parameters" />
     </option>
   </component>

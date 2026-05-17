@@ -1,30 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-
   <component name="AnalysisUIOptions">
     <option name="SCOPE_TYPE" value="4" />
   </component>
-
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
-
   <component name="ChangeListManager">
-    <list default="true" id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1"
-          name="Changes"
-          comment="Merge branch 'main' into dev" />
+    <list default="true" id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="Merge branch 'main' into dev" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -32,54 +38,47 @@
       </MavenGeneralSettings>
     </option>
   </component>
-
-  <component name="ProjectColorInfo">
-    {
-      "associatedIndex": 1
-    }
-  </component>
-
+  <component name="ProjectColorInfo">{
+      &quot;associatedIndex&quot;: 1
+    }</component>
   <component name="ProjectId" id="3D1BzHNXuz5VUD4BwLiPV27GjXK" />
-
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-
-  <component name="PropertiesComponent">
-    {
-      "keyToString": {
-        "Spring Boot.MedicalAppointmentApplication.executor": "Run",
-        "git-widget-placeholder": "Appointment-&amp;&amp;-Schedule",
-        "last_opened_file_path": "C:/Users"
-      }
-    }
-  </component>
-
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.MedicalAppointmentApplication.executor": "Run",
+    "git-widget-placeholder": "Appointment-&&-Schedule",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users"
+  }
+}]]></component>
   <component name="RunManager">
-    <configuration name="MedicalAppointmentApplication"
-                   type="SpringBootApplicationConfigurationType"
-                   factoryName="Spring Boot"
-                   temporary="true">
+    <configuration name="MedicalAppointmentApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true">
       <module name="medical-appointment-system" />
-      <option name="SPRING_BOOT_MAIN_CLASS"
-              value="com.medical.MedicalAppointmentApplication" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.medical.MedicalAppointmentApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
   </component>
-
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.33514.17" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1"
-                  name="Changes"
-                  comment="" />
+      <changelist id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="" />
       <created>1777440058478</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1777440058478</updated>
     </task>
+    <servers />
   </component>
-
 </project>

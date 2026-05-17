@@ -9,3 +9,4 @@ public class MedicalAppointmentApplication {
         SpringApplication.run(MedicalAppointmentApplication.class, args);
     }
 }
+dd

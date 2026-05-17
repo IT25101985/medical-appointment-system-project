@@ -1,4 +1,9 @@
 package com.medical.repository;
 
-public class ScheduleRepository {
+import com.medical.entity.Schedule;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 }

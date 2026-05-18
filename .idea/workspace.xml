@@ -7,35 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/appointments/appointments-list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/appointments/book-appointment.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/appointments/dashboard.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/appointments/my-appointments.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/appointments/reschedule.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/appointments/schedules.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/appointments/view-appointment.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_07-05-2026_13_14_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_07-05-2026_13_14__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_07-05-2026_13_15_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_07-05-2026_13_15__Changes_.xml" beforeDir="false" />
+    <list default="true" id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="Merge branch 'main' into dev">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/appointment/controller/AppointmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/appointment/controller/AppointmentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/appointment/entity/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/appointment/entity/Appointment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/appointment/entity/Schedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/appointment/entity/Schedule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/appointment/repository/AppointmentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/appointment/repository/AppointmentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/appointment/repository/ScheduleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/appointment/repository/ScheduleRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/appointment/service/AppointmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/appointment/service/AppointmentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/medicalappointmentsystemproject/MedicalAppointmentSystemProjectApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/medicalappointmentsystemproject/MedicalAppointmentSystemProjectApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/appointment.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/appointment.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/appointment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/appointment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/appointments.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/book-appointment.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/reschedule.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/schedule.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/repository/AppointmentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/repository/AppointmentRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,33 +19,30 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="CSS File" />
-        <option value="JavaScript File" />
         <option value="Class" />
-        <option value="HTML File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Admin-&amp;-Authentication" />
+        <entry key="$PROJECT_DIR$" value="dev" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;IT25101985&quot;
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "IT25101985"
   }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/IT25101985/medical-appointment-system-project.git&quot;,
-    &quot;accountId&quot;: &quot;ab67e447-d563-40d8-93a6-fd5251b331ca&quot;
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/IT25101985/medical-appointment-system-project.git",
+    "accountId": "8294d8c8-39de-452e-8d5f-52b253f9a0b4"
   }
-}</component>
+}]]></component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -82,63 +53,27 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
-  </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 1
-}</component>
+      &quot;associatedIndex&quot;: 1
+    }</component>
   <component name="ProjectId" id="3D1BzHNXuz5VUD4BwLiPV27GjXK" />
   <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "Spring Boot.MedicalAppointmentApplication.executor": "Run",
-    "Spring Boot.MedicalAppointmentSystemProjectApplication.executor": "Run",
     "git-widget-placeholder": "Appointment-&&-Schedule",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/MalithPC/OneDrive/Documents/it23835382/medical-appointment-system-project",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+    "last_opened_file_path": "C:/Users"
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\dell\Documents\New folder (2)\medical-appointment-system-project\src\main\resources\templates\appointments" />
-    </key>
-  </component>
   <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="medical-appointment-system-project" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="medical-appointment-system-project" />
-      <option name="filePath" />
-      <method v="2" />
-    </configuration>
-    <configuration name="MedicalAppointmentSystemProjectApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+    <configuration name="MedicalAppointmentApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true">
       <module name="medical-appointment-system" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.medical.medicalappointmentsystemproject.MedicalAppointmentSystemProjectApplication" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.medical.MedicalAppointmentApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -147,11 +82,10 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.33514.17" />
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.31033.145" />
       </set>
     </attachedChunks>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="" />
@@ -159,12 +93,17 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1777440058478</updated>
-      <workItem from="1778393018416" duration="3001000" />
-      <workItem from="1778398822011" duration="1596000" />
     </task>
     <servers />
   </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../../medical-appointment-system-project/git hub/medical-appointment-system-project/src/main/java/com/medical/entity/Appointment.java</url>
+          <line>7</line>
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

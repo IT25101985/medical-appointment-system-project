@@ -1,25 +1,48 @@
-package com.medical.entity;
+package com.medical.config;
 
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
+import com.medical.entity.User;
+import com.medical.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
+import java.util.Optional;
 
-@Entity
-@DiscriminatorValue("ADMIN")
-public class Admin extends User {
+@Component
+public class DataInitializer implements CommandLineRunner {
 
-    private String department;
+    @Autowired
+    private UserRepository userRepository;
 
-    public Admin() {
-        super();
-        this.setRole("ROLE_ADMIN");
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Override
+    public void run(String... args) throws Exception {
+
+        Optional<User> adminOpt = userRepository.findByUsername("admin");
+
+        // Scenario 1: If admin does not exist, create a new default admin
+        if (adminOpt.isEmpty()) {
+            User admin = new User();
+            admin.setUsername("admin");
+            admin.setPassword(passwordEncoder.encode("admin123")); // Hashing the password
+            admin.setFullName("System Administrator");
+            admin.setRole("ROLE_ADMIN");
+
+            userRepository.save(admin);
+            System.out.println("Default Admin created successfully!");
+            return; // Exit the method since task is complete
+        }
+
+        // Scenario 2: If admin exists, check if the password is in plain text
+        User admin = adminOpt.get();
+        boolean isPlainText = !admin.getPassword().startsWith("$2a$");
+
+        if (isPlainText) {
+            admin.setPassword(passwordEncoder.encode("admin123")); // Securely re-hash the password
+            userRepository.save(admin);
+            System.out.println("Admin password was plain text. Re-hashed successfully!");
+        }
     }
-
-    public Admin(String username, String password, String fullName, String department) {
-        super(username, password, fullName);
-        this.department = department;
-        this.setRole("ROLE_ADMIN");
-    }
-
-    public String getDepartment() { return department; }
-    public void setDepartment(String department) { this.department = department; }
 }

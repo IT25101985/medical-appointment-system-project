@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="Merge branch 'main' into dev&#10;&#10;# Conflicts:&#10;#&#9;.idea/compiler.xml&#10;#&#9;.idea/workspace.xml&#10;#&#9;pom.xml&#10;#&#9;src/main/java/com/medical/medicalappointmentsystemproject/MedicalAppointmentSystemProjectApplication.java&#10;#&#9;src/main/resources/application.properties&#10;#&#9;target/classes/.idea/workspace.xml&#10;#&#9;target/classes/templates/Patient/dashboard.html&#10;#&#9;target/classes/templates/Patient/profile.html" />
+    <list default="true" id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="Merge branch 'main' into dev&#10;&#10;# Conflicts:&#10;#&#9;.idea/compiler.xml&#10;#&#9;.idea/workspace.xml&#10;#&#9;pom.xml&#10;#&#9;src/main/java/com/medical/medicalappointmentsystemproject/MedicalAppointmentSystemProjectApplication.java&#10;#&#9;src/main/resources/application.properties&#10;#&#9;target/classes/.idea/workspace.xml&#10;#&#9;target/classes/templates/Patient/dashboard.html&#10;#&#9;target/classes/templates/Patient/profile.html">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/config/DataInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/config/DataInitializer.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

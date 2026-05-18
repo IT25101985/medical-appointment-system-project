@@ -16,4 +16,10 @@ public class Patient extends User {
         this.setRole("ROLE_PATIENT");
     }
 
+    public Patient(String username, String password, String fullName, String bloodGroup) {
+        super(username, password, fullName);
+        this.bloodGroup = bloodGroup;
+        this.setRole("ROLE_PATIENT");
+    }
+
 }

@@ -22,4 +22,5 @@ public class Patient extends User {
         this.setRole("ROLE_PATIENT");
     }
 
+
 }

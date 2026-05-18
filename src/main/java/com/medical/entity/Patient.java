@@ -1,4 +1,5 @@
 package com.medical.entity;
+
 import jakarta.persistence.Entity;
 
 @Entity

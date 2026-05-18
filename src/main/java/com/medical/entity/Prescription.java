@@ -8,12 +8,14 @@ public class Prescription {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
+    @org.hibernate.annotations.OnDelete(action = org.hibernate.annotations.OnDeleteAction.CASCADE)
     private MedicalRecord medicalRecord;
 
     private String medication;
     private String dosage;
     private String duration;
+    private Double price = 0.0;
 
     // Encapsulation
     public Long getId() { return id; }
@@ -26,4 +28,6 @@ public class Prescription {
     public void setDosage(String dosage) { this.dosage = dosage; }
     public String getDuration() { return duration; }
     public void setDuration(String duration) { this.duration = duration; }
+    public Double getPrice() { return price; }
+    public void setPrice(Double price) { this.price = price; }
 }

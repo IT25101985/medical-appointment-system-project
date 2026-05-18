@@ -42,7 +42,7 @@ public class DataInitializer implements CommandLineRunner {
         if (isPlainText) {
             admin.setPassword(passwordEncoder.encode("admin123")); // Securely re-hash the password
             userRepository.save(admin);
-            System.out.println("Admin password was plain text. Re-hashed successfully!");
+            System.out.println("Admin password was plain text. Re-hashed successfully!"); 1
         }
     }
 }

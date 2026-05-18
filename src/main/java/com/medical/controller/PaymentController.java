@@ -1,8 +1,5 @@
 package com.medical.controller;
 
-import com.medical.service.CardPayment;
-import com.medical.service.CashPayment;
-import com.medical.service.Payment;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

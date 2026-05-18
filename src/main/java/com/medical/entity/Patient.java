@@ -22,5 +22,15 @@ public class Patient extends User {
         this.setRole("ROLE_PATIENT");
     }
 
+    public String getBloodGroup() { return bloodGroup; }
+    public void setBloodGroup(String bloodGroup) { this.bloodGroup = bloodGroup; }
 
+    public String getBloodPressure() { return bloodPressure; }
+    public void setBloodPressure(String bloodPressure) { this.bloodPressure = bloodPressure; }
+
+    public String getHeartRate() { return heartRate; }
+    public void setHeartRate(String heartRate) { this.heartRate = heartRate; }
+
+    public String getEmergencyContact() { return emergencyContact; }
+    public void setEmergencyContact(String emergencyContact) { this.emergencyContact = emergencyContact; }
 }

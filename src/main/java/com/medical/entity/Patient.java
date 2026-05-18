@@ -10,4 +10,10 @@ public class Patient extends User {
     private String bloodPressure;
     private String heartRate;
     private String emergencyContact;
+
+    public Patient() {
+        super();
+        this.setRole("ROLE_PATIENT");
+    }
+
 }

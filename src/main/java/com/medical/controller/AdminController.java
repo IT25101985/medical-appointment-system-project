@@ -1,22 +1,30 @@
 package com.medical.controller;
 
+import com.medical.entity.Appointment;
 import com.medical.entity.Doctor;
 import com.medical.entity.User;
+import com.medical.entity.Feedback;
+import com.medical.service.AppointmentService;
+import com.medical.service.DoctorService;
 import com.medical.service.UserService;
 import com.medical.service.MedicalRecordService;
 import com.medical.service.FeedbackService;
+import com.medical.service.NotificationService;
+import com.medical.repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
@@ -38,22 +46,36 @@ public class AdminController {
     private FeedbackService feedbackService;
 
     @Autowired
-    private com.medical.service.NotificationService notificationService;
+    private NotificationService notificationService;
 
     @Autowired
-    private com.medical.repository.UserRepository userRepository;
+    private UserRepository userRepository;
+
+    // --- OOP Helper Method (Encapsulated Reusable Logic) ---
+    // This helper method finds an appointment by its ID using a clean, readable loop.
+    private Appointment findAppointmentById(Long id) {
+        for (Appointment a : appointmentService.getAllAppointments()) {
+            if (a.getId().equals(id)) {
+                return a; // Return the object immediately when found
+            }
+        }
+        return null; // Return null if no matching appointment is found
+    }
 
     @GetMapping("/export")
-    public void exportData(jakarta.servlet.http.HttpServletResponse response) throws java.io.IOException {
+    public void exportData(HttpServletResponse response) throws IOException {
         response.setContentType("text/csv");
         response.setHeader("Content-Disposition", "attachment; filename=\"users_export.csv\"");
-        java.io.PrintWriter writer = response.getWriter();
+
+        PrintWriter writer = response.getWriter();
         writer.println("ID,Username,Full Name,Role,Email,Phone");
+
         for (User u : userService.getAllUsers()) {
+            String email = (u.getEmail() != null) ? u.getEmail() : "";
+            String phone = (u.getPhoneNo() != null) ? u.getPhoneNo() : "";
+
             writer.printf("%d,%s,%s,%s,%s,%s\n",
-                    u.getId(), u.getUsername(), u.getFullName(), u.getRole(),
-                    u.getEmail() != null ? u.getEmail() : "",
-                    u.getPhoneNo() != null ? u.getPhoneNo() : "");
+                    u.getId(), u.getUsername(), u.getFullName(), u.getRole(), email, phone);
         }
     }
 
@@ -63,38 +85,40 @@ public class AdminController {
         List<User> allUsers = userService.getAllUsers();
         List<Doctor> allDoctors = doctorService.getAllDoctors();
 
-        // Status counts
+        // Status counters
         long total = allAppointments.size();
         long cancelled = allAppointments.stream().filter(a -> "CANCELLED".equals(a.getStatus())).count();
         long completed = allAppointments.stream().filter(a -> "COMPLETED".equals(a.getStatus())).count();
         long scheduled = allAppointments.stream().filter(a -> "SCHEDULED".equals(a.getStatus())).count();
 
         // Today's appointments
-        java.time.LocalDate today = java.time.LocalDate.now();
+        LocalDate today = LocalDate.now();
         long todayCount = allAppointments.stream()
                 .filter(a -> a.getAppointmentDate() != null && a.getAppointmentDate().toLocalDate().equals(today))
                 .count();
 
-        // Revenue estimate (completed × avg fee)
-        double revenue = allDoctors.stream()
+        // Revenue calculation (completed * average fee)
+        double averageFee = allDoctors.stream()
                 .mapToDouble(d -> d.getConsultationFee() != null ? d.getConsultationFee() : 500.0)
-                .average().orElse(500.0) * completed;
+                .average().orElse(500.0);
+        double revenue = averageFee * completed;
 
-        // Peak booking hours
-        java.util.Map<Integer, Long> hourlyStats = allAppointments.stream()
+        // Peak booking hours statistics
+        Map<Integer, Long> hourlyStats = allAppointments.stream()
                 .filter(a -> a.getAppointmentDate() != null)
-                .collect(java.util.stream.Collectors.groupingBy(
-                        a -> a.getAppointmentDate().getHour(), java.util.stream.Collectors.counting()));
+                .collect(Collectors.groupingBy(a -> a.getAppointmentDate().getHour(), Collectors.counting()));
 
-        // User demographics
         long patientsCount = allUsers.stream().filter(u -> "ROLE_PATIENT".equals(u.getRole())).count();
         long doctorsCount = allDoctors.size();
 
-        // Recent 5 appointments
+        // Fetch recent 5 appointments
         List<Appointment> recentAppointments = allAppointments.stream()
-                .sorted((a, b) -> { if(a.getId()==null||b.getId()==null) return 0; return b.getId().compareTo(a.getId()); })
+                .sorted((a, b) -> {
+                    if (a.getId() == null || b.getId() == null) return 0;
+                    return b.getId().compareTo(a.getId());
+                })
                 .limit(5)
-                .collect(java.util.stream.Collectors.toList());
+                .collect(Collectors.toList());
 
         model.addAttribute("totalAppointments", total);
         model.addAttribute("cancelledCount", cancelled);
@@ -128,13 +152,14 @@ public class AdminController {
             if (profileImage != null && !profileImage.isEmpty()) {
                 user.setProfileImage(profileImage);
             }
+
             User savedUser = userService.saveUser(user);
             doctor.setUser(savedUser);
             doctor.setName(user.getFullName()); // Fix null name issue
+
             doctorService.saveDoctor(doctor);
             return "redirect:/admin/doctors?add_success";
         } catch (Exception e) {
-            e.printStackTrace();
             return "redirect:/admin/doctors?error=Registration failed: " + e.getMessage();
         }
     }
@@ -142,21 +167,26 @@ public class AdminController {
     @PostMapping("/doctors/{id}/delete")
     public String deleteDoctor(@PathVariable Long id) {
         Optional<Doctor> d = doctorService.getDoctorById(id);
-        if(d.isPresent()){
+
+        if (d.isPresent()) {
             Doctor doc = d.get();
-            // Delete related appointments manually to prevent FK constraint issues
-            for(Appointment a : appointmentService.getAppointmentsForDoctor(doc)) {
+
+            // 1. Manually remove doctor's appointments to prevent Foreign Key constraints
+            for (Appointment a : appointmentService.getAppointmentsForDoctor(doc)) {
                 appointmentService.deleteAppointment(a);
             }
-            // Delete related feedbacks manually
-            for(com.medical.entity.Feedback f : feedbackService.getFeedbackByDoctor(doc)) {
-                feedbackService.deleteFeedback(f.getId()); // assuming this exists, if not we'll need to add it or ignore
+
+            // 2. Manually remove doctor's feedbacks
+            for (Feedback f : feedbackService.getFeedbackByDoctor(doc)) {
+                feedbackService.deleteFeedback(f.getId());
             }
+
             User u = doc.getUser();
             doctorService.deleteDoctor(id);
-            if(u != null) {
-                // Delete patient feedbacks if any
-                for(com.medical.entity.Feedback f : feedbackService.getFeedbackByPatient(u)) {
+
+            // 3. Delete the associated user account and patient side feedbacks
+            if (u != null) {
+                for (Feedback f : feedbackService.getFeedbackByPatient(u)) {
                     feedbackService.deleteFeedback(f.getId());
                 }
                 userService.deleteUser(u);
@@ -178,11 +208,16 @@ public class AdminController {
             Optional<Doctor> optDoc = doctorService.getDoctorById(id);
             if (optDoc.isPresent()) {
                 Doctor doc = optDoc.get();
-                if (name != null && !name.trim().isEmpty()) doc.setName(name.trim());
+
+                if (name != null && !name.trim().isEmpty()) {
+                    doc.setName(name.trim());
+                }
                 doc.setSpecialization(specialization);
                 doc.setExperience(experience);
                 doc.setClinicHours(clinicHours);
-                if (consultationFee != null) doc.setConsultationFee(consultationFee);
+                if (consultationFee != null) {
+                    doc.setConsultationFee(consultationFee);
+                }
 
                 if (doc.getUser() != null) {
                     User u = doc.getUser();
@@ -195,7 +230,6 @@ public class AdminController {
             }
             return "redirect:/admin/doctors?update_success";
         } catch (Exception e) {
-            e.printStackTrace();
             return "redirect:/admin/doctors?error";
         }
     }
@@ -205,9 +239,8 @@ public class AdminController {
         Optional<Doctor> optDoc = doctorService.getDoctorById(id);
         if (optDoc.isPresent() && optDoc.get().getUser() != null) {
             User u = optDoc.get().getUser();
-            // Reset to default password '123'
-            u.setPassword("123");
-            userService.saveUser(u); // saveUser will encode '123'
+            u.setPassword("123"); // Resets to default password '123'
+            userService.saveUser(u);
         }
         return "redirect:/admin/doctors?reset_success";
     }
@@ -221,43 +254,26 @@ public class AdminController {
 
     @PostMapping("/appointments/{id}/checkin")
     public String checkInAppointment(@PathVariable Long id) {
+        // Reusing our custom OOP helper method to locate the appointment smoothly
+        Appointment foundAppointment = findAppointmentById(id);
 
-        // Loop through all appointments to find the matching ID (Beginner approach)
-        Appointment foundAppointment = null;
-        for (Appointment a : appointmentService.getAllAppointments()) {
-            if (a.getId().equals(id)) {
-                foundAppointment = a;
-                break; // We found the appointment, exit the loop early
-            }
-        }
-
-        // If we successfully found the appointment, change its status
         if (foundAppointment != null) {
             foundAppointment.setStatus("COMPLETED");
-            appointmentService.saveAppointment(foundAppointment); // Save to database
+            appointmentService.saveAppointment(foundAppointment);
         }
-        return "redirect:/admin/appointments"; // Reload page
+        return "redirect:/admin/appointments";
     }
 
     @PostMapping("/appointments/{id}/cancel")
     public String cancelAppointment(@PathVariable Long id) {
+        // Reusing our custom OOP helper method to locate the appointment smoothly
+        Appointment foundAppointment = findAppointmentById(id);
 
-        // Find appointment using a traditional for-loop
-        Appointment foundAppointment = null;
-        for (Appointment a : appointmentService.getAllAppointments()) {
-            if (a.getId().equals(id)) {
-                foundAppointment = a;
-                break;
-            }
-        }
-
-        // Check if the appointment exists
         if (foundAppointment != null) {
-            // 1. Update Database Status
             foundAppointment.setStatus("CANCELLED");
             appointmentService.saveAppointment(foundAppointment);
 
-            // 2. Send cancellation email
+            // Attempt to send a cancellation alert email
             try {
                 notificationService.sendCancellationEmail(
                         foundAppointment.getContactEmail(),
@@ -265,18 +281,16 @@ public class AdminController {
                         foundAppointment.getAppointmentDate().toString()
                 );
             } catch (Exception e) {
-                // Ignore failure so the system doesn't crash if the email server is offline
-                System.out.println("Email ignored");
+                System.out.println("Email ignored to prevent application crash.");
             }
         }
         return "redirect:/admin/appointments";
     }
 
-    // --- User Management (Member 1) ---
     @GetMapping("/users")
     public String userManagement(Model model) {
         model.addAttribute("users", userService.getAllUsers());
-        return "admin/users"; // You'll need to create this HTML file
+        return "admin/users";
     }
 
     @PostMapping("/users/{id}/delete")
@@ -285,22 +299,22 @@ public class AdminController {
         if (optUser.isPresent()) {
             User user = optUser.get();
 
-            // Clean up patient side relationships first
-            for(Appointment a : appointmentService.getAppointmentsForPatient(user)) {
+            // Clean up patient-side relational records first
+            for (Appointment a : appointmentService.getAppointmentsForPatient(user)) {
                 appointmentService.deleteAppointment(a);
             }
-            for(com.medical.entity.Feedback f : feedbackService.getFeedbackByPatient(user)) {
+            for (Feedback f : feedbackService.getFeedbackByPatient(user)) {
                 feedbackService.deleteFeedback(f.getId());
             }
 
-            // If user is a doctor, we need to handle the Doctor entity relationship
+            // If the user happens to be a doctor, handle the Doctor data dependencies safely
             Optional<Doctor> optDoc = doctorService.getDoctorByUser(user);
             if (optDoc.isPresent()) {
                 Doctor doc = optDoc.get();
-                for(Appointment a : appointmentService.getAppointmentsForDoctor(doc)) {
+                for (Appointment a : appointmentService.getAppointmentsForDoctor(doc)) {
                     appointmentService.deleteAppointment(a);
                 }
-                for(com.medical.entity.Feedback f : feedbackService.getFeedbackByDoctor(doc)) {
+                for (Feedback f : feedbackService.getFeedbackByDoctor(doc)) {
                     feedbackService.deleteFeedback(f.getId());
                 }
                 doctorService.deleteDoctor(doc.getId());

@@ -3,16 +3,24 @@
   <component name="AnalysisUIOptions">
     <option name="SCOPE_TYPE" value="4" />
   </component>
+
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
+
   <component name="ChangeListManager">
-    <list default="true" id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="Merge branch 'dev' into Patient-Profile-Management&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/main/java/com/medical/config/DataInitializer.java&#10;#&#9;src/main/java/com/medical/config/SecurityConfig.java&#10;#&#9;src/main/java/com/medical/controller/AdminController.java&#10;#&#9;src/main/java/com/medical/controller/AuthController.java&#10;#&#9;src/main/java/com/medical/controller/PatientController.java&#10;#&#9;src/main/java/com/medical/entity/Appointment.java&#10;#&#9;src/main/java/com/medical/entity/Patient.java&#10;#&#9;src/main/java/com/medical/entity/User.java&#10;#&#9;src/main/java/com/medical/repository/UserRepository.java&#10;#&#9;src/main/java/com/medical/service/AppointmentService.java&#10;#&#9;src/main/java/com/medical/service/UserService.java&#10;#&#9;src/main/resources/templates/admin/appointments.html&#10;#&#9;src/main/resources/templates/admin/dashboard.html&#10;#&#9;src/main/resources/templates/index.html&#10;#&#9;src/main/resources/templates/login.html&#10;#&#9;src/main/resources/templates/register.html&#10;#&#9;target/classes/templates/Patient/book-appointment.html" />
+    <list default="true"
+          id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1"
+          name="Changes"
+          comment="Merge branch 'dev' into Patient-Profile-Management">
+    </list>
+
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -20,20 +28,25 @@
       </list>
     </option>
   </component>
+
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="dev" />
       </map>
     </option>
+
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
+
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
     &quot;state&quot;: &quot;OPEN&quot;,
     &quot;assignee&quot;: &quot;IT25101985&quot;
   }
 }</component>
+
   <component name="GithubProjectSettings">
     <option name="branchProtectionPatterns">
       <list>
@@ -41,15 +54,18 @@
       </list>
     </option>
   </component>
+
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/IT25101985/medical-appointment-system-project.git&quot;,
     &quot;accountId&quot;: &quot;8294d8c8-39de-452e-8d5f-52b253f9a0b4&quot;
   }
 }</component>
+
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -57,14 +73,20 @@
       </MavenGeneralSettings>
     </option>
   </component>
+
   <component name="ProjectColorInfo">{
-      &quot;associatedIndex&quot;: 1
-    }</component>
+  &quot;associatedIndex&quot;: 1
+}</component>
+
   <component name="ProjectId" id="3D1BzHNXuz5VUD4BwLiPV27GjXK" />
+
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
@@ -74,20 +96,30 @@
     &quot;last_opened_file_path&quot;: &quot;C:/Users&quot;
   }
 }</component>
+
   <component name="RunManager">
-    <configuration name="MedicalAppointmentApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true">
+    <configuration name="MedicalAppointmentApplication"
+                   type="SpringBootApplicationConfigurationType"
+                   factoryName="Spring Boot"
+                   temporary="true">
+
       <module name="medical-appointment-system" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.medical.MedicalAppointmentApplication" />
+
+      <option name="SPRING_BOOT_MAIN_CLASS"
+              value="com.medical.MedicalAppointmentApplication" />
+
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.MedicalAppointmentApplication" />
       </list>
     </recent_temporary>
   </component>
+
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -95,24 +127,100 @@
       </set>
     </attachedChunks>
   </component>
+
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="" />
+      <changelist id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1"
+                  name="Changes"
+                  comment="" />
+
       <created>1777440058478</created>
+
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1777440058478</updated>
+      <updated>1777090910200</updated>
     </task>
+
+    <task id="LOCAL-00001" summary="Again creating Patient entity extending user">
+      <option name="closed" value="true" />
+      <created>1779109895567</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1779109895567</updated>
+    </task>
+
+    <task id="LOCAL-00002" summary="Creating Patient entity extending user">
+      <option name="closed" value="true" />
+      <created>1779110275762</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1779110275762</updated>
+    </task>
+
+    <task id="LOCAL-00003" summary="Implementing Patient entity extending User">
+      <option name="closed" value="true" />
+      <created>1779110734244</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1779110734244</updated>
+    </task>
+
+    <task id="LOCAL-00004" summary="Adding patient fields in Patient entity">
+      <option name="closed" value="true" />
+      <created>1779110885977</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1779110885977</updated>
+    </task>
+
+    <task id="LOCAL-00005" summary="Configuring JPA discriminator value">
+      <option name="closed" value="true" />
+      <created>1779114228141</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1779114228141</updated>
+    </task>
+
+    <task id="LOCAL-00006" summary="Implementing default constructor with super inheritance in Patient entity">
+      <option name="closed" value="true" />
+      <created>1779114586765</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1779114586765</updated>
+    </task>
+
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/../../medical-appointment-system-project/git hub/medical-appointment-system-project/src/main/java/com/medical/entity/Appointment.java</url>
-          <line>7</line>
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
+
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Again creating Patient entity extending user" />
+    <MESSAGE value="Creating Patient entity extending user" />
+    <MESSAGE value="Implementing Patient entity extending User" />
+    <MESSAGE value="Adding patient fields in Patient entity" />
+    <MESSAGE value="Configuring JPA discriminator value" />
+    <MESSAGE value="Implementing default constructor with super inheritance in Patient entity" />
+
+    <option name="LAST_COMMIT_MESSAGE"
+            value="Implementing default constructor with super inheritance in Patient entity" />
+  </component>
+
 </project>

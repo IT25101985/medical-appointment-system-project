@@ -1,15 +1,19 @@
 package com.medical.controller;
 
 import com.medical.entity.User;
+import com.medical.entity.Patient; // Missing import added
 import com.medical.service.UserService;
+import com.medical.service.DoctorService; // Cleaned up fully qualified package name
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.web.bind.annotation.*;
+
 import java.security.Principal;
+import java.util.Optional;
 
 @Controller
 public class AuthController {
@@ -18,7 +22,35 @@ public class AuthController {
     private UserService userService;
 
     @Autowired
-    private com.medical.service.DoctorService doctorService;
+    private DoctorService doctorService;
+
+    // --- OOP Helper Method (Encapsulating Login Status Check) ---
+    // This reusable method checks if a user is currently logged in or not
+    private boolean isUserLoggedIn(Authentication authentication) {
+        return authentication != null &&
+                authentication.isAuthenticated() &&
+                !authentication.getPrincipal().equals("anonymousUser");
+    }
+
+    // --- OOP Helper Method (Encapsulating Role-Based Redirection Logic) ---
+    // This method decides the dashboard path according to user authority
+    private String getDashboardRedirectPath(Authentication authentication) {
+        if (authentication == null) {
+            return "redirect:/login";
+        }
+
+        // Loop through all roles assigned to this authenticated user
+        for (GrantedAuthority authority : authentication.getAuthorities()) {
+            String role = authority.getAuthority();
+            if ("ROLE_ADMIN".equals(role)) {
+                return "redirect:/admin/dashboard";
+            } else if ("ROLE_DOCTOR".equals(role)) {
+                return "redirect:/doctor/dashboard";
+            }
+        }
+        // If the user is neither Admin nor Doctor, send them to Patient dashboard
+        return "redirect:/patient/dashboard";
+    }
 
     @GetMapping("/")
     public String index(Model model, Principal principal) {
@@ -31,7 +63,8 @@ public class AuthController {
 
     @GetMapping("/login")
     public String login(Authentication authentication) {
-        if (authentication != null && authentication.isAuthenticated() && !authentication.getPrincipal().equals("anonymousUser")) {
+        // Reusing OOP helper method to prevent already logged in users from seeing login page again
+        if (isUserLoggedIn(authentication)) {
             return "redirect:/dashboard";
         }
         return "login";
@@ -45,10 +78,9 @@ public class AuthController {
 
     @PostMapping("/register")
     public String registerUser(@ModelAttribute("user") Patient user) {
-        // Log to console for debugging
         System.out.println("Registering user: " + user.getUsername());
 
-        user.setRole("ROLE_PATIENT"); // Default role for portal registration
+        user.setRole("ROLE_PATIENT"); // Default role assigned automatically
         userService.saveUser(user);
 
         return "redirect:/login?registered";
@@ -60,12 +92,12 @@ public class AuthController {
     }
 
     @PostMapping("/forgot-password")
-    public String processForgotPassword(@org.springframework.web.bind.annotation.RequestParam String username,
-                                        @org.springframework.web.bind.annotation.RequestParam String newPassword) {
-        java.util.Optional<User> optUser = userService.findByUsername(username);
+    public String processForgotPassword(@RequestParam String username, @RequestParam String newPassword) {
+        Optional<User> optUser = userService.findByUsername(username);
+
         if (optUser.isPresent()) {
             User user = optUser.get();
-            user.setPassword(newPassword);
+            user.setPassword(newPassword); // Overwriting the old password
             userService.saveUser(user);
             return "redirect:/forgot-password?success";
         }
@@ -74,12 +106,7 @@ public class AuthController {
 
     @GetMapping("/dashboard")
     public String dashboard(Authentication authentication) {
-        if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
-            return "redirect:/admin/dashboard";
-        } else if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_DOCTOR"))) {
-            return "redirect:/doctor/dashboard";
-        } else {
-            return "redirect:/patient/dashboard";
-        }
+        // Reusing our custom OOP helper method to cleanly route the user
+        return getDashboardRedirectPath(authentication);
     }
 }

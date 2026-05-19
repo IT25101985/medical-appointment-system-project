@@ -3,151 +3,269 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Portal | Healthcare</title>
+    <title>Admin Insights | HealthCarePlus</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: ['class', '[data-theme="dark"]'],
-        }
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/css/dark-mode.css">
+    <script src="/js/theme.js"></script>
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* Video Background Styling */
-        #video-bg {
-            position: fixed;
-            right: 0;
-            bottom: 0;
-            min-width: 100%;
-            min-height: 100%;
-            z-index: -1;
-            object-fit: cover;
-            filter: brightness(0.6) saturate(1.2);
-        }
-
-        /* Enhanced Glassmorphism */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(15px) saturate(180%);
-            -webkit-backdrop-filter: blur(15px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-        }
-
-        [data-theme="dark"] .glass-card {
-            background: rgba(15, 23, 42, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .nav-link {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .nav-link:hover {
-            background: #4f46e5;
-            transform: translateY(-5px) scale(1.02);
-            border-color: transparent;
-        }
-
-        /* Home Button & Theme Switch Enhancements */
-        .modern-home-btn, .theme-switch {
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
+        .glass-sidebar { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); }
+        .stat-card { transition: all 0.3s ease; }
+        .stat-card:hover { transform: translateY(-5px); }
+        .active-nav { background: rgba(59, 130, 246, 0.2); border-left: 4px solid #3b82f6; color: #3b82f6 !important; }
     </style>
 </head>
-<body class="flex items-center justify-center p-6" data-theme="light">
+<body class="flex">
 
-<video autoplay muted loop id="video-bg" poster="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=2000">
-    <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-technology-plexus-lines-background-33392-large.mp4" type="video/mp4">
-</video>
-
-<a href="/" class="modern-home-btn fixed top-5 left-5 bg-emerald-600/80 text-white px-6 py-2 rounded-full font-semibold flex items-center gap-2 hover:bg-blue-700 transition-all z-50">
-    <i class="fa-solid fa-house-chimney-medical"></i> Home
-</a>
-
-<div class="theme-switch fixed top-5 right-5 w-11 h-11 flex items-center justify-center rounded-full bg-slate-900 border border-slate-800 text-white/20 text-white cursor-pointer z-50" id="theme-toggle">
-    <i class="fa-solid fa-moon"></i>
-</div>
-
-<main class="glass-card animate__animated animate__zoomIn max-w-4xl w-full rounded-3xl overflow-hidden">
-    <header class="bg-emerald-600/40 p-10 text-white flex justify-between items-center border-b border-white/10">
-        <div>
-            <h1 class="text-4xl font-bold tracking-tight">Admin Dashboard</h1>
-            <p class="text-indigo-100 text-sm mt-1">Hospital Management System | Secure Node</p>
+<!-- Sidebar Navigation -->
+<aside class="w-64 min-h-screen glass-sidebar text-slate-300 flex flex-col sticky top-0 hidden lg:flex">
+    <div class="p-6">
+        <div class="flex items-center gap-3 mb-10">
+            <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center">
+                <i class="fa-solid fa-hospital text-white text-xl"></i>
+            </div>
+            <span class="text-xl font-bold text-white tracking-tight">Admin<span class="text-blue-500">Center</span></span>
         </div>
+
+        <nav class="space-y-2">
+            <a th:href="@{/admin/dashboard}" class="flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-slate-800 transition active-nav">
+                <i class="fa-solid fa-chart-line w-5"></i> Insights
+            </a>
+            <a th:href="@{/admin/doctors}" class="flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-slate-800 transition">
+                <i class="fa-solid fa-user-doctor w-5"></i> Doctors
+            </a>
+            <a th:href="@{/admin/appointments}" class="flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-slate-800 transition">
+                <i class="fa-solid fa-calendar-check w-5"></i> Bookings
+            </a>
+            <a th:href="@{/admin/users}" class="flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-slate-800 transition">
+                <i class="fa-solid fa-users w-5"></i> Patients
+            </a>
+            <a th:href="@{/admin/invoices}" class="flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-slate-800 transition">
+                <i class="fa-solid fa-file-invoice-dollar w-5"></i> Revenue
+            </a>
+        </nav>
+    </div>
+
+    <div class="mt-auto p-6 border-t border-slate-800">
         <form th:action="@{/logout}" method="post">
-            <button type="submit" class="bg-red-500/80 hover:bg-red-600 px-5 py-2.5 rounded-xl text-sm font-bold transition-all flex items-center gap-2 shadow-lg">
-                Logout
-                <i class="fa-solid fa-right-from-bracket"></i>
+            <button class="flex items-center gap-4 px-4 py-3 w-full rounded-xl hover:bg-rose-500/10 hover:text-rose-500 transition text-slate-400 font-semibold">
+                <i class="fa-solid fa-right-from-bracket"></i> Sign Out
             </button>
         </form>
+    </div>
+</aside>
+
+<!-- Main Content -->
+<main class="flex-1 p-8 overflow-y-auto h-screen">
+    <header class="flex justify-between items-center mb-10">
+        <div>
+            <h1 class="text-3xl font-extrabold text-slate-800">System Overview</h1>
+            <p class="text-slate-500 mt-1">Real-time insights and hospital analytics</p>
+        </div>
+        <div class="flex gap-4">
+            <button onclick="toggleGlobalTheme()" class="bg-white w-10 h-10 rounded-2xl border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50 transition" title="Toggle Dark/Light Mode">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+            <div class="bg-white px-4 py-2 rounded-2xl border border-slate-200 flex items-center gap-3">
+                <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+                <span class="text-sm font-bold text-slate-600">System Online</span>
+            </div>
+            <a th:href="@{/admin/export}" class="bg-slate-900 text-white px-6 py-2 rounded-2xl font-bold flex items-center gap-2 hover:bg-slate-800 transition">
+                <i class="fa-solid fa-download"></i> Export Data
+            </a>
+        </div>
     </header>
 
-    <nav class="p-10">
-        <ul class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <li class="animate__animated animate__fadeInLeft animate__delay-1s">
-                <a href="/admin/doctors" class="nav-link block p-8 rounded-2xl group">
-                    <div class="flex items-center space-x-5">
-                        <div class="p-4 bg-indigo-500/20 rounded-2xl group-hover:bg-slate-900 border border-slate-800 text-white group-hover:text-emerald-500 transition-all text-2xl text-indigo-200">
-                            <i class="fa-solid fa-user-doctor"></i>
-                        </div>
-                        <div>
-                            <span class="block text-xl font-bold text-white mb-1">Manage Doctors</span>
-                            <span class="text-sm text-gray-300 group-hover:text-indigo-100">Profiles, schedules, and departments</span>
-                        </div>
-                    </div>
-                </a>
-            </li>
+    <!-- Statistics Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+        <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm stat-card">
+            <div class="flex justify-between items-start mb-4">
+                <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center">
+                    <i class="fa-solid fa-calendar-check text-xl"></i>
+                </div>
+                <span class="text-emerald-500 text-xs font-bold bg-emerald-50 px-2 py-1 rounded-lg">+12%</span>
+            </div>
+            <p class="text-slate-400 text-sm font-semibold uppercase tracking-wider">Total Appointments</p>
+            <h3 class="text-3xl font-black text-slate-800 mt-1" th:text="${totalAppointments}">1,280</h3>
+        </div>
 
-            <li class="animate__animated animate__fadeInRight animate__delay-1s">
-                <a href="/admin/appointments" class="nav-link block p-8 rounded-2xl group">
-                    <div class="flex items-center space-x-5">
-                        <div class="p-4 bg-emerald-500/20 rounded-2xl group-hover:bg-slate-900 border border-slate-800 text-white group-hover:text-emerald-600 transition-all text-2xl text-emerald-200">
-                            <i class="fa-solid fa-calendar-check"></i>
-                        </div>
-                        <div>
-                            <span class="block text-xl font-bold text-white mb-1">Appointments</span>
-                            <span class="text-sm text-gray-300 group-hover:text-emerald-100">Real-time patient booking logs</span>
-                        </div>
-                    </div>
-                </a>
-            </li>
-        </ul>
-    </nav>
+        <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm stat-card">
+            <div class="flex justify-between items-start mb-4">
+                <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center">
+                    <i class="fa-solid fa-user-doctor text-xl"></i>
+                </div>
+            </div>
+            <p class="text-slate-400 text-sm font-semibold uppercase tracking-wider">Total Doctors</p>
+            <h3 class="text-3xl font-black text-slate-800 mt-1" th:text="${doctorsCount}">42</h3>
+        </div>
 
-    <footer class="bg-black/20 p-6 text-center text-xs font-medium text-white/60 tracking-widest uppercase">
-        &copy; 2026 Healthcare Systems | Authorized Personnel Only
-    </footer>
+        <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm stat-card">
+            <div class="flex justify-between items-start mb-4">
+                <div class="w-12 h-12 bg-rose-50 text-rose-600 rounded-2xl flex items-center justify-center">
+                    <i class="fa-solid fa-users text-xl"></i>
+                </div>
+            </div>
+            <p class="text-slate-400 text-sm font-semibold uppercase tracking-wider">Total Patients</p>
+            <div class="flex items-end justify-between mt-1">
+                <h3 class="text-3xl font-black text-slate-800" th:text="${patientsCount}">8,420</h3>
+                <a th:href="@{/admin/users}" class="text-xs font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-lg hover:bg-blue-100 transition">See User Datas</a>
+            </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm stat-card">
+            <div class="flex justify-between items-start mb-4">
+                <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center">
+                    <i class="fa-solid fa-hand-holding-dollar text-xl"></i>
+                </div>
+                <span class="text-emerald-500 text-xs font-bold bg-emerald-50 px-2 py-1 rounded-lg">Live</span>
+            </div>
+            <p class="text-slate-400 text-sm font-semibold uppercase tracking-wider">Today's Revenue</p>
+            <h3 class="text-3xl font-black text-slate-800 mt-1" th:text="'Rs. ' + ${estimatedRevenue}">Rs. 45,200</h3>
+        </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+        <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold text-slate-800">Booking Trends</h3>
+                <select class="bg-slate-50 border-none rounded-xl text-sm font-bold p-2 outline-none">
+                    <option>Last 24 Hours</option>
+                    <option>Last 7 Days</option>
+                </select>
+            </div>
+            <div style="height: 300px;">
+                <canvas id="bookingChart"></canvas>
+            </div>
+        </div>
+
+        <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm">
+            <h3 class="text-xl font-bold text-slate-800 mb-6">Appointment Status</h3>
+            <div style="height: 300px; display: flex; justify-content: center;">
+                <canvas id="statusChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Activity & Live Status -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2 bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden">
+            <div class="p-6 border-b border-slate-50 flex justify-between items-center">
+                <h3 class="font-bold text-slate-800">Recent Appointments</h3>
+                <a th:href="@{/admin/appointments}" class="text-blue-600 text-sm font-bold hover:underline">View All</a>
+            </div>
+            <table class="w-full text-left">
+                <thead class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider">
+                <tr>
+                    <th class="px-6 py-4 font-bold">Patient</th>
+                    <th class="px-6 py-4 font-bold">Doctor</th>
+                    <th class="px-6 py-4 font-bold">Status</th>
+                </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-50">
+                <tr th:each="app : ${recentAppointments}" class="hover:bg-slate-50 transition">
+                    <td class="px-6 py-4">
+                        <p class="font-bold text-slate-800" th:text="${app.patientName}">John Doe</p>
+                        <p class="text-xs text-slate-400" th:text="${app.contactPhone}">+94 77 123 4567</p>
+                    </td>
+                    <td class="px-6 py-4">
+                        <p class="text-sm font-semibold text-slate-600" th:text="'Dr. ' + ${app.doctorName}">Dr. Smith</p>
+                    </td>
+                    <td class="px-6 py-4">
+                                <span th:class="${'px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ' +
+                                    (app.status == 'SCHEDULED' ? 'bg-blue-100 text-blue-600' :
+                                     app.status == 'COMPLETED' ? 'bg-emerald-100 text-emerald-600' :
+                                     'bg-rose-100 text-rose-600')}"
+                                      th:text="${app.status}">SCHEDULED</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="bg-slate-900 rounded-3xl p-6 text-white shadow-xl shadow-slate-200">
+            <h3 class="font-bold text-lg mb-6 flex items-center gap-3">
+                <i class="fa-solid fa-bell text-blue-400"></i> System Alerts
+            </h3>
+            <div class="space-y-4">
+                <div class="bg-white/5 p-4 rounded-2xl border border-white/10">
+                    <p class="text-xs font-bold text-blue-400 uppercase mb-1">Queue Alert</p>
+                    <p class="text-sm text-slate-300">Dr. Smith's clinic has 8 patients waiting. Average delay: 12 mins.</p>
+                </div>
+                <div class="bg-rose-500/10 p-4 rounded-2xl border border-rose-500/20">
+                    <p class="text-xs font-bold text-rose-400 uppercase mb-1">Emergency Alert</p>
+                    <p class="text-sm text-slate-300">Ambulance #4 is arriving in 5 minutes. Prep Trauma Center.</p>
+                </div>
+            </div>
+            <button class="w-full mt-10 py-3 bg-blue-600 hover:bg-blue-700 rounded-2xl font-bold transition">
+                Send Global Alert
+            </button>
+        </div>
+    </div>
 </main>
 
-<script>
-    const themeToggle = document.getElementById('theme-toggle');
-    const body = document.body;
-    const icon = themeToggle.querySelector('i');
+<script th:inline="javascript">
+    /*<![CDATA[*/
+        // Booking Trends Chart
+        const hourlyData = [[${hourlyStats}]] || {};
+        const labels = Array.from({length: 24}, (_, i) => i + ":00");
+        const data = Array.from({length: 24}, (_, i) => hourlyData[i] || 0);
 
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    body.setAttribute('data-theme', savedTheme);
-    if(savedTheme === 'dark') icon.classList.replace('fa-moon', 'fa-sun');
+        new Chart(document.getElementById('bookingChart'), {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Appointments',
+                    data: data,
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    borderWidth: 3,
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: true, grid: { display: false }, ticks: { color: '#94a3b8' } },
+                    x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
+                }
+            }
+        });
 
-    themeToggle.addEventListener('click', () => {
-        const currentTheme = body.getAttribute('data-theme');
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        body.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        icon.classList.toggle('fa-moon');
-        icon.classList.toggle('fa-sun');
-    });
+        // Status Chart
+        new Chart(document.getElementById('statusChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Completed', 'Scheduled', 'Cancelled'],
+                datasets: [{
+                    data: [
+                        [[${completedCount}]] || 0,
+                        [[${scheduledCount}]] || 0,
+                        [[${cancelledCount}]] || 0
+                    ],
+                    backgroundColor: ['#10b981', '#3b82f6', '#f43f5e'],
+                    borderWidth: 0,
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { usePointStyle: true, padding: 20, font: { weight: 'bold' } } }
+                },
+                cutout: '70%'
+            }
+        });
+    /*]]>*/
 </script>
 </body>
 </html>

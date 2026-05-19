@@ -9,7 +9,6 @@ import com.medical.service.DoctorService;
 import com.medical.service.UserService;
 import com.medical.service.MedicalRecordService;
 import com.medical.service.FeedbackService;
-import com.medical.service.NotificationService;
 import com.medical.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,9 +43,6 @@ public class AdminController {
 
     @Autowired
     private FeedbackService feedbackService;
-
-    @Autowired
-    private NotificationService notificationService;
 
     @Autowired
     private UserRepository userRepository;
@@ -155,7 +151,7 @@ public class AdminController {
 
             User savedUser = userService.saveUser(user);
             doctor.setUser(savedUser);
-            doctor.setName(user.getFullName()); // Fix null name issue
+            doctor.setName(user.getFullName());
 
             doctorService.saveDoctor(doctor);
             return "redirect:/admin/doctors?add_success";
@@ -272,17 +268,7 @@ public class AdminController {
         if (foundAppointment != null) {
             foundAppointment.setStatus("CANCELLED");
             appointmentService.saveAppointment(foundAppointment);
-
-            // Attempt to send a cancellation alert email
-            try {
-                notificationService.sendCancellationEmail(
-                        foundAppointment.getContactEmail(),
-                        foundAppointment.getPatient().getFullName(),
-                        foundAppointment.getAppointmentDate().toString()
-                );
-            } catch (Exception e) {
-                System.out.println("Email ignored to prevent application crash.");
-            }
+            // Notification logic successfully removed from here
         }
         return "redirect:/admin/appointments";
     }

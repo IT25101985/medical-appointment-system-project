@@ -53,4 +53,14 @@ public class PatientProfileController {
         return "redirect:/patient/dashboard?section=profile&success";
     }
 
+
+    @PostMapping("/delete-account")
+    public String deleteAccount(Principal principal) {
+        if (principal != null) {
+            Optional<User> optUser = userService.findByUsername(principal.getName());
+            optUser.ifPresent(user -> userService.deleteUser(user));
+        }
+        return "redirect:/logout";
+    }
+
 }

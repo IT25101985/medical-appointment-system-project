@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
 
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="4" />
+  </component>
+
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
@@ -9,7 +13,9 @@
     <list default="true"
           id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1"
           name="Changes"
-          comment="" />
+          comment="Merge branch 'main' into dev">
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/Patient/history.html" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,7 +37,6 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
 
   <component name="GitHubPullRequestSearchHistory">{
@@ -62,10 +67,10 @@
   </component>
 
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 1
-}</component>
+      &quot;associatedIndex&quot;: 1
+    }</component>
 
-  <component name="ProjectId" id="3CtcWSQluYdZKCIjn4DLvErY2Ww" />
+  <component name="ProjectId" id="3D1BzHNXuz5VUD4BwLiPV27GjXK" />
 
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -74,28 +79,24 @@
 
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "Spring Boot.MedicalAppointmentApplication.executor": "Run",
-    "git-widget-placeholder": "dev",
+    "git-widget-placeholder": "#48 on Appointment-&&-Schedule",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/medical-appointment-system-project/git hub/medical-appointment-system-project/pom.xml"
+    "last_opened_file_path": "C:/Users"
   }
 }]]></component>
 
   <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="medical-appointment-system-project" />
+    <configuration name="MedicalAppointmentApplication"
+                   type="SpringBootApplicationConfigurationType"
+                   factoryName="Spring Boot"
+                   temporary="true">
+      <module name="medical-appointment-system" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.medical.MedicalAppointmentApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
-    </configuration>
-
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="medical-appointment-system-project" />
-      <option name="filePath" />
-      <method v="2" />
     </configuration>
   </component>
 
@@ -120,12 +121,23 @@
       <changelist id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1"
                   name="Changes"
                   comment="" />
-      <created>1777967443385</created>
+      <created>1777440058478</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1777967443385</updated>
+      <updated>1777440058478</updated>
     </task>
     <servers />
+  </component>
+
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../../medical-appointment-system-project/git hub/medical-appointment-system-project/src/main/java/com/medical/entity/Appointment.java</url>
+          <line>7</line>
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 
 </project>

@@ -9,6 +9,10 @@
   </component>
 
   <component name="ChangeListManager">
+<<<<<<< HEAD
+    <list default="true" id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="Implementing default constructor with super inheritance in Patient entity">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/MedicalAppointmentApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/MedicalAppointmentApplication.java" afterDir="false" />
+=======
     <list default="true"
           id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1"
           name="Changes"
@@ -29,6 +33,7 @@
               beforeDir="false"
               afterPath="$PROJECT_DIR$/src/main/java/com/medical/repository/AppointmentRepository.java"
               afterDir="false" />
+>>>>>>> parent of 30796fb (Merge pull request #52 from IT25101985/Patient-Profile-Management)
     </list>
 
     <option name="SHOW_DIALOG" value="false" />
@@ -81,15 +86,28 @@
   </component>
 
   <component name="ProjectColorInfo">{
+<<<<<<< HEAD
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="3CtbjZoYF3vqRbh2nx0NXlrYSHu" />
+=======
       &quot;associatedIndex&quot;: 1
     }</component>
 
   <component name="ProjectId" id="3D1BzHNXuz5VUD4BwLiPV27GjXK" />
 
+>>>>>>> parent of 30796fb (Merge pull request #52 from IT25101985/Patient-Profile-Management)
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< HEAD
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "git-widget-placeholder": "dev"
+  }
+}]]></component>
+=======
 
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
@@ -115,6 +133,7 @@
     </configuration>
   </component>
 
+>>>>>>> parent of 30796fb (Merge pull request #52 from IT25101985/Patient-Profile-Management)
   <component name="SharedIndexes">
     <attachedChunks>
       <set>

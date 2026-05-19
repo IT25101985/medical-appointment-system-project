@@ -12,7 +12,7 @@ import java.security.Principal;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/patient")
+@RequestMapping("/templates/patient")
 public class PatientProfileController {
 
     @Autowired

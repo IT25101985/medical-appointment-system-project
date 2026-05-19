@@ -2,6 +2,8 @@ package com.medical.controller;
 
 import com.medical.entity.Doctor;
 import com.medical.entity.User;
+import com.medical.service.AppointmentService;
+import com.medical.service.DoctorService;
 import com.medical.service.UserService;
 import com.medical.service.MedicalRecordService;
 import com.medical.service.FeedbackService;

@@ -26,4 +26,31 @@ public class PatientProfileController {
         return "redirect:/patient/dashboard?section=profile";
     }
 
+    @PostMapping("/profile")
+    public String updateProfile(@ModelAttribute("user") Patient updatedUser, Principal principal) {
+        if (principal != null) {
+            Optional<User> optUser = userService.findByUsername(principal.getName());
+            if (optUser.isPresent()) {
+                User currentUser = optUser.get();
+                userService.updateUserProfile(currentUser, updatedUser);
+
+                // Updates Patient specific fields
+                if (currentUser instanceof Patient) {
+                    Patient p = (Patient) currentUser;
+                    p.setBloodGroup(updatedUser.getBloodGroup());
+                    p.setBloodPressure(updatedUser.getBloodPressure());
+                    p.setHeartRate(updatedUser.getHeartRate());
+                    p.setEmergencyContact(updatedUser.getEmergencyContact());
+                    userRepository.save(p);
+                }
+
+                if(updatedUser.getPassword() != null && !updatedUser.getPassword().trim().isEmpty()) {
+                    currentUser.setPassword(updatedUser.getPassword());
+                    userService.saveUser(currentUser);
+                }
+            }
+        }
+        return "redirect:/patient/dashboard?section=profile&success";
+    }
+
 }

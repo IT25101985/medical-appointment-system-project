@@ -9,10 +9,21 @@
   </component>
 
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true"
           id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1"
           name="Changes"
           comment="Merge branch 'dev' into Patient-Profile-Management">
+=======
+    <list default="true" id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="Merge branch 'main' into dev">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/Patient/book-appointment.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/doctor/consultations.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/doctor/consultations.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/doctor/dashboard.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/doctor/records.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/doctor/view-appointments.html" beforeDir="false" />
+>>>>>>> Stashed changes
     </list>
 
     <option name="SHOW_DIALOG" value="false" />
@@ -39,13 +50,17 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
     &quot;state&quot;: &quot;OPEN&quot;,
     &quot;assignee&quot;: &quot;IT25101985&quot;
   }
 }</component>
+<<<<<<< Updated upstream
 
   <component name="GithubProjectSettings">
     <option name="branchProtectionPatterns">
@@ -55,13 +70,18 @@
     </option>
   </component>
 
+=======
+>>>>>>> Stashed changes
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/IT25101985/medical-appointment-system-project.git&quot;,
     &quot;accountId&quot;: &quot;8294d8c8-39de-452e-8d5f-52b253f9a0b4&quot;
   }
 }</component>
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -86,6 +106,7 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< Updated upstream
 
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
@@ -94,6 +115,15 @@
     &quot;git-widget-placeholder&quot;: &quot;Admin-&amp;&amp;-Authentication&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users&quot;
+=======
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.MedicalAppointmentApplication.executor": "Run",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users"
+>>>>>>> Stashed changes
   }
 }</component>
 
@@ -112,7 +142,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.MedicalAppointmentApplication" />

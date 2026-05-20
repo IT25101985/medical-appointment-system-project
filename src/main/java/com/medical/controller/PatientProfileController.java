@@ -2,8 +2,18 @@ package com.medical.controller;
 
 import com.medical.entity.Patient;
 import com.medical.entity.User;
+import com.medical.entity.Appointment;
+import com.medical.entity.Invoice;
+import com.medical.entity.MedicalRecord;
+import com.medical.entity.Doctor;
 import com.medical.repository.UserRepository;
 import com.medical.service.UserService;
+import com.medical.service.AppointmentService;
+import com.medical.service.MedicalRecordService;
+import com.medical.service.InvoiceService;
+import com.medical.service.DoctorService;
+import com.medical.repository.PatientRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

@@ -83,7 +83,6 @@ public class PatientProfileController {
                 String rawPassword = null;
                 if (updatedUser.getPassword() != null && !updatedUser.getPassword().trim().isEmpty()) {
                     rawPassword = updatedUser.getPassword().trim();
-                    // Policy: Minimum 8 characters, at least one digit, and at least one special character
                     if (rawPassword.length() < 8 || !rawPassword.matches(".*\\d.*") || !rawPassword.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\",.<>/?].*")) {
                         return "redirect:/patient/dashboard?section=profile&error=weak_password";
                     }
@@ -131,7 +130,7 @@ public class PatientProfileController {
 
 
     @GetMapping("/dashboard")
-    public String dashboard(Principal principal, Model model, @RequestParam(value = "reschedule", required = false) Long rescheduleId) {
+    public String dashboard(Principal principal, Model model) {
         if (principal == null) {
             return "redirect:/login";
         }
@@ -163,18 +162,8 @@ public class PatientProfileController {
         model.addAttribute("username", principal.getName());
 
         Appointment app = new Appointment();
-        if (rescheduleId != null) {
-            Optional<Appointment> optApp = appointmentService.getAppointmentById(rescheduleId);
-            if (optApp.isPresent() && optApp.get().getPatient().getId().equals(user.getId())) {
-                app = optApp.get();
-            }
-        }
-        if (app.getContactEmail() == null) {
-            app.setContactEmail(user.getEmail());
-        }
-        if (app.getContactPhone() == null) {
-            app.setContactPhone(user.getPhoneNo());
-        }
+        app.setContactEmail(user.getEmail());
+        app.setContactPhone(user.getPhoneNo());
         model.addAttribute("appointment", app);
 
         List<Doctor> doctors = doctorService.getAllDoctors();

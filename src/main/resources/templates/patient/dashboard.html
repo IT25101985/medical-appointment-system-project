@@ -115,12 +115,12 @@
 <!-- Sidebar -->
 <aside class="w-80 glass-sidebar h-screen p-8 flex flex-col sticky top-0 hidden lg:flex z-50">
   <div class="mb-10">
-    <div class="flex items-center gap-3 mb-8">
+    <a href="/" class="flex items-center gap-3 mb-8 hover:opacity-85 transition-opacity" style="text-decoration: none;">
       <div class="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center text-white shadow-lg">
         <i class="fa-solid fa-heart-pulse"></i>
       </div>
       <span class="text-xl font-bold tracking-tight">HEALTHCARE<span class="text-emerald-600">PLUS</span></span>
-    </div>
+    </a>
 
     <nav class="space-y-2">
       <div onclick="showSection('dashboard')" class="nav-item active flex items-center gap-4 px-4 py-3 rounded-xl font-semibold" id="nav-dashboard">
@@ -368,7 +368,7 @@
             <div class="space-y-4">
               <div>
                 <label class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1 block">Select Date</label>
-                <input type="text" id="datePicker" placeholder="Choose a date..." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-emerald-500 transition-all" required>
+                <input type="text" id="datePicker" placeholder="Choose a date..." th:value="${appointment.appointmentDate != null ? #temporals.format(appointment.appointmentDate, 'yyyy-MM-dd') : ''}" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-emerald-500 transition-all" required>
               </div>
               <div>
                 <label class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1 block">Available Slots</label>
@@ -382,9 +382,9 @@
         </div>
 
         <h3 class="font-bold mb-4 flex items-center gap-2 text-emerald-600"><i class="fa-solid fa-3"></i> Choose Your Doctor</h3>
-        <input type="hidden" name="doctor.id" id="selectedDoctorId" required>
+        <input type="hidden" name="doctor.id" id="selectedDoctorId" th:value="${appointment.doctor != null ? appointment.doctor.id : ''}" required>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          <div th:each="doc : ${doctors}" class="doctor-card p-4 flex flex-col items-center" th:data-id="${doc.id}" onclick="selectDoctor(this)">
+          <div th:each="doc : ${doctors}" th:class="${appointment.doctor != null and appointment.doctor.id == doc.id ? 'doctor-card p-4 flex flex-col items-center selected' : 'doctor-card p-4 flex flex-col items-center'}" th:data-id="${doc.id}" onclick="selectDoctor(this)">
             <img th:src="${(doc.user != null and doc.user.profileImage != null and doc.user.profileImage.length() > 20) ? (doc.user.profileImage.startsWith('http') or doc.user.profileImage.startsWith('data:') ? doc.user.profileImage : 'data:image/jpeg;base64,' + doc.user.profileImage) : 'https://ui-avatars.com/api/?name=' + (doc.name ?: 'Doctor') + '&background=random&color=fff'}" class="w-16 h-16 rounded-full mb-3 border-2 border-white shadow-sm">
             <p class="text-xs font-bold text-slate-900" th:text="${doc.name ?: 'Unknown Doctor'}">Doctor</p>
             <p class="text-[10px] text-emerald-600 font-bold" th:text="${doc.specialization ?: 'Specialist'}">Specialty</p>
@@ -459,7 +459,11 @@
                 <i class="fa-solid fa-file-invoice-dollar"></i>
               </a>
 
-              <form th:if="${app.status == 'SCHEDULED'}" th:action="@{/patient/appointment/{id}/cancel(id=${app.id})}" method="post">
+              <a th:if="${app.status == 'SCHEDULED'}" th:href="@{/patient/appointment/{id}/reschedule(id=${app.id})}" class="p-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-all mr-2" title="Reschedule Appointment">
+                <i class="fa-solid fa-arrows-rotate"></i>
+              </a>
+
+              <form th:if="${app.status == 'SCHEDULED'}" th:action="@{/patient/appointment/{id}/cancel(id=${app.id})}" method="post" class="inline">
                 <button type="submit" class="p-2 bg-rose-50 text-rose-600 rounded-lg hover:bg-rose-100 transition-all" title="Cancel Appointment">
                   <i class="fa-solid fa-xmark"></i>
                 </button>
@@ -628,6 +632,15 @@
             fetchSlots(doctorId, dateStr);
         }
     }
+
+    // Auto-fetch if editing
+    window.addEventListener('DOMContentLoaded', () => {
+        const preSelectedDoctor = document.getElementById('selectedDoctorId').value;
+        const preSelectedDate = document.getElementById('datePicker').value;
+        if (preSelectedDoctor && preSelectedDate) {
+            fetchSlots(preSelectedDoctor, preSelectedDate);
+        }
+    });
 
     function fetchSlots(doctorId, dateStr) {
         const timeSelect = document.getElementById('timeSelect');

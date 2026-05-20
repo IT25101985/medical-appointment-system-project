@@ -22,6 +22,7 @@ public class Patient extends User {
         this.setRole("ROLE_PATIENT");
     }
 
+
     public String getBloodGroup() { return bloodGroup; }
     public void setBloodGroup(String bloodGroup) { this.bloodGroup = bloodGroup; }
 

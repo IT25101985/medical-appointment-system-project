@@ -93,5 +93,40 @@ public class PatientProfileController {
         return "redirect:/logout";
     }
 
+    // Overriding / extended handling of Dashboard to add complex tracking analytics pipelines
+    @GetMapping("/dashboard")
+    public String dashboard(Principal principal, Model model) {
+        if (principal == null) {
+            return "redirect:/login";
+        }
+
+        Optional<User> optUser = userService.findByUsername(principal.getName());
+        if (optUser.isEmpty()) {
+            return "redirect:/login";
+        }
+
+        User user = optUser.get();
+
+        Patient patient;
+        Optional<Patient> optPatient = patientRepository.findById(user.getId());
+        if (optPatient.isPresent()) {
+            patient = optPatient.get();
+        } else {
+            patient = new Patient();
+            patient.setId(user.getId());
+            patient.setUsername(user.getUsername());
+            patient.setFullName(user.getFullName());
+            patient.setEmail(user.getEmail());
+            patient.setPhoneNo(user.getPhoneNo());
+            patient.setAddress(user.getAddress());
+            patient.setProfileImage(user.getProfileImage());
+        }
+
+        model.addAttribute("patient", patient);
+        model.addAttribute("user", patient);
+        model.addAttribute("username", principal.getName());
+
+    }
+
 
 }

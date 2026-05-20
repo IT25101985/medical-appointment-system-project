@@ -62,27 +62,62 @@ public class PatientProfileController {
             Optional<User> optUser = userService.findByUsername(principal.getName());
             if (optUser.isPresent()) {
                 User currentUser = optUser.get();
-                userService.updateUserProfile(currentUser, updatedUser);
 
-                // Updates Patient specific fields
-                if (currentUser instanceof Patient) {
-                    Patient p = (Patient) currentUser;
-                    p.setBloodGroup(updatedUser.getBloodGroup());
-                    p.setBloodPressure(updatedUser.getBloodPressure());
-                    p.setHeartRate(updatedUser.getHeartRate());
-                    p.setEmergencyContact(updatedUser.getEmergencyContact());
-                    userRepository.save(p);
+
+                String bp = updatedUser.getBloodPressure();
+                if (bp != null && !bp.trim().isEmpty()) {
+                    if (!bp.matches("\\d{2,3}/\\d{2,3}")) {
+                        return "redirect:/patient/dashboard?section=profile&error=invalid_bp";
+                    }
                 }
 
-                if(updatedUser.getPassword() != null && !updatedUser.getPassword().trim().isEmpty()) {
-                    currentUser.setPassword(updatedUser.getPassword());
-                    userService.saveUser(currentUser);
+
+                String emergencyContact = updatedUser.getEmergencyContact();
+                if (emergencyContact != null && !emergencyContact.trim().isEmpty()) {
+                    if (!emergencyContact.matches("\\d{10}")) {
+                        return "redirect:/patient/dashboard?section=profile&error=invalid_phone";
+                    }
+                }
+
+
+                String rawPassword = null;
+                if (updatedUser.getPassword() != null && !updatedUser.getPassword().trim().isEmpty()) {
+                    rawPassword = updatedUser.getPassword().trim();
+                    if (rawPassword.length() < 8 || !rawPassword.matches(".*\\d.*") || !rawPassword.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\",.<>/?].*")) {
+                        return "redirect:/patient/dashboard?section=profile&error=weak_password";
+                    }
+                }
+
+
+                Optional<Patient> optPatient = patientRepository.findById(currentUser.getId());
+                if (optPatient.isPresent()) {
+                    Patient p = optPatient.get();
+                    p.setFullName(updatedUser.getFullName());
+                    p.setPhoneNo(updatedUser.getPhoneNo());
+                    p.setAddress(updatedUser.getAddress());
+                    p.setProfileImage(updatedUser.getProfileImage());
+                    p.setBloodGroup(updatedUser.getBloodGroup());
+                    p.setBloodPressure(bp != null ? bp.trim() : null);
+                    p.setHeartRate(updatedUser.getHeartRate());
+                    p.setEmergencyContact(emergencyContact != null ? emergencyContact.trim() : null);
+
+                    if (rawPassword != null) {
+                        p.setPassword(rawPassword);
+                        userService.saveUser(p);
+                    } else {
+                        patientRepository.save(p);
+                    }
+                } else {
+                    if (rawPassword != null) {
+                        currentUser.setPassword(rawPassword);
+                        userService.saveUser(currentUser);
+                    }
+                    userService.updateUserProfile(currentUser, updatedUser);
                 }
             }
         }
         return "redirect:/patient/dashboard?section=profile&success";
     }
-
 
     @PostMapping("/delete-account")
     public String deleteAccount(Principal principal) {
@@ -93,7 +128,7 @@ public class PatientProfileController {
         return "redirect:/logout";
     }
 
-    // Overriding / extended handling of Dashboard to add complex tracking analytics pipelines
+
     @GetMapping("/dashboard")
     public String dashboard(Principal principal, Model model) {
         if (principal == null) {
@@ -126,22 +161,39 @@ public class PatientProfileController {
         model.addAttribute("user", patient);
         model.addAttribute("username", principal.getName());
 
-    }
-
-    Appointment app = new Appointment();
+        Appointment app = new Appointment();
         app.setContactEmail(user.getEmail());
         app.setContactPhone(user.getPhoneNo());
         model.addAttribute("appointment", app);
 
-    List<Doctor> doctors = doctorService.getAllDoctors();
+        List<Doctor> doctors = doctorService.getAllDoctors();
         model.addAttribute("doctors", doctors != null ? doctors : new ArrayList<>());
 
-    List<Appointment> appointments;
+        List<Appointment> appointments;
         try {
-        appointments = appointmentService.getAppointmentsForPatient(user);
-        if (appointments == null) appointments = new ArrayList<>();
-    } catch (Exception e) {
-        appointments = new ArrayList<>();
+            appointments = appointmentService.getAppointmentsForPatient(user);
+            if (appointments == null) appointments = new ArrayList<>();
+        } catch (Exception e) {
+            appointments = new ArrayList<>();
+        }
+
+
+        long totalVisits = appointments.stream()
+                .filter(a -> "COMPLETED".equals(a.getStatus()))
+                .count();
+
+        long cancelledVisits = appointments.stream()
+                .filter(a -> "CANCELLED".equals(a.getStatus()))
+                .count();
+
+
+        double attendanceRate = (totalVisits + cancelledVisits > 0)
+                ? ((double) totalVisits / (totalVisits + cancelledVisits)) * 100
+                : 100.0;
+
+
+        model.addAttribute("totalVisits", totalVisits);
+        model.addAttribute("attendanceRate", String.format("%.1f%%", attendanceRate));
 
 
         Map<Long, Invoice> invoiceMap = new HashMap<>();
@@ -166,6 +218,4 @@ public class PatientProfileController {
 
         return "patient/dashboard";
     }
-
-
 }

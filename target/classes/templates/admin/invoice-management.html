@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Invoice Management | Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-6xl mx-auto">
+        <div class="flex justify-between items-center mb-10">
+            <h1 class="text-3xl font-bold text-gray-800">Billing & Invoices</h1>
+            <a href="/admin/dashboard" class="bg-white px-4 py-2 rounded-lg shadow text-gray-600 hover:text-blue-600 font-bold">
+                <i class="fa-solid fa-arrow-left mr-2"></i> Back to Dashboard
+            </a>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
+            <table class="w-full text-left">
+                <thead class="bg-gray-50 border-b">
+                    <tr>
+                        <th class="px-6 py-4 font-bold text-gray-600">ID</th>
+                        <th class="px-6 py-4 font-bold text-gray-600">Patient</th>
+                        <th class="px-6 py-4 font-bold text-gray-600">Amount</th>
+                        <th class="px-6 py-4 font-bold text-gray-600">Status</th>
+                        <th class="px-6 py-4 font-bold text-gray-600">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y">
+                    <tr th:each="inv : ${invoices}">
+                        <td class="px-6 py-4 font-mono text-sm" th:text="'#' + ${inv.id}"></td>
+                        <td class="px-6 py-4">
+                            <p class="font-bold" th:text="${inv.appointment.patient.fullName}"></p>
+                            <p class="text-xs text-gray-400" th:text="${inv.appointment.doctor.name}"></p>
+                        </td>
+                        <td class="px-6 py-4 font-bold text-blue-600" th:text="'Rs.' + ${inv.amount}"></td>
+                        <td class="px-6 py-4">
+                            <span th:classappend="${inv.status == 'PAID' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}"
+                                  class="px-3 py-1 rounded-full text-xs font-bold" th:text="${inv.status}"></span>
+                        </td>
+                        <td class="px-6 py-4 flex gap-2">
+                            <form th:action="@{/admin/invoice/{id}/update(id=${inv.id})}" method="post">
+                                <input type="hidden" name="status" value="REFUNDED">
+                                <button class="text-orange-600 hover:text-orange-800 text-sm font-bold">Refund</button>
+                            </form>
+                            <form th:action="@{/admin/invoice/{id}/delete(id=${inv.id})}" method="post" onsubmit="return confirm('Delete this record?');">
+                                <button class="text-red-600 hover:text-red-800 text-sm font-bold">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

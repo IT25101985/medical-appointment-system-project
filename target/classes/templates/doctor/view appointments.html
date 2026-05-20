@@ -99,48 +99,7 @@
                 </thead>
                 <tbody class="divide-y divide-slate-100">
 
-                <tr class="current-session group transition-all">
-                    <td class="px-8 py-6">
-                        <div class="flex items-center gap-4">
-                            <div class="text-center min-w-[60px]">
-                                <p class="text-sm font-bold text-emerald-500">10:30</p>
-                                <p class="text-[10px] text-slate-400 font-bold uppercase">AM</p>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="h-11 w-11 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold shadow-lg shadow-blue-200">
-                                    JD
-                                </div>
-                                <div>
-                                    <p class="font-bold text-white">John Doe (Demo)</p>
-                                    <p class="text-xs text-slate-400">ID: #PT-8829</p>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="px-8 py-6">
-                        <div class="flex flex-col">
-                            <span class="text-sm font-semibold text-slate-700">General Checkup</span>
-                            <span class="text-xs text-slate-400">Follow-up for Hypertension</span>
-                        </div>
-                    </td>
-                    <td class="px-8 py-6">
-                            <span class="inline-flex items-center gap-1.5 px-3 py-1 text-[10px] font-extrabold bg-blue-50 text-emerald-500 rounded-full uppercase border border-blue-100">
-                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse"></span>
-                                In Queue
-                            </span>
-                    </td>
-                    <td class="px-8 py-6 text-right">
-                        <div class="flex justify-end gap-2">
-                            <a href="/doctor/consultations" class="action-btn px-4 py-2 bg-emerald-600 text-white text-xs font-bold rounded-xl hover:bg-blue-700 decoration-none inline-flex items-center">
-                                Start Session
-                            </a>
-                            <a href="/doctor/records" class="action-btn p-2 bg-slate-100 text-slate-300 rounded-xl hover:bg-slate-200 decoration-none inline-flex items-center">
-                                <i class="fa-solid fa-ellipsis-vertical px-1"></i>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-
+                <!-- Appointments loop -->
                 <tr th:each="app : ${appointments}" class="hover:bg-slate-800/50 transition-all">
                     <td class="px-8 py-6">
                         <div class="flex items-center gap-4">
@@ -152,22 +111,27 @@
                                     SA
                                 </div>
                                 <div>
-                                    <p class="font-bold text-slate-700" th:text="${app.patient != null ? app.patient.fullName : 'Guest Patient'}">Sarah Adams</p>
+                                    <p class="font-bold text-slate-200" th:text="${app.patient != null ? app.patient.fullName : 'Guest Patient'}">Sarah Adams</p>
                                     <p class="text-xs text-slate-400" th:text="'ID: #PT-' + ${app.patient != null ? app.patient.id : '0000'}">ID: #PT-9012</p>
                                 </div>
                             </div>
                         </div>
                     </td>
                     <td class="px-8 py-6">
-                        <span class="text-sm font-medium text-slate-600">Consultation</span>
+                        <span class="text-sm font-medium text-slate-300">Consultation</span>
                     </td>
                     <td class="px-8 py-6">
-                        <span class="px-3 py-1 text-[10px] font-extrabold bg-slate-100 text-slate-300 rounded-full uppercase">Scheduled</span>
+                        <span class="px-3 py-1 text-[10px] font-extrabold bg-emerald-500/10 text-emerald-400 rounded-full uppercase" th:text="${app.status}">Scheduled</span>
                     </td>
                     <td class="px-8 py-6 text-right">
-                        <a href="/doctor/records" class="text-slate-400 hover:text-emerald-500 text-xs font-bold transition-colors inline-block decoration-none">
-                            View Records <i class="fa-solid fa-arrow-right-long ml-1"></i>
-                        </a>
+                        <div class="flex justify-end gap-3 items-center">
+                            <a th:if="${app.status == 'SCHEDULED'}" th:href="@{/doctor/prescribe/{id}(id=${app.id})}" class="action-btn px-4 py-2 bg-emerald-600 text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-emerald-500 shadow-lg shadow-emerald-500/20 decoration-none">
+                                <i class="fa-solid fa-file-prescription mr-2"></i> Prescribe
+                            </a>
+                            <a href="/doctor/records" class="text-slate-400 hover:text-emerald-500 text-xs font-bold transition-colors inline-block decoration-none">
+                                View Records <i class="fa-solid fa-arrow-right-long ml-1"></i>
+                            </a>
+                        </div>
                     </td>
                 </tr>
                 </tbody>

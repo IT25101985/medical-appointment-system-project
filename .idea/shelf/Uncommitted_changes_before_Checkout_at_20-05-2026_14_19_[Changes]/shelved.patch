@@ -1,0 +1,800 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\"\r\n          id=\"a8ef14fd-5384-498a-8c34-ffbf826f6aa1\"\r\n          name=\"Changes\"\r\n          comment=\"Merge branch\">\r\n      <change beforePath=\"$PROJECT_DIR$/pom.xml\" beforeDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"dev\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n\r\n  <component name=\"ProjectColorInfo\">\r\n    {\r\n      &quot;associatedIndex&quot;: 6\r\n    }\r\n  </component>\r\n\r\n  <component name=\"ProjectId\" id=\"3D1BzHNXuz5VUD4BwLiPV27GjXK\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RunOnceActivity.git.unshallow\": \"true\",\r\n    \"Spring Boot.MedicalAppointmentApplication.executor\": \"Run\",\r\n    \"git-widget-placeholder\": \"Payments,-Invoices-&&-Feedback\",\r\n    \"kotlin-language-version-configured\": \"true\"\r\n  }\r\n}]]></component>\r\n\r\n  <component name=\"RunManager\" selected=\"Application.MedicalAppointmentApplication\">\r\n    <configuration name=\"MedicalAppointmentApplication\"\r\n                   type=\"SpringBootApplicationConfigurationType\"\r\n                   factoryName=\"Spring Boot\"\r\n                   temporary=\"true\">\r\n      <module name=\"medical-appointment-system\" />\r\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"com.medical.MedicalAppointmentApplication\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.MedicalAppointmentApplication\" />\r\n        <item itemvalue=\"Spring Boot.MedicalAppointmentApplication\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.31033.145\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"a8ef14fd-5384-498a-8c34-ffbf826f6aa1\"\r\n                  name=\"Changes\"\r\n                  comment=\"\" />\r\n      <created>1777440058478</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1777440058478</updated>\r\n    </task>\r\n    <servers />\r\n  </component>\r\n\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\r\n          <url>file://$PROJECT_DIR$/src/main/java/com/medical/entity/Appointment.java</url>\r\n          <line>6</line>\r\n        </line-breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 871274f3e7f45a4abb58867c28ade138bfcc3305)
++++ b/.idea/workspace.xml	(date 1779259455464)
+@@ -4,11 +4,8 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true"
+-          id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1"
+-          name="Changes"
+-          comment="Merge branch">
+-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
++    <list default="true" id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="Merge branch">
++      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/patient/history.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/patient/history.html" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -30,13 +27,9 @@
+     </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
+-
+-  <component name="ProjectColorInfo">
+-    {
++  <component name="ProjectColorInfo">{
+       &quot;associatedIndex&quot;: 6
+-    }
+-  </component>
+-
++    }</component>
+   <component name="ProjectId" id="3D1BzHNXuz5VUD4BwLiPV27GjXK" />
+   <component name="ProjectViewState">
+     <option name="hideEmptyMiddlePackages" value="true" />
+@@ -46,26 +39,20 @@
+   "keyToString": {
+     "RunOnceActivity.git.unshallow": "true",
+     "Spring Boot.MedicalAppointmentApplication.executor": "Run",
+-    "git-widget-placeholder": "Payments,-Invoices-&&-Feedback",
++    "git-widget-placeholder": "main",
+     "kotlin-language-version-configured": "true"
+   }
+ }]]></component>
+-
+-  <component name="RunManager" selected="Application.MedicalAppointmentApplication">
+-    <configuration name="MedicalAppointmentApplication"
+-                   type="SpringBootApplicationConfigurationType"
+-                   factoryName="Spring Boot"
+-                   temporary="true">
++  <component name="RunManager">
++    <configuration name="MedicalAppointmentApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true">
+       <module name="medical-appointment-system" />
+       <option name="SPRING_BOOT_MAIN_CLASS" value="com.medical.MedicalAppointmentApplication" />
+       <method v="2">
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
+-
+     <recent_temporary>
+       <list>
+-        <item itemvalue="Application.MedicalAppointmentApplication" />
+         <item itemvalue="Spring Boot.MedicalAppointmentApplication" />
+       </list>
+     </recent_temporary>
+@@ -80,9 +67,7 @@
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+     <task active="true" id="Default" summary="Default task">
+-      <changelist id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1"
+-                  name="Changes"
+-                  comment="" />
++      <changelist id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="" />
+       <created>1777440058478</created>
+       <option name="number" value="Default" />
+       <option name="presentableId" value="Default" />
+@@ -90,7 +75,6 @@
+     </task>
+     <servers />
+   </component>
+-
+   <component name="XDebuggerManager">
+     <breakpoint-manager>
+       <breakpoints>
+@@ -101,5 +85,4 @@
+       </breakpoints>
+     </breakpoint-manager>
+   </component>
+-
+ </project>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_25-04-2026_11_10_[Changes]1/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-04-2026_11_10_[Changes]1/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-04-2026_11_10_[Changes]1/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-04-2026_11_10_[Changes]1/shelved.patch	(revision 871274f3e7f45a4abb58867c28ade138bfcc3305)
++++ /dev/null	(revision 871274f3e7f45a4abb58867c28ade138bfcc3305)
+@@ -1,56 +0,0 @@
+-Index: .idea/vcs.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+-deleted file mode 100644
+---- a/.idea/vcs.xml	(revision f25192e6907dbd3be967e94d165eda76de739463)
+-+++ /dev/null	(revision f25192e6907dbd3be967e94d165eda76de739463)
+-@@ -1,6 +0,0 @@
+--<?xml version="1.0" encoding="UTF-8"?>
+--<project version="4">
+--  <component name="VcsDirectoryMappings">
+--    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+--  </component>
+--</project>
+-\ No newline at end of file
+-Index: .idea/compiler.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"CompilerConfiguration\">\r\n<<<<<<< Updated upstream\r\n    <annotationProcessing>\r\n      <profile name=\"Annotation profile for Medical-Appointment-System-Project\" enabled=\"true\">\r\n        <sourceOutputDir name=\"target/generated-sources/annotations\" />\r\n        <sourceTestOutputDir name=\"target/generated-test-sources/test-annotations\" />\r\n        <outputRelativeToContentRoot value=\"true\" />\r\n        <processorPath useClasspath=\"false\">\r\n          <entry name=\"$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar\" />\r\n        </processorPath>\r\n        <module name=\"Medical-Appointment-System-Project\" />\r\n      </profile>\r\n    </annotationProcessing>\r\n  </component>\r\n  <component name=\"JavacSettings\">\r\n    <option name=\"ADDITIONAL_OPTIONS_OVERRIDE\">\r\n      <module name=\"Medical-Appointment-System-Project\" options=\"-parameters\" />\r\n    </option>\r\n=======\r\n    <bytecodeTargetLevel>\r\n      <module name=\"Medical-Appointment-System-Project\" target=\"17\" />\r\n    </bytecodeTargetLevel>\r\n>>>>>>> Stashed changes\r\n  </component>\r\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+---- a/.idea/compiler.xml	(revision f25192e6907dbd3be967e94d165eda76de739463)
+-+++ b/.idea/compiler.xml	(date 1777095555787)
+-@@ -1,27 +1,8 @@
+- <?xml version="1.0" encoding="UTF-8"?>
+- <project version="4">
+-   <component name="CompilerConfiguration">
+--<<<<<<< Updated upstream
+--    <annotationProcessing>
+--      <profile name="Annotation profile for Medical-Appointment-System-Project" enabled="true">
+--        <sourceOutputDir name="target/generated-sources/annotations" />
+--        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+--        <outputRelativeToContentRoot value="true" />
+--        <processorPath useClasspath="false">
+--          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
+--        </processorPath>
+--        <module name="Medical-Appointment-System-Project" />
+--      </profile>
+--    </annotationProcessing>
+--  </component>
+--  <component name="JavacSettings">
+--    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+--      <module name="Medical-Appointment-System-Project" options="-parameters" />
+--    </option>
+--=======
+-     <bytecodeTargetLevel>
+-       <module name="Medical-Appointment-System-Project" target="17" />
+-     </bytecodeTargetLevel>
+-->>>>>>> Stashed changes
+-   </component>
+- </project>
+-\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_07-05-2026_13_15_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_07-05-2026_13_15_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Checkout_at_07-05-2026_13_15_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_07-05-2026_13_15_[Changes]/shelved.patch	(revision 871274f3e7f45a4abb58867c28ade138bfcc3305)
++++ /dev/null	(revision 871274f3e7f45a4abb58867c28ade138bfcc3305)
+@@ -1,175 +0,0 @@
+-Index: src/main/java/com/medical/entity/User.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package com.medical.entity;\r\n\r\nimport jakarta.persistence.*;\r\n\r\n@Entity\r\n@Table(name = \"users\")\r\n@Inheritance(strategy = InheritanceType.SINGLE_TABLE)\r\n@DiscriminatorColumn(name = \"user_type\")\r\npublic class User {\r\n    @Id\r\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\r\n    private Long id;\r\n    \r\n    private String username;\r\n    private String password;\r\n    private String fullName;\r\n    private String role; // ROLE_ADMIN, ROLE_DOCTOR, ROLE_PATIENT\r\n    private String email;\r\n    private String phoneNo;\r\n    private String address;\r\n    @Column(columnDefinition = \"LONGTEXT\")\r\n    private String profileImage;\r\n\r\n    // Default constructor\r\n    public User() {}\r\n\r\n    // Simple constructor\r\n    public User(String username, String password, String fullName) {\r\n        this.username = username;\r\n        this.password = password;\r\n        this.fullName = fullName;\r\n    }\r\n\r\n    // Getters and Setters (Encapsulation)\r\n    public Long getId() { return id; }\r\n    public void setId(Long id) { this.id = id; }\r\n    \r\n    public String getUsername() { return username; }\r\n    public void setUsername(String username) { this.username = username; }\r\n    \r\n    public String getPassword() { return password; }\r\n    public void setPassword(String password) { this.password = password; }\r\n    \r\n    public String getFullName() { return fullName; }\r\n    public void setFullName(String fullName) { this.fullName = fullName; }\r\n    \r\n    public String getRole() { return role; }\r\n    public void setRole(String role) { this.role = role; }\r\n\r\n    public String getEmail() { return email; }\r\n    public void setEmail(String email) { this.email = email; }\r\n\r\n    public String getPhoneNo() { return phoneNo; }\r\n    public void setPhoneNo(String phoneNo) { this.phoneNo = phoneNo; }\r\n\r\n    public String getAddress() { return address; }\r\n    public void setAddress(String address) { this.address = address; }\r\n\r\n    public String getProfileImage() { return profileImage; }\r\n    public void setProfileImage(String profileImage) { this.profileImage = profileImage; }\r\n}\r\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/src/main/java/com/medical/entity/User.java b/src/main/java/com/medical/entity/User.java
+---- a/src/main/java/com/medical/entity/User.java	(revision a341b2349b7b45784959d76b907d0e84e3332f99)
+-+++ b/src/main/java/com/medical/entity/User.java	(date 1778139893105)
+-@@ -10,7 +10,7 @@
+-     @Id
+-     @GeneratedValue(strategy = GenerationType.IDENTITY)
+-     private Long id;
+--    
+-+
+-     private String username;
+-     private String password;
+-     private String fullName;
+-@@ -34,16 +34,16 @@
+-     // Getters and Setters (Encapsulation)
+-     public Long getId() { return id; }
+-     public void setId(Long id) { this.id = id; }
+--    
+-+
+-     public String getUsername() { return username; }
+-     public void setUsername(String username) { this.username = username; }
+--    
+-+
+-     public String getPassword() { return password; }
+-     public void setPassword(String password) { this.password = password; }
+--    
+-+
+-     public String getFullName() { return fullName; }
+-     public void setFullName(String fullName) { this.fullName = fullName; }
+--    
+-+
+-     public String getRole() { return role; }
+-     public void setRole(String role) { this.role = role; }
+- 
+-Index: .idea/workspace.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"a8ef14fd-5384-498a-8c34-ffbf826f6aa1\" name=\"Changes\" comment=\"\">\r\n      <change afterPath=\"$PROJECT_DIR$/../../Medical-Appointment-System-Project/.gitattributes\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/../../Medical-Appointment-System-Project/.gitignore\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/../../Medical-Appointment-System-Project/.mvn/wrapper/maven-wrapper.properties\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/../../Medical-Appointment-System-Project/mvnw\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/../../Medical-Appointment-System-Project/mvnw.cmd\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/../../Medical-Appointment-System-Project/pom.xml\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/../../Medical-Appointment-System-Project/src/main/java/com/medical/medicalappointmentsystemproject/MedicalAppointmentSystemProjectApplication.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/../../Medical-Appointment-System-Project/src/main/resources/application.properties\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/../../Medical-Appointment-System-Project/src/test/java/com/medical/medicalappointmentsystemproject/MedicalAppointmentSystemProjectApplicationTests.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"dev\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n    <option name=\"ROOT_SYNC\" value=\"DONT_SYNC\" />\r\n  </component>\r\n\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;IT25101985&quot;\r\n  }\r\n}</component>\r\n\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/IT25101985/medical-appointment-system-project.git&quot;,\r\n    &quot;accountId&quot;: &quot;8294d8c8-39de-452e-8d5f-52b253f9a0b4&quot;\r\n  }\r\n}</component>\r\n\r\n  <component name=\"MavenImportPreferences\">\r\n    <option name=\"generalSettings\">\r\n      <MavenGeneralSettings>\r\n        <option name=\"mavenHomeTypeForPersistence\" value=\"WRAPPER\" />\r\n      </MavenGeneralSettings>\r\n    </option>\r\n  </component>\r\n\r\n  <component name=\"ProjectColorInfo\"><![CDATA[{\r\n  \"associatedIndex\": 1\r\n}]]></component>\r\n\r\n  <component name=\"ProjectId\" id=\"3CtcWSQluYdZKCIjn4DLvErY2Ww\" />\r\n\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"ModuleVcsDetector.initialDetectionPerformed\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"Spring Boot.MedicalAppointmentApplication.executor\": \"Run\",\r\n    \"git-widget-placeholder\": \"dev\",\r\n    \"kotlin-language-version-configured\": \"true\",\r\n    \"last_opened_file_path\": \"D:/medical-appointment-system-project/git hub/medical-appointment-system-project/pom.xml\"\r\n  }\r\n}]]></component>\r\n\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.31033.145\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"a8ef14fd-5384-498a-8c34-ffbf826f6aa1\" name=\"Changes\" comment=\"\" />\r\n      <created>1777967443385</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1777967443385</updated>\r\n    </task>\r\n    <servers />\r\n  </component>\r\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+---- a/.idea/workspace.xml	(revision a341b2349b7b45784959d76b907d0e84e3332f99)
+-+++ b/.idea/workspace.xml	(date 1778139900894)
+-@@ -3,49 +3,36 @@
+-   <component name="AutoImportSettings">
+-     <option name="autoReloadType" value="SELECTIVE" />
+-   </component>
+--
+-   <component name="ChangeListManager">
+-     <list default="true" id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="">
+--      <change afterPath="$PROJECT_DIR$/../../Medical-Appointment-System-Project/.gitattributes" afterDir="false" />
+--      <change afterPath="$PROJECT_DIR$/../../Medical-Appointment-System-Project/.gitignore" afterDir="false" />
+--      <change afterPath="$PROJECT_DIR$/../../Medical-Appointment-System-Project/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+--      <change afterPath="$PROJECT_DIR$/../../Medical-Appointment-System-Project/mvnw" afterDir="false" />
+--      <change afterPath="$PROJECT_DIR$/../../Medical-Appointment-System-Project/mvnw.cmd" afterDir="false" />
+--      <change afterPath="$PROJECT_DIR$/../../Medical-Appointment-System-Project/pom.xml" afterDir="false" />
+--      <change afterPath="$PROJECT_DIR$/../../Medical-Appointment-System-Project/src/main/java/com/medical/medicalappointmentsystemproject/MedicalAppointmentSystemProjectApplication.java" afterDir="false" />
+--      <change afterPath="$PROJECT_DIR$/../../Medical-Appointment-System-Project/src/main/resources/application.properties" afterDir="false" />
+--      <change afterPath="$PROJECT_DIR$/../../Medical-Appointment-System-Project/src/test/java/com/medical/medicalappointmentsystemproject/MedicalAppointmentSystemProjectApplicationTests.java" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/medicalappointmentsystemproject/MedicalAppointmentSystemProjectApplication.java" beforeDir="false" />
+-     </list>
+-     <option name="SHOW_DIALOG" value="false" />
+-     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+-     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+-     <option name="LAST_RESOLUTION" value="IGNORE" />
+-   </component>
+--
+-   <component name="Git.Settings">
+-     <option name="RECENT_BRANCH_BY_REPOSITORY">
+-       <map>
+--        <entry key="$PROJECT_DIR$" value="dev" />
+-+        <entry key="$PROJECT_DIR$" value="Doctor-Management" />
+-       </map>
+-     </option>
+-     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+-     <option name="ROOT_SYNC" value="DONT_SYNC" />
+-   </component>
+--
+-   <component name="GitHubPullRequestSearchHistory">{
+-   &quot;lastFilter&quot;: {
+-     &quot;state&quot;: &quot;OPEN&quot;,
+-     &quot;assignee&quot;: &quot;IT25101985&quot;
+-   }
+- }</component>
+--
+-   <component name="GithubPullRequestsUISettings">{
+-   &quot;selectedUrlAndAccountId&quot;: {
+-     &quot;url&quot;: &quot;https://github.com/IT25101985/medical-appointment-system-project.git&quot;,
+-     &quot;accountId&quot;: &quot;8294d8c8-39de-452e-8d5f-52b253f9a0b4&quot;
+-   }
+- }</component>
+--
+-   <component name="MavenImportPreferences">
+-     <option name="generalSettings">
+-       <MavenGeneralSettings>
+-@@ -53,29 +40,46 @@
+-       </MavenGeneralSettings>
+-     </option>
+-   </component>
+--
+--  <component name="ProjectColorInfo"><![CDATA[{
+--  "associatedIndex": 1
+--}]]></component>
+--
+-+  <component name="ProjectColorInfo">{
+-+  &quot;associatedIndex&quot;: 1
+-+}</component>
+-   <component name="ProjectId" id="3CtcWSQluYdZKCIjn4DLvErY2Ww" />
+--
+-   <component name="ProjectViewState">
+-     <option name="hideEmptyMiddlePackages" value="true" />
+-     <option name="showLibraryContents" value="true" />
+-   </component>
+--
+--  <component name="PropertiesComponent"><![CDATA[{
+--  "keyToString": {
+--    "ModuleVcsDetector.initialDetectionPerformed": "true",
+--    "RunOnceActivity.ShowReadmeOnStart": "true",
+--    "Spring Boot.MedicalAppointmentApplication.executor": "Run",
+--    "git-widget-placeholder": "dev",
+--    "kotlin-language-version-configured": "true",
+--    "last_opened_file_path": "D:/medical-appointment-system-project/git hub/medical-appointment-system-project/pom.xml"
+--  }
+--}]]></component>
+--
+-+  <component name="PropertiesComponent">{
+-+  &quot;keyToString&quot;: {
+-+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+-+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-+    &quot;Spring Boot.MedicalAppointmentApplication.executor&quot;: &quot;Run&quot;,
+-+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+-+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+-+    &quot;last_opened_file_path&quot;: &quot;D:/medical-appointment-system-project/git hub/medical-appointment-system-project/pom.xml&quot;
+-+  }
+-+}</component>
+-+  <component name="RunManager">
+-+    <configuration name="MedicalAppointmentApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+-+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UnknownPolicyInFreeMode" />
+-+      <module name="medical-appointment-system" />
+-+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.medical.MedicalAppointmentApplication" />
+-+      <extension name="coverage">
+-+        <pattern>
+-+          <option name="PATTERN" value="com.medical.*" />
+-+          <option name="ENABLED" value="true" />
+-+        </pattern>
+-+      </extension>
+-+      <method v="2">
+-+        <option name="Make" enabled="true" />
+-+      </method>
+-+    </configuration>
+-+    <recent_temporary>
+-+      <list>
+-+        <item itemvalue="Spring Boot.MedicalAppointmentApplication" />
+-+        <item itemvalue="Spring Boot.MedicalAppointmentApplication" />
+-+      </list>
+-+    </recent_temporary>
+-+  </component>
+-   <component name="SharedIndexes">
+-     <attachedChunks>
+-       <set>
+-@@ -83,7 +87,6 @@
+-       </set>
+-     </attachedChunks>
+-   </component>
+--
+-   <component name="TaskManager">
+-     <task active="true" id="Default" summary="Default task">
+-       <changelist id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="" />
+Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_25-04-2026_10_08_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-04-2026_10_08_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-04-2026_10_08_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-04-2026_10_08_[Changes]/shelved.patch	(revision 871274f3e7f45a4abb58867c28ade138bfcc3305)
++++ /dev/null	(revision 871274f3e7f45a4abb58867c28ade138bfcc3305)
+@@ -1,18 +0,0 @@
+-Index: .idea/compiler.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"CompilerConfiguration\">\r\n    <annotationProcessing>\r\n      <profile name=\"Annotation profile for Medical-Appointment-System-Project\" enabled=\"true\">\r\n        <sourceOutputDir name=\"target/generated-sources/annotations\" />\r\n        <sourceTestOutputDir name=\"target/generated-test-sources/test-annotations\" />\r\n        <outputRelativeToContentRoot value=\"true\" />\r\n        <processorPath useClasspath=\"false\">\r\n          <entry name=\"$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar\" />\r\n          <entry name=\"$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar\" />\r\n        </processorPath>\r\n        <module name=\"Medical-Appointment-System-Project\" />\r\n      </profile>\r\n    </annotationProcessing>\r\n  </component>\r\n  <component name=\"JavacSettings\">\r\n    <option name=\"ADDITIONAL_OPTIONS_OVERRIDE\">\r\n      <module name=\"Medical-Appointment-System-Project\" options=\"-parameters\" />\r\n    </option>\r\n  </component>\r\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+---- a/.idea/compiler.xml	(revision dbbc02680e9c61550885470b1add65f15bb9821d)
+-+++ b/.idea/compiler.xml	(date 1777091850164)
+-@@ -8,7 +8,6 @@
+-         <outputRelativeToContentRoot value="true" />
+-         <processorPath useClasspath="false">
+-           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
+--          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
+-         </processorPath>
+-         <module name="Medical-Appointment-System-Project" />
+-       </profile>
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_25-04-2026_11_17_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_25-04-2026_11_17_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_25-04-2026_11_17_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_25-04-2026_11_17_[Changes]/shelved.patch	(revision 871274f3e7f45a4abb58867c28ade138bfcc3305)
++++ /dev/null	(revision 871274f3e7f45a4abb58867c28ade138bfcc3305)
+@@ -1,115 +0,0 @@
+-Index: .idea/compiler.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"CompilerConfiguration\">\r\n<<<<<<< Updated upstream\r\n    <annotationProcessing>\r\n      <profile name=\"Annotation profile for Medical-Appointment-System-Project\" enabled=\"true\">\r\n        <sourceOutputDir name=\"target/generated-sources/annotations\" />\r\n        <sourceTestOutputDir name=\"target/generated-test-sources/test-annotations\" />\r\n        <outputRelativeToContentRoot value=\"true\" />\r\n        <processorPath useClasspath=\"false\">\r\n          <entry name=\"$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar\" />\r\n        </processorPath>\r\n        <module name=\"Medical-Appointment-System-Project\" />\r\n      </profile>\r\n    </annotationProcessing>\r\n  </component>\r\n  <component name=\"JavacSettings\">\r\n    <option name=\"ADDITIONAL_OPTIONS_OVERRIDE\">\r\n      <module name=\"Medical-Appointment-System-Project\" options=\"-parameters\" />\r\n    </option>\r\n=======\r\n    <bytecodeTargetLevel>\r\n      <module name=\"Medical-Appointment-System-Project\" target=\"17\" />\r\n    </bytecodeTargetLevel>\r\n>>>>>>> Stashed changes\r\n  </component>\r\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+---- a/.idea/compiler.xml	(revision f25192e6907dbd3be967e94d165eda76de739463)
+-+++ b/.idea/compiler.xml	(date 1777096032826)
+-@@ -1,7 +1,6 @@
+- <?xml version="1.0" encoding="UTF-8"?>
+- <project version="4">
+-   <component name="CompilerConfiguration">
+--<<<<<<< Updated upstream
+-     <annotationProcessing>
+-       <profile name="Annotation profile for Medical-Appointment-System-Project" enabled="true">
+-         <sourceOutputDir name="target/generated-sources/annotations" />
+-@@ -18,10 +17,5 @@
+-     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+-       <module name="Medical-Appointment-System-Project" options="-parameters" />
+-     </option>
+--=======
+--    <bytecodeTargetLevel>
+--      <module name="Medical-Appointment-System-Project" target="17" />
+--    </bytecodeTargetLevel>
+-->>>>>>> Stashed changes
+-   </component>
+- </project>
+-\ No newline at end of file
+-Index: .idea/workspace.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"a8ef14fd-5384-498a-8c34-ffbf826f6aa1\" name=\"Changes\" comment=\"\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MavenImportPreferences\">\r\n    <option name=\"generalSettings\">\r\n      <MavenGeneralSettings>\r\n        <option name=\"mavenHomeTypeForPersistence\" value=\"WRAPPER\" />\r\n      </MavenGeneralSettings>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectColorInfo\"><![CDATA[{\r\n  \"associatedIndex\": 4\r\n}]]></component>\r\n  <component name=\"ProjectId\" id=\"3CpmVLmidugj9AGGj9O4FmbGKcc\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"ModuleVcsDetector.initialDetectionPerformed\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"git-widget-placeholder\": \"master\",\r\n    \"kotlin-language-version-configured\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.31033.145\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"a8ef14fd-5384-498a-8c34-ffbf826f6aa1\" name=\"Changes\" comment=\"\" />\r\n      <created>1777090910200</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1777090910200</updated>\r\n    </task>\r\n    <servers />\r\n  </component>\r\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+---- a/.idea/workspace.xml	(revision f25192e6907dbd3be967e94d165eda76de739463)
+-+++ b/.idea/workspace.xml	(date 1777095995782)
+-@@ -13,6 +13,18 @@
+-   <component name="Git.Settings">
+-     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+-   </component>
+-+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+-+  "lastFilter": {
+-+    "state": "OPEN",
+-+    "assignee": "IT25101985"
+-+  }
+-+}]]></component>
+-+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+-+  "selectedUrlAndAccountId": {
+-+    "url": "https://github.com/IT25101985/medical-appointment-system-project.git",
+-+    "accountId": "8294d8c8-39de-452e-8d5f-52b253f9a0b4"
+-+  }
+-+}]]></component>
+-   <component name="MavenImportPreferences">
+-     <option name="generalSettings">
+-       <MavenGeneralSettings>
+-@@ -20,9 +32,9 @@
+-       </MavenGeneralSettings>
+-     </option>
+-   </component>
+--  <component name="ProjectColorInfo"><![CDATA[{
+--  "associatedIndex": 4
+--}]]></component>
+-+  <component name="ProjectColorInfo">{
+-+  &quot;associatedIndex&quot;: 4
+-+}</component>
+-   <component name="ProjectId" id="3CpmVLmidugj9AGGj9O4FmbGKcc" />
+-   <component name="ProjectViewState">
+-     <option name="hideEmptyMiddlePackages" value="true" />
+-@@ -32,10 +44,22 @@
+-   "keyToString": {
+-     "ModuleVcsDetector.initialDetectionPerformed": "true",
+-     "RunOnceActivity.ShowReadmeOnStart": "true",
+--    "git-widget-placeholder": "master",
+-     "kotlin-language-version-configured": "true"
+-   }
+- }]]></component>
+-+  <component name="RunManager">
+-+    <configuration default="true" type="JetRunConfigurationType">
+-+      <module name="Medical-Appointment-System-Project" />
+-+      <method v="2">
+-+        <option name="Make" enabled="true" />
+-+      </method>
+-+    </configuration>
+-+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+-+      <module name="Medical-Appointment-System-Project" />
+-+      <option name="filePath" />
+-+      <method v="2" />
+-+    </configuration>
+-+  </component>
+-   <component name="SharedIndexes">
+-     <attachedChunks>
+-       <set>
+-Index: .idea/vcs.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"VcsDirectoryMappings\">\r\n    <mapping directory=\"$PROJECT_DIR$\" vcs=\"Git\" />\r\n  </component>\r\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+---- a/.idea/vcs.xml	(revision f25192e6907dbd3be967e94d165eda76de739463)
+-+++ b/.idea/vcs.xml	(date 1777096032905)
+-@@ -1,6 +1,6 @@
+- <?xml version="1.0" encoding="UTF-8"?>
+- <project version="4">
+-   <component name="VcsDirectoryMappings">
+--    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+-+    <mapping directory="" vcs="Git" />
+-   </component>
+- </project>
+-\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_25-04-2026_18_12_[Changes]1/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-04-2026_18_12_[Changes]1/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-04-2026_18_12_[Changes]1/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_25-04-2026_18_12_[Changes]1/shelved.patch	(revision 871274f3e7f45a4abb58867c28ade138bfcc3305)
++++ /dev/null	(revision 871274f3e7f45a4abb58867c28ade138bfcc3305)
+@@ -1,26 +0,0 @@
+-Index: .idea/misc.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\r\n<<<<<<< Updated upstream\r\n  <component name=\"MavenProjectsManager\">\r\n    <option name=\"originalFiles\">\r\n      <list>\r\n        <option value=\"$PROJECT_DIR$/pom.xml\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_24\" default=\"true\" project-jdk-name=\"24\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n=======\r\n>>>>>>> Stashed changes\r\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/misc.xml b/.idea/misc.xml
+---- a/.idea/misc.xml	(revision c4544c22ef39544bab8ffd8a1d49096941927188)
+-+++ b/.idea/misc.xml	(date 1777096385281)
+-@@ -1,7 +1,6 @@
+- <?xml version="1.0" encoding="UTF-8"?>
+- <project version="4">
+-   <component name="ExternalStorageConfigurationManager" enabled="true" />
+--<<<<<<< Updated upstream
+-   <component name="MavenProjectsManager">
+-     <option name="originalFiles">
+-       <list>
+-@@ -12,6 +11,4 @@
+-   <component name="ProjectRootManager" version="2" languageLevel="JDK_24" default="true" project-jdk-name="24" project-jdk-type="JavaSDK">
+-     <output url="file://$PROJECT_DIR$/out" />
+-   </component>
+--=======
+-->>>>>>> Stashed changes
+- </project>
+-\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_07-05-2026_13_14_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_07-05-2026_13_14_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Checkout_at_07-05-2026_13_14_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_07-05-2026_13_14_[Changes]/shelved.patch	(revision 871274f3e7f45a4abb58867c28ade138bfcc3305)
++++ /dev/null	(revision 871274f3e7f45a4abb58867c28ade138bfcc3305)
+@@ -1,143 +0,0 @@
+-Index: src/main/java/com/medical/entity/User.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package com.medical.entity;\r\n\r\nimport jakarta.persistence.*;\r\n\r\n@Entity\r\n@Table(name = \"users\")\r\n@Inheritance(strategy = InheritanceType.SINGLE_TABLE)\r\n@DiscriminatorColumn(name = \"user_type\")\r\npublic class User {\r\n    @Id\r\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\r\n    private Long id;\r\n    \r\n    private String username;\r\n    private String password;\r\n    private String fullName;\r\n    private String role; // ROLE_ADMIN, ROLE_DOCTOR, ROLE_PATIENT\r\n    private String email;\r\n    private String phoneNo;\r\n    private String address;\r\n    @Column(columnDefinition = \"LONGTEXT\")\r\n    private String profileImage;\r\n\r\n    // Default constructor\r\n    public User() {}\r\n\r\n    // Simple constructor\r\n    public User(String username, String password, String fullName) {\r\n        this.username = username;\r\n        this.password = password;\r\n        this.fullName = fullName;\r\n    }\r\n\r\n    // Getters and Setters (Encapsulation)\r\n    public Long getId() { return id; }\r\n    public void setId(Long id) { this.id = id; }\r\n    \r\n    public String getUsername() { return username; }\r\n    public void setUsername(String username) { this.username = username; }\r\n    \r\n    public String getPassword() { return password; }\r\n    public void setPassword(String password) { this.password = password; }\r\n    \r\n    public String getFullName() { return fullName; }\r\n    public void setFullName(String fullName) { this.fullName = fullName; }\r\n    \r\n    public String getRole() { return role; }\r\n    public void setRole(String role) { this.role = role; }\r\n\r\n    public String getEmail() { return email; }\r\n    public void setEmail(String email) { this.email = email; }\r\n\r\n    public String getPhoneNo() { return phoneNo; }\r\n    public void setPhoneNo(String phoneNo) { this.phoneNo = phoneNo; }\r\n\r\n    public String getAddress() { return address; }\r\n    public void setAddress(String address) { this.address = address; }\r\n\r\n    public String getProfileImage() { return profileImage; }\r\n    public void setProfileImage(String profileImage) { this.profileImage = profileImage; }\r\n}\r\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/src/main/java/com/medical/entity/User.java b/src/main/java/com/medical/entity/User.java
+---- a/src/main/java/com/medical/entity/User.java	(revision c07a5c6ec8a8d12d993a5bcd01a2de5bc40d3f80)
+-+++ b/src/main/java/com/medical/entity/User.java	(date 1778139837436)
+-@@ -10,7 +10,7 @@
+-     @Id
+-     @GeneratedValue(strategy = GenerationType.IDENTITY)
+-     private Long id;
+--    
+-+
+-     private String username;
+-     private String password;
+-     private String fullName;
+-@@ -34,16 +34,16 @@
+-     // Getters and Setters (Encapsulation)
+-     public Long getId() { return id; }
+-     public void setId(Long id) { this.id = id; }
+--    
+-+
+-     public String getUsername() { return username; }
+-     public void setUsername(String username) { this.username = username; }
+--    
+-+
+-     public String getPassword() { return password; }
+-     public void setPassword(String password) { this.password = password; }
+--    
+-+
+-     public String getFullName() { return fullName; }
+-     public void setFullName(String fullName) { this.fullName = fullName; }
+--    
+-+
+-     public String getRole() { return role; }
+-     public void setRole(String role) { this.role = role; }
+- 
+-Index: .idea/workspace.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"a8ef14fd-5384-498a-8c34-ffbf826f6aa1\" name=\"Changes\" comment=\"\">\r\n      <change afterPath=\"$PROJECT_DIR$/../../Medical-Appointment-System-Project/.gitattributes\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/../../Medical-Appointment-System-Project/.gitignore\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/../../Medical-Appointment-System-Project/.mvn/wrapper/maven-wrapper.properties\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/../../Medical-Appointment-System-Project/mvnw\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/../../Medical-Appointment-System-Project/mvnw.cmd\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/../../Medical-Appointment-System-Project/pom.xml\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/../../Medical-Appointment-System-Project/src/main/java/com/medical/medicalappointmentsystemproject/MedicalAppointmentSystemProjectApplication.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/../../Medical-Appointment-System-Project/src/main/resources/application.properties\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/../../Medical-Appointment-System-Project/src/test/java/com/medical/medicalappointmentsystemproject/MedicalAppointmentSystemProjectApplicationTests.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"dev\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n    <option name=\"ROOT_SYNC\" value=\"DONT_SYNC\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;IT25101985&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/IT25101985/medical-appointment-system-project.git&quot;,\r\n    &quot;accountId&quot;: &quot;8294d8c8-39de-452e-8d5f-52b253f9a0b4&quot;\r\n  }\r\n}</component>\r\n  <component name=\"MavenImportPreferences\">\r\n    <option name=\"generalSettings\">\r\n      <MavenGeneralSettings>\r\n        <option name=\"mavenHomeTypeForPersistence\" value=\"WRAPPER\" />\r\n      </MavenGeneralSettings>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 1\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"3CtcWSQluYdZKCIjn4DLvErY2Ww\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"ModuleVcsDetector.initialDetectionPerformed\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"Spring Boot.MedicalAppointmentApplication.executor\": \"Run\",\r\n    \"git-widget-placeholder\": \"dev\",\r\n    \"kotlin-language-version-configured\": \"true\",\r\n    \"last_opened_file_path\": \"D:/medical-appointment-system-project/git hub/medical-appointment-system-project/pom.xml\"\r\n  }\r\n}]]></component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.31033.145\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"a8ef14fd-5384-498a-8c34-ffbf826f6aa1\" name=\"Changes\" comment=\"\" />\r\n      <created>1777967443385</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1777967443385</updated>\r\n    </task>\r\n    <servers />\r\n  </component>\r\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+---- a/.idea/workspace.xml	(revision c07a5c6ec8a8d12d993a5bcd01a2de5bc40d3f80)
+-+++ b/.idea/workspace.xml	(date 1778139716589)
+-@@ -5,15 +5,7 @@
+-   </component>
+-   <component name="ChangeListManager">
+-     <list default="true" id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="">
+--      <change afterPath="$PROJECT_DIR$/../../Medical-Appointment-System-Project/.gitattributes" afterDir="false" />
+--      <change afterPath="$PROJECT_DIR$/../../Medical-Appointment-System-Project/.gitignore" afterDir="false" />
+--      <change afterPath="$PROJECT_DIR$/../../Medical-Appointment-System-Project/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+--      <change afterPath="$PROJECT_DIR$/../../Medical-Appointment-System-Project/mvnw" afterDir="false" />
+--      <change afterPath="$PROJECT_DIR$/../../Medical-Appointment-System-Project/mvnw.cmd" afterDir="false" />
+--      <change afterPath="$PROJECT_DIR$/../../Medical-Appointment-System-Project/pom.xml" afterDir="false" />
+--      <change afterPath="$PROJECT_DIR$/../../Medical-Appointment-System-Project/src/main/java/com/medical/medicalappointmentsystemproject/MedicalAppointmentSystemProjectApplication.java" afterDir="false" />
+--      <change afterPath="$PROJECT_DIR$/../../Medical-Appointment-System-Project/src/main/resources/application.properties" afterDir="false" />
+--      <change afterPath="$PROJECT_DIR$/../../Medical-Appointment-System-Project/src/test/java/com/medical/medicalappointmentsystemproject/MedicalAppointmentSystemProjectApplicationTests.java" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/medicalappointmentsystemproject/MedicalAppointmentSystemProjectApplication.java" beforeDir="false" />
+-     </list>
+-     <option name="SHOW_DIALOG" value="false" />
+-     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+-@@ -23,7 +15,7 @@
+-   <component name="Git.Settings">
+-     <option name="RECENT_BRANCH_BY_REPOSITORY">
+-       <map>
+--        <entry key="$PROJECT_DIR$" value="dev" />
+-+        <entry key="$PROJECT_DIR$" value="Doctor-Management" />
+-       </map>
+-     </option>
+-     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+-@@ -56,16 +48,37 @@
+-     <option name="hideEmptyMiddlePackages" value="true" />
+-     <option name="showLibraryContents" value="true" />
+-   </component>
+--  <component name="PropertiesComponent"><![CDATA[{
+--  "keyToString": {
+--    "ModuleVcsDetector.initialDetectionPerformed": "true",
+--    "RunOnceActivity.ShowReadmeOnStart": "true",
+--    "Spring Boot.MedicalAppointmentApplication.executor": "Run",
+--    "git-widget-placeholder": "dev",
+--    "kotlin-language-version-configured": "true",
+--    "last_opened_file_path": "D:/medical-appointment-system-project/git hub/medical-appointment-system-project/pom.xml"
+-+  <component name="PropertiesComponent">{
+-+  &quot;keyToString&quot;: {
+-+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+-+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-+    &quot;Spring Boot.MedicalAppointmentApplication.executor&quot;: &quot;Run&quot;,
+-+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+-+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+-+    &quot;last_opened_file_path&quot;: &quot;D:/medical-appointment-system-project/git hub/medical-appointment-system-project/pom.xml&quot;
+-   }
+--}]]></component>
+-+}</component>
+-+  <component name="RunManager">
+-+    <configuration name="MedicalAppointmentApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+-+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UnknownPolicyInFreeMode" />
+-+      <module name="medical-appointment-system" />
+-+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.medical.MedicalAppointmentApplication" />
+-+      <extension name="coverage">
+-+        <pattern>
+-+          <option name="PATTERN" value="com.medical.*" />
+-+          <option name="ENABLED" value="true" />
+-+        </pattern>
+-+      </extension>
+-+      <method v="2">
+-+        <option name="Make" enabled="true" />
+-+      </method>
+-+    </configuration>
+-+    <recent_temporary>
+-+      <list>
+-+        <item itemvalue="Spring Boot.MedicalAppointmentApplication" />
+-+      </list>
+-+    </recent_temporary>
+-+  </component>
+-   <component name="SharedIndexes">
+-     <attachedChunks>
+-       <set>
+-Index: src/main/java/com/medical/medicalappointmentsystemproject/MedicalAppointmentSystemProjectApplication.java
+-===================================================================
+-diff --git a/src/main/java/com/medical/medicalappointmentsystemproject/MedicalAppointmentSystemProjectApplication.java b/src/main/java/com/medical/medicalappointmentsystemproject/MedicalAppointmentSystemProjectApplication.java
+-deleted file mode 100644
+---- a/src/main/java/com/medical/medicalappointmentsystemproject/MedicalAppointmentSystemProjectApplication.java	(revision c07a5c6ec8a8d12d993a5bcd01a2de5bc40d3f80)
+-+++ /dev/null	(revision c07a5c6ec8a8d12d993a5bcd01a2de5bc40d3f80)
+-@@ -1,13 +0,0 @@
+--package com.medical.medicalappointmentsystemproject;
+--
+--import org.springframework.boot.SpringApplication;
+--import org.springframework.boot.autoconfigure.SpringBootApplication;
+--
+--@SpringBootApplication
+--public class MedicalAppointmentSystemProjectApplication {
+--
+--    public static void main(String[] args) {
+--        SpringApplication.run(MedicalAppointmentSystemProjectApplication.class, args);
+--    }
+--
+--}
+Index: src/main/resources/templates/patient/history.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\r\n<html xmlns:th=\"http://www.thymeleaf.org\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <title>HealthCarePlus - My History</title>\r\n    <script src=\"https://cdn.tailwindcss.com\"></script>\r\n    <link href=\"https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap\" rel=\"stylesheet\">\r\n    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\">\r\n\r\n    <style>\r\n        body {\r\n            font-family: 'Plus Jakarta Sans', sans-serif;\r\n            background: #f0f4f8;\r\n            background-image:\r\n                radial-gradient(at 0% 100%, rgba(16, 185, 129, 0.1) 0, transparent 40%),\r\n                radial-gradient(at 100% 0%, rgba(59, 130, 246, 0.1) 0, transparent 40%);\r\n            min-height: 100vh;\r\n            color: #1e293b;\r\n        }\r\n\r\n        .glass-sidebar {\r\n            background: rgba(255, 255, 255, 0.8);\r\n            backdrop-filter: blur(20px);\r\n            border-right: 1px solid rgba(226, 232, 240, 0.8);\r\n        }\r\n\r\n        .premium-card {\r\n            background: white;\r\n            border-radius: 24px;\r\n            border: 1px solid rgba(226, 232, 240, 1);\r\n            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);\r\n            overflow: hidden;\r\n        }\r\n\r\n        .nav-item {\r\n            transition: all 0.3s ease;\r\n            position: relative;\r\n        }\r\n\r\n        .nav-item.active {\r\n            background: rgba(16, 185, 129, 0.1);\r\n            color: #059669;\r\n        }\r\n\r\n        .nav-item.active::after {\r\n            content: '';\r\n            position: absolute;\r\n            right: 0;\r\n            top: 20%;\r\n            height: 60%;\r\n            width: 4px;\r\n            background: #10b981;\r\n            border-radius: 4px 0 0 4px;\r\n        }\r\n    </style>\r\n</head>\r\n<body class=\"flex\">\r\n\r\n<!-- Sidebar -->\r\n<aside class=\"w-80 glass-sidebar h-screen p-8 flex flex-col sticky top-0 hidden lg:flex\">\r\n    <div class=\"mb-10\">\r\n        <div class=\"flex items-center gap-3 mb-8\">\r\n            <div class=\"w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center text-white shadow-lg\">\r\n                <i class=\"fa-solid fa-clock-rotate-left\"></i>\r\n            </div>\r\n            <span class=\"text-xl font-bold tracking-tight text-slate-800\">HEALTH<span class=\"text-emerald-600\">HISTORY</span></span>\r\n        </div>\r\n\r\n        <nav class=\"space-y-2\">\r\n            <a href=\"/patient/dashboard\" class=\"nav-item flex items-center gap-4 px-4 py-3 text-slate-500 hover:bg-emerald-50 hover:text-emerald-600 rounded-xl transition-all\">\r\n                <i class=\"fa-solid fa-grid-2\"></i> Dashboard\r\n            </a>\r\n            <a href=\"/patient/book-appointment\" class=\"nav-item flex items-center gap-4 px-4 py-3 text-slate-500 hover:bg-emerald-50 hover:text-emerald-600 rounded-xl transition-all\">\r\n                <i class=\"fa-solid fa-calendar-plus\"></i> Book Appointment\r\n            </a>\r\n            <a href=\"/patient/history\" class=\"nav-item active flex items-center gap-4 px-4 py-3 rounded-xl font-semibold\">\r\n                <i class=\"fa-solid fa-clock-rotate-left\"></i> My History\r\n            </a>\r\n            <a href=\"/patient/profile\" class=\"nav-item flex items-center gap-4 px-4 py-3 text-slate-500 hover:bg-emerald-50 hover:text-emerald-600 rounded-xl transition-all\">\r\n                <i class=\"fa-solid fa-user-gear\"></i> Profile Settings\r\n            </a>\r\n        </nav>\r\n    </div>\r\n\r\n    <div class=\"mt-auto\">\r\n        <form th:action=\"@{/logout}\" method=\"post\">\r\n            <button type=\"submit\" class=\"w-full flex items-center justify-center gap-2 px-4 py-3 text-slate-400 font-bold hover:text-red-500 transition-all\">\r\n                <i class=\"fa-solid fa-power-off\"></i> Sign Out\r\n            </button>\r\n        </form>\r\n    </div>\r\n</aside>\r\n\r\n<main class=\"flex-1 p-6 md:p-10\">\r\n    <header class=\"mb-8\">\r\n        <h1 class=\"text-3xl font-extrabold tracking-tight\">Medical <span class=\"text-emerald-600\">Timeline</span></h1>\r\n        <p class=\"text-slate-500 mt-1\">Detailed record of your past consultations and prescriptions</p>\r\n    </header>\r\n\r\n    <div th:if=\"${param.success}\" class=\"mb-6 p-4 bg-emerald-50 border border-emerald-100 text-emerald-700 rounded-2xl flex items-center gap-3\">\r\n        <i class=\"fa-solid fa-circle-check\"></i>\r\n        <span class=\"text-sm font-bold\">Appointment booked successfully!</span>\r\n    </div>\r\n\r\n    <div class=\"premium-card\">\r\n        <table class=\"w-full text-left\">\r\n            <thead class=\"bg-slate-50 border-b border-slate-100\">\r\n            <tr>\r\n                <th class=\"px-8 py-5 text-[10px] font-bold text-slate-500 uppercase tracking-widest\">Medical Specialist</th>\r\n                <th class=\"px-8 py-5 text-[10px] font-bold text-slate-500 uppercase tracking-widest\">Date & Time</th>\r\n                <th class=\"px-8 py-5 text-[10px] font-bold text-slate-500 uppercase tracking-widest\">Status</th>\r\n                <th class=\"px-8 py-5 text-[10px] font-bold text-slate-500 uppercase tracking-widest text-right\">Actions</th>\r\n            </tr>\r\n            </thead>\r\n            <tbody class=\"divide-y divide-slate-100\">\r\n            <tr th:each=\"app : ${appointments}\" class=\"hover:bg-slate-50/50 transition-all group\">\r\n                <td class=\"px-8 py-5\">\r\n                    <div class=\"flex items-center gap-3\">\r\n                        <div class=\"w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-slate-400 group-hover:bg-emerald-100 group-hover:text-emerald-600 transition-all\">\r\n                            <i class=\"fa-solid fa-user-md\"></i>\r\n                        </div>\r\n                        <div>\r\n                            <p class=\"text-sm font-bold text-slate-900\" th:text=\"${app.doctor.name}\">Dr. Name</p>\r\n                            <p class=\"text-[10px] text-slate-500\" th:text=\"${app.doctor.specialization}\">Specialty</p>\r\n                        </div>\r\n                    </div>\r\n                </td>\r\n                <td class=\"px-8 py-5\">\r\n                    <p class=\"text-sm font-bold text-slate-700\" th:text=\"${#temporals.format(app.appointmentDate, 'MMM dd, yyyy')}\">Date</p>\r\n                    <p class=\"text-[10px] text-slate-400 font-bold\" th:text=\"${#temporals.format(app.appointmentDate, 'HH:mm')}\">Time</p>\r\n                </td>\r\n                <td class=\"px-8 py-5\">\r\n                        <span th:class=\"${'px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ' +\r\n                            (app.status == 'SCHEDULED' ? 'bg-blue-100 text-blue-600' :\r\n                             app.status == 'COMPLETED' ? 'bg-emerald-100 text-emerald-600' :\r\n                             'bg-rose-100 text-rose-600')}\"\r\n                              th:text=\"${app.status}\">Status</span>\r\n                </td>\r\n                <td class=\"px-8 py-5 text-right\">\r\n                    <div class=\"flex justify-end gap-2\">\r\n                        <a th:if=\"${recordMap.get(app.id) != null}\" th:href=\"@{/patient/appointment/{id}/record(id=${app.id})}\" class=\"p-2 bg-emerald-50 text-emerald-600 rounded-lg hover:bg-emerald-100 transition-all\" title=\"View Record\">\r\n                            <i class=\"fa-solid fa-file-medical\"></i>\r\n                        </a>\r\n                        <form th:if=\"${app.status == 'SCHEDULED'}\" th:action=\"@{/patient/appointment/{id}/cancel(id=${app.id})}\" method=\"post\">\r\n                            <button type=\"submit\" class=\"p-2 bg-rose-50 text-rose-600 rounded-lg hover:bg-rose-100 transition-all\" title=\"Cancel Appointment\">\r\n                                <i class=\"fa-solid fa-xmark\"></i>\r\n                            </button>\r\n                        </form>\r\n                    </div>\r\n                </td>\r\n            </tr>\r\n            <tr th:if=\"${#lists.isEmpty(appointments)}\">\r\n                <td colspan=\"4\" class=\"px-8 py-20 text-center\">\r\n                    <div class=\"flex flex-col items-center gap-4\">\r\n                        <i class=\"fa-solid fa-calendar-xmark text-5xl text-slate-200\"></i>\r\n                        <p class=\"text-slate-400 font-medium\">No medical history found yet.</p>\r\n                        <a href=\"/patient/book-appointment\" class=\"text-emerald-600 font-bold hover:underline\">Book an appointment now</a>\r\n                    </div>\r\n                </td>\r\n            </tr>\r\n            </tbody>\r\n        </table>\r\n    </div>\r\n</main>\r\n\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/templates/patient/history.html b/src/main/resources/templates/patient/history.html
+--- a/src/main/resources/templates/patient/history.html	(revision 871274f3e7f45a4abb58867c28ade138bfcc3305)
++++ b/src/main/resources/templates/patient/history.html	(date 1779259316444)
+@@ -12,7 +12,7 @@
+         body {
+             font-family: 'Plus Jakarta Sans', sans-serif;
+             background: #f0f4f8;
+-            background-image:
++            background-image: 
+                 radial-gradient(at 0% 100%, rgba(16, 185, 129, 0.1) 0, transparent 40%),
+                 radial-gradient(at 100% 0%, rgba(59, 130, 246, 0.1) 0, transparent 40%);
+             min-height: 100vh;
+@@ -106,59 +106,59 @@
+     <div class="premium-card">
+         <table class="w-full text-left">
+             <thead class="bg-slate-50 border-b border-slate-100">
+-            <tr>
+-                <th class="px-8 py-5 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Medical Specialist</th>
+-                <th class="px-8 py-5 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Date & Time</th>
+-                <th class="px-8 py-5 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Status</th>
+-                <th class="px-8 py-5 text-[10px] font-bold text-slate-500 uppercase tracking-widest text-right">Actions</th>
+-            </tr>
++                <tr>
++                    <th class="px-8 py-5 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Medical Specialist</th>
++                    <th class="px-8 py-5 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Date & Time</th>
++                    <th class="px-8 py-5 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Status</th>
++                    <th class="px-8 py-5 text-[10px] font-bold text-slate-500 uppercase tracking-widest text-right">Actions</th>
++                </tr>
+             </thead>
+             <tbody class="divide-y divide-slate-100">
+-            <tr th:each="app : ${appointments}" class="hover:bg-slate-50/50 transition-all group">
+-                <td class="px-8 py-5">
+-                    <div class="flex items-center gap-3">
+-                        <div class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-slate-400 group-hover:bg-emerald-100 group-hover:text-emerald-600 transition-all">
+-                            <i class="fa-solid fa-user-md"></i>
+-                        </div>
+-                        <div>
+-                            <p class="text-sm font-bold text-slate-900" th:text="${app.doctor.name}">Dr. Name</p>
+-                            <p class="text-[10px] text-slate-500" th:text="${app.doctor.specialization}">Specialty</p>
+-                        </div>
+-                    </div>
+-                </td>
+-                <td class="px-8 py-5">
+-                    <p class="text-sm font-bold text-slate-700" th:text="${#temporals.format(app.appointmentDate, 'MMM dd, yyyy')}">Date</p>
+-                    <p class="text-[10px] text-slate-400 font-bold" th:text="${#temporals.format(app.appointmentDate, 'HH:mm')}">Time</p>
+-                </td>
+-                <td class="px-8 py-5">
+-                        <span th:class="${'px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ' +
+-                            (app.status == 'SCHEDULED' ? 'bg-blue-100 text-blue-600' :
+-                             app.status == 'COMPLETED' ? 'bg-emerald-100 text-emerald-600' :
+-                             'bg-rose-100 text-rose-600')}"
++                <tr th:each="app : ${appointments}" class="hover:bg-slate-50/50 transition-all group">
++                    <td class="px-8 py-5">
++                        <div class="flex items-center gap-3">
++                            <div class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-slate-400 group-hover:bg-emerald-100 group-hover:text-emerald-600 transition-all">
++                                <i class="fa-solid fa-user-md"></i>
++                            </div>
++                            <div>
++                                <p class="text-sm font-bold text-slate-900" th:text="${app.doctor.name}">Dr. Name</p>
++                                <p class="text-[10px] text-slate-500" th:text="${app.doctor.specialization}">Specialty</p>
++                            </div>
++                        </div>
++                    </td>
++                    <td class="px-8 py-5">
++                        <p class="text-sm font-bold text-slate-700" th:text="${#temporals.format(app.appointmentDate, 'MMM dd, yyyy')}">Date</p>
++                        <p class="text-[10px] text-slate-400 font-bold" th:text="${#temporals.format(app.appointmentDate, 'HH:mm')}">Time</p>
++                    </td>
++                    <td class="px-8 py-5">
++                        <span th:class="${'px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ' + 
++                            (app.status == 'SCHEDULED' ? 'bg-blue-100 text-blue-600' : 
++                             app.status == 'COMPLETED' ? 'bg-emerald-100 text-emerald-600' : 
++                             'bg-rose-100 text-rose-600')}" 
+                               th:text="${app.status}">Status</span>
+-                </td>
+-                <td class="px-8 py-5 text-right">
+-                    <div class="flex justify-end gap-2">
+-                        <a th:if="${recordMap.get(app.id) != null}" th:href="@{/patient/appointment/{id}/record(id=${app.id})}" class="p-2 bg-emerald-50 text-emerald-600 rounded-lg hover:bg-emerald-100 transition-all" title="View Record">
+-                            <i class="fa-solid fa-file-medical"></i>
+-                        </a>
+-                        <form th:if="${app.status == 'SCHEDULED'}" th:action="@{/patient/appointment/{id}/cancel(id=${app.id})}" method="post">
+-                            <button type="submit" class="p-2 bg-rose-50 text-rose-600 rounded-lg hover:bg-rose-100 transition-all" title="Cancel Appointment">
+-                                <i class="fa-solid fa-xmark"></i>
+-                            </button>
+-                        </form>
+-                    </div>
+-                </td>
+-            </tr>
+-            <tr th:if="${#lists.isEmpty(appointments)}">
+-                <td colspan="4" class="px-8 py-20 text-center">
+-                    <div class="flex flex-col items-center gap-4">
+-                        <i class="fa-solid fa-calendar-xmark text-5xl text-slate-200"></i>
+-                        <p class="text-slate-400 font-medium">No medical history found yet.</p>
+-                        <a href="/patient/book-appointment" class="text-emerald-600 font-bold hover:underline">Book an appointment now</a>
+-                    </div>
+-                </td>
+-            </tr>
++                    </td>
++                    <td class="px-8 py-5 text-right">
++                        <div class="flex justify-end gap-2">
++                            <a th:if="${recordMap.get(app.id) != null}" th:href="@{/patient/appointment/{id}/record(id=${app.id})}" class="p-2 bg-emerald-50 text-emerald-600 rounded-lg hover:bg-emerald-100 transition-all" title="View Record">
++                                <i class="fa-solid fa-file-medical"></i>
++                            </a>
++                            <form th:if="${app.status == 'SCHEDULED'}" th:action="@{/patient/appointment/{id}/cancel(id=${app.id})}" method="post">
++                                <button type="submit" class="p-2 bg-rose-50 text-rose-600 rounded-lg hover:bg-rose-100 transition-all" title="Cancel Appointment">
++                                    <i class="fa-solid fa-xmark"></i>
++                                </button>
++                            </form>
++                        </div>
++                    </td>
++                </tr>
++                <tr th:if="${#lists.isEmpty(appointments)}">
++                    <td colspan="4" class="px-8 py-20 text-center">
++                        <div class="flex flex-col items-center gap-4">
++                            <i class="fa-solid fa-calendar-xmark text-5xl text-slate-200"></i>
++                            <p class="text-slate-400 font-medium">No medical history found yet.</p>
++                            <a href="/patient/book-appointment" class="text-emerald-600 font-bold hover:underline">Book an appointment now</a>
++                        </div>
++                    </td>
++                </tr>
+             </tbody>
+         </table>
+     </div>

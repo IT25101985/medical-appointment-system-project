@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinical Records | Digital Archive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { background: #020617; color: #f8fafc; font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass-card { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(30, 41, 59, 1); }
+        .record-item:hover { background: rgba(16, 185, 129, 0.05); border-color: #10b981; }
+    </style>
+</head>
+<body class="p-4 md:p-10">
+
+<div class="max-w-6xl mx-auto">
+    <div class="flex items-center gap-4 mb-10">
+        <a href="/templates/doctor/dashboard" class="w-10 h-10 flex items-center justify-center rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition-all">
+            <i class="fa-solid fa-chevron-left"></i>
+        </a>
+        <h1 class="text-3xl font-extrabold tracking-tight">Patient Clinical History</h1>
+    </div>
+
+    <div class="grid grid-cols-1 gap-4">
+        <div th:each="record : ${records}" class="glass-card rounded-2xl p-6 record-item border border-slate-800 transition-all">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-emerald-500/10 text-emerald-500 rounded-xl flex items-center justify-center font-black">
+                        <i class="fa-solid fa-file-medical text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold" th:text="${record.patient.fullName}">Patient Name</h3>
+                        <p class="text-xs text-slate-500 font-bold uppercase tracking-widest" th:text="${#temporals.format(record.recordDate, 'MMM dd, yyyy | HH:mm')}">Date</p>
+                    </div>
+                </div>
+
+                <div class="flex-1 px-0 md:px-10">
+                    <p class="text-slate-300 text-sm italic" th:text="'&quot;' + ${record.diagnosis} + '&quot;'">Diagnosis notes go here...</p>
+                </div>
+
+                <div class="flex gap-2">
+                    <a th:href="@{/doctor/record/{id}/edit(id=${record.id})}" class="p-2 bg-blue-500/10 text-blue-400 rounded-lg hover:bg-blue-500/20 transition-all" title="Edit Notes">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+                    <form th:action="@{/doctor/record/{id}/archive(id=${record.id})}" method="post" onsubmit="return confirm('Archive this clinical record? It will be removed from active view.');">
+                        <button type="submit" class="p-2 bg-red-500/10 text-red-400 rounded-lg hover:bg-red-500/20 transition-all" title="Archive Record">
+                            <i class="fa-solid fa-box-archive"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div th:if="${#lists.isEmpty(records)}" class="p-20 text-center glass-card rounded-[2.5rem]">
+            <div class="w-20 h-20 bg-slate-900 border border-slate-800 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fa-solid fa-folder-open text-3xl text-slate-600"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-300">No records found</h3>
+            <p class="text-slate-500 mt-2">Historical data will appear here once you start prescribing.</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

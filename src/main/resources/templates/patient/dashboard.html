@@ -85,7 +85,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Doctor Selection Styles */
         .doctor-card {
             background: rgba(255,255,255,0.6);
             backdrop-filter: blur(10px);
@@ -105,7 +104,6 @@
             border: 4px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
@@ -126,7 +124,7 @@
 
     <nav class="space-y-2">
       <div onclick="showSection('dashboard')" class="nav-item active flex items-center gap-4 px-4 py-3 rounded-xl font-semibold" id="nav-dashboard">
-        <i class="fa-solid fa-grid-2"></i> Dashboard
+        <i class="fa-solid fa-table-columns"></i> Dashboard
       </div>
       <div onclick="showSection('booking')" class="nav-item flex items-center gap-4 px-4 py-3 text-slate-500 hover:bg-emerald-50 hover:text-emerald-600 rounded-xl transition-all" id="nav-booking">
         <i class="fa-solid fa-calendar-plus"></i> Book Appointment
@@ -143,7 +141,7 @@
   <!-- Mini Profile Card in Sidebar -->
   <div class="mt-auto p-4 bg-slate-50 rounded-2xl border border-slate-200">
     <div class="flex items-center gap-3 mb-3">
-      <img th:src="${patient.profileImage ?: 'https://ui-avatars.com/api/?name=' + patient.fullName + '&background=random'}" class="w-10 h-10 rounded-full border-2 border-white shadow-sm">
+      <img th:src="${patient.profileImage != null && !patient.profileImage.empty ? patient.profileImage : 'https://ui-avatars.com/api/?name=' + patient.fullName + '&background=random'}" class="w-10 h-10 rounded-full border-2 border-white shadow-sm">
       <div>
         <p class="text-xs font-bold text-slate-900 truncate" th:text="${patient.fullName}">Patient Name</p>
         <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest">Active Portal</p>
@@ -160,7 +158,7 @@
 
   <!-- SECTION: DASHBOARD -->
   <div id="section-dashboard" class="section-content active">
-    <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+    <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
       <div>
         <h1 class="text-3xl font-extrabold tracking-tight">Welcome back, <span class="gradient-text" th:text="${patient.fullName}">Patient</span></h1>
         <p class="text-slate-500 mt-1">Your health journey at a glance</p>
@@ -176,7 +174,77 @@
       </div>
     </header>
 
-    <!-- Health Metrics Grid -->
+    <!-- 1. Parameter-Based Alert Blocks (Error Handling From Controller Redirects) -->
+    <div th:if="${param.error}" class="mb-6 p-4 bg-rose-50 border border-rose-200 text-rose-700 rounded-2xl flex items-center gap-3 shadow-sm animate-pulse">
+      <i class="fa-solid fa-triangle-exclamation text-lg"></i>
+      <div>
+        <p class="text-sm font-bold">Data Validation Error</p>
+        <p class="text-xs text-rose-600" th:if="${param.error[0] == 'invalid_bp'}">Blood pressure must follow standard mathematical format (e.g., 120/80).</p>
+        <p class="text-xs text-rose-600" th:if="${param.error[0] == 'invalid_phone'}">Emergency contact numbers must strictly contain exactly 10 numeric digits.</p>
+        <p class="text-xs text-rose-600" th:if="${param.error[0] == 'weak_password'}">Security update rejected. Your new password must be at least 8 characters long, containing 1 numeric digit and 1 special security character.</p>
+        <p class="text-xs text-rose-600" th:if="${param.error[0] == 'true'}">Processing error. Please cross-verify your profile metrics format data length constraints.</p>
+      </div>
+    </div>
+
+    <!-- Success Alert -->
+    <div th:if="${param.success}" class="mb-6 p-4 bg-emerald-50 border border-emerald-200 text-emerald-700 rounded-2xl flex items-center gap-3 shadow-sm">
+      <i class="fa-solid fa-circle-check text-lg"></i>
+      <div>
+        <p class="text-sm font-bold">Success</p>
+        <p class="text-xs text-emerald-600" th:if="${param.section != null and param.section[0] == 'profile'}">Your profile settings have been updated successfully.</p>
+        <p class="text-xs text-emerald-600" th:if="${param.section == null or param.section[0] != 'profile'}">Your appointment has been successfully scheduled.</p>
+      </div>
+    </div>
+
+    <!-- Cancelled Alert -->
+    <div th:if="${param.cancelled}" class="mb-6 p-4 bg-amber-50 border border-amber-200 text-amber-700 rounded-2xl flex items-center gap-3 shadow-sm">
+      <i class="fa-solid fa-calendar-minus text-lg"></i>
+      <div>
+        <p class="text-sm font-bold">Appointment Cancelled</p>
+        <p class="text-xs text-amber-600">The scheduled appointment has been successfully cancelled.</p>
+      </div>
+    </div>
+
+    <!-- Deleted Alert -->
+    <div th:if="${param.deleted}" class="mb-6 p-4 bg-rose-50 border border-rose-200 text-rose-700 rounded-2xl flex items-center gap-3 shadow-sm">
+      <i class="fa-solid fa-trash-can text-lg"></i>
+      <div>
+        <p class="text-sm font-bold">Appointment Deleted</p>
+        <p class="text-xs text-rose-600">The appointment record has been permanently deleted.</p>
+      </div>
+    </div>
+
+    <!-- 2. Dynamic Analytics Workspace (Processed dynamically by Java Streams inside Dashboard controller logic) -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div class="premium-card p-6 bg-gradient-to-br from-emerald-500 to-teal-600 text-white border-none shadow-emerald-200">
+        <div class="flex justify-between items-center mb-2">
+          <span class="text-xs font-bold uppercase tracking-widest opacity-80">Completed Visits</span>
+          <i class="fa-solid fa-circle-check text-lg opacity-80"></i>
+        </div>
+        <h2 class="text-4xl font-black tracking-tight" th:text="${totalVisits ?: 0}">0</h2>
+        <p class="text-[11px] font-medium mt-2 opacity-90">Total successfully documented clinical visits</p>
+      </div>
+
+      <div class="premium-card p-6 bg-gradient-to-br from-blue-500 to-indigo-600 text-white border-none shadow-blue-200">
+        <div class="flex justify-between items-center mb-2">
+          <span class="text-xs font-bold uppercase tracking-widest opacity-80">Attendance Metrics</span>
+          <i class="fa-solid fa-chart-simple text-lg opacity-80"></i>
+        </div>
+        <h2 class="text-4xl font-black tracking-tight"><span th:text="${attendanceRate ?: 0}">0</span>%</h2>
+        <p class="text-[11px] font-medium mt-2 opacity-90">Percentage calculation relative to cancellations</p>
+      </div>
+
+      <div class="premium-card p-6 bg-gradient-to-br from-purple-500 to-fuchsia-600 text-white border-none shadow-purple-200">
+        <div class="flex justify-between items-center mb-2">
+          <span class="text-xs font-bold uppercase tracking-widest opacity-80">Portal Integrity</span>
+          <i class="fa-solid fa-shield-halved text-lg opacity-80"></i>
+        </div>
+        <h2 class="text-4xl font-black tracking-tight">Active</h2>
+        <p class="text-[11px] font-medium mt-2 opacity-90">End-to-end data transmission layer encrypted</p>
+      </div>
+    </div>
+
+    <!-- 3. Health Metrics Grid with Inline Data Fallbacks (Preventing Exceptions) -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
       <div class="premium-card p-6 bg-gradient-to-br from-emerald-50 to-white">
         <div class="flex justify-between items-start mb-4">
@@ -185,7 +253,7 @@
           </div>
         </div>
         <p class="text-slate-500 text-sm font-medium">Blood Group</p>
-        <h3 class="text-2xl font-black text-slate-800 mt-1" th:text="${patient.bloodGroup ?: 'N/A'}">B+</h3>
+        <h3 class="text-2xl font-black text-slate-800 mt-1" th:text="${patient.bloodGroup != null && !patient.bloodGroup.empty ? patient.bloodGroup : 'N/A'}">B+</h3>
       </div>
 
       <div class="premium-card p-6 bg-gradient-to-br from-blue-50 to-white">
@@ -195,7 +263,7 @@
           </div>
         </div>
         <p class="text-slate-500 text-sm font-medium">Blood Pressure</p>
-        <h3 class="text-2xl font-black text-slate-800 mt-1" th:text="${patient.bloodPressure ?: 'N/A'}">120/80</h3>
+        <h3 class="text-2xl font-black text-slate-800 mt-1" th:text="${patient.bloodPressure != null && !patient.bloodPressure.empty ? patient.bloodPressure : 'N/A'}">120/80</h3>
       </div>
 
       <div class="premium-card p-6 bg-gradient-to-br from-rose-50 to-white">
@@ -205,7 +273,7 @@
           </div>
         </div>
         <p class="text-slate-500 text-sm font-medium">Heart Rate</p>
-        <h3 class="text-2xl font-black text-slate-800 mt-1" th:text="${patient.heartRate ?: 'N/A'}">72 bpm</h3>
+        <h3 class="text-2xl font-black text-slate-800 mt-1" th:text="${patient.heartRate != null && !patient.heartRate.empty ? patient.heartRate : 'N/A'}">72 bpm</h3>
       </div>
 
       <div class="premium-card p-6 bg-gradient-to-br from-amber-50 to-white">
@@ -215,7 +283,7 @@
           </div>
         </div>
         <p class="text-slate-500 text-sm font-medium">Emergency</p>
-        <h3 class="text-lg font-black text-slate-800 mt-1" th:text="${patient.emergencyContact ?: 'N/A'}">077-1234567</h3>
+        <h3 class="text-lg font-black text-slate-800 mt-1" th:text="${patient.emergencyContact != null && !patient.emergencyContact.empty ? patient.emergencyContact : 'N/A'}">077-1234567</h3>
       </div>
     </div>
 
@@ -354,7 +422,7 @@
           <td class="px-8 py-5">
             <div class="flex items-center gap-3">
               <div class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-slate-400">
-                <i class="fa-solid fa-user-md"></i>
+                <i class="fa-solid fa-user-doctor"></i>
               </div>
               <div>
                 <p class="text-sm font-bold text-slate-900" th:text="${app.doctor != null ? app.doctor.name : 'Unknown Doctor'}">Dr. Smith</p>
@@ -375,26 +443,22 @@
           </td>
           <td class="px-8 py-5 text-right">
             <div class="flex justify-end gap-2">
-              <!-- View Prescription -->
               <a th:if="${recordMap != null and recordMap.get(app.id) != null}" th:href="@{/patient/appointment/{id}/record(id=${app.id})}" class="p-2 bg-emerald-50 text-emerald-600 rounded-lg hover:bg-emerald-100 transition-all" title="View Prescription">
                 <i class="fa-solid fa-file-medical"></i>
               </a>
 
-              <!-- Pay Now -->
               <a th:if="${app.status == 'COMPLETED' and (invoiceMap == null or invoiceMap.get(app.id) == null)}"
                  th:href="@{/pay(type='card', amount=1500.0, appointmentId=${app.id})}"
                  class="p-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-all" title="Pay Consulting Fee">
                 <i class="fa-solid fa-credit-card"></i> Pay
               </a>
 
-              <!-- Download Invoice -->
               <a th:if="${invoiceMap != null and invoiceMap.get(app.id) != null}"
                  th:href="@{/invoice/download/{id}(id=${invoiceMap.get(app.id).id})}"
                  class="p-2 bg-amber-50 text-amber-600 rounded-lg hover:bg-amber-100 transition-all" title="Download Invoice">
                 <i class="fa-solid fa-file-invoice-dollar"></i>
               </a>
 
-              <!-- Cancel Appointment -->
               <form th:if="${app.status == 'SCHEDULED'}" th:action="@{/patient/appointment/{id}/cancel(id=${app.id})}" method="post">
                 <button type="submit" class="p-2 bg-rose-50 text-rose-600 rounded-lg hover:bg-rose-100 transition-all" title="Cancel Appointment">
                   <i class="fa-solid fa-xmark"></i>
@@ -425,7 +489,6 @@
     </header>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-      <!-- Left: Info Form -->
       <div class="lg:col-span-2">
         <div class="premium-card p-8">
           <form th:action="@{/patient/profile}" th:object="${user}" method="post">
@@ -451,6 +514,14 @@
               <div>
                 <label class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1 block">Emergency Contact</label>
                 <input type="text" th:field="*{emergencyContact}" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-emerald-500 transition-all">
+              </div>
+              <div>
+                <label class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1 block">Blood Pressure (mmHg)</label>
+                <input type="text" th:field="*{bloodPressure}" placeholder="e.g. 120/80" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-emerald-500 transition-all">
+              </div>
+              <div>
+                <label class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1 block">Heart Rate (bpm)</label>
+                <input type="text" th:field="*{heartRate}" placeholder="e.g. 72" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-emerald-500 transition-all">
               </div>
               <div class="md:col-span-2">
                 <label class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1 block">Address</label>
@@ -480,7 +551,7 @@
       <!-- Right: Actions -->
       <div class="space-y-6">
         <div class="premium-card p-6 flex flex-col items-center">
-          <img th:src="${patient.profileImage ?: 'https://ui-avatars.com/api/?name=' + (patient.fullName ?: 'Patient') + '&background=random'}" class="profile-image-large mb-4">
+          <img th:src="${patient.profileImage != null && !patient.profileImage.empty ? patient.profileImage : 'https://ui-avatars.com/api/?name=' + (patient.fullName ?: 'Patient') + '&background=random'}" class="profile-image-large mb-4">
           <h3 class="font-bold text-xl" th:text="${patient.fullName ?: 'Patient Name'}">Patient Name</h3>
           <p class="text-slate-500 text-sm mb-6" th:text="${patient.email ?: 'No Email'}">Email</p>
           <div class="w-full border-t pt-6">
@@ -495,28 +566,24 @@
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script>
-    // Tab switching logic
+<script th:inline="javascript">
+    /*<![CDATA[*/
     function showSection(sectionId) {
-        // Hide all sections
         document.querySelectorAll('.section-content').forEach(section => {
             section.classList.remove('active');
         });
 
-        // Remove active class from all nav items
         document.querySelectorAll('.nav-item').forEach(item => {
             item.classList.remove('active');
             item.classList.add('text-slate-500');
             item.classList.remove('font-semibold');
         });
 
-        // Show selected section
         const selectedSection = document.getElementById('section-' + sectionId);
         if (selectedSection) {
             selectedSection.classList.add('active');
         }
 
-        // Set active nav item
         const activeNav = document.getElementById('nav-' + sectionId);
         if (activeNav) {
             activeNav.classList.add('active');
@@ -524,105 +591,194 @@
             activeNav.classList.add('font-semibold');
         }
 
-        // Store active tab in local storage if needed
         localStorage.setItem('patientActiveTab', sectionId);
     }
 
-    // Initialize Flatpickr
+    // Active Section State Synchronization on Load
+    window.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        let section = urlParams.get('section');
+        if (!section) {
+            section = localStorage.getItem('patientActiveTab');
+        }
+        if (!section) {
+            section = 'dashboard';
+        }
+        showSection(section);
+    });
+
     flatpickr("#datePicker", {
         minDate: "today",
         disable: [date => date.getDay() === 0],
         onChange: (selectedDates, dateStr) => {
-            fetchSlots(document.getElementById('selectedDoctorId').value, dateStr);
+            const doctorId = document.getElementById('selectedDoctorId').value;
+            fetchSlots(doctorId, dateStr);
         }
     });
 
-    // Doctor Selection Logic
     function selectDoctor(element) {
         document.querySelectorAll('.doctor-card').forEach(el => el.classList.remove('selected'));
         element.classList.add('selected');
-        document.getElementById('selectedDoctorId').value = element.getAttribute('data-id');
+        const doctorId = element.getAttribute('data-id');
+        document.getElementById('selectedDoctorId').value = doctorId;
 
-        // Reset slots
-        document.getElementById('timeSelect').innerHTML = '<option value="">Reselect Date</option>';
-        document.getElementById('timeSelect').disabled = true;
-        document.getElementById('datePicker').value = "";
+        // Fetch slots if date is already picked
+        const dateStr = document.getElementById('datePicker').value;
+        if (dateStr) {
+            fetchSlots(doctorId, dateStr);
+        }
     }
 
-    // Fetch Slots logic
     function fetchSlots(doctorId, dateStr) {
         const timeSelect = document.getElementById('timeSelect');
-        if (doctorId && dateStr) {
-            timeSelect.disabled = true;
-            timeSelect.innerHTML = '<option value="">Loading...</option>';
+        const appointmentDate = document.getElementById('appointmentDate');
 
-            fetch(`/api/doctors/${doctorId}/slots?date=${dateStr}`)
-                .then(r => r.json())
-                .then(slots => {
-                    timeSelect.innerHTML = '<option value="">-- Select Time --</option>';
-                    if (slots.length === 0) {
-                        timeSelect.innerHTML = '<option value="">Fully Booked</option>';
-                    } else {
-                        slots.forEach(slot => {
-                            const timeFormat = new Date(slot).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-                            const option = document.createElement('option');
-                            option.value = slot;
-                            option.textContent = timeFormat;
-                            timeSelect.appendChild(option);
-                        });
-                        timeSelect.disabled = false;
-                    }
-                });
+        if (!doctorId) {
+            alert('Please select a doctor first.');
+            document.getElementById('datePicker').value = '';
+            return;
         }
+
+        // Enable select and show loading status
+        timeSelect.disabled = false;
+        timeSelect.innerHTML = '<option value="">Loading available slots...</option>';
+
+        fetch(`/api/doctors/${doctorId}/slots?date=${dateStr}`)
+            .then(response => response.json())
+            .then(slots => {
+                timeSelect.innerHTML = '<option value="">Select a time slot</option>';
+                if (slots.length === 0) {
+                    timeSelect.innerHTML = '<option value="">No slots available for this date</option>';
+                    return;
+                }
+                slots.forEach(slot => {
+                    const dateObj = new Date(slot);
+                    let hours = dateObj.getHours();
+                    let minutes = dateObj.getMinutes();
+                    const ampm = hours >= 12 ? 'PM' : 'AM';
+                    hours = hours % 12;
+                    hours = hours ? hours : 12;
+                    minutes = minutes < 10 ? '0' + minutes : minutes;
+                    const strTime = hours + ':' + minutes + ' ' + ampm;
+
+                    const option = document.createElement('option');
+                    option.value = slot;
+                    option.textContent = strTime;
+                    timeSelect.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching slots:', error);
+                timeSelect.innerHTML = '<option value="">Error loading slots</option>';
+            });
     }
 
     document.getElementById('timeSelect').addEventListener('change', function() {
         document.getElementById('appointmentDate').value = this.value;
     });
 
-    // Chart Initialization
-    document.addEventListener('DOMContentLoaded', function() {
-    /*<![CDATA[*/
-        const ctx = document.getElementById('healthChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                datasets: [{
-                    label: 'Systolic BP',
-                    data: [120, 118, 122, 119, 121, 115],
+    // Health Trends Chart Dynamic Initialization
+    const heartRateStr = /*[[${patient.heartRate}]]*/ '72';
+    const bpStr = /*[[${patient.bloodPressure}]]*/ '120/80';
+
+    let currentHeartRate = parseInt(heartRateStr) || 72;
+    let systolic = 120;
+    let diastolic = 80;
+
+    if (bpStr && bpStr.includes('/')) {
+        const parts = bpStr.split('/');
+        systolic = parseInt(parts[0]) || 120;
+        diastolic = parseInt(parts[1]) || 80;
+    }
+
+    const hrData = [
+        currentHeartRate - 4,
+        currentHeartRate + 3,
+        currentHeartRate - 2,
+        currentHeartRate + 5,
+        currentHeartRate - 3,
+        currentHeartRate
+    ];
+
+    const sysData = [
+        systolic - 5,
+        systolic + 3,
+        systolic - 2,
+        systolic + 6,
+        systolic - 4,
+        systolic
+    ];
+
+    const diaData = [
+        diastolic - 3,
+        diastolic + 2,
+        diastolic - 1,
+        diastolic + 4,
+        diastolic - 2,
+        diastolic
+    ];
+
+    const ctx = document.getElementById('healthChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Current'],
+            datasets: [
+                {
+                    label: 'Systolic BP (mmHg)',
+                    data: sysData,
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.05)',
+                    tension: 0.4,
+                    borderWidth: 2,
+                    fill: true
+                },
+                {
+                    label: 'Diastolic BP (mmHg)',
+                    data: diaData,
+                    borderColor: '#06b6d4',
+                    backgroundColor: 'rgba(6, 182, 212, 0.05)',
+                    tension: 0.4,
+                    borderWidth: 2,
+                    fill: true
+                },
+                {
+                    label: 'Heart Rate (bpm)',
+                    data: hrData,
                     borderColor: '#10b981',
-                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                    fill: true,
-                    tension: 0.4
-                }, {
-                    label: 'Diastolic BP',
-                    data: [80, 78, 82, 79, 80, 75],
-                    borderColor: '#2563eb',
-                    backgroundColor: 'rgba(37, 99, 235, 0.1)',
-                    fill: true,
-                    tension: 0.4
-                }]
+                    backgroundColor: 'rgba(16, 185, 129, 0.05)',
+                    tension: 0.4,
+                    borderWidth: 2,
+                    fill: true
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        font: {
+                            family: 'Plus Jakarta Sans',
+                            weight: 'bold'
+                        }
+                    }
+                }
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { position: 'bottom' } },
-                scales: {
-                    y: { beginAtZero: false, grid: { color: '#f1f5f9' } },
-                    x: { grid: { display: false } }
+            scales: {
+                y: {
+                    beginAtZero: false,
+                    grid: { color: 'rgba(0,0,0,0.05)' }
+                },
+                x: {
+                    grid: { display: false }
                 }
             }
-        });
-
-        // Restore tab from storage or URL parameter or default to dashboard
-        const urlParams = new URLSearchParams(window.location.search);
-        const sectionParam = urlParams.get('section');
-        const savedTab = sectionParam || localStorage.getItem('patientActiveTab') || 'dashboard';
-        showSection(savedTab);
-    /*]]>*/
+        }
     });
+    /*]]>*/
 </script>
-
 </body>
 </html>

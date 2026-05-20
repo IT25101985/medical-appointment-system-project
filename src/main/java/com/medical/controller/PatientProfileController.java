@@ -128,5 +128,21 @@ public class PatientProfileController {
 
     }
 
+    Appointment app = new Appointment();
+        app.setContactEmail(user.getEmail());
+        app.setContactPhone(user.getPhoneNo());
+        model.addAttribute("appointment", app);
+
+    List<Doctor> doctors = doctorService.getAllDoctors();
+        model.addAttribute("doctors", doctors != null ? doctors : new ArrayList<>());
+
+    List<Appointment> appointments;
+        try {
+        appointments = appointmentService.getAppointmentsForPatient(user);
+        if (appointments == null) appointments = new ArrayList<>();
+    } catch (Exception e) {
+        appointments = new ArrayList<>();
+    }
+
 
 }

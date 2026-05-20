@@ -221,26 +221,6 @@
         .spinner { width: 20px; height: 20px; border: 2px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.7s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* ── Divider ── */
-        .divider { display: flex; align-items: center; gap: 12px; margin: 22px 0; }
-        .divider-line { flex: 1; height: 1px; background: var(--glass-border); }
-        .divider-text { font-size: 12px; color: var(--text-muted); font-weight: 500; white-space: nowrap; }
-
-        /* ── Biometric buttons ── */
-        .biometric-row { display: flex; gap: 12px; margin-bottom: 22px; }
-        .bio-btn {
-          flex: 1; padding: 12px;
-          background: var(--input-bg);
-          border: 1.5px solid var(--glass-border);
-          border-radius: 14px; cursor: pointer;
-          display: flex; flex-direction: column; align-items: center; gap: 6px;
-          font-family: 'Inter', sans-serif;
-          font-size: 11px; font-weight: 600;
-          color: var(--text-muted);
-          transition: all 0.25s;
-        }
-        .bio-btn i { font-size: 22px; }
-        .bio-btn:hover { border-color: #3b82f6; color: #3b82f6; background: rgba(59,130,246,0.06); transform: translateY(-2px); }
 
         /* ── Register link ── */
         .register-text {
@@ -313,13 +293,13 @@
 <div class="login-card">
 
     <!-- Logo -->
-    <div class="logo-wrap">
+    <a href="/" class="logo-wrap" style="text-decoration: none;">
         <div class="logo-icon"><i class="fa-solid fa-heart-pulse"></i></div>
         <div>
             <div class="logo-text">HealthCare<span>Plus</span></div>
             <p style="font-size:10px;color:var(--text-muted);font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-top:1px">Patient Portal</p>
         </div>
-    </div>
+    </a>
 
     <h1 class="card-title">Welcome back 👋</h1>
     <p class="card-sub">Sign in to access your health dashboard</p>
@@ -381,28 +361,7 @@
         </button>
     </form>
 
-    <!-- Divider -->
-    <div class="divider">
-        <div class="divider-line"></div>
-        <span class="divider-text">or sign in with</span>
-        <div class="divider-line"></div>
-    </div>
 
-    <!-- Biometric -->
-    <div class="biometric-row">
-        <button class="bio-btn" onclick="handleBiometric('face')">
-            <i class="fa-solid fa-face-smile" style="color:var(--blue)"></i>
-            <span>Face ID</span>
-        </button>
-        <button class="bio-btn" onclick="handleBiometric('fingerprint')">
-            <i class="fa-solid fa-fingerprint" style="color:var(--teal)"></i>
-            <span>Fingerprint</span>
-        </button>
-        <button class="bio-btn" onclick="handleBiometric('passkey')">
-            <i class="fa-solid fa-key" style="color:#818cf8"></i>
-            <span>Passkey</span>
-        </button>
-    </div>
 
     <!-- Register -->
     <p class="register-text">
@@ -453,15 +412,6 @@
       setTimeout(() => { btn.classList.remove('loading'); btn.style.pointerEvents = 'auto'; }, 5000);
     });
 
-    /* ── Biometric (demo UI) ── */
-    function handleBiometric(type) {
-      const labels = { face: 'Face ID', fingerprint: 'Fingerprint', passkey: 'Passkey' };
-      if (window.PublicKeyCredential) {
-        alert('✅ ' + labels[type] + ' authentication would launch here on a supported device.\nThis is a WebAuthn-compatible system.');
-      } else {
-        alert('⚠️ Your browser does not support biometric authentication.\nPlease use your username and password.');
-      }
-    }
 
     /* ── Input micro-interactions ── */
     document.querySelectorAll('.field-input').forEach(input => {

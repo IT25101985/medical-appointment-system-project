@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Patient Dashboard</title>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #005b96;
+            --primary-green: #2e7d32;
+            --soft-bg: #f4f7f6;
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.8);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(-45deg, #0f4c81, #2563eb, #10b981, #0f4c81);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .dashboard-container {
+            background: var(--glass);
+            backdrop-filter: blur(16px);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 900px;
+            animation: fadeInSlide 0.8s ease-out forwards;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container { grid-template-columns: 1fr; }
+        }
+
+        @keyframes fadeInSlide {
+            0% { opacity: 0; transform: translateY(50px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* Home Button Overlay */
+        .home-btn {
+            position: fixed;
+            top: 20px; left: 20px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 10px 20px;
+            border-radius: 12px;
+            color: white; font-weight: bold;
+            text-decoration: none;
+            display: flex; align-items: center; gap: 8px;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        .home-btn:hover { background: rgba(255,255,255,0.4); transform: scale(1.05); }
+
+        .sidebar { text-align: center; border-right: 1px solid rgba(0,0,0,0.1); padding-right: 20px; }
+
+        .logo {
+            width: 80px; height: 80px;
+            background-color: var(--primary-blue);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-weight: bold;
+        }
+
+        h1 { color: var(--primary-blue); margin-bottom: 1rem; font-size: 1.5rem; }
+
+        nav ul { list-style: none; padding: 0; }
+        nav li { margin: 10px 0; }
+        nav a {
+            display: block; padding: 12px;
+            text-decoration: none; color: var(--primary-blue);
+            border-radius: 10px; background: rgba(0,91,150,0.1);
+            transition: all 0.3s ease; font-weight: 600;
+        }
+        nav a:hover {
+            background-color: var(--primary-blue); color: white;
+            transform: translateX(5px);
+        }
+
+        button.logout {
+            margin-top: 20px; width: 100%;
+            background-color: rgba(231, 76, 60, 0.8);
+            color: white; border: none; padding: 12px;
+            border-radius: 10px; cursor: pointer;
+            transition: all 0.3s ease; font-weight: bold;
+        }
+        button.logout:hover { background-color: rgb(231, 76, 60); }
+
+        .main-content { padding-left: 10px; }
+
+        .chart-container {
+            background: white; border-radius: 15px; padding: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            /* Skeleton Loading Simulation */
+            position: relative;
+        }
+
+        /* Skeleton Loading */
+        .skeleton {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, #e2e8f0 25%, #cbd5e1 50%, #e2e8f0 75%);
+            background-size: 200% 100%;
+            animation: skeletonLoading 1.5s infinite;
+            border-radius: 15px;
+            z-index: 10;
+        }
+        @keyframes skeletonLoading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+    </style>
+</head>
+<body>
+
+<a href="/" class="home-btn"><i class="fa-solid fa-home"></i> Home</a>
+
+<div class="dashboard-container">
+    <div class="sidebar">
+        <div class="logo">
+            <i class="fa-solid fa-user-plus" style="font-size: 30px;"></i>
+        </div>
+        <h1>Patient Portal</h1>
+        <nav>
+            <ul>
+                <li><a th:href="@{/patient/book-appointment}"><i class="fa-solid fa-calendar-plus"></i> Book Appointment</a></li>
+                <li><a th:href="@{/patient/history}"><i class="fa-solid fa-clock-rotate-left"></i> My History</a></li>
+                <li><a th:href="@{/patient/profile}"><i class="fa-solid fa-user-pen"></i> Edit Profile</a></li>
+            </ul>
+        </nav>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+        </form>
+    </div>
+
+    <!-- Data Visualization Dashboard -->
+    <div class="main-content">
+        <h2 style="color: var(--primary-blue); margin-bottom: 15px;">Health Metrics Overview</h2>
+
+        <div class="chart-container" style="height: 300px; margin-bottom: 20px;">
+            <div id="chartSkeleton" class="skeleton"></div>
+            <canvas id="healthChart"></canvas>
+        </div>
+
+        <p style="color: #666; font-size: 0.9rem;">
+            * Your latest metrics synced automatically based on previous visit records.
+        </p>
+    </div>
+</div>
+
+<script>
+    // Simulate Backend Fetching Data with Skeleton
+    document.addEventListener("DOMContentLoaded", function() {
+        setTimeout(() => {
+            document.getElementById('chartSkeleton').style.display = 'none';
+            renderChart();
+        }, 1200); // Wait 1.2s to demontrate skeleton UI
+    });
+
+    function renderChart() {
+        const ctx = document.getElementById('healthChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Blood Pressure (Systolic)',
+                    data: [120, 118, 122, 119, 121, 115],
+                    borderColor: '#2e7d32',
+                    tension: 0.4,
+                    fill: false
+                }, {
+                    label: 'Weight (kg)',
+                    data: [75, 74.5, 73, 73.2, 72, 71.5],
+                    borderColor: '#005b96',
+                    tension: 0.4,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top' }
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>

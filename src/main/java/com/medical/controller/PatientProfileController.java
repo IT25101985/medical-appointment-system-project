@@ -27,7 +27,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/templates/patient")
+@RequestMapping("/patient")
 public class PatientProfileController {
 
     @Autowired

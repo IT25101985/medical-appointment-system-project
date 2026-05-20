@@ -21,7 +21,7 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/register", "/login", "/css/**", "/js/**").permitAll()
+                        .requestMatchers("/", "/register", "/login", "/forgot-password", "/error", "/css/**", "/js/**", "/images/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/templates/doctor/**").hasRole("DOCTOR")
                         .requestMatchers("/patient/**").hasRole("PATIENT")
@@ -60,13 +60,16 @@ public class SecurityConfig {
                     role = "ROLE_PATIENT"; // Default safety role
                 }
 
+                // Ensure the role string passed to .roles() does NOT have ROLE_ prefix
+                String roleName = role.replace("ROLE_", "");
+
                 return org.springframework.security.core.userdetails.User
                         .withUsername(user.getUsername())
                         .password(user.getPassword())
-                        .roles(role.replace("ROLE_", ""))
+                        .roles(roleName)
                         .build();
             }
-            throw new UsernameNotFoundException("User not found");
+            throw new UsernameNotFoundException("User not found: " + username);
         };
     }
 }

@@ -39,6 +39,9 @@ public class PatientProfileController {
     @Autowired
     private PatientRepository patientRepository;
 
+    @Autowired
+    private AppointmentService appointmentService;
+
     @GetMapping("/profile")
     public String viewProfile() {
         return "redirect:/patient/dashboard?section=profile";

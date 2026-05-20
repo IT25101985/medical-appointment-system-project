@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/doctor")
+@RequestMapping("/templates/doctor")
 public class DoctorController {
 
     @Autowired
@@ -26,7 +26,7 @@ public class DoctorController {
                 model.addAttribute("profileImage", optUser.get().getProfileImage());
             }
         }
-        return "doctor/dashboard";
+        return "templates/doctor/dashboard";
     }
 
     @PostMapping("/update-picture")
@@ -54,14 +54,14 @@ public class DoctorController {
         } else {
             model.addAttribute("appointments", new java.util.ArrayList<>());
         }
-        return "doctor/view-appointments";
+        return "templates/doctor/view-appointments";
     }
     @GetMapping("/records")
     public String patientRecords(Model model, java.security.Principal principal) {
         if (principal != null) {
             model.addAttribute("username", principal.getName());
         }
-        return "doctor/records";
+        return "templates/doctor/records";
     }
 
     @GetMapping("/consultations")
@@ -69,6 +69,6 @@ public class DoctorController {
         if (principal != null) {
             model.addAttribute("username", principal.getName());
         }
-        return "doctor/consultations";
+        return "templates/doctor/consultations";
     }
 }

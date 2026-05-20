@@ -1,5 +1,7 @@
 package com.medical.config;
 
+import com.medical.entity.User;
+import com.medical.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,8 +13,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import java.util.Optional;
-import com.medical.repository.UserRepository;
-import com.medical.entity.User;
 
 @Configuration
 @EnableWebSecurity
@@ -25,7 +25,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/register", "/login", "/forgot-password", "/error", "/css/**", "/js/**", "/images/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/templates/doctor/**").hasRole("DOCTOR")
+                        .requestMatchers("/doctor/**").hasRole("DOCTOR")
                         .requestMatchers("/patient/**").hasRole("PATIENT")
                         .anyRequest().authenticated()
                 )

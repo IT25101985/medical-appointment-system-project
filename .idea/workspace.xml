@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2605545f-0ebe-40d7-a92e-1abe1be52f92" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/users.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/users.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/forgot-password.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/forgot-password.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/register.html" afterDir="false" />
+    <list default="true" id="2605545f-0ebe-40d7-a92e-1abe1be52f92" name="Changes" comment="Merge branch">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/controller/PatientBookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/controller/PatientBookingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/medical/repository/AppointmentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/medical/repository/AppointmentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/medical/service/AppointmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/medical/service/AppointmentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/admin/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admin/dashboard.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

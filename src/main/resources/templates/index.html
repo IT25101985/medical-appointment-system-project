@@ -67,6 +67,7 @@
                 <button onclick="toggleGlobalTheme()" class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 transition" title="Toggle Dark/Light Mode">
                     <i class="fa-solid fa-moon"></i>
                 </button>
+
                 <!-- Not logged in -->
                 <div th:if="${#authentication == null or #authentication.name == 'anonymousUser'}">
                     <a href="/login" class="text-sm font-bold text-blue-600 border border-blue-200 px-4 py-2 rounded-xl hover:bg-blue-50 transition">

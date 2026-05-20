@@ -1,9 +1,12 @@
 package com.medical.controller;
 
+<<<<<<< HEAD
+=======
 import com.medical.entity.User;
 import com.medical.service.AppointmentService;
 import com.medical.service.DoctorService;
 import com.medical.service.UserService;
+>>>>>>> dev
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;

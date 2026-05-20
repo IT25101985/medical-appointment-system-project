@@ -1,7 +1,5 @@
 package com.medical.config;
 
-import com.medical.entity.User;
-import com.medical.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -25,7 +23,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/register", "/login", "/forgot-password", "/error", "/css/**", "/js/**", "/images/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/doctor/**").hasRole("DOCTOR")
+                        .requestMatchers("/templates/doctor/**").hasRole("DOCTOR")
                         .requestMatchers("/patient/**").hasRole("PATIENT")
                         .anyRequest().authenticated()
                 )

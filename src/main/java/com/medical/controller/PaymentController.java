@@ -1,8 +1,11 @@
 package com.medical.controller;
 
+<<<<<<< HEAD
+=======
 import com.medical.entity.*;
 import com.medical.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+>>>>>>> dev
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

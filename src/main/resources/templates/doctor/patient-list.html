@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HealthCarePlus - Patient List</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #020617;
+            background-image:
+                radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.15) 0, transparent 40%),
+                radial-gradient(at 100% 0%, rgba(30, 58, 138, 0.2) 0, transparent 40%);
+            min-height: 100vh;
+            color: #f8fafc;
+        }
+
+        .glass-sidebar {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(30, 41, 59, 0.8);
+        }
+
+        .workspace-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(30, 41, 59, 1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-item {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-item.active {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+        }
+        .nav-item.active::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 20%;
+            height: 60%;
+            width: 4px;
+            background: #10b981;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .modern-home-btn {
+            position: fixed; top: 20px; right: 20px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white; padding: 10px 24px; border-radius: 30px;
+            text-decoration: none; font-weight: 600; z-index: 1000;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+            transition: all 0.3s ease; display: flex; align-items: center; gap: 8px;
+        }
+    </style>
+</head>
+<body class="flex">
+<a href="/" class="modern-home-btn"><i class="fa-solid fa-house-chimney-medical"></i> Home</a>
+
+<aside class="w-72 glass-sidebar h-screen p-8 flex flex-col justify-between hidden md:flex sticky top-0">
+  <div>
+    <div class="flex items-center gap-3 mb-12">
+      <div class="w-10 h-10 bg-gradient-to-br from-emerald-500 to-emerald-700 rounded-xl flex items-center justify-center text-white shadow-lg shadow-emerald-500/30">
+        <i class="fa-solid fa-stethoscope"></i>
+      </div>
+      <span class="text-xl font-bold text-white tracking-tight">HEALTHCARE<span class="font-bold text-emerald-500">PLUS</span></span>
+    </div>
+
+    <nav class="space-y-2">
+      <a href="/doctor/dashboard" class="nav-item flex items-center gap-4 px-4 py-3 text-slate-400 hover:bg-slate-800 hover:text-emerald-500 rounded-xl transition-all">
+        <i class="fa-solid fa-house-user"></i> Overview
+      </a>
+      <a href="/doctor/appointments" class="nav-item flex items-center gap-4 px-4 py-3 text-slate-400 hover:bg-slate-800 hover:text-emerald-500 rounded-xl transition-all">
+        <i class="fa-solid fa-calendar-check"></i> Appointments
+      </a>
+      <a href="/doctor/patients" class="nav-item active flex items-center gap-4 px-4 py-3 rounded-xl font-semibold">
+        <i class="fa-solid fa-users-medical"></i> Patient List
+      </a>
+      <a href="/doctor/records" class="nav-item flex items-center gap-4 px-4 py-3 text-slate-400 hover:bg-slate-800 hover:text-emerald-500 rounded-xl transition-all">
+        <i class="fa-solid fa-folder-open"></i> Patient Records
+      </a>
+      <a href="/doctor/consultations" class="nav-item flex items-center gap-4 px-4 py-3 text-slate-400 hover:bg-slate-800 hover:text-emerald-500 rounded-xl transition-all">
+        <i class="fa-solid fa-video"></i> Consultations
+      </a>
+    </nav>
+  </div>
+
+  <div>
+    <form th:action="@{/logout}" method="post">
+      <button type="submit" class="w-full flex items-center justify-center gap-2 px-4 py-3 border border-slate-700 text-slate-400 font-bold rounded-xl hover:border-red-500/50 hover:bg-red-500/10 hover:text-red-400 transition-all">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out
+      </button>
+    </form>
+  </div>
+</aside>
+
+<main class="flex-1 p-8 md:p-12">
+  <header class="flex justify-between items-center mb-10">
+    <div>
+      <h1 class="text-3xl font-extrabold gradient-text tracking-tight">Patient Directory</h1>
+      <p class="text-slate-400 mt-1 font-medium">Browse and manage all registered patients</p>
+    </div>
+  </header>
+
+  <div class="workspace-card rounded-[2rem] overflow-hidden border border-slate-800">
+    <table class="w-full text-left border-collapse">
+      <thead>
+      <tr class="bg-slate-900/50 border-b border-slate-800">
+        <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Patient</th>
+        <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Contact Info</th>
+        <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Address</th>
+        <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider text-right">Actions</th>
+      </tr>
+      </thead>
+      <tbody class="divide-y divide-slate-800">
+      <tr th:each="patient : ${patients}" class="hover:bg-slate-800/30 transition-colors">
+        <td class="px-6 py-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-emerald-500/10 rounded-full flex items-center justify-center text-emerald-500 overflow-hidden">
+              <img th:if="${patient.profileImage != null and !patient.profileImage.isEmpty()}" th:src="${patient.profileImage}" class="w-full h-full object-cover">
+              <i th:unless="${patient.profileImage != null and !patient.profileImage.isEmpty()}" class="fa-solid fa-user"></i>
+            </div>
+            <div>
+              <p class="text-sm font-bold text-white" th:text="${patient.fullName}">Patient Name</p>
+              <p class="text-[10px] text-slate-500" th:text="'ID: #' + ${patient.id}">#123</p>
+            </div>
+          </div>
+        </td>
+        <td class="px-6 py-4">
+          <p class="text-xs text-slate-300"><i class="fa-solid fa-phone text-[10px] text-emerald-500 mr-2"></i><span th:text="${patient.phoneNo}">Phone</span></p>
+          <p class="text-xs text-slate-300 mt-1"><i class="fa-solid fa-envelope text-[10px] text-emerald-500 mr-2"></i><span th:text="${patient.username}">Email</span></p>
+        </td>
+        <td class="px-6 py-4">
+          <p class="text-xs text-slate-400" th:text="${patient.address}">Address</p>
+        </td>
+        <td class="px-6 py-4 text-right">
+          <a th:href="@{/doctor/records(patientId=${patient.id})}" class="px-4 py-2 bg-emerald-500/10 text-emerald-400 rounded-lg text-xs font-bold hover:bg-emerald-500 hover:text-white transition-all">
+            View Records
+          </a>
+        </td>
+      </tr>
+      <tr th:if="${#lists.isEmpty(patients)}">
+        <td colspan="4" class="px-6 py-20 text-center">
+          <i class="fa-solid fa-users-slash text-4xl text-slate-700 mb-4 block"></i>
+          <p class="text-slate-500 font-medium">No patients found in the system.</p>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+</body>
+</html>

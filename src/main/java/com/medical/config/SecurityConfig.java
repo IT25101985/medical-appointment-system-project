@@ -11,6 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import java.util.Optional;
+import com.medical.repository.UserRepository;
+import com.medical.entity.User;
 
 @Configuration
 @EnableWebSecurity

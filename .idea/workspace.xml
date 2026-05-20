@@ -4,10 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2605545f-0ebe-40d7-a92e-1abe1be52f92" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/medical/entity/Admin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/controller/PatientProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/controller/PatientProfileController.java" afterDir="false" />
+    <list default="true" id="2605545f-0ebe-40d7-a92e-1abe1be52f92" name="Changes" comment="Merge branch">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/medical/service/CardPayment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/medical/service/CashPayment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/medical/service/Payment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/config/DataInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/config/DataInitializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/repository/PatientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/repository/PatientRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/service/PDFGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/service/PDFGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/service/PdfService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/service/PdfService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/service/RatingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/service/RatingService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +55,11 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.notifications&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\final medical aapiment system\medical-appointment-system-project\src\main\java\com\medical\service" />
+    </key>
+  </component>
   <component name="RunManager" selected="Application.MedicalAppointmentApplication">
     <configuration name="MedicalAppointmentApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.medical.MedicalAppointmentApplication" />

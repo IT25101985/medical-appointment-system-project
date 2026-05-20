@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.time.format.DateTimeFormatter;
+import com.medical.entity.Appointment;
 
 @Service
 public class PdfService implements PDFGenerator {

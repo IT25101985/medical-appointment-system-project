@@ -8,3 +8,8 @@
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
+<<<<<<< HEAD
+=======
+.idea/
+*.iml
+>>>>>>> c0dbc0d883b5deb2e23bb68b224dcbf5c6cc79b4

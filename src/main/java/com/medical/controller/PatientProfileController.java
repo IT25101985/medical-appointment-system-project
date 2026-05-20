@@ -142,6 +142,29 @@ public class PatientProfileController {
         if (appointments == null) appointments = new ArrayList<>();
     } catch (Exception e) {
         appointments = new ArrayList<>();
+
+
+        Map<Long, Invoice> invoiceMap = new HashMap<>();
+        Map<Long, MedicalRecord> recordMap = new HashMap<>();
+        for (Appointment a : appointments) {
+            try {
+                invoiceService.getInvoiceByAppointment(a).ifPresent(inv -> invoiceMap.put(a.getId(), inv));
+                medicalRecordService.getRecordByAppointment(a).ifPresent(rec -> recordMap.put(a.getId(), rec));
+            } catch (Exception ignored) {}
+        }
+
+        model.addAttribute("appointments", appointments);
+        model.addAttribute("invoiceMap", invoiceMap);
+        model.addAttribute("recordMap", recordMap);
+
+        try {
+            List<MedicalRecord> recentRecords = medicalRecordService.getRecentRecordsByPatient(user);
+            model.addAttribute("latestRecord", (recentRecords != null && !recentRecords.isEmpty()) ? recentRecords.get(0) : null);
+        } catch (Exception e) {
+            model.addAttribute("latestRecord", null);
+        }
+
+        return "patient/dashboard";
     }
 
 

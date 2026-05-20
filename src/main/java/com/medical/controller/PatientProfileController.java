@@ -63,7 +63,7 @@ public class PatientProfileController {
             if (optUser.isPresent()) {
                 User currentUser = optUser.get();
 
-
+                // 1. Advanced Input Validation: Blood Pressure Format Check (e.g., 120/80)
                 String bp = updatedUser.getBloodPressure();
                 if (bp != null && !bp.trim().isEmpty()) {
                     if (!bp.matches("\\d{2,3}/\\d{2,3}")) {
@@ -71,7 +71,7 @@ public class PatientProfileController {
                     }
                 }
 
-
+                // 2. Advanced Input Validation: Emergency Contact Phone Number Check (Exactly 10 digits)
                 String emergencyContact = updatedUser.getEmergencyContact();
                 if (emergencyContact != null && !emergencyContact.trim().isEmpty()) {
                     if (!emergencyContact.matches("\\d{10}")) {
@@ -79,16 +79,17 @@ public class PatientProfileController {
                     }
                 }
 
-
+                // 3. Advanced Input Validation: Defensive Password Strength Policy
                 String rawPassword = null;
                 if (updatedUser.getPassword() != null && !updatedUser.getPassword().trim().isEmpty()) {
                     rawPassword = updatedUser.getPassword().trim();
+                    // Policy: Minimum 8 characters, at least one digit, and at least one special character
                     if (rawPassword.length() < 8 || !rawPassword.matches(".*\\d.*") || !rawPassword.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\",.<>/?].*")) {
                         return "redirect:/patient/dashboard?section=profile&error=weak_password";
                     }
                 }
 
-
+                // Query and save patient-specific + base user updates in one transaction
                 Optional<Patient> optPatient = patientRepository.findById(currentUser.getId());
                 if (optPatient.isPresent()) {
                     Patient p = optPatient.get();
@@ -103,7 +104,7 @@ public class PatientProfileController {
 
                     if (rawPassword != null) {
                         p.setPassword(rawPassword);
-                        userService.saveUser(p);
+                        userService.saveUser(p); // Hashing and saving patient credentials securely
                     } else {
                         patientRepository.save(p);
                     }
@@ -128,9 +129,9 @@ public class PatientProfileController {
         return "redirect:/logout";
     }
 
-
+    // Overriding / extended handling of Dashboard to add complex tracking analytics pipelines
     @GetMapping("/dashboard")
-    public String dashboard(Principal principal, Model model) {
+    public String dashboard(Principal principal, Model model, @RequestParam(value = "reschedule", required = false) Long rescheduleId) {
         if (principal == null) {
             return "redirect:/login";
         }
@@ -162,8 +163,18 @@ public class PatientProfileController {
         model.addAttribute("username", principal.getName());
 
         Appointment app = new Appointment();
-        app.setContactEmail(user.getEmail());
-        app.setContactPhone(user.getPhoneNo());
+        if (rescheduleId != null) {
+            Optional<Appointment> optApp = appointmentService.getAppointmentById(rescheduleId);
+            if (optApp.isPresent() && optApp.get().getPatient().getId().equals(user.getId())) {
+                app = optApp.get();
+            }
+        }
+        if (app.getContactEmail() == null) {
+            app.setContactEmail(user.getEmail());
+        }
+        if (app.getContactPhone() == null) {
+            app.setContactPhone(user.getPhoneNo());
+        }
         model.addAttribute("appointment", app);
 
         List<Doctor> doctors = doctorService.getAllDoctors();
@@ -177,7 +188,7 @@ public class PatientProfileController {
             appointments = new ArrayList<>();
         }
 
-
+        // --- CORE ADVANCED WORKLOAD EXTENSION: DATA ANALYTICS STREAM PIPELINES ---
         long totalVisits = appointments.stream()
                 .filter(a -> "COMPLETED".equals(a.getStatus()))
                 .count();
@@ -186,15 +197,15 @@ public class PatientProfileController {
                 .filter(a -> "CANCELLED".equals(a.getStatus()))
                 .count();
 
-
+        // Analytical processing mapping ratio calculation logic safely avoiding division by zero
         double attendanceRate = (totalVisits + cancelledVisits > 0)
                 ? ((double) totalVisits / (totalVisits + cancelledVisits)) * 100
                 : 100.0;
 
-
+        // Binding complex parameters directly to data keys for the view engine
         model.addAttribute("totalVisits", totalVisits);
         model.addAttribute("attendanceRate", String.format("%.1f%%", attendanceRate));
-
+        // -------------------------------------------------------------------------
 
         Map<Long, Invoice> invoiceMap = new HashMap<>();
         Map<Long, MedicalRecord> recordMap = new HashMap<>();

@@ -4,7 +4,6 @@ import com.medical.entity.MedicalRecord;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.medical.entity.User;
 import java.util.List;
 
 @Repository

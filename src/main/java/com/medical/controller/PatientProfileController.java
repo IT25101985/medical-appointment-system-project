@@ -217,5 +217,6 @@ public class PatientProfileController {
         }
 
         return "patient/dashboard";
+
     }
 }

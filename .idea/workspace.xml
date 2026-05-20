@@ -4,16 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2605545f-0ebe-40d7-a92e-1abe1be52f92" name="Changes" comment="Merge branch">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/medical/service/CardPayment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/medical/service/CashPayment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/medical/service/Payment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/config/DataInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/config/DataInitializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/repository/PatientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/repository/PatientRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/service/PDFGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/service/PDFGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/service/PdfService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/service/PdfService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/service/RatingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/service/RatingService.java" afterDir="false" />
+    <list default="true" id="2605545f-0ebe-40d7-a92e-1abe1be52f92" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/users.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/users.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/forgot-password.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/forgot-password.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/register.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,6 +86,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.MedicalAppointmentApplication" />
+        <item itemvalue="Spring Boot.MedicalAppointmentApplication" />
         <item itemvalue="Application.MedicalAppointmentApplication" />
         <item itemvalue="Spring Boot.MedicalAppointmentApplication" />
       </list>

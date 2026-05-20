@@ -3,313 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Appointment Management | MedAdmin</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Appointment Command Center | Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
-        :root {
-            --primary: #4f46e5;
-            --primary-light: #eef2ff;
-            --success: #10b981;
-            --danger: #ef4444;
-            --bg-body: #f8fafc;
-            --bg-card: #ffffff;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --border: #e2e8f0;
-            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-        }
-
-        [data-theme="dark"] {
-            --bg-body: #0f172a;
-            --bg-card: #1e293b;
-            --text-main: #f1f5f9;
-            --text-muted: #94a3b8;
-            --border: #334155;
-            --primary-light: rgba(79, 70, 229, 0.1);
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            margin: 0;
-            line-height: 1.5;
-            transition: all 0.3s ease;
-        }
-
-        /* Top Header */
-        header {
-            background: var(--bg-card);
-            border-bottom: 1px solid var(--border);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .logo {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* Main Content Layout */
-        .container {
-            max-width: 1300px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
-            display: grid;
-            grid-template-columns: 1fr 320px;
-            gap: 2rem;
-        }
-
-        @media (max-width: 1024px) {
-            .container { grid-template-columns: 1fr; }
-        }
-
-        .card {
-            background: var(--bg-card);
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow);
-            overflow: hidden;
-        }
-
-        .card-header {
-            padding: 1.25rem 1.5rem;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .card-title {
-            font-size: 1rem;
-            font-weight: 600;
-            margin: 0;
-        }
-
-        /* Table Design */
-        .table-wrap { overflow-x: auto; }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-        }
-
-        th {
-            background: var(--bg-body);
-            padding: 0.75rem 1.5rem;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            letter-spacing: 0.05em;
-        }
-
-        td {
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid var(--border);
-            font-size: 0.9rem;
-        }
-
-        tr:last-child td { border-bottom: none; }
-
-        /* Badges */
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 500;
-        }
-        .status-scheduled { background: #e0e7ff; color: #4338ca; }
-        .status-completed { background: #d1fae5; color: #065f46; }
-        .status-cancelled { background: #fee2e2; color: #991b1b; }
-
-        /* Doctor List (Sidebar) */
-        .doctor-item {
-            padding: 1rem 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-bottom: 1px solid var(--border);
-            transition: background 0.2s;
-        }
-        .doctor-item:hover { background: var(--bg-body); }
-        .doctor-item:last-child { border-bottom: none; }
-
-        .avatar {
-            width: 44px; height: 44px;
-            border-radius: 10px;
-            object-fit: cover;
-            background: var(--primary-light);
-        }
-
-        .doc-info h4 { margin: 0; font-size: 0.875rem; font-weight: 600; }
-        .doc-info p { margin: 0; font-size: 0.75rem; color: var(--text-muted); }
-
-        /* Buttons & Actions */
-        .btn {
-            cursor: pointer;
-            border-radius: 8px;
-            padding: 0.5rem 1rem;
-            font-size: 0.875rem;
-            font-weight: 500;
-            border: 1px solid var(--border);
-            background: var(--bg-card);
-            color: var(--text-main);
-            transition: all 0.2s;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .btn:hover { background: var(--bg-body); border-color: var(--text-muted); }
-
-        .btn-action { padding: 0.4rem; border-radius: 6px; font-size: 0.8rem; }
-        .btn-checkin { color: var(--success); border-color: var(--success); }
-        .btn-checkin:hover { background: var(--success); color: white; }
-        .btn-cancel { color: var(--danger); border-color: var(--danger); }
-        .btn-cancel:hover { background: var(--danger); color: white; }
-
-        .theme-toggle {
-            width: 40px; height: 40px;
-            display: flex; align-items: center; justify-content: center;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
+        .glass-sidebar { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); }
+        .queue-badge { animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
     </style>
 </head>
-<body data-theme="light">
+<body class="flex">
 
-<header>
-    <div class="logo">
-        <i class="fa-solid fa-square-h"></i>
-        <span>MedAdmin <span style="font-weight: 300;">Clinic</span></span>
-    </div>
-    <div style="display: flex; gap: 12px; align-items: center;">
-        <button class="btn theme-toggle" id="theme-btn">
-            <i class="fa-solid fa-moon"></i>
-        </button>
-        <a href="/admin/dashboard" class="btn"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
-    </div>
-</header>
-
-<div class="container">
-    <main>
-        <div style="margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: flex-end;">
-            <div>
-                <h1 style="margin: 0; font-size: 1.75rem; letter-spacing: -0.025em;">Appointments</h1>
-                <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem;">Manage and monitor daily patient schedules</p>
+<!-- Sidebar -->
+<aside class="w-64 min-h-screen glass-sidebar text-slate-300 flex flex-col sticky top-0 hidden lg:flex">
+    <div class="p-6">
+        <div class="flex items-center gap-3 mb-10">
+            <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center">
+                <i class="fa-solid fa-hospital text-white text-xl"></i>
             </div>
-            <a href="/" class="btn" style="background: var(--primary); color: white; border: none;">
-                <i class="fa-solid fa-plus"></i> New Booking
+            <span class="text-xl font-bold text-white">Admin<span class="text-blue-500">Center</span></span>
+        </div>
+        <nav class="space-y-2">
+            <a th:href="@{/admin/dashboard}" class="flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-slate-800 transition">
+                <i class="fa-solid fa-chart-line w-5"></i> Insights
             </a>
-        </div>
+            <a th:href="@{/admin/doctors}" class="flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-slate-800 transition">
+                <i class="fa-solid fa-user-doctor w-5"></i> Doctors
+            </a>
+            <a th:href="@{/admin/appointments}" class="flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-slate-800 transition active-nav" style="background: rgba(59, 130, 246, 0.2); border-left: 4px solid #3b82f6; color: #3b82f6;">
+                <i class="fa-solid fa-calendar-check w-5"></i> Bookings
+            </a>
+            <a th:href="@{/admin/users}" class="flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-slate-800 transition">
+                <i class="fa-solid fa-users w-5"></i> Patients
+            </a>
+        </nav>
+    </div>
+</aside>
 
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">Recent Activity</div>
-                <div style="font-size: 0.8rem; color: var(--text-muted);" th:text="${#lists.size(appointments)} + ' total records'"></div>
-            </div>
-            <div class="table-wrap">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Patient</th>
-                        <th>Consultant</th>
-                        <th>Date & Time</th>
-                        <th>Status</th>
-                        <th style="text-align: right;">Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="app : ${appointments}">
-                        <td>
-                            <div style="font-weight: 600;" th:text="${app.patient.fullName}"></div>
-                            <div style="font-size: 0.75rem; color: var(--text-muted);" th:text="'ID: #' + ${app.id}"></div>
-                        </td>
-                        <td th:text="${app.doctor.name}"></td>
-                        <td th:text="${app.appointmentDate}"></td>
-                        <td>
-                            <span th:class="'status-badge status-' + ${#strings.toLowerCase(app.status)}" th:text="${app.status}"></span>
-                        </td>
-                        <td style="text-align: right;">
-                            <div style="display: inline-flex; gap: 8px;">
-                                <form th:if="${app.status == 'SCHEDULED'}" th:action="@{/admin/appointments/{id}/checkin(id=${app.id})}" method="post">
-                                    <button type="submit" class="btn btn-action btn-checkin" title="Check-in"><i class="fa-solid fa-check"></i></button>
-                                </form>
-                                <form th:if="${app.status == 'SCHEDULED'}" th:action="@{/admin/appointments/{id}/cancel(id=${app.id})}" method="post">
-                                    <button type="submit" class="btn btn-action btn-cancel" title="Cancel Appointment"><i class="fa-solid fa-xmark"></i></button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+<!-- Main Content -->
+<main class="flex-1 p-8 overflow-y-auto h-screen">
+    <header class="flex justify-between items-center mb-8">
+        <div>
+            <h1 class="text-3xl font-extrabold text-slate-800">Booking Command Center</h1>
+            <p class="text-slate-500">Manage queues, reschedule visits, and handle cancellations</p>
+        </div>
+        <div class="flex gap-3">
+            <div class="bg-blue-600 text-white px-6 py-3 rounded-2xl font-bold flex items-center gap-2 shadow-lg shadow-blue-200">
+                <i class="fa-solid fa-clock"></i> <span id="liveTime">--:--:--</span>
             </div>
         </div>
-    </main>
+    </header>
 
-    <aside>
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">Medical Staff</div>
+    <!-- Queue Insights -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div th:each="doc : ${doctors}" class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm flex items-center justify-between">
+            <div>
+                <p class="text-[10px] font-black uppercase text-slate-400 tracking-widest mb-1" th:text="${doc.specialization}">Cardiology</p>
+                <h4 class="font-bold text-slate-800" th:text="'Dr. ' + ${doc.name}">Dr. John</h4>
             </div>
-            <div class="doctor-list">
-                <div class="doctor-item" th:each="doctor : ${doctors}">
-                    <img th:src="${doctor.user != null and doctor.user.profileImage != null ? doctor.user.profileImage : 'https://cdn-icons-png.flaticon.com/512/3774/3774299.png'}" class="avatar" alt="Doc">
-                    <div class="doc-info">
-                        <h4 th:text="${doctor.name}"></h4>
-                        <p th:text="${doctor.specialization}"></p>
+            <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex flex-col items-center justify-center">
+                <span class="text-lg font-black leading-none" th:text="${#lists.size(appointments.?[doctor != null and doctor.id == __${doc.id}__ and status == 'SCHEDULED'])}">0</span>
+                <span class="text-[8px] font-bold uppercase">Queue</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="bg-white p-4 rounded-3xl border border-slate-100 shadow-sm mb-8 flex flex-col md:flex-row gap-4 items-center">
+        <div class="relative flex-1 w-full">
+            <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+            <input type="text" id="appointmentSearch" placeholder="Search by patient name, phone, or status..."
+                   class="w-full pl-12 pr-4 py-3 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition">
+        </div>
+        <div class="flex gap-2">
+            <button onclick="filterStatus('all')" class="px-4 py-2 bg-slate-900 text-white rounded-xl text-xs font-bold">All</button>
+            <button onclick="filterStatus('SCHEDULED')" class="px-4 py-2 bg-blue-100 text-blue-600 rounded-xl text-xs font-bold hover:bg-blue-600 hover:text-white transition">Scheduled</button>
+            <button onclick="filterStatus('COMPLETED')" class="px-4 py-2 bg-emerald-100 text-emerald-600 rounded-xl text-xs font-bold hover:bg-emerald-600 hover:text-white transition">Completed</button>
+        </div>
+    </div>
+
+    <!-- Appointment Table -->
+    <div class="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden">
+        <table class="w-full text-left">
+            <thead class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider">
+            <tr>
+                <th class="px-6 py-4 font-bold">Patient & Contact</th>
+                <th class="px-6 py-4 font-bold">Date & Time</th>
+                <th class="px-6 py-4 font-bold">Assigned Doctor</th>
+                <th class="px-6 py-4 font-bold">Status</th>
+                <th class="px-6 py-4 font-bold text-center">Actions</th>
+            </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-50" id="appointmentTableBody">
+            <tr th:each="app : ${appointments}" class="hover:bg-slate-50/50 transition app-row" th:data-status="${app.status}">
+                <td class="px-6 py-4">
+                    <p class="font-bold text-slate-800" th:text="${app.patientName}">John Doe</p>
+                    <p class="text-xs text-slate-400" th:text="${app.contactPhone}">+94 77 123 4567</p>
+                </td>
+                <td class="px-6 py-4">
+                    <p class="text-sm font-bold text-slate-700" th:text="${#temporals.format(app.appointmentDate, 'dd MMM yyyy')}">12 May 2026</p>
+                    <p class="text-[10px] font-black text-blue-600 uppercase" th:text="${#temporals.format(app.appointmentDate, 'hh:mm a')}">10:30 AM</p>
+                </td>
+                <td class="px-6 py-4">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 bg-slate-100 rounded-lg flex items-center justify-center text-slate-400">
+                            <i class="fa-solid fa-user-doctor text-xs"></i>
+                        </div>
+                        <span class="text-sm font-semibold text-slate-600" th:text="'Dr. ' + ${app.doctorName}">Dr. Smith</span>
                     </div>
-                </div>
-            </div>
-            <div style="padding: 1.25rem; text-align: center;">
-                <a href="/admin/doctors" style="font-size: 0.8rem; color: var(--primary); text-decoration: none; font-weight: 500;">View Full Directory</a>
-            </div>
-        </div>
-
-        <div class="card" style="margin-top: 1.5rem; background: var(--primary-light); border: none;">
-            <div style="padding: 1.5rem;">
-                <h4 style="margin: 0 0 0.5rem 0; font-size: 0.9rem;">Need Help?</h4>
-                <p style="margin: 0; font-size: 0.8rem; color: var(--text-muted);">Access the administration manual or contact IT support for system issues.</p>
-                <div style="margin-top: 1rem;">
-                    <a href="mailto:support@medical.com" class="btn btn-action" style="width: 100%; justify-content: center;">Contact Support</a>
-                </div>
-            </div>
-        </div>
-    </aside>
-</div>
+                </td>
+                <td class="px-6 py-4">
+                            <span th:class="${'px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest ' +
+                                (app.status == 'SCHEDULED' ? 'bg-blue-100 text-blue-600' :
+                                 app.status == 'COMPLETED' ? 'bg-emerald-100 text-emerald-600' :
+                                 'bg-rose-100 text-rose-600')}"
+                                  th:text="${app.status}">SCHEDULED</span>
+                </td>
+                <td class="px-6 py-4">
+                    <div class="flex justify-center gap-2">
+                        <form th:if="${app.status == 'SCHEDULED'}" th:action="@{/admin/appointments/{id}/checkin(id=${app.id})}" method="post">
+                            <button class="px-4 py-2 bg-emerald-600 text-white rounded-xl text-xs font-bold hover:bg-emerald-700 transition flex items-center gap-2">
+                                <i class="fa-solid fa-check"></i> Check-in
+                            </button>
+                        </form>
+                        <form th:if="${app.status == 'SCHEDULED'}" th:action="@{/admin/appointments/{id}/cancel(id=${app.id})}" method="post" onsubmit="return confirm('Send cancellation email to patient?')">
+                            <button class="px-4 py-2 bg-rose-50 text-rose-600 rounded-xl text-xs font-bold hover:bg-rose-600 hover:text-white transition">
+                                Cancel
+                            </button>
+                        </form>
+                        <span th:unless="${app.status == 'SCHEDULED'}" class="text-xs font-bold text-slate-300 italic">No actions</span>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
 
 <script>
-    const themeBtn = document.getElementById('theme-btn');
-    const body = document.body;
-    const icon = themeBtn.querySelector('i');
+    // Update Live Clock
+    function updateClock() {
+        const now = new Date();
+        document.getElementById('liveTime').innerText = now.toLocaleTimeString();
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
 
-    const toggleTheme = (theme) => {
-        const isDark = theme === 'dark';
-        body.setAttribute('data-theme', theme);
-        icon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
-        localStorage.setItem('med_theme', theme);
-    };
-
-    themeBtn.addEventListener('click', () => {
-        const current = body.getAttribute('data-theme');
-        toggleTheme(current === 'light' ? 'dark' : 'light');
+    // Search Filter
+    document.getElementById('appointmentSearch').addEventListener('input', function(e) {
+        const q = e.target.value.toLowerCase();
+        document.querySelectorAll('.app-row').forEach(row => {
+            const text = row.innerText.toLowerCase();
+            row.style.display = text.includes(q) ? '' : 'none';
+        });
     });
 
-    // Init
-    toggleTheme(localStorage.getItem('med_theme') || 'light');
+    // Status Filter
+    function filterStatus(status) {
+        document.querySelectorAll('.app-row').forEach(row => {
+            if (status === 'all') {
+                row.style.display = '';
+            } else {
+                row.style.display = row.getAttribute('data-status') === status ? '' : 'none';
+            }
+        });
+    }
 </script>
-
 </body>
 </html>

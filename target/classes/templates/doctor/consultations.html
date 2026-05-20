@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinical Workspace | Start Session</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #020617; color: #f8fafc; }
+        .workspace-glass { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(20px); border: 1px solid rgba(30, 41, 59, 1); }
+        .active-session-ring { border: 2px solid #10b981; box-shadow: 0 0 20px rgba(16, 185, 129, 0.2); }
+        .sidebar-item { transition: all 0.3s ease; }
+        .sidebar-item:hover { background: rgba(16, 185, 129, 0.1); color: #10b981; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+<header class="p-6 border-b border-slate-800 flex justify-between items-center bg-slate-900/50 backdrop-blur-md sticky top-0 z-50">
+    <div class="flex items-center gap-3">
+        <a href="/doctor/dashboard" class="text-slate-400 hover:text-white transition-all"><i class="fa-solid fa-arrow-left text-xl"></i></a>
+        <h1 class="text-xl font-bold tracking-tight">Active Consultation <span class="text-emerald-500 ml-2">• Live</span></h1>
+    </div>
+    <div class="flex items-center gap-4">
+        <div class="px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-emerald-400 text-xs font-bold flex items-center gap-2">
+            <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span> Encrypted Session
+        </div>
+        <a href="/doctor/appointments" class="px-5 py-2.5 bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white rounded-xl text-sm font-bold transition-all">
+            End Session
+        </a>
+    </div>
+</header>
+
+<div class="flex-1 flex flex-col lg:flex-row p-6 gap-8">
+    <!-- Left: Patient Vitals & Info -->
+    <aside class="w-full lg:w-80 space-y-6">
+        <div class="workspace-glass p-6 rounded-3xl text-center">
+            <div class="w-24 h-24 bg-slate-800 rounded-full mx-auto mb-4 flex items-center justify-center border-4 border-slate-700">
+                <i class="fa-solid fa-user text-4xl text-slate-500"></i>
+            </div>
+            <h2 class="text-xl font-bold">John Doe</h2>
+            <p class="text-xs text-slate-500 font-bold uppercase tracking-widest mt-1">ID: #PT-8829</p>
+
+            <div class="mt-6 grid grid-cols-2 gap-4">
+                <div class="p-3 bg-slate-900/50 rounded-2xl border border-slate-800">
+                    <p class="text-[10px] text-slate-500 uppercase font-bold">Age</p>
+                    <p class="text-sm font-bold">28 Yrs</p>
+                </div>
+                <div class="p-3 bg-slate-900/50 rounded-2xl border border-slate-800">
+                    <p class="text-[10px] text-slate-500 uppercase font-bold">Blood</p>
+                    <p class="text-sm font-bold text-red-500">O+ Pos</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="workspace-glass p-6 rounded-3xl">
+            <h3 class="text-sm font-bold mb-4 uppercase text-slate-500">Recent Vitals</h3>
+            <div class="space-y-4">
+                <div class="flex justify-between items-center">
+                    <span class="text-sm text-slate-400">Blood Pressure</span>
+                    <span class="text-sm font-bold text-emerald-400">120/80</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-sm text-slate-400">Heart Rate</span>
+                    <span class="text-sm font-bold text-emerald-400">72 bpm</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-sm text-slate-400">Temperature</span>
+                    <span class="text-sm font-bold text-amber-400">98.6 °F</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Center: Main Workspace -->
+    <main class="flex-1 space-y-6">
+        <div class="workspace-glass p-8 rounded-[2.5rem] flex flex-col h-full min-h-[500px]">
+            <div class="flex justify-between items-center mb-8">
+                <h3 class="text-lg font-bold">Clinical Notes & Observations</h3>
+                <div class="flex gap-2">
+                    <button class="p-2 bg-slate-800 rounded-lg hover:bg-slate-700 transition-all"><i class="fa-solid fa-microphone text-slate-400"></i></button>
+                    <button class="p-2 bg-slate-800 rounded-lg hover:bg-slate-700 transition-all"><i class="fa-solid fa-paperclip text-slate-400"></i></button>
+                </div>
+            </div>
+
+            <textarea placeholder="Start typing your clinical notes here... Use '/' for quick medical templates."
+                      class="flex-1 bg-transparent border-none outline-none resize-none text-slate-300 leading-relaxed text-lg placeholder-slate-700"></textarea>
+
+            <div class="pt-8 border-t border-slate-800 mt-8 flex justify-between items-center">
+                <div class="text-xs text-slate-500 italic">Auto-saving to cloud...</div>
+                <button class="px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-2xl shadow-lg shadow-emerald-500/20 transition-all">
+                    Generate Prescription
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Right: Quick Links / AI Assistant -->
+    <aside class="w-full lg:w-72 space-y-6">
+        <div class="workspace-glass p-6 rounded-3xl bg-gradient-to-br from-slate-900 to-indigo-950/30">
+            <h3 class="text-sm font-bold mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-wand-magic-sparkles text-indigo-400"></i> AI Diagnosis Aid
+            </h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Based on BP and notes, consider checking for orthostatic hypotension.</p>
+        </div>
+
+        <div class="workspace-glass p-6 rounded-3xl">
+            <h3 class="text-sm font-bold mb-4 uppercase text-slate-500">Quick Templates</h3>
+            <div class="space-y-2">
+                <button class="w-full text-left p-3 bg-slate-900/50 rounded-xl text-xs text-slate-300 hover:bg-emerald-600 hover:text-white transition-all">Common Cold / Flu</button>
+                <button class="w-full text-left p-3 bg-slate-900/50 rounded-xl text-xs text-slate-300 hover:bg-emerald-600 hover:text-white transition-all">Hypertension Follow-up</button>
+                <button class="w-full text-left p-3 bg-slate-900/50 rounded-xl text-xs text-slate-300 hover:bg-emerald-600 hover:text-white transition-all">General Wellness</button>
+            </div>
+        </div>
+    </aside>
+</div>
+
+</body>
+</html>

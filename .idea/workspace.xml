@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/controller/PaymentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/controller/PaymentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/entity/Invoice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/entity/Invoice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/service/CardPayment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/service/CardPayment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/service/CashPayment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/service/CashPayment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/service/Payment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/service/Payment.java" afterDir="false" />
+    <list default="true"
+          id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1"
+          name="Changes"
+          comment="Merge branch">
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,37 +29,14 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;IT25101985&quot;
-  }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/IT25101985/medical-appointment-system-project.git&quot;,
-    &quot;accountId&quot;: &quot;8294d8c8-39de-452e-8d5f-52b253f9a0b4&quot;
-  }
-}</component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
+
+  <component name="ProjectColorInfo">
+    {
+      &quot;associatedIndex&quot;: 6
+    }
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
-      </MavenGeneralSettings>
-    </option>
-  </component>
-  <component name="McpProjectServerCommands">
-    <commands />
-    <urls />
-  </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 1
-}</component>
+
   <component name="ProjectId" id="3D1BzHNXuz5VUD4BwLiPV27GjXK" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -68,31 +44,25 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.MedicalAppointmentApplication.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "Spring Boot.MedicalAppointmentApplication.executor": "Run",
     "git-widget-placeholder": "Payments,-Invoices-&&-Feedback",
     "kotlin-language-version-configured": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Spring Boot.MedicalAppointmentApplication">
-    <configuration name="MedicalAppointmentApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.medical.MedicalAppointmentApplication" />
-      <module name="medical-appointment-system" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MedicalAppointmentApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UnknownPolicyInFreeMode" />
+
+  <component name="RunManager" selected="Application.MedicalAppointmentApplication">
+    <configuration name="MedicalAppointmentApplication"
+                   type="SpringBootApplicationConfigurationType"
+                   factoryName="Spring Boot"
+                   temporary="true">
       <module name="medical-appointment-system" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.medical.MedicalAppointmentApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+
     <recent_temporary>
       <list>
         <item itemvalue="Application.MedicalAppointmentApplication" />
@@ -110,12 +80,26 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="" />
+      <changelist id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1"
+                  name="Changes"
+                  comment="" />
       <created>1777440058478</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1777967443385</updated>
+      <updated>1777440058478</updated>
     </task>
     <servers />
   </component>
+
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/medical/entity/Appointment.java</url>
+          <line>6</line>
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+
 </project>

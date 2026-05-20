@@ -1,12 +1,12 @@
 package com.medical.config;
 
+import com.medical.entity.User;
+import com.medical.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import java.util.Optional;
-import com.medical.repository.UserRepository;
-import com.medical.entity.User;
 
 @Component
 public class DataInitializer implements CommandLineRunner {

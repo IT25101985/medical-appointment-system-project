@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
-
   <component name="ChangeListManager">
-    <list default="true" id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="" />
+    <list default="true" id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/controller/PaymentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/controller/PaymentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/entity/Invoice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/entity/Invoice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/service/CardPayment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/service/CardPayment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/service/CashPayment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/service/CashPayment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/service/Payment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/service/Payment.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -20,7 +23,6 @@
       </list>
     </option>
   </component>
-
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
@@ -30,45 +32,40 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
-
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
     &quot;state&quot;: &quot;OPEN&quot;,
     &quot;assignee&quot;: &quot;IT25101985&quot;
   }
 }</component>
-
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/IT25101985/medical-appointment-system-project.git&quot;,
     &quot;accountId&quot;: &quot;8294d8c8-39de-452e-8d5f-52b253f9a0b4&quot;
   }
 }</component>
-
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="Use Maven wrapper" />
-        <option name="useMavenConfig" value="true" />
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
       </MavenGeneralSettings>
     </option>
   </component>
-
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
-
   <component name="ProjectId" id="3D1BzHNXuz5VUD4BwLiPV27GjXK" />
-
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.MedicalAppointmentApplication.executor": "Run",
@@ -76,11 +73,10 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Spring Boot.MedicalAppointmentApplication.executor": "Run",
-    "git-widget-placeholder": "dev",
+    "git-widget-placeholder": "Payments,-Invoices-&&-Feedback",
     "kotlin-language-version-configured": "true"
   }
 }]]></component>
-
   <component name="RunManager" selected="Spring Boot.MedicalAppointmentApplication">
     <configuration name="MedicalAppointmentApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.medical.MedicalAppointmentApplication" />
@@ -89,7 +85,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-
     <configuration name="MedicalAppointmentApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UnknownPolicyInFreeMode" />
       <module name="medical-appointment-system" />
@@ -98,17 +93,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="medical-appointment-system" />
-    </configuration>
-
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="medical-appointment-system" />
-      <option name="filePath" />
-      <method v="2" />
-    </configuration>
-
     <recent_temporary>
       <list>
         <item itemvalue="Application.MedicalAppointmentApplication" />
@@ -116,7 +100,6 @@
       </list>
     </recent_temporary>
   </component>
-
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -124,15 +107,7 @@
       </set>
     </attachedChunks>
   </component>
-
-  <component name="SpellCheckerSettings"
-             RuntimeDictionaries="0"
-             Folders="0"
-             CustomDictionaries="0"
-             DefaultDictionary="application-level"
-             UseSingleDictionary="true"
-             transferred="true" />
-
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="" />
@@ -143,5 +118,4 @@
     </task>
     <servers />
   </component>
-
 </project>

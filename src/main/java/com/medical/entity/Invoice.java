@@ -10,6 +10,7 @@ public class Invoice {
     private Long id;
 
     @OneToOne
+    @org.hibernate.annotations.OnDelete(action = org.hibernate.annotations.OnDeleteAction.CASCADE)
     private Appointment appointment;
 
     private Double amount;

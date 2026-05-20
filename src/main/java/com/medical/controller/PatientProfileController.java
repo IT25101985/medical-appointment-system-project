@@ -48,6 +48,9 @@ public class PatientProfileController {
     @Autowired
     private MedicalRecordService medicalRecordService;
 
+    @Autowired
+    private InvoiceService invoiceService;
+
     @GetMapping("/profile")
     public String viewProfile() {
         return "redirect:/patient/dashboard?section=profile";

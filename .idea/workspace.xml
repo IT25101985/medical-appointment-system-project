@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+
   <component name="AnalysisUIOptions">
     <option name="SCOPE_TYPE" value="4" />
   </component>
@@ -37,6 +38,7 @@
         <entry key="$PROJECT_DIR$" value="dev" />
       </map>
     </option>
+
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
 
@@ -100,7 +102,9 @@
                    factoryName="Spring Boot"
                    temporary="true">
       <module name="medical-appointment-system" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.medical.MedicalAppointmentApplication" />
+
+      <option name="SPRING_BOOT_MAIN_CLASS"
+              value="com.medical.MedicalAppointmentApplication" />
 
       <method v="2">
         <option name="Make" enabled="true" />
@@ -155,4 +159,5 @@
       </breakpoints>
     </breakpoint-manager>
   </component>
+
 </project>

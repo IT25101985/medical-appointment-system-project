@@ -1,0 +1,198 @@
+Index: src/main/java/com/medical/controller/PatientProfileController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.medical.controller;\r\n\r\nimport com.medical.entity.Patient;\r\nimport com.medical.entity.User;\r\nimport com.medical.entity.Appointment;\r\nimport com.medical.entity.Invoice;\r\nimport com.medical.entity.MedicalRecord;\r\nimport com.medical.entity.Doctor;\r\nimport com.medical.repository.UserRepository;\r\nimport com.medical.service.UserService;\r\nimport com.medical.service.AppointmentService;\r\nimport com.medical.service.MedicalRecordService;\r\nimport com.medical.service.InvoiceService;\r\nimport com.medical.service.DoctorService;\r\nimport com.medical.repository.PatientRepository;\r\n\r\n\r\n\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.stereotype.Controller;\r\nimport org.springframework.web.bind.annotation.*;\r\n\r\nimport java.security.Principal;\r\nimport java.util.Optional;\r\n\r\n@Controller\r\n@RequestMapping(\"/templates/patient\")\r\npublic class PatientProfileController {\r\n\r\n    @Autowired\r\n    private UserService userService;\r\n\r\n    @Autowired\r\n    private UserRepository userRepository;\r\n\r\n    @GetMapping(\"/profile\")\r\n    public String viewProfile() {\r\n        return \"redirect:/patient/dashboard?section=profile\";\r\n    }\r\n\r\n    @PostMapping(\"/profile\")\r\n    public String updateProfile(@ModelAttribute(\"user\") Patient updatedUser, Principal principal) {\r\n        if (principal != null) {\r\n            Optional<User> optUser = userService.findByUsername(principal.getName());\r\n            if (optUser.isPresent()) {\r\n                User currentUser = optUser.get();\r\n                userService.updateUserProfile(currentUser, updatedUser);\r\n\r\n                // Updates Patient specific fields\r\n                if (currentUser instanceof Patient) {\r\n                    Patient p = (Patient) currentUser;\r\n                    p.setBloodGroup(updatedUser.getBloodGroup());\r\n                    p.setBloodPressure(updatedUser.getBloodPressure());\r\n                    p.setHeartRate(updatedUser.getHeartRate());\r\n                    p.setEmergencyContact(updatedUser.getEmergencyContact());\r\n                    userRepository.save(p);\r\n                }\r\n\r\n                if(updatedUser.getPassword() != null && !updatedUser.getPassword().trim().isEmpty()) {\r\n                    currentUser.setPassword(updatedUser.getPassword());\r\n                    userService.saveUser(currentUser);\r\n                }\r\n            }\r\n        }\r\n        return \"redirect:/patient/dashboard?section=profile&success\";\r\n    }\r\n\r\n\r\n    @PostMapping(\"/delete-account\")\r\n    public String deleteAccount(Principal principal) {\r\n        if (principal != null) {\r\n            Optional<User> optUser = userService.findByUsername(principal.getName());\r\n            optUser.ifPresent(user -> userService.deleteUser(user));\r\n        }\r\n        return \"redirect:/logout\";\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/medical/controller/PatientProfileController.java b/src/main/java/com/medical/controller/PatientProfileController.java
+--- a/src/main/java/com/medical/controller/PatientProfileController.java	(revision 747c75bef1ccbd1e2129ce050dff7cb055a39535)
++++ b/src/main/java/com/medical/controller/PatientProfileController.java	(date 1779272174161)
+@@ -14,8 +14,6 @@
+ import com.medical.service.DoctorService;
+ import com.medical.repository.PatientRepository;
+ 
+-
+-
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.stereotype.Controller;
+ import org.springframework.web.bind.annotation.*;
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"a8ef14fd-5384-498a-8c34-ffbf826f6aa1\" name=\"Changes\" comment=\"Implementing default constructor with super inheritance in Patient entity\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/medical/config/DataInitializer.java\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/medical/config/SecurityConfig.java\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/medical/controller/AdminController.java\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/medical/controller/AuthController.java\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/medical/controller/PatientController.java\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/medical/controller/ProfileController.java\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/medical/entity/Admin.java\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/medical/entity/Appointment.java\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/medical/entity/Patient.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/medical/entity/Patient.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/medical/entity/User.java\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/medical/repository/PatientRepository.java\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/medical/repository/UserRepository.java\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/medical/service/AppointmentService.java\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/medical/service/PatientService.java\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/medical/service/UserService.java\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/resources/templates/Patient/book-appointment.html\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/resources/templates/Patient/dashboard.html\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/resources/templates/Patient/history.html\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/resources/templates/Patient/profile.html\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/resources/templates/admin/appointments.html\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/resources/templates/admin/dashboard.html\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/resources/templates/admin/doctor-management.html\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/resources/templates/index.html\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/resources/templates/login.html\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/resources/templates/register.html\" beforeDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"dev\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n    <option name=\"ROOT_SYNC\" value=\"DONT_SYNC\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;IT25101985&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/IT25101985/medical-appointment-system-project.git&quot;,\r\n    &quot;accountId&quot;: &quot;8294d8c8-39de-452e-8d5f-52b253f9a0b4&quot;\r\n  }\r\n}</component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 0\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"3CtbjZoYF3vqRbh2nx0NXlrYSHu\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;git-widget-placeholder&quot;: &quot;Admin-&amp;&amp;-Authentication&quot;\r\n  }\r\n}</component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.31033.145\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"a8ef14fd-5384-498a-8c34-ffbf826f6aa1\" name=\"Changes\" comment=\"\" />\r\n      <created>1777090910200</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1777090910200</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Again creating Patient entity extending user\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1779109895567</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1779109895567</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Creating Patient entity extending user\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1779110275762</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1779110275762</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Implementing Patient entity extending User\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1779110734244</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1779110734244</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"Adding patient fields in Patient entity\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1779110885977</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1779110885977</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"Configuring JPA discriminator value\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1779114228141</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1779114228141</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"Implementing default constructor with super inheritance in Patient entity\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1779114586765</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1779114586765</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"7\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Again creating Patient entity extending user\" />\r\n    <MESSAGE value=\"Creating Patient entity extending user\" />\r\n    <MESSAGE value=\"Implementing Patient entity extending User\" />\r\n    <MESSAGE value=\"Adding patient fields in Patient entity\" />\r\n    <MESSAGE value=\"Configuring JPA discriminator value\" />\r\n    <MESSAGE value=\"Implementing default constructor with super inheritance in Patient entity\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Implementing default constructor with super inheritance in Patient entity\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 6c2ca994df5a79df2ca92e2789bdb5ff6fdde264)
++++ b/.idea/workspace.xml	(date 1779271620711)
+@@ -4,33 +4,10 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="Implementing default constructor with super inheritance in Patient entity">
++    <list default="true" id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="Adding dashboard frontend">
++      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/config/DataInitializer.java" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/config/SecurityConfig.java" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/controller/AdminController.java" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/controller/AuthController.java" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/controller/PatientController.java" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/controller/ProfileController.java" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/entity/Admin.java" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/entity/Appointment.java" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/entity/Patient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/entity/Patient.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/entity/User.java" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/repository/PatientRepository.java" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/repository/UserRepository.java" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/service/AppointmentService.java" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/service/PatientService.java" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/service/UserService.java" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/Patient/book-appointment.html" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/Patient/dashboard.html" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/Patient/history.html" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/Patient/profile.html" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/appointments.html" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/dashboard.html" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/doctor-management.html" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/login.html" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/register.html" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/medical/controller/PatientProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/medical/controller/PatientProfileController.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -41,13 +18,14 @@
+     <option name="RECENT_TEMPLATES">
+       <list>
+         <option value="Class" />
++        <option value="HTML File" />
+       </list>
+     </option>
+   </component>
+   <component name="Git.Settings">
+     <option name="RECENT_BRANCH_BY_REPOSITORY">
+       <map>
+-        <entry key="$PROJECT_DIR$" value="dev" />
++        <entry key="$PROJECT_DIR$" value="Admin-&amp;-Authentication" />
+       </map>
+     </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+@@ -65,20 +43,29 @@
+     &quot;accountId&quot;: &quot;8294d8c8-39de-452e-8d5f-52b253f9a0b4&quot;
+   }
+ }</component>
++  <component name="MarkdownSettingsMigration">
++    <option name="stateVersion" value="1" />
++  </component>
+   <component name="ProjectColorInfo">{
+   &quot;associatedIndex&quot;: 0
+ }</component>
+   <component name="ProjectId" id="3CtbjZoYF3vqRbh2nx0NXlrYSHu" />
+   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+   <component name="ProjectViewState">
+-    <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;git-widget-placeholder&quot;: &quot;Admin-&amp;&amp;-Authentication&quot;
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "DefaultHtmlFileTemplate": "HTML File",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "git-widget-placeholder": "Admin-&&-Authentication"
+   }
+-}</component>
++}]]></component>
++  <component name="RecentsManager">
++    <key name="MoveFile.RECENT_KEYS">
++      <recent name="C:\Users\user\Desktop\SLIIT Assignments\SLIITSem2year1\OOPproject\src\main\resources\templates" />
++    </key>
++  </component>
+   <component name="SharedIndexes">
+     <attachedChunks>
+       <set>
+@@ -86,6 +73,7 @@
+       </set>
+     </attachedChunks>
+   </component>
++  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+     <task active="true" id="Default" summary="Default task">
+       <changelist id="a8ef14fd-5384-498a-8c34-ffbf826f6aa1" name="Changes" comment="" />
+@@ -142,7 +130,39 @@
+       <option name="project" value="LOCAL" />
+       <updated>1779114586765</updated>
+     </task>
+-    <option name="localTasksCounter" value="7" />
++    <task id="LOCAL-00007" summary="Adding patient-list">
++      <option name="closed" value="true" />
++      <created>1779215734708</created>
++      <option name="number" value="00007" />
++      <option name="presentableId" value="LOCAL-00007" />
++      <option name="project" value="LOCAL" />
++      <updated>1779215734708</updated>
++    </task>
++    <task id="LOCAL-00008" summary="update">
++      <option name="closed" value="true" />
++      <created>1779215835395</created>
++      <option name="number" value="00008" />
++      <option name="presentableId" value="LOCAL-00008" />
++      <option name="project" value="LOCAL" />
++      <updated>1779215835395</updated>
++    </task>
++    <task id="LOCAL-00009" summary="Adding profile frontend">
++      <option name="closed" value="true" />
++      <created>1779216173857</created>
++      <option name="number" value="00009" />
++      <option name="presentableId" value="LOCAL-00009" />
++      <option name="project" value="LOCAL" />
++      <updated>1779216173857</updated>
++    </task>
++    <task id="LOCAL-00010" summary="Adding dashboard frontend">
++      <option name="closed" value="true" />
++      <created>1779216448128</created>
++      <option name="number" value="00010" />
++      <option name="presentableId" value="LOCAL-00010" />
++      <option name="project" value="LOCAL" />
++      <updated>1779216448128</updated>
++    </task>
++    <option name="localTasksCounter" value="11" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+@@ -163,6 +183,10 @@
+     <MESSAGE value="Adding patient fields in Patient entity" />
+     <MESSAGE value="Configuring JPA discriminator value" />
+     <MESSAGE value="Implementing default constructor with super inheritance in Patient entity" />
+-    <option name="LAST_COMMIT_MESSAGE" value="Implementing default constructor with super inheritance in Patient entity" />
++    <MESSAGE value="Adding patient-list" />
++    <MESSAGE value="update" />
++    <MESSAGE value="Adding profile frontend" />
++    <MESSAGE value="Adding dashboard frontend" />
++    <option name="LAST_COMMIT_MESSAGE" value="Adding dashboard frontend" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"VcsDirectoryMappings\">\r\n    <mapping directory=\"$PROJECT_DIR$/../../Medical-Appointment-System-Project\" vcs=\"Git\" />\r\n    <mapping directory=\"$PROJECT_DIR$\" vcs=\"Git\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+--- a/.idea/vcs.xml	(revision 6c2ca994df5a79df2ca92e2789bdb5ff6fdde264)
++++ b/.idea/vcs.xml	(date 1779271269064)
+@@ -1,7 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="VcsDirectoryMappings">
+-    <mapping directory="$PROJECT_DIR$/../../Medical-Appointment-System-Project" vcs="Git" />
+     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+   </component>
+ </project>
+\ No newline at end of file

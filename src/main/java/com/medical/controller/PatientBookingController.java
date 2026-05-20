@@ -33,81 +33,7 @@ public class PatientBookingController {
     @Autowired
     private InvoiceService invoiceService;
 
-    @GetMapping("/dashboard")
-    public String dashboard(Principal principal, Model model) {
-        if (principal == null) {
-            return "redirect:/login";
-        }
-
-        Optional<User> optUser = userService.findByUsername(principal.getName());
-        if (optUser.isEmpty()) {
-            return "redirect:/login";
-        }
-
-        User user = optUser.get();
-
-        // Build a patient object for display in the template
-        Patient patient;
-        if (user instanceof Patient) {
-            patient = (Patient) user;
-        } else {
-            // User registered but no Patient record yet - create a display-only object
-            patient = new Patient();
-            patient.setId(user.getId());
-            patient.setUsername(user.getUsername());
-            patient.setFullName(user.getFullName());
-            patient.setEmail(user.getEmail());
-            patient.setPhoneNo(user.getPhoneNo());
-            patient.setAddress(user.getAddress());
-            patient.setProfileImage(user.getProfileImage());
-        }
-
-        model.addAttribute("patient", patient);
-        model.addAttribute("user", patient);
-        model.addAttribute("username", principal.getName());
-
-        // Booking form
-        Appointment app = new Appointment();
-        app.setContactEmail(user.getEmail());
-        app.setContactPhone(user.getPhoneNo());
-        model.addAttribute("appointment", app);
-
-        // Doctors list
-        List<Doctor> doctors = doctorService.getAllDoctors();
-        model.addAttribute("doctors", doctors != null ? doctors : new ArrayList<>());
-
-        // Appointments & maps - use the real DB user for querying
-        List<Appointment> appointments;
-        try {
-            appointments = appointmentService.getAppointmentsForPatient(user);
-            if (appointments == null) appointments = new ArrayList<>();
-        } catch (Exception e) {
-            appointments = new ArrayList<>();
-        }
-
-        Map<Long, Invoice> invoiceMap = new HashMap<>();
-        Map<Long, MedicalRecord> recordMap = new HashMap<>();
-        for (Appointment a : appointments) {
-            try {
-                invoiceService.getInvoiceByAppointment(a).ifPresent(inv -> invoiceMap.put(a.getId(), inv));
-                medicalRecordService.getRecordByAppointment(a).ifPresent(rec -> recordMap.put(a.getId(), rec));
-            } catch (Exception ignored) {}
-        }
-
-        model.addAttribute("appointments", appointments);
-        model.addAttribute("invoiceMap", invoiceMap);
-        model.addAttribute("recordMap", recordMap);
-
-        // Latest prescription for dashboard overview
-        try {
-            List<MedicalRecord> recentRecords = medicalRecordService.getRecentRecordsByPatient(user);
-            model.addAttribute("latestRecord", (recentRecords != null && !recentRecords.isEmpty()) ? recentRecords.get(0) : null);
-        } catch (Exception e) {
-            model.addAttribute("latestRecord", null);
-        }
-
-        return "patient/dashboard";
-    }
+    // Dashboard mapping has been moved to PatientProfileController for workload distribution and advanced analytics integration.
 
     @GetMapping("/book-appointment")
     public String bookAppointmentForm() {
@@ -121,6 +47,22 @@ public class PatientBookingController {
         if (principal != null) {
             Optional<User> optUser = userService.findByUsername(principal.getName());
             if (optUser.isPresent()) {
+                if (appointment.getId() != null) {
+                    Optional<Appointment> existingOpt = appointmentService.getAppointmentById(appointment.getId());
+                    if (existingOpt.isPresent() && existingOpt.get().getPatient().getId().equals(optUser.get().getId())) {
+                        Appointment existing = existingOpt.get();
+                        existing.setAppointmentDate(appointment.getAppointmentDate());
+                        existing.setContactEmail(appointment.getContactEmail());
+                        existing.setContactPhone(appointment.getContactPhone());
+                        if (appointment.getDoctor() != null && appointment.getDoctor().getId() != null) {
+                            doctorService.getDoctorById(appointment.getDoctor().getId()).ifPresent(existing::setDoctor);
+                        }
+                        existing.setStatus("SCHEDULED");
+                        appointmentService.saveAppointment(existing);
+                        return "redirect:/patient/dashboard?section=history&success";
+                    }
+                }
+
                 appointment.setPatient(optUser.get());
                 appointment.setStatus("SCHEDULED");
 

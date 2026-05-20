@@ -1,5 +1,8 @@
 package com.medical.service;
 
+import com.medical.entity.Doctor;
+import com.medical.entity.Specialization;
+import com.medical.repository.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +17,11 @@ public class DoctorService {
     public List<Doctor> getAllDoctors() {
         return doctorRepository.findAll();
     }
-    
+
     public Optional<Doctor> getDoctorById(Long id) {
         return doctorRepository.findById(id);
     }
-    
+
     public Doctor saveDoctor(Doctor doctor) {
         return doctorRepository.save(doctor);
     }
@@ -30,5 +33,9 @@ public class DoctorService {
     // Polymorphism search
     public List<Doctor> searchBySpeciality(Specialization spec) {
         return doctorRepository.findBySpecialization(spec.getSpecialtyName());
+    }
+
+    public Optional<Doctor> getDoctorByUser(com.medical.entity.User user) {
+        return doctorRepository.findByUser(user);
     }
 }

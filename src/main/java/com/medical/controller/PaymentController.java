@@ -1,11 +1,8 @@
 package com.medical.controller;
 
-<<<<<<< HEAD
-=======
 import com.medical.entity.*;
 import com.medical.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
->>>>>>> dev
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +31,7 @@ public class PaymentController {
     private DoctorService doctorService;
 
     @GetMapping("/pay")
-    public String processPayment(@RequestParam("type") String type, 
+    public String processPayment(@RequestParam("type") String type,
                                  @RequestParam("amount") Double amount,
                                  @RequestParam("appointmentId") Long appointmentId,
                                  Model model) {
@@ -50,7 +47,7 @@ public class PaymentController {
             invoice.setAmount(amount);
             invoice.setStatus("PAID");
             invoiceService.saveInvoice(invoice);
-            
+
             model.addAttribute("invoice", invoice);
             return "patient/payment-success";
         }
@@ -59,9 +56,9 @@ public class PaymentController {
 
     // Feedback creation
     @PostMapping("/feedback/add")
-    public String addFeedback(@RequestParam Long doctorId, 
-                              @RequestParam Integer rating, 
-                              @RequestParam String comments, 
+    public String addFeedback(@RequestParam Long doctorId,
+                              @RequestParam Integer rating,
+                              @RequestParam String comments,
                               Principal principal) {
         if (principal != null) {
             Optional<User> optPatient = userService.findByUsername(principal.getName());
@@ -126,14 +123,14 @@ public class PaymentController {
         if (optInv.isPresent()) {
             Invoice inv = optInv.get();
             String content = "--- HEALTHCAREPLUS MEDICAL INVOICE ---\n\n" +
-                             "Invoice ID: #" + inv.getId() + "\n" +
-                             "Patient: " + inv.getAppointment().getPatient().getFullName() + "\n" +
-                             "Doctor: " + inv.getAppointment().getDoctor().getName() + "\n" +
-                             "Date: " + inv.getAppointment().getAppointmentDate() + "\n" +
-                             "Amount Paid: $" + inv.getAmount() + "\n" +
-                             "Status: " + inv.getStatus() + "\n\n" +
-                             "Thank you for choosing HealthcarePlus!";
-            
+                    "Invoice ID: #" + inv.getId() + "\n" +
+                    "Patient: " + inv.getAppointment().getPatient().getFullName() + "\n" +
+                    "Doctor: " + inv.getAppointment().getDoctor().getName() + "\n" +
+                    "Date: " + inv.getAppointment().getAppointmentDate() + "\n" +
+                    "Amount Paid: $" + inv.getAmount() + "\n" +
+                    "Status: " + inv.getStatus() + "\n\n" +
+                    "Thank you for choosing HealthcarePlus!";
+
             byte[] data = content.getBytes();
             org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
             headers.setContentType(org.springframework.http.MediaType.TEXT_PLAIN);

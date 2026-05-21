@@ -67,18 +67,20 @@
             transition: all 0.3s ease; display: flex; align-items: center; gap: 8px;
         }
     </style>
+  <script src="/js/theme.js"></script>
+  <link rel="stylesheet" href="/css/dark-mode.css">
 </head>
 <body class="flex">
 <a href="/" class="modern-home-btn"><i class="fa-solid fa-house-chimney-medical"></i> Home</a>
 
 <aside class="w-72 glass-sidebar h-screen p-8 flex flex-col justify-between hidden md:flex sticky top-0">
   <div>
-    <div class="flex items-center gap-3 mb-12">
+    <a href="/" class="flex items-center gap-3 mb-12 hover:opacity-85 transition-opacity" style="text-decoration: none;">
       <div class="w-10 h-10 bg-gradient-to-br from-emerald-500 to-emerald-700 rounded-xl flex items-center justify-center text-white shadow-lg shadow-emerald-500/30">
         <i class="fa-solid fa-stethoscope"></i>
       </div>
       <span class="text-xl font-bold text-white tracking-tight">HEALTHCARE<span class="font-bold text-emerald-500">PLUS</span></span>
-    </div>
+    </a>
 
     <nav class="space-y-2">
       <a href="/doctor/dashboard" class="nav-item flex items-center gap-4 px-4 py-3 text-slate-400 hover:bg-slate-800 hover:text-emerald-500 rounded-xl transition-all">

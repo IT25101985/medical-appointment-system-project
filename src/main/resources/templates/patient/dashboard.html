@@ -13,102 +13,102 @@
   <script src="/js/theme.js"></script>
 
   <style>
-    body {
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        background: #f0f4f8;
-        background-image:
-            radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.1) 0, transparent 40%),
-            radial-gradient(at 100% 0%, rgba(59, 130, 246, 0.1) 0, transparent 40%);
-        min-height: 100vh;
-        color: #1e293b;
-        overflow-x: hidden;
-    }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #f0f4f8;
+            background-image:
+                radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.1) 0, transparent 40%),
+                radial-gradient(at 100% 0%, rgba(59, 130, 246, 0.1) 0, transparent 40%);
+            min-height: 100vh;
+            color: #1e293b;
+            overflow-x: hidden;
+        }
 
-    .glass-sidebar {
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(20px);
-        border-right: 1px solid rgba(226, 232, 240, 0.8);
-    }
+        .glass-sidebar {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(226, 232, 240, 0.8);
+        }
 
-    .premium-card {
-        background: white;
-        border-radius: 24px;
-        border: 1px solid rgba(226, 232, 240, 1);
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
-        transition: all 0.3s ease;
-    }
+        .premium-card {
+            background: white;
+            border-radius: 24px;
+            border: 1px solid rgba(226, 232, 240, 1);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
 
-    .premium-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.1);
-    }
+        .premium-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.1);
+        }
 
-    .nav-item {
-        transition: all 0.3s ease;
-        position: relative;
-        cursor: pointer;
-    }
+        .nav-item {
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
 
-    .nav-item.active {
-        background: rgba(16, 185, 129, 0.1);
-        color: #059669;
-    }
+        .nav-item.active {
+            background: rgba(16, 185, 129, 0.1);
+            color: #059669;
+        }
 
-    .nav-item.active::after {
-        content: '';
-        position: absolute;
-        right: 0;
-        top: 20%;
-        height: 60%;
-        width: 4px;
-        background: #10b981;
-        border-radius: 4px 0 0 4px;
-    }
+        .nav-item.active::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 20%;
+            height: 60%;
+            width: 4px;
+            background: #10b981;
+            border-radius: 4px 0 0 4px;
+        }
 
-    .gradient-text {
-        background: linear-gradient(135deg, #059669 0%, #2563eb 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
+        .gradient-text {
+            background: linear-gradient(135deg, #059669 0%, #2563eb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-    .section-content {
-        display: none;
-        animation: slideUp 0.5s ease forwards;
-    }
+        .section-content {
+            display: none;
+            animation: slideUp 0.5s ease forwards;
+        }
 
-    .section-content.active {
-        display: block;
-    }
+        .section-content.active {
+            display: block;
+        }
 
-    @keyframes slideUp {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-    .doctor-card {
-        background: rgba(255,255,255,0.6);
-        backdrop-filter: blur(10px);
-        border: 2px solid transparent;
-        border-radius: 15px;
-        padding: 15px;
-        text-align: center;
-        cursor: pointer;
-        transition: all 0.3s;
-        position: relative;
-    }
-    .doctor-card:hover { transform: scale(1.02); border-color: #10b981; }
-    .doctor-card.selected { border-color: #10b981; background: #f0fdf4; }
+        .doctor-card {
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(10px);
+            border: 2px solid transparent;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+        .doctor-card:hover { transform: scale(1.02); border-color: #10b981; }
+        .doctor-card.selected { border-color: #10b981; background: #f0fdf4; }
 
-    .profile-image-large {
-        width: 120px; height: 120px; border-radius: 50%; object-fit: cover;
-        border: 4px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
+        .profile-image-large {
+            width: 120px; height: 120px; border-radius: 50%; object-fit: cover;
+            border: 4px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
 
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-  </style>
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
 </head>
 <body class="flex">
 
@@ -571,227 +571,227 @@
 
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script th:inline="javascript">
-  /*<![CDATA[*/
-  function showSection(sectionId) {
-      document.querySelectorAll('.section-content').forEach(section => {
-          section.classList.remove('active');
-      });
+    /*<![CDATA[*/
+    function showSection(sectionId) {
+        document.querySelectorAll('.section-content').forEach(section => {
+            section.classList.remove('active');
+        });
 
-      document.querySelectorAll('.nav-item').forEach(item => {
-          item.classList.remove('active');
-          item.classList.add('text-slate-500');
-          item.classList.remove('font-semibold');
-      });
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.classList.remove('active');
+            item.classList.add('text-slate-500');
+            item.classList.remove('font-semibold');
+        });
 
-      const selectedSection = document.getElementById('section-' + sectionId);
-      if (selectedSection) {
-          selectedSection.classList.add('active');
-      }
+        const selectedSection = document.getElementById('section-' + sectionId);
+        if (selectedSection) {
+            selectedSection.classList.add('active');
+        }
 
-      const activeNav = document.getElementById('nav-' + sectionId);
-      if (activeNav) {
-          activeNav.classList.add('active');
-          activeNav.classList.remove('text-slate-500');
-          activeNav.classList.add('font-semibold');
-      }
+        const activeNav = document.getElementById('nav-' + sectionId);
+        if (activeNav) {
+            activeNav.classList.add('active');
+            activeNav.classList.remove('text-slate-500');
+            activeNav.classList.add('font-semibold');
+        }
 
-      localStorage.setItem('patientActiveTab', sectionId);
-  }
+        localStorage.setItem('patientActiveTab', sectionId);
+    }
 
-  // Active Section State Synchronization on Load
-  window.addEventListener('DOMContentLoaded', () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      let section = urlParams.get('section');
-      if (!section) {
-          section = localStorage.getItem('patientActiveTab');
-      }
-      if (!section) {
-          section = 'dashboard';
-      }
-      showSection(section);
-  });
+    // Active Section State Synchronization on Load
+    window.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        let section = urlParams.get('section');
+        if (!section) {
+            section = localStorage.getItem('patientActiveTab');
+        }
+        if (!section) {
+            section = 'dashboard';
+        }
+        showSection(section);
+    });
 
-  flatpickr("#datePicker", {
-      minDate: "today",
-      disable: [date => date.getDay() === 0],
-      onChange: (selectedDates, dateStr) => {
-          const doctorId = document.getElementById('selectedDoctorId').value;
-          fetchSlots(doctorId, dateStr);
-      }
-  });
+    flatpickr("#datePicker", {
+        minDate: "today",
+        disable: [date => date.getDay() === 0],
+        onChange: (selectedDates, dateStr) => {
+            const doctorId = document.getElementById('selectedDoctorId').value;
+            fetchSlots(doctorId, dateStr);
+        }
+    });
 
-  function selectDoctor(element) {
-      document.querySelectorAll('.doctor-card').forEach(el => el.classList.remove('selected'));
-      element.classList.add('selected');
-      const doctorId = element.getAttribute('data-id');
-      document.getElementById('selectedDoctorId').value = doctorId;
+    function selectDoctor(element) {
+        document.querySelectorAll('.doctor-card').forEach(el => el.classList.remove('selected'));
+        element.classList.add('selected');
+        const doctorId = element.getAttribute('data-id');
+        document.getElementById('selectedDoctorId').value = doctorId;
 
-      // Fetch slots if date is already picked
-      const dateStr = document.getElementById('datePicker').value;
-      if (dateStr) {
-          fetchSlots(doctorId, dateStr);
-      }
-  }
+        // Fetch slots if date is already picked
+        const dateStr = document.getElementById('datePicker').value;
+        if (dateStr) {
+            fetchSlots(doctorId, dateStr);
+        }
+    }
 
-  // Auto-fetch if editing
-  window.addEventListener('DOMContentLoaded', () => {
-      const preSelectedDoctor = document.getElementById('selectedDoctorId').value;
-      const preSelectedDate = document.getElementById('datePicker').value;
-      if (preSelectedDoctor && preSelectedDate) {
-          fetchSlots(preSelectedDoctor, preSelectedDate);
-      }
-  });
+    // Auto-fetch if editing
+    window.addEventListener('DOMContentLoaded', () => {
+        const preSelectedDoctor = document.getElementById('selectedDoctorId').value;
+        const preSelectedDate = document.getElementById('datePicker').value;
+        if (preSelectedDoctor && preSelectedDate) {
+            fetchSlots(preSelectedDoctor, preSelectedDate);
+        }
+    });
 
-  function fetchSlots(doctorId, dateStr) {
-      const timeSelect = document.getElementById('timeSelect');
-      const appointmentDate = document.getElementById('appointmentDate');
+    function fetchSlots(doctorId, dateStr) {
+        const timeSelect = document.getElementById('timeSelect');
+        const appointmentDate = document.getElementById('appointmentDate');
 
-      if (!doctorId) {
-          alert('Please select a doctor first.');
-          document.getElementById('datePicker').value = '';
-          return;
-      }
+        if (!doctorId) {
+            alert('Please select a doctor first.');
+            document.getElementById('datePicker').value = '';
+            return;
+        }
 
-      // Enable select and show loading status
-      timeSelect.disabled = false;
-      timeSelect.innerHTML = '<option value="">Loading available slots...</option>';
+        // Enable select and show loading status
+        timeSelect.disabled = false;
+        timeSelect.innerHTML = '<option value="">Loading available slots...</option>';
 
-      fetch(`/api/doctors/${doctorId}/slots?date=${dateStr}`)
-          .then(response => response.json())
-          .then(slots => {
-              timeSelect.innerHTML = '<option value="">Select a time slot</option>';
-              if (slots.length === 0) {
-                  timeSelect.innerHTML = '<option value="">No slots available for this date</option>';
-                  return;
-              }
-              slots.forEach(slot => {
-                  const dateObj = new Date(slot);
-                  let hours = dateObj.getHours();
-                  let minutes = dateObj.getMinutes();
-                  const ampm = hours >= 12 ? 'PM' : 'AM';
-                  hours = hours % 12;
-                  hours = hours ? hours : 12;
-                  minutes = minutes < 10 ? '0' + minutes : minutes;
-                  const strTime = hours + ':' + minutes + ' ' + ampm;
+        fetch(`/api/doctors/${doctorId}/slots?date=${dateStr}`)
+            .then(response => response.json())
+            .then(slots => {
+                timeSelect.innerHTML = '<option value="">Select a time slot</option>';
+                if (slots.length === 0) {
+                    timeSelect.innerHTML = '<option value="">No slots available for this date</option>';
+                    return;
+                }
+                slots.forEach(slot => {
+                    const dateObj = new Date(slot);
+                    let hours = dateObj.getHours();
+                    let minutes = dateObj.getMinutes();
+                    const ampm = hours >= 12 ? 'PM' : 'AM';
+                    hours = hours % 12;
+                    hours = hours ? hours : 12;
+                    minutes = minutes < 10 ? '0' + minutes : minutes;
+                    const strTime = hours + ':' + minutes + ' ' + ampm;
 
-                  const option = document.createElement('option');
-                  option.value = slot;
-                  option.textContent = strTime;
-                  timeSelect.appendChild(option);
-              });
-          })
-          .catch(error => {
-              console.error('Error fetching slots:', error);
-              timeSelect.innerHTML = '<option value="">Error loading slots</option>';
-          });
-  }
+                    const option = document.createElement('option');
+                    option.value = slot;
+                    option.textContent = strTime;
+                    timeSelect.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching slots:', error);
+                timeSelect.innerHTML = '<option value="">Error loading slots</option>';
+            });
+    }
 
-  document.getElementById('timeSelect').addEventListener('change', function() {
-      document.getElementById('appointmentDate').value = this.value;
-  });
+    document.getElementById('timeSelect').addEventListener('change', function() {
+        document.getElementById('appointmentDate').value = this.value;
+    });
 
-  // Health Trends Chart Dynamic Initialization
-  const heartRateStr = /*[[${patient.heartRate}]]*/ '72';
-  const bpStr = /*[[${patient.bloodPressure}]]*/ '120/80';
+    // Health Trends Chart Dynamic Initialization
+    const heartRateStr = /*[[${patient.heartRate}]]*/ '72';
+    const bpStr = /*[[${patient.bloodPressure}]]*/ '120/80';
 
-  let currentHeartRate = parseInt(heartRateStr) || 72;
-  let systolic = 120;
-  let diastolic = 80;
+    let currentHeartRate = parseInt(heartRateStr) || 72;
+    let systolic = 120;
+    let diastolic = 80;
 
-  if (bpStr && bpStr.includes('/')) {
-      const parts = bpStr.split('/');
-      systolic = parseInt(parts[0]) || 120;
-      diastolic = parseInt(parts[1]) || 80;
-  }
+    if (bpStr && bpStr.includes('/')) {
+        const parts = bpStr.split('/');
+        systolic = parseInt(parts[0]) || 120;
+        diastolic = parseInt(parts[1]) || 80;
+    }
 
-  const hrData = [
-      currentHeartRate - 4,
-      currentHeartRate + 3,
-      currentHeartRate - 2,
-      currentHeartRate + 5,
-      currentHeartRate - 3,
-      currentHeartRate
-  ];
+    const hrData = [
+        currentHeartRate - 4,
+        currentHeartRate + 3,
+        currentHeartRate - 2,
+        currentHeartRate + 5,
+        currentHeartRate - 3,
+        currentHeartRate
+    ];
 
-  const sysData = [
-      systolic - 5,
-      systolic + 3,
-      systolic - 2,
-      systolic + 6,
-      systolic - 4,
-      systolic
-  ];
+    const sysData = [
+        systolic - 5,
+        systolic + 3,
+        systolic - 2,
+        systolic + 6,
+        systolic - 4,
+        systolic
+    ];
 
-  const diaData = [
-      diastolic - 3,
-      diastolic + 2,
-      diastolic - 1,
-      diastolic + 4,
-      diastolic - 2,
-      diastolic
-  ];
+    const diaData = [
+        diastolic - 3,
+        diastolic + 2,
+        diastolic - 1,
+        diastolic + 4,
+        diastolic - 2,
+        diastolic
+    ];
 
-  const ctx = document.getElementById('healthChart').getContext('2d');
-  new Chart(ctx, {
-      type: 'line',
-      data: {
-          labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Current'],
-          datasets: [
-              {
-                  label: 'Systolic BP (mmHg)',
-                  data: sysData,
-                  borderColor: '#3b82f6',
-                  backgroundColor: 'rgba(59, 130, 246, 0.05)',
-                  tension: 0.4,
-                  borderWidth: 2,
-                  fill: true
-              },
-              {
-                  label: 'Diastolic BP (mmHg)',
-                  data: diaData,
-                  borderColor: '#06b6d4',
-                  backgroundColor: 'rgba(6, 182, 212, 0.05)',
-                  tension: 0.4,
-                  borderWidth: 2,
-                  fill: true
-              },
-              {
-                  label: 'Heart Rate (bpm)',
-                  data: hrData,
-                  borderColor: '#10b981',
-                  backgroundColor: 'rgba(16, 185, 129, 0.05)',
-                  tension: 0.4,
-                  borderWidth: 2,
-                  fill: true
-              }
-          ]
-      },
-      options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-              legend: {
-                  position: 'top',
-                  labels: {
-                      font: {
-                          family: 'Plus Jakarta Sans',
-                          weight: 'bold'
-                      }
-                  }
-              }
-          },
-          scales: {
-              y: {
-                  beginAtZero: false,
-                  grid: { color: 'rgba(0,0,0,0.05)' }
-              },
-              x: {
-                  grid: { display: false }
-              }
-          }
-      }
-  });
-  /*]]>*/
+    const ctx = document.getElementById('healthChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Current'],
+            datasets: [
+                {
+                    label: 'Systolic BP (mmHg)',
+                    data: sysData,
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.05)',
+                    tension: 0.4,
+                    borderWidth: 2,
+                    fill: true
+                },
+                {
+                    label: 'Diastolic BP (mmHg)',
+                    data: diaData,
+                    borderColor: '#06b6d4',
+                    backgroundColor: 'rgba(6, 182, 212, 0.05)',
+                    tension: 0.4,
+                    borderWidth: 2,
+                    fill: true
+                },
+                {
+                    label: 'Heart Rate (bpm)',
+                    data: hrData,
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.05)',
+                    tension: 0.4,
+                    borderWidth: 2,
+                    fill: true
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        font: {
+                            family: 'Plus Jakarta Sans',
+                            weight: 'bold'
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: false,
+                    grid: { color: 'rgba(0,0,0,0.05)' }
+                },
+                x: {
+                    grid: { display: false }
+                }
+            }
+        }
+    });
+    /*]]>*/
 </script>
 </body>
 </html>

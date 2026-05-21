@@ -1,6 +1,5 @@
 package com.medical.controller;
 
-import com.medical.entity.Patient;
 import com.medical.entity.User;
 import com.medical.entity.Appointment;
 import com.medical.entity.MedicalRecord;

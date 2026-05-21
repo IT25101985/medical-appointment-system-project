@@ -2,7 +2,6 @@ package com.medical.controller;
 
 import com.medical.entity.*;
 import com.medical.service.*;
-import com.medical.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

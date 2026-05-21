@@ -1,5 +1,6 @@
 package com.medical.service;
 
+import com.medical.entity.Doctor;
 import com.medical.entity.Specialization;
 import com.medical.repository.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;

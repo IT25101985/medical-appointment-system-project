@@ -1,5 +1,6 @@
 package com.medical.service;
 
+import com.medical.entity.Doctor;
 import com.medical.entity.User;
 import com.medical.repository.AppointmentRepository;
 import com.medical.entity.Appointment;

@@ -4,6 +4,7 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.medical.entity.Appointment;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;

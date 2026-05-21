@@ -1,6 +1,5 @@
 package com.medical.repository;
 
-import com.medical.entity.Doctor;
 import com.medical.entity.User;
 import com.medical.entity.Appointment;
 import org.springframework.data.jpa.repository.JpaRepository;

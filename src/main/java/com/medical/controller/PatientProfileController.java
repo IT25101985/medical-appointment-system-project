@@ -5,7 +5,6 @@ import com.medical.entity.User;
 import com.medical.entity.Appointment;
 import com.medical.entity.Invoice;
 import com.medical.entity.MedicalRecord;
-import com.medical.entity.Doctor;
 import com.medical.repository.UserRepository;
 import com.medical.service.UserService;
 import com.medical.service.AppointmentService;

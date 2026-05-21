@@ -1,6 +1,5 @@
 package com.medical.service;
 
-import com.medical.entity.Prescription;
 import com.medical.entity.User;
 import com.medical.repository.MedicalRecordRepository;
 import com.medical.repository.PrescriptionRepository;

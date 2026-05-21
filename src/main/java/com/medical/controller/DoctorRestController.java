@@ -1,5 +1,7 @@
 package com.medical.controller;
 
+import com.medical.entity.Appointment;
+import com.medical.entity.Doctor;
 import com.medical.repository.AppointmentRepository;
 import com.medical.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;

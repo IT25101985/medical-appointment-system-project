@@ -1,6 +1,8 @@
 package com.medical.controller;
 
+import com.medical.entity.Patient;
 import com.medical.entity.User;
+import com.medical.service.DoctorService;
 import com.medical.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +20,7 @@ public class AuthController {
     private UserService userService;
 
     @Autowired
-    private com.medical.service.DoctorService doctorService;
+    private DoctorService doctorService;
 
     @GetMapping("/")
     public String index(Model model, Principal principal) {

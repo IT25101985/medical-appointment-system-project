@@ -6,7 +6,6 @@ import com.medical.service.UserService;
 import com.medical.service.AppointmentService;
 import com.medical.service.MedicalRecordService;
 import com.medical.service.InvoiceService;
-import com.medical.service.DoctorService;
 import com.medical.repository.PatientRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;

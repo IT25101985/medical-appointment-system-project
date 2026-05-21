@@ -1,7 +1,6 @@
 package com.medical.service;
 
 import org.springframework.stereotype.Service;
-import com.medical.entity.Feedback;
 
 @Service
 public class RatingService {

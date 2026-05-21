@@ -33,6 +33,7 @@ public class PatientBookingController {
     @Autowired
     private InvoiceService invoiceService;
 
+    // Dashboard mapping has been moved to PatientProfileController for workload distribution and advanced analytics integration.
 
     @GetMapping("/book-appointment")
     public String bookAppointmentForm() {
@@ -46,6 +47,22 @@ public class PatientBookingController {
         if (principal != null) {
             Optional<User> optUser = userService.findByUsername(principal.getName());
             if (optUser.isPresent()) {
+                if (appointment.getId() != null) {
+                    Optional<Appointment> existingOpt = appointmentService.getAppointmentById(appointment.getId());
+                    if (existingOpt.isPresent() && existingOpt.get().getPatient().getId().equals(optUser.get().getId())) {
+                        Appointment existing = existingOpt.get();
+                        existing.setAppointmentDate(appointment.getAppointmentDate());
+                        existing.setContactEmail(appointment.getContactEmail());
+                        existing.setContactPhone(appointment.getContactPhone());
+                        if (appointment.getDoctor() != null && appointment.getDoctor().getId() != null) {
+                            doctorService.getDoctorById(appointment.getDoctor().getId()).ifPresent(existing::setDoctor);
+                        }
+                        existing.setStatus("SCHEDULED");
+                        appointmentService.saveAppointment(existing);
+                        return "redirect:/patient/dashboard?section=history&success";
+                    }
+                }
+
                 appointment.setPatient(optUser.get());
                 appointment.setStatus("SCHEDULED");
 

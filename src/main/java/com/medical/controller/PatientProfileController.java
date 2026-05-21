@@ -2,7 +2,6 @@ package com.medical.controller;
 
 import com.medical.entity.Appointment;
 import com.medical.entity.MedicalRecord;
-import com.medical.service.UserService;
 import com.medical.service.AppointmentService;
 import com.medical.service.MedicalRecordService;
 import com.medical.repository.PatientRepository;

@@ -1,7 +1,6 @@
 package com.medical.controller;
 
 import com.medical.service.AppointmentService;
-import com.medical.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;

@@ -11,18 +11,20 @@ public class Patient extends User {
     private String heartRate;
     private String emergencyContact;
 
+    // Default constructor implementing structural super references
     public Patient() {
         super();
         this.setRole("ROLE_PATIENT");
     }
 
+    // Extended Constructor explicitly demonstrating structural OOP Inheritance execution
     public Patient(String username, String password, String fullName, String bloodGroup) {
         super(username, password, fullName);
         this.bloodGroup = bloodGroup;
         this.setRole("ROLE_PATIENT");
     }
 
-
+    // Safe Encapsulation Setters & Getters
     public String getBloodGroup() { return bloodGroup; }
     public void setBloodGroup(String bloodGroup) { this.bloodGroup = bloodGroup; }
 

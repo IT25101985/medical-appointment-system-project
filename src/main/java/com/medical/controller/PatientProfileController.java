@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -38,6 +39,9 @@ public class PatientProfileController {
 
     @Autowired
     private PatientRepository patientRepository;
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Autowired
     private AppointmentService appointmentService;
@@ -63,27 +67,34 @@ public class PatientProfileController {
             if (optUser.isPresent()) {
                 User currentUser = optUser.get();
 
-
                 String bp = updatedUser.getBloodPressure();
-                if (bp != null && !bp.trim().isEmpty()) {
-                    if (!bp.matches("\\d{2,3}/\\d{2,3}")) {
+                if (bp != null) {
+                    bp = bp.trim();
+                }
+                if (bp != null && !bp.isEmpty()) {
+                    if (!bp.matches("\\s*\\d{2,3}\\s*/\\s*\\d{2,3}\\s*")) {
                         return "redirect:/patient/dashboard?section=profile&error=invalid_bp";
                     }
+                    bp = bp.replaceAll("\\s+", ""); // Normalize to "120/80"
                 }
 
 
                 String emergencyContact = updatedUser.getEmergencyContact();
-                if (emergencyContact != null && !emergencyContact.trim().isEmpty()) {
-                    if (!emergencyContact.matches("\\d{10}")) {
+                if (emergencyContact != null) {
+                    emergencyContact = emergencyContact.trim();
+                }
+                if (emergencyContact != null && !emergencyContact.isEmpty()) {
+                    String cleanPhone = emergencyContact.replaceAll("[\\s\\-()]", "");
+                    if (!cleanPhone.matches("\\d{10}")) {
                         return "redirect:/patient/dashboard?section=profile&error=invalid_phone";
                     }
+                    emergencyContact = cleanPhone;
                 }
 
 
                 String rawPassword = null;
                 if (updatedUser.getPassword() != null && !updatedUser.getPassword().trim().isEmpty()) {
                     rawPassword = updatedUser.getPassword().trim();
-                    // Policy: Minimum 8 characters, at least one digit, and at least one special character
                     if (rawPassword.length() < 8 || !rawPassword.matches(".*\\d.*") || !rawPassword.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\",.<>/?].*")) {
                         return "redirect:/patient/dashboard?section=profile&error=weak_password";
                     }
@@ -97,10 +108,13 @@ public class PatientProfileController {
                     p.setPhoneNo(updatedUser.getPhoneNo());
                     p.setAddress(updatedUser.getAddress());
                     p.setProfileImage(updatedUser.getProfileImage());
-                    p.setBloodGroup(updatedUser.getBloodGroup());
-                    p.setBloodPressure(bp != null ? bp.trim() : null);
-                    p.setHeartRate(updatedUser.getHeartRate());
-                    p.setEmergencyContact(emergencyContact != null ? emergencyContact.trim() : null);
+                    if (updatedUser.getBloodGroup() != null) p.setBloodGroup(updatedUser.getBloodGroup());
+                    if (bp != null) p.setBloodPressure(bp.isEmpty() ? null : bp);
+                    if (updatedUser.getHeartRate() != null) {
+                        String hr = updatedUser.getHeartRate().trim();
+                        p.setHeartRate(hr.isEmpty() ? null : hr);
+                    }
+                    if (emergencyContact != null) p.setEmergencyContact(emergencyContact.isEmpty() ? null : emergencyContact);
 
                     if (rawPassword != null) {
                         p.setPassword(rawPassword);
@@ -109,11 +123,25 @@ public class PatientProfileController {
                         patientRepository.save(p);
                     }
                 } else {
+                    currentUser.setFullName(updatedUser.getFullName());
+                    currentUser.setPhoneNo(updatedUser.getPhoneNo());
+                    currentUser.setAddress(updatedUser.getAddress());
+                    currentUser.setProfileImage(updatedUser.getProfileImage());
                     if (rawPassword != null) {
                         currentUser.setPassword(rawPassword);
-                        userService.saveUser(currentUser);
                     }
-                    userService.updateUserProfile(currentUser, updatedUser);
+                    userService.saveUser(currentUser);
+
+                    String newBg = updatedUser.getBloodGroup();
+                    String newBp = (bp != null && !bp.isEmpty()) ? bp : null;
+                    String newHr = null;
+                    if (updatedUser.getHeartRate() != null) {
+                        newHr = updatedUser.getHeartRate().trim().isEmpty() ? null : updatedUser.getHeartRate().trim();
+                    }
+                    String newEc = (emergencyContact != null && !emergencyContact.isEmpty()) ? emergencyContact : null;
+
+                    jdbcTemplate.update("UPDATE users SET user_type = 'PATIENT', blood_group = ?, blood_pressure = ?, heart_rate = ?, emergency_contact = ? WHERE id = ?",
+                            newBg, newBp, newHr, newEc, currentUser.getId());
                 }
             }
         }

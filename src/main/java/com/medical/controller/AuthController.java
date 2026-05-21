@@ -1,6 +1,5 @@
 package com.medical.controller;
 
-import com.medical.entity.User;
 import com.medical.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

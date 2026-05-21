@@ -1,6 +1,5 @@
 package com.medical.controller;
 
-import com.medical.entity.User;
 import com.medical.service.AppointmentService;
 import com.medical.service.DoctorService;
 import com.medical.service.UserService;
@@ -16,7 +15,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
 import java.io.ByteArrayInputStream;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/patient")

@@ -1,5 +1,6 @@
 package com.medical.service;
 
+import com.medical.entity.Invoice;
 import com.medical.repository.InvoiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

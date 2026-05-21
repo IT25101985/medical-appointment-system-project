@@ -1,6 +1,7 @@
 package com.medical.controller;
 
 import com.medical.entity.User;
+import com.medical.entity.Patient; // Missing import added
 import com.medical.service.UserService;
 import com.medical.service.DoctorService; // Cleaned up fully qualified package name
 
